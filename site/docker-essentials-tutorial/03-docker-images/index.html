@@ -1,0 +1,6329 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://devops-mastery.io/docker-essentials-tutorial/03-docker-images/">
+      
+      
+        <link rel="prev" href="../02-docker-architecture/">
+      
+      
+        <link rel="next" href="../04-docker-containers/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.0">
+    
+    
+      
+        <title>03 Images - DevOps Engineering Mastery</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.9f615399.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.649f08f9.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#module-3-docker-images" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="DevOps Engineering Mastery" class="md-header__button md-logo" aria-label="DevOps Engineering Mastery" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DevOps Engineering Mastery
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              03 Images
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="DevOps Engineering Mastery" class="md-nav__button md-logo" aria-label="DevOps Engineering Mastery" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    DevOps Engineering Mastery
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../portfolio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    My Portfolio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AWS Essentials
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            AWS Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/START_HERE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/docs/01-aws-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/docs/02-identity-access-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 IAM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/docs/03-compute-services/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Compute
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/docs/04-storage-databases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Storage & DBs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/docs/05-networking-content-delivery/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Networking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/docs/06-cicd-devops-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 CI/CD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/docs/07-monitoring-observability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Monitoring
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/docs/08-security-compliance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/docs/09-cost-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 Cost Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/docs/10-advanced-services/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 Advanced Services
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/final-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../aws-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_3_5">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/INDEX/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completion Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/DELIVERY_SUMMARY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Delivery Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Docker Essentials
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_4">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Docker Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-container-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-docker-architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    03 Images
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    03 Images
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-docker-image" class="md-nav__link">
+    What is a Docker Image?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#image-layers-the-foundation" class="md-nav__link">
+    Image Layers: The Foundation
+  </a>
+  
+    <nav class="md-nav" aria-label="Image Layers: The Foundation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-layers-work" class="md-nav__link">
+    How Layers Work
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layer-immutability" class="md-nav__link">
+    Layer Immutability
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#union-filesystem-how-layers-combine" class="md-nav__link">
+    Union Filesystem: How Layers Combine
+  </a>
+  
+    <nav class="md-nav" aria-label="Union Filesystem: How Layers Combine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-property-copy-on-write-cow" class="md-nav__link">
+    Key Property: Copy-on-Write (CoW)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dockerfile-anatomy" class="md-nav__link">
+    Dockerfile Anatomy
+  </a>
+  
+    <nav class="md-nav" aria-label="Dockerfile Anatomy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#which-instructions-create-layers" class="md-nav__link">
+    Which Instructions Create Layers?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#image-configuration-metadata" class="md-nav__link">
+    Image Configuration (Metadata)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-images-how-docker-processes-dockerfiles" class="md-nav__link">
+    Building Images: How Docker Processes Dockerfiles
+  </a>
+  
+    <nav class="md-nav" aria-label="Building Images: How Docker Processes Dockerfiles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-build-process" class="md-nav__link">
+    The Build Process
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-cache-why-rebuilds-are-fast" class="md-nav__link">
+    Build Cache: Why Rebuilds Are Fast
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-context" class="md-nav__link">
+    Build Context
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#image-best-practices-keep-images-small" class="md-nav__link">
+    Image Best Practices: Keep Images Small
+  </a>
+  
+    <nav class="md-nav" aria-label="Image Best Practices: Keep Images Small">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#principle-minimal-images" class="md-nav__link">
+    Principle: Minimal Images
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practice-1-multi-stage-builds" class="md-nav__link">
+    Practice 1: Multi-Stage Builds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practice-2-minimize-layers" class="md-nav__link">
+    Practice 2: Minimize Layers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practice-3-use-minimal-base-images" class="md-nav__link">
+    Practice 3: Use Minimal Base Images
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practice-4-dont-run-as-root" class="md-nav__link">
+    Practice 4: Don't Run as Root
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practice-5-leverage-build-cache" class="md-nav__link">
+    Practice 5: Leverage Build Cache
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#image-tagging-and-versioning" class="md-nav__link">
+    Image Tagging and Versioning
+  </a>
+  
+    <nav class="md-nav" aria-label="Image Tagging and Versioning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tagging-strategy" class="md-nav__link">
+    Tagging Strategy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-tags" class="md-nav__link">
+    Version Tags
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latest-vs-floating-tags" class="md-nav__link">
+    Latest vs Floating Tags
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#image-digest-immutable-identity" class="md-nav__link">
+    Image Digest: Immutable Identity
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#image-compression-and-distribution" class="md-nav__link">
+    Image Compression and Distribution
+  </a>
+  
+    <nav class="md-nav" aria-label="Image Compression and Distribution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-images-are-compressed" class="md-nav__link">
+    How Images Are Compressed
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#image-verification-trust-and-integrity" class="md-nav__link">
+    Image Verification: Trust and Integrity
+  </a>
+  
+    <nav class="md-nav" aria-label="Image Verification: Trust and Integrity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#image-signing" class="md-nav__link">
+    Image Signing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scanning-for-vulnerabilities" class="md-nav__link">
+    Scanning for Vulnerabilities
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-world-example-production-web-app-image" class="md-nav__link">
+    Real-World Example: Production Web App Image
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production-insights" class="md-nav__link">
+    Production Insights
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-exam-questions" class="md-nav__link">
+    Practice: Exam Questions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hands-on-labs" class="md-nav__link">
+    Hands-On Labs
+  </a>
+  
+    <nav class="md-nav" aria-label="Hands-On Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-build-images-and-observe-layer-creation" class="md-nav__link">
+    Lab 1: Build Images and Observe Layer Creation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-multi-stage-build" class="md-nav__link">
+    Lab 2: Multi-Stage Build
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#failure-scenario-layer-cache-invalidation-gone-wrong" class="md-nav__link">
+    Failure Scenario: Layer Cache Invalidation Gone Wrong
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-docker-containers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Containers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-docker-networking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Networking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-docker-volumes-storage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Storage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-docker-compose/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Compose
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-docker-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-docker-cicd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 CI/CD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-docker-kubernetes-readiness/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 Kubernetes Readiness
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../final-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_4_4">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TUTORIAL_SUMMARY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Kubernetes Essentials
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Kubernetes Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/START_HERE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/01-kubernetes-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/02-kubectl-cluster-interaction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Kubectl
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/03-pods-workloads/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Pods & Workloads
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/04-services-networking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Services
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/05-configmaps-secrets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Config & Secrets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/06-storage-volumes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Storage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/07-resource-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Resource Mgmt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/08-health-probes-logging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Health & Logging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/09-rbac-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/10-helm-package-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 Helm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/11-advanced-cluster-operations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11 Advanced Ops
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/12-kubernetes-cicd-docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12 CI/CD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/FINAL_PROJECT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../kubernetes-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_5_5">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/INDEX/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completion Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/EXAM_AND_PRACTICE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exam & Practice
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../cicd-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    CI/CD Essentials
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_6">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            CI/CD Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
+        
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/01-cicd-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/02-source-control-triggers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Triggers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/03-ci-pipeline-design/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Pipeline Design
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/04-artifact-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Artifacts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/05-security-in-cicd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/06-continuous-deployment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 CD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/07-infrastructure-as-code/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 IaC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/08-pipeline-observability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Observability
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/09-cicd-tools-comparison/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 Tooling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/10-failure-recovery/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 Recovery
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/final-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../cicd-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_6_5">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/INDEX/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completion Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/DELIVERY_SUMMARY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Delivery Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../database-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Database Essentials
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_7">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Database Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database-essentials-tutorial/docs/01-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database-essentials-tutorial/docs/02-postgresql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 PostgreSQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database-essentials-tutorial/docs/03-nosql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 NoSQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database-essentials-tutorial/docs/04-database-design/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 DB Design
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database-essentials-tutorial/docs/05-sqlalchemy-orm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 SQLAlchemy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database-essentials-tutorial/docs/06-migrations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Migrations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database-essentials-tutorial/docs/07-performance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database-essentials-tutorial/docs/08-transactions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Transactions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database-essentials-tutorial/docs/09-final-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Networking Essentials
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Networking Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/GETTING_STARTED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Start Here
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_2" >
+        
+          <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/docs/01-networking-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/docs/02-http-https-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 HTTP/S
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/docs/03-rest-api-design/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 API Design
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/docs/04-websockets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 WebSockets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/docs/05-load-balancing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Load Balancing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/docs/06-reverse-proxy-nginx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Nginx
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/docs/07-dns-domain-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 DNS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/docs/08-ssl-tls-certificates/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 SSL/TLS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/docs/09-final-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../networking-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_4">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Observability Essentials
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Observability Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/START_HERE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_2" >
+        
+          <label class="md-nav__link" for="__nav_9_2" id="__nav_9_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/docs/01-observability-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/docs/02-prometheus-metrics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Prometheus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/docs/03-logging-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Logging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/docs/04-loki-fluent-bit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Loki
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/docs/05-grafana-dashboards/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Grafana
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/docs/06-aws-cloudwatch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 CloudWatch
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/docs/07-alerting-incident-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Alerting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/docs/08-advanced-patterns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Advanced Patterns
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/FINAL_PROJECT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../observability-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_9_5">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_5">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/INDEX/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completion Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/DELIVERY_SUMMARY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Delivery Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Distributed Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Distributed Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/START_HERE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_2" >
+        
+          <label class="md-nav__link" for="__nav_10_2" id="__nav_10_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/docs/01-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/docs/02-scalability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Scalability
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/docs/03-data-storage-replication/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Storage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/docs/04-messaging-event-driven/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Messaging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/docs/05-fault-tolerance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Fault Tolerance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/docs/06-performance-optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/docs/07-consistency-transactions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Transactions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/docs/08-microservices-patterns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Microservices
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/docs/09-observability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 Observability
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/docs/10-deployment-scaling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 Deployment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/FINAL_PROJECT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../distributed-systems-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_10_4">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_4">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/INDEX/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/EXAM_AND_PRACTICE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exam & Practice
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../flask-backend-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Flask Backend
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_11">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Flask Backend
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11_2" >
+        
+          <label class="md-nav__link" for="__nav_11_2" id="__nav_11_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/01-flask-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/02-flask-architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/03-routing-and-views/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Routing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/04-request-handling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Requests
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/05-response-formats/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Response
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/06-templates-static/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Templates
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/07-flask-blueprints/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Blueprints
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/08-error-handling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Errors
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/09-authentication-authorization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 Auth
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/10-flask-extensions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 Extensions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/11-final-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Capstone Projects
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            Capstone Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/README_START_HERE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Start Here
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Platform Engineering
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_12_2">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_12_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12_2">
+            <span class="md-nav__icon md-icon"></span>
+            Platform Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/aws/infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/decisions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Architecture Decisions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/scaling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scaling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/cost-awareness/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cost Awareness
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/interview-notes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interview Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Distributed Systems
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_12_3">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_12_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12_3">
+            <span class="md-nav__icon md-icon"></span>
+            Distributed Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/docs/decisions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Architecture Decisions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/docs/scaling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scaling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/PORTFOLIO_OVERVIEW/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12_5" >
+        
+          <label class="md-nav__link" for="__nav_12_5" id="__nav_12_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_12_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12_5">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/COMPLETION_SUMMARY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completion Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-docker-image" class="md-nav__link">
+    What is a Docker Image?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#image-layers-the-foundation" class="md-nav__link">
+    Image Layers: The Foundation
+  </a>
+  
+    <nav class="md-nav" aria-label="Image Layers: The Foundation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-layers-work" class="md-nav__link">
+    How Layers Work
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layer-immutability" class="md-nav__link">
+    Layer Immutability
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#union-filesystem-how-layers-combine" class="md-nav__link">
+    Union Filesystem: How Layers Combine
+  </a>
+  
+    <nav class="md-nav" aria-label="Union Filesystem: How Layers Combine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-property-copy-on-write-cow" class="md-nav__link">
+    Key Property: Copy-on-Write (CoW)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dockerfile-anatomy" class="md-nav__link">
+    Dockerfile Anatomy
+  </a>
+  
+    <nav class="md-nav" aria-label="Dockerfile Anatomy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#which-instructions-create-layers" class="md-nav__link">
+    Which Instructions Create Layers?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#image-configuration-metadata" class="md-nav__link">
+    Image Configuration (Metadata)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-images-how-docker-processes-dockerfiles" class="md-nav__link">
+    Building Images: How Docker Processes Dockerfiles
+  </a>
+  
+    <nav class="md-nav" aria-label="Building Images: How Docker Processes Dockerfiles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-build-process" class="md-nav__link">
+    The Build Process
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-cache-why-rebuilds-are-fast" class="md-nav__link">
+    Build Cache: Why Rebuilds Are Fast
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-context" class="md-nav__link">
+    Build Context
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#image-best-practices-keep-images-small" class="md-nav__link">
+    Image Best Practices: Keep Images Small
+  </a>
+  
+    <nav class="md-nav" aria-label="Image Best Practices: Keep Images Small">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#principle-minimal-images" class="md-nav__link">
+    Principle: Minimal Images
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practice-1-multi-stage-builds" class="md-nav__link">
+    Practice 1: Multi-Stage Builds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practice-2-minimize-layers" class="md-nav__link">
+    Practice 2: Minimize Layers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practice-3-use-minimal-base-images" class="md-nav__link">
+    Practice 3: Use Minimal Base Images
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practice-4-dont-run-as-root" class="md-nav__link">
+    Practice 4: Don't Run as Root
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practice-5-leverage-build-cache" class="md-nav__link">
+    Practice 5: Leverage Build Cache
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#image-tagging-and-versioning" class="md-nav__link">
+    Image Tagging and Versioning
+  </a>
+  
+    <nav class="md-nav" aria-label="Image Tagging and Versioning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tagging-strategy" class="md-nav__link">
+    Tagging Strategy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-tags" class="md-nav__link">
+    Version Tags
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latest-vs-floating-tags" class="md-nav__link">
+    Latest vs Floating Tags
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#image-digest-immutable-identity" class="md-nav__link">
+    Image Digest: Immutable Identity
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#image-compression-and-distribution" class="md-nav__link">
+    Image Compression and Distribution
+  </a>
+  
+    <nav class="md-nav" aria-label="Image Compression and Distribution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-images-are-compressed" class="md-nav__link">
+    How Images Are Compressed
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#image-verification-trust-and-integrity" class="md-nav__link">
+    Image Verification: Trust and Integrity
+  </a>
+  
+    <nav class="md-nav" aria-label="Image Verification: Trust and Integrity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#image-signing" class="md-nav__link">
+    Image Signing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scanning-for-vulnerabilities" class="md-nav__link">
+    Scanning for Vulnerabilities
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-world-example-production-web-app-image" class="md-nav__link">
+    Real-World Example: Production Web App Image
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production-insights" class="md-nav__link">
+    Production Insights
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-exam-questions" class="md-nav__link">
+    Practice: Exam Questions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hands-on-labs" class="md-nav__link">
+    Hands-On Labs
+  </a>
+  
+    <nav class="md-nav" aria-label="Hands-On Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-build-images-and-observe-layer-creation" class="md-nav__link">
+    Lab 1: Build Images and Observe Layer Creation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-multi-stage-build" class="md-nav__link">
+    Lab 2: Multi-Stage Build
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#failure-scenario-layer-cache-invalidation-gone-wrong" class="md-nav__link">
+    Failure Scenario: Layer Cache Invalidation Gone Wrong
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="module-3-docker-images">Module 3: Docker Images</h1>
+<h2 id="what-is-a-docker-image">What is a Docker Image?</h2>
+<p>A Docker image is an immutable, layered filesystem and metadata that serves as a blueprint for creating containers.</p>
+<p><strong>Key properties:</strong>
+- Immutable: once created, an image never changes
+- Layered: built from stacked read-only filesystem layers
+- Self-contained: includes all code, runtime, libraries needed
+- Versioned: identified by repository name, tag, and digest
+- Portable: runs on any system with Docker</p>
+<p>Think of it as a frozen snapshot of an application's entire filesystem and configuration.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Images have multiple identifiers</span>
+docker<span class="w"> </span>images
+<span class="c1"># Shows: REPOSITORY, TAG, IMAGE ID, SIZE, CREATED</span>
+
+<span class="c1"># Three ways to reference same image:</span>
+docker<span class="w"> </span>run<span class="w"> </span>myapp:1.0<span class="w">              </span><span class="c1"># Tag: myapp:1.0</span>
+docker<span class="w"> </span>run<span class="w"> </span>myapp:latest<span class="w">           </span><span class="c1"># Tag: myapp:latest (might be 1.0)</span>
+docker<span class="w"> </span>run<span class="w"> </span>sha256:abc123...<span class="w">       </span><span class="c1"># Digest: exact SHA256 hash</span>
+</code></pre></div>
+<h2 id="image-layers-the-foundation">Image Layers: The Foundation</h2>
+<p>An image is built from layers, stacked on top of each other.</p>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────┐
+│  Layer 3 (diff): app.py (new file)     │
+├─────────────────────────────────────────┤
+│  Layer 2 (diff): python3 binary added   │
+├─────────────────────────────────────────┤
+│  Layer 1 (diff): ubuntu base filesystem │
+├─────────────────────────────────────────┤
+│       (immutable, read-only)            │
+└─────────────────────────────────────────┘
+</code></pre></div>
+<h3 id="how-layers-work">How Layers Work</h3>
+<p>Each layer is a <strong>diff</strong> - only the changes made in that layer, not the entire filesystem.</p>
+<div class="highlight"><pre><span></span><code><span class="c"># Dockerfile shows layer creation</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:22.04</span><span class="w">                          </span><span class="c"># Layer 1: 77 MB (ubuntu filesystem)</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python3<span class="w">  </span>#<span class="w"> </span>Layer<span class="w"> </span><span class="m">2</span>:<span class="w"> </span><span class="m">150</span><span class="w"> </span>MB<span class="w"> </span><span class="o">(</span>python3<span class="w"> </span>added<span class="o">)</span>
+<span class="k">COPY</span><span class="w"> </span>app.py<span class="w"> </span>/app/app.py<span class="w">                   </span>#<span class="w"> </span>Layer<span class="w"> </span><span class="m">3</span>:<span class="w"> </span><span class="m">5</span><span class="w"> </span>KB<span class="w"> </span><span class="o">(</span>app.py<span class="w"> </span>added<span class="o">)</span>
+</code></pre></div>
+<p>When this image runs, Docker uses <code>overlay2</code> to union these layers:</p>
+<ol>
+<li>Start with Layer 1: <code>/bin</code>, <code>/usr</code>, <code>/etc</code>, <code>/var</code>, etc. from ubuntu</li>
+<li>Overlay Layer 2: Python binaries go into <code>/usr/bin</code> (union replaces files)</li>
+<li>Overlay Layer 3: <code>app.py</code> placed in <code>/app/</code></li>
+<li>Result: single filesystem view containing ubuntu + python + app.py</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># See this in practice</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>demo:1.0<span class="w"> </span>.
+
+docker<span class="w"> </span><span class="nb">history</span><span class="w"> </span>demo:1.0
+<span class="c1"># Shows layers and sizes</span>
+<span class="c1"># Layer 1: 77MB (FROM ubuntu)</span>
+<span class="c1"># Layer 2: 150MB (RUN apt-get install python3)</span>
+<span class="c1"># Layer 3: 5KB (COPY app.py)</span>
+<span class="c1"># Total: ~227MB</span>
+
+<span class="c1"># But actual disk usage is less if layers are reused</span>
+docker<span class="w"> </span>images<span class="w"> </span>demo
+<span class="c1"># SIZE column shows uncompressed size</span>
+</code></pre></div>
+<h3 id="layer-immutability">Layer Immutability</h3>
+<p>Once created, a layer never changes. This is fundamental.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># If you rebuild with same Dockerfile</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>demo:2.0<span class="w"> </span>.
+
+<span class="c1"># Docker checks if layers can be reused</span>
+<span class="c1"># If FROM ubuntu:22.04 is in cache, reuses it</span>
+<span class="c1"># If RUN command is identical, reuses it</span>
+<span class="c1"># If files in COPY changed, creates new layer</span>
+
+<span class="c1"># The old layers are never modified, only reused</span>
+</code></pre></div>
+<h2 id="union-filesystem-how-layers-combine">Union Filesystem: How Layers Combine</h2>
+<p>The union filesystem (overlay2) presents multiple layers as a single filesystem.</p>
+<div class="highlight"><pre><span></span><code>Container filesystem view (from inside container):
+/
+├── bin → from layer 1
+├── usr
+│   ├── bin → contains python3 from layer 2
+│   ├── lib → python3 libs from layer 2
+├── app → from layer 3
+│   └── app.py
+└── var → from layer 1
+
+Physical storage: layers don&#39;t overlap, only differences stored
+/var/lib/docker/overlay2/
+├── layer1hash/diff/  (ubuntu files)
+├── layer2hash/diff/  (only python3 binary and libs)
+├── layer3hash/diff/  (only app.py)
+</code></pre></div>
+<h3 id="key-property-copy-on-write-cow">Key Property: Copy-on-Write (CoW)</h3>
+<p>When a container modifies a file from a read-only layer, the union filesystem copies it to the container's writable layer before modification.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Container reads from read-only layer</span>
+cat<span class="w"> </span>/etc/hostname
+<span class="c1"># Reads from image layer</span>
+
+<span class="c1"># Container modifies a file</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;new-content&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/hostname
+<span class="c1"># CoW: Copies /etc/hostname to container layer first</span>
+<span class="c1"># Then modifies the copy</span>
+<span class="c1"># Original in image layer unchanged</span>
+
+<span class="c1"># When container stops, modification is lost</span>
+<span class="c1"># Next container from same image gets original</span>
+</code></pre></div>
+<p>This is why <strong>data written to containers is ephemeral</strong> - modifications are in the writable layer, which is deleted when the container is deleted.</p>
+<h2 id="dockerfile-anatomy">Dockerfile Anatomy</h2>
+<p>A Dockerfile is a sequence of commands that build an image layer by layer.</p>
+<div class="highlight"><pre><span></span><code><span class="c"># 1. Base image (required, first)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:22.04</span>
+<span class="c"># Creates the first layer from ubuntu image</span>
+
+<span class="c"># 2. Metadata (optional, doesn&#39;t create layer)</span>
+<span class="k">LABEL</span><span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="w"> </span><span class="nv">maintainer</span><span class="o">=</span><span class="s2">&quot;team@example.com&quot;</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+<span class="k">ENV</span><span class="w"> </span><span class="nv">NODE_ENV</span><span class="o">=</span>production
+
+<span class="c"># 3. Run commands (each creates layer)</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>curl<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>wget<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>git
+
+<span class="c"># 4. Copy files (creates layer with new files)</span>
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
+<span class="k">COPY</span><span class="w"> </span>app.py<span class="w"> </span>.
+
+<span class="c"># 5. Expose ports (metadata, doesn&#39;t create layer)</span>
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">8000</span>
+
+<span class="c"># 6. Set entrypoint (metadata)</span>
+<span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python3&quot;</span><span class="p">]</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;app.py&quot;</span><span class="p">]</span>
+</code></pre></div>
+<h3 id="which-instructions-create-layers">Which Instructions Create Layers?</h3>
+<p>Only instructions that modify the filesystem create layers:</p>
+<p><strong>Creates layers:</strong>
+- <code>FROM</code> (base layer)
+- <code>RUN</code> (execute command, results are layer)
+- <code>COPY</code> (add files from build context)
+- <code>ADD</code> (like COPY, but can extract archives)</p>
+<p><strong>Metadata only (no layers):</strong>
+- <code>LABEL</code>
+- <code>ENV</code>
+- <code>EXPOSE</code>
+- <code>WORKDIR</code>
+- <code>USER</code>
+- <code>CMD</code>
+- <code>ENTRYPOINT</code>
+- <code>HEALTHCHECK</code></p>
+<div class="highlight"><pre><span></span><code><span class="c"># This creates 4 layers</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:22.04</span><span class="w">           </span><span class="c"># Layer 1</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>curl<span class="w">    </span>#<span class="w"> </span>Layer<span class="w"> </span><span class="m">2</span>
+<span class="k">COPY</span><span class="w"> </span>app.py<span class="w"> </span>/app/<span class="w">           </span>#<span class="w"> </span>Layer<span class="w"> </span><span class="m">3</span>
+<span class="k">ENV</span><span class="w"> </span><span class="nv">NODE_ENV</span><span class="o">=</span>production<span class="w">     </span><span class="c"># (metadata only)</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/app/app.py&quot;</span><span class="p">]</span><span class="w">  </span>#<span class="w"> </span><span class="o">(</span>metadata<span class="w"> </span>only<span class="o">)</span>
+</code></pre></div>
+<h3 id="image-configuration-metadata">Image Configuration (Metadata)</h3>
+<p>Besides layers, images store metadata:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># View image metadata</span>
+docker<span class="w"> </span>inspect<span class="w"> </span>ubuntu:22.04<span class="w"> </span><span class="p">|</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>json.tool
+
+<span class="c1"># Key metadata:</span>
+<span class="o">{</span>
+<span class="w">  </span><span class="s2">&quot;Architecture&quot;</span>:<span class="w"> </span><span class="s2">&quot;amd64&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;Os&quot;</span>:<span class="w"> </span><span class="s2">&quot;linux&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;Config&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;Env&quot;</span>:<span class="w"> </span><span class="o">[</span><span class="s2">&quot;PATH=/usr/local/sbin:/usr/local/bin:...&quot;</span><span class="o">]</span>,
+<span class="w">    </span><span class="s2">&quot;Cmd&quot;</span>:<span class="w"> </span><span class="o">[</span><span class="s2">&quot;/bin/bash&quot;</span><span class="o">]</span>,
+<span class="w">    </span><span class="s2">&quot;WorkingDir&quot;</span>:<span class="w"> </span><span class="s2">&quot;&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;Labels&quot;</span>:<span class="w"> </span><span class="o">{</span>...<span class="o">}</span>,
+<span class="w">    </span><span class="s2">&quot;User&quot;</span>:<span class="w"> </span><span class="s2">&quot;root&quot;</span>
+<span class="w">  </span><span class="o">}</span>,
+<span class="w">  </span><span class="s2">&quot;RootFS&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;Type&quot;</span>:<span class="w"> </span><span class="s2">&quot;layers&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;Layers&quot;</span>:<span class="w"> </span><span class="o">[</span><span class="s2">&quot;sha256:layer1hash&quot;</span>,<span class="w"> </span><span class="s2">&quot;sha256:layer2hash&quot;</span>,<span class="w"> </span>...<span class="o">]</span>
+<span class="w">  </span><span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>When a container starts, Docker uses this metadata:
+- Sets <code>ENV</code> variables in container process
+- Sets <code>WORKDIR</code> for relative paths
+- Uses <code>CMD</code>/<code>ENTRYPOINT</code> as default process
+- Runs as <code>USER</code> (default: root - usually wrong)</p>
+<h2 id="building-images-how-docker-processes-dockerfiles">Building Images: How Docker Processes Dockerfiles</h2>
+<h3 id="the-build-process">The Build Process</h3>
+<div class="highlight"><pre><span></span><code>1. Read Dockerfile
+2. Parse instructions
+3. For each instruction:
+   a. Check build cache
+   b. If in cache, reuse layer (fast)
+   c. If not in cache, execute instruction (slow)
+   d. Create layer with results
+4. Tag image with repository:tag
+5. Return image ID
+</code></pre></div>
+<h3 id="build-cache-why-rebuilds-are-fast">Build Cache: Why Rebuilds Are Fast</h3>
+<p>Docker caches layers to speed up builds.</p>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:22.04</span><span class="w">                    </span><span class="c"># Layer 1 - cached</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python3<span class="w">  </span>#<span class="w"> </span>Layer<span class="w"> </span><span class="m">2</span><span class="w"> </span>-<span class="w"> </span>cached
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.<span class="w">              </span>#<span class="w"> </span>Layer<span class="w"> </span><span class="m">3</span><span class="w"> </span>-<span class="w"> </span>only<span class="w"> </span><span class="k">if</span><span class="w"> </span>changed
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt<span class="w">  </span>#<span class="w"> </span>Layer<span class="w"> </span><span class="m">4</span><span class="w"> </span>-<span class="w"> </span>rerun<span class="w"> </span><span class="k">if</span><span class="w"> </span>Layer<span class="w"> </span><span class="m">3</span><span class="w"> </span>changed
+<span class="k">COPY</span><span class="w"> </span>app.py<span class="w"> </span>/app/<span class="w">                   </span>#<span class="w"> </span>Layer<span class="w"> </span><span class="m">5</span><span class="w"> </span>-<span class="w"> </span>only<span class="w"> </span><span class="k">if</span><span class="w"> </span>changed
+</code></pre></div>
+<p>Cache invalidation:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Cache is valid when:</span>
+<span class="c1"># - Same base image</span>
+<span class="c1"># - Same instruction text</span>
+<span class="c1"># - Same source files (for COPY/ADD)</span>
+
+<span class="c1"># Cache is invalid when:</span>
+<span class="c1"># - Base image changed</span>
+<span class="c1"># - Instruction text changed</span>
+<span class="c1"># - Files in COPY changed</span>
+<span class="c1"># - Any previous layer was invalidated</span>
+</code></pre></div>
+<p><strong>Cache invalidation is sequential and strict:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:22.04</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python3<span class="w">         </span>#<span class="w"> </span>Cached<span class="w"> </span><span class="k">if</span><span class="w"> </span>previous<span class="w"> </span>layers<span class="w"> </span>unchanged
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>flask<span class="w">               </span>#<span class="w"> </span>Only<span class="w"> </span>runs<span class="w"> </span><span class="k">if</span><span class="w"> </span>previous<span class="w"> </span>line<span class="w"> </span>ran
+<span class="k">COPY</span><span class="w"> </span>app.py<span class="w"> </span>/app/<span class="w">                   </span>#<span class="w"> </span>If<span class="w"> </span>app.py<span class="w"> </span>changed,<span class="w"> </span>this<span class="w"> </span>invalidates
+<span class="k">RUN</span><span class="w"> </span>pytest<span class="w"> </span>tests/<span class="w">                   </span>#<span class="w"> </span>Reruns<span class="w"> </span>even<span class="w"> </span><span class="k">if</span><span class="w"> </span>code<span class="w"> </span>didn<span class="err">&#39;</span>t<span class="w"> </span>change
+</code></pre></div>
+<h3 id="build-context">Build Context</h3>
+<p>The build context is the directory sent to Docker daemon for building.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run from directory with Dockerfile</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:1.0<span class="w"> </span>.
+<span class="c1"># Context: everything in current directory</span>
+
+<span class="c1"># Build context is sent to daemon</span>
+<span class="c1"># This is why builds are slow with large directories</span>
+
+<span class="c1"># Use .dockerignore to exclude files</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;node_modules/&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>.dockerignore
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;.git/&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.dockerignore
+
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:1.0<span class="w"> </span>.
+<span class="c1"># Faster because node_modules and .git aren&#39;t sent</span>
+</code></pre></div>
+<p><strong>Important:</strong> Docker sends the entire build context to the daemon.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Bad: large build context</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:1.0<span class="w"> </span>/<span class="w">  </span><span class="c1"># Sends entire filesystem!</span>
+
+<span class="c1"># Good: small, focused context</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:1.0<span class="w"> </span>.<span class="w">  </span><span class="c1"># From project directory</span>
+</code></pre></div>
+<h2 id="image-best-practices-keep-images-small">Image Best Practices: Keep Images Small</h2>
+<h3 id="principle-minimal-images">Principle: Minimal Images</h3>
+<p>Smaller images:
+- Download faster (less bandwidth)
+- Start faster (less disk I/O)
+- Have less attack surface (fewer binaries/libraries)
+- Reduce storage costs</p>
+<h3 id="practice-1-multi-stage-builds">Practice 1: Multi-Stage Builds</h3>
+<p>Split building from running.</p>
+<div class="highlight"><pre><span></span><code><span class="c"># BAD: Single stage, large image</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:22.04</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>build-essential<span class="w"> </span>git<span class="w"> </span>gcc
+<span class="k">COPY</span><span class="w"> </span>src/<span class="w"> </span>/src/
+<span class="k">RUN</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/src<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>build
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;/src/bin/app&quot;</span><span class="p">]</span>
+
+<span class="c"># Result: image includes build tools (gcc, git, build-essential)</span>
+<span class="c"># Size: ~600MB (most for build tools that aren&#39;t needed at runtime)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># GOOD: Multi-stage, small image</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:22.04</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>build-essential<span class="w"> </span>gcc
+<span class="k">COPY</span><span class="w"> </span>src/<span class="w"> </span>/src/
+<span class="k">RUN</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/src<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>build
+
+<span class="c"># Now start fresh, copy only the binary</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:22.04</span>
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/src/bin/app<span class="w"> </span>/usr/local/bin/
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;app&quot;</span><span class="p">]</span>
+
+<span class="c"># Result: Final image has only the binary and runtime libraries</span>
+<span class="c"># Size: ~150MB (build tools not included)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># See the difference</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>badimage:1.0<span class="w"> </span>-f<span class="w"> </span>Dockerfile.bad<span class="w"> </span>.
+docker<span class="w"> </span>images<span class="w"> </span>badimage
+<span class="c1"># SIZE: 600MB</span>
+
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>goodimage:1.0<span class="w"> </span>-f<span class="w"> </span>Dockerfile.good<span class="w"> </span>.
+docker<span class="w"> </span>images<span class="w"> </span>goodimage
+<span class="c1"># SIZE: 150MB</span>
+
+<span class="c1"># Same application, 4x smaller with multi-stage build</span>
+</code></pre></div>
+<h3 id="practice-2-minimize-layers">Practice 2: Minimize Layers</h3>
+<p>Combine <code>RUN</code> commands to reduce layer count.</p>
+<div class="highlight"><pre><span></span><code><span class="c"># BAD: Multiple RUN commands, each creates layer</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:22.04</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>curl
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>python3
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>git
+<span class="c"># 4 layers, each with full apt cache</span>
+
+<span class="c"># GOOD: Single RUN command</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:22.04</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>curl<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>python3<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>git
+<span class="c"># 1 layer with final result</span>
+
+<span class="c"># Even better: clean up afterward</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:22.04</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>curl<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>python3<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>git<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
+<span class="c"># Removes package cache, reduces layer size</span>
+</code></pre></div>
+<h3 id="practice-3-use-minimal-base-images">Practice 3: Use Minimal Base Images</h3>
+<p>Choose smallest image that fits your needs.</p>
+<div class="highlight"><pre><span></span><code><span class="c"># Not minimal</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:22.04</span><span class="w">           </span><span class="c"># 77 MB</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python3
+<span class="c"># Final: 230 MB</span>
+
+<span class="c"># Better</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.11-slim</span><span class="w">       </span><span class="c"># 125 MB (python already included)</span>
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<span class="c"># Final: 180 MB (slightly larger but has everything)</span>
+
+<span class="c"># Best (when applicable)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.11-alpine</span><span class="w">     </span><span class="c"># 50 MB (minimal Linux)</span>
+<span class="k">RUN</span><span class="w"> </span>apk<span class="w"> </span>add<span class="w"> </span>--no-cache<span class="w"> </span>gcc<span class="w">  </span>#<span class="w"> </span>Alpine<span class="err">&#39;</span>s<span class="w"> </span>package<span class="w"> </span>manager
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<span class="c"># Final: 150 MB (smallest, might have compatibility issues)</span>
+</code></pre></div>
+<p><strong>Trade-off:</strong> Alpine is smaller but can have compatibility issues with Python packages that need C extensions.</p>
+<h3 id="practice-4-dont-run-as-root">Practice 4: Don't Run as Root</h3>
+<p>Security: run as non-root user.</p>
+<div class="highlight"><pre><span></span><code><span class="c"># BAD: Runs as root</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:22.04</span>
+<span class="k">COPY</span><span class="w"> </span>app.py<span class="w"> </span>/app/
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/app/app.py&quot;</span><span class="p">]</span>
+<span class="c"># Container runs as root (uid=0)</span>
+
+<span class="c"># GOOD: Create non-root user</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:22.04</span>
+<span class="k">RUN</span><span class="w"> </span>useradd<span class="w"> </span>-m<span class="w"> </span>appuser
+<span class="k">COPY</span><span class="w"> </span>app.py<span class="w"> </span>/app/
+<span class="k">RUN</span><span class="w"> </span>chown<span class="w"> </span>appuser:appuser<span class="w"> </span>/app/
+<span class="k">USER</span><span class="w"> </span><span class="s">appuser</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/app/app.py&quot;</span><span class="p">]</span>
+<span class="c"># Container runs as appuser (uid=1000)</span>
+
+<span class="c"># BETTER: Use official image&#39;s user</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.11-slim</span>
+<span class="k">RUN</span><span class="w"> </span>useradd<span class="w"> </span>-m<span class="w"> </span>appuser
+<span class="k">COPY</span><span class="w"> </span>app.py<span class="w"> </span>/app/
+<span class="k">RUN</span><span class="w"> </span>chown<span class="w"> </span>appuser:appuser<span class="w"> </span>/app/
+<span class="k">USER</span><span class="w"> </span><span class="s">appuser</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/app/app.py&quot;</span><span class="p">]</span>
+</code></pre></div>
+<h3 id="practice-5-leverage-build-cache">Practice 5: Leverage Build Cache</h3>
+<p>Arrange Dockerfile to maximize cache reuse.</p>
+<div class="highlight"><pre><span></span><code><span class="c"># BAD: Invalidates cache too early</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:22.04</span>
+<span class="k">COPY</span><span class="w"> </span>app.py<span class="w"> </span>/app/
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="c"># If you modify app.py, the RUN layer is invalidated</span>
+<span class="c"># RUN command re-executes (slow) even if requirements unchanged</span>
+
+<span class="c"># GOOD: Dependencies before code</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:22.04</span>
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<span class="k">COPY</span><span class="w"> </span>app.py<span class="w"> </span>/app/
+
+<span class="c"># If you modify app.py, dependencies are cached</span>
+<span class="c"># Only the COPY layer is recreated (fast)</span>
+</code></pre></div>
+<p><strong>Golden rule:</strong> Put things that change frequently AFTER things that change rarely.</p>
+<h2 id="image-tagging-and-versioning">Image Tagging and Versioning</h2>
+<h3 id="tagging-strategy">Tagging Strategy</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Tag syntax: [registry]/[repository]:[tag]</span>
+docker<span class="w"> </span>tag<span class="w"> </span>myimage:1.0<span class="w"> </span>hub.docker.com/myuser/myimage:1.0
+
+<span class="c1"># Typical tags:</span>
+docker<span class="w"> </span>tag<span class="w"> </span>myapp:latest<span class="w"> </span>myapp:1.0<span class="w">            </span><span class="c1"># Semantic versioning</span>
+docker<span class="w"> </span>tag<span class="w"> </span>myapp:latest<span class="w"> </span>myapp:v1.0<span class="w">           </span><span class="c1"># v prefix (also good)</span>
+docker<span class="w"> </span>tag<span class="w"> </span>myapp:latest<span class="w"> </span>myapp:stable<span class="w">         </span><span class="c1"># Semantic tag</span>
+docker<span class="w"> </span>tag<span class="w"> </span>myapp:latest<span class="w"> </span>myapp:2024-01-15<span class="w">     </span><span class="c1"># Date tag</span>
+</code></pre></div>
+<p><strong>Naming conventions:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Good: immutable, specific</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:v1.0.5-build.123<span class="w"> </span>.<span class="w">    </span><span class="c1"># Includes build number</span>
+docker<span class="w"> </span>tag<span class="w"> </span>myapp:v1.0.5-build.123<span class="w"> </span>myregistry.com/team/myapp:v1.0.5
+
+<span class="c1"># Less good: mutable, ambiguous</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:latest<span class="w"> </span>.<span class="w">                </span><span class="c1"># Latest changes frequently</span>
+docker<span class="w"> </span>tag<span class="w"> </span>myapp:latest<span class="w"> </span>myapp:stable<span class="w">          </span><span class="c1"># &quot;Stable&quot; is subjective</span>
+</code></pre></div>
+<h3 id="version-tags">Version Tags</h3>
+<p>Use semantic versioning for releases:</p>
+<div class="highlight"><pre><span></span><code>v[MAJOR].[MINOR].[PATCH][-prerelease][+build]
+
+Examples:
+v1.0.0          # Release
+v1.0.1          # Patch fix
+v1.1.0          # Minor feature
+v2.0.0          # Major breaking change
+v1.1.0-rc1      # Release candidate
+v1.1.0-beta.1   # Beta
+</code></pre></div>
+<h3 id="latest-vs-floating-tags">Latest vs Floating Tags</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># latest: points to most recent build (mutable)</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:latest<span class="w"> </span>.<span class="w">      </span><span class="c1"># Latest now points here</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:latest<span class="w"> </span>.<span class="w">      </span><span class="c1"># Latest now points here (old one orphaned)</span>
+
+<span class="c1"># v1.0: points to v1.0.X releases (floats, mutable)</span>
+docker<span class="w"> </span>tag<span class="w"> </span>myapp:v1.0.1<span class="w"> </span>myapp:v1.0
+docker<span class="w"> </span>tag<span class="w"> </span>myapp:v1.0.2<span class="w"> </span>myapp:v1.0<span class="w">  </span><span class="c1"># v1.0 now points to v1.0.2</span>
+
+<span class="c1"># v1.0.1: immutable, never changes</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:v1.0.1<span class="w"> </span>.
+<span class="c1"># This version always means this exact build</span>
+</code></pre></div>
+<p><strong>Best practice for production:</strong>
+- Deploy using specific version tags (v1.0.1)
+- Never use <code>latest</code> in production
+- Use floating tags (v1.0) for convenience only</p>
+<h2 id="image-digest-immutable-identity">Image Digest: Immutable Identity</h2>
+<p>Every image has a unique SHA256 hash digest.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># View digest</span>
+docker<span class="w"> </span>images<span class="w"> </span>--digests
+<span class="c1"># Shows: REPOSITORY, TAG, DIGEST, IMAGE ID, SIZE</span>
+
+<span class="c1"># Example output:</span>
+<span class="c1"># ubuntu    22.04  sha256:abc123def456...  abc123  77MB</span>
+
+<span class="c1"># Same image, multiple tags</span>
+docker<span class="w"> </span>pull<span class="w"> </span>ubuntu:22.04
+docker<span class="w"> </span>pull<span class="w"> </span>ubuntu:latest
+<span class="c1"># If latest points to 22.04, they have same digest</span>
+
+<span class="c1"># Reference by digest (immutable)</span>
+docker<span class="w"> </span>run<span class="w"> </span>ubuntu@sha256:abc123def456...
+<span class="c1"># Always this exact version, regardless of tags</span>
+</code></pre></div>
+<p><strong>Why digests matter:</strong>
+- Tags can change (latest updated)
+- Digests never change (immutable identity)
+- For critical deployments, use digests</p>
+<div class="highlight"><pre><span></span><code><span class="c"># Less safe: latest can change</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:latest</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>...
+
+<span class="c"># More safe: version-specific</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:22.04</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>...
+
+<span class="c"># Most safe: digest-specific</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu@sha256:abc123def456...</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>...
+</code></pre></div>
+<h2 id="image-compression-and-distribution">Image Compression and Distribution</h2>
+<h3 id="how-images-are-compressed">How Images Are Compressed</h3>
+<p>Images are compressed with gzip when pushed to registries.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Build image (uncompressed on disk)</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:1.0<span class="w"> </span>.
+ls<span class="w"> </span>-la<span class="w"> </span>/var/lib/docker/overlay2/
+<span class="c1"># Uncompressed layers on disk</span>
+
+<span class="c1"># Push to registry (compressed)</span>
+docker<span class="w"> </span>push<span class="w"> </span>myregistry.com/myapp:1.0
+<span class="c1"># Docker compresses layers with gzip before upload</span>
+
+<span class="c1"># Pull from registry (compressed)</span>
+docker<span class="w"> </span>pull<span class="w"> </span>myregistry.com/myapp:1.0
+<span class="c1"># Docker downloads compressed, then decompresses</span>
+</code></pre></div>
+<p><strong>Compression rates:</strong>
+- Text files: 10-50% of original
+- Binaries: 30-60% of original
+- Overall image: ~30-50% of uncompressed</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># See compression in action</span>
+docker<span class="w"> </span>images<span class="w"> </span>myapp:1.0
+<span class="c1"># Shows uncompressed size: 500MB</span>
+
+<span class="c1"># Check registry storage size (usually much smaller)</span>
+<span class="c1"># (Requires registry admin access)</span>
+<span class="c1"># Actual stored: ~200MB (compressed)</span>
+</code></pre></div>
+<h2 id="image-verification-trust-and-integrity">Image Verification: Trust and Integrity</h2>
+<h3 id="image-signing">Image Signing</h3>
+<p>Sign images to verify they haven't been tampered with.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Docker Content Trust (DCT) signs images</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">DOCKER_CONTENT_TRUST</span><span class="o">=</span><span class="m">1</span>
+docker<span class="w"> </span>push<span class="w"> </span>myregistry.com/myapp:1.0
+<span class="c1"># Requires signing key</span>
+
+<span class="c1"># Pull signed image</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">DOCKER_CONTENT_TRUST</span><span class="o">=</span><span class="m">1</span>
+docker<span class="w"> </span>pull<span class="w"> </span>myregistry.com/myapp:1.0
+<span class="c1"># Verifies signature before pulling</span>
+</code></pre></div>
+<p><strong>Note:</strong> DCT is less common now. Sigstore is the modern approach.</p>
+<h3 id="scanning-for-vulnerabilities">Scanning for Vulnerabilities</h3>
+<p>Before pushing, scan images for known vulnerabilities.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Docker Scout (built-in)</span>
+docker<span class="w"> </span>scout<span class="w"> </span>cves<span class="w"> </span>myapp:1.0
+<span class="c1"># Shows CVEs in image layers</span>
+
+<span class="c1"># Trivy (external tool)</span>
+trivy<span class="w"> </span>image<span class="w"> </span>myapp:1.0
+<span class="c1"># Scans and reports vulnerabilities</span>
+
+<span class="c1"># Grype (Anchore tool)</span>
+grype<span class="w"> </span>myapp:1.0
+<span class="c1"># Another vulnerability scanner</span>
+</code></pre></div>
+<h2 id="real-world-example-production-web-app-image">Real-World Example: Production Web App Image</h2>
+<div class="highlight"><pre><span></span><code><span class="c"># Multi-stage build for Node.js app</span>
+
+<span class="c"># Stage 1: Build</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">node:18-alpine</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/build</span>
+<span class="k">COPY</span><span class="w"> </span>package*.json<span class="w"> </span>./
+<span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>ci<span class="w"> </span>--only<span class="o">=</span>production<span class="w">  </span>#<span class="w"> </span>Install<span class="w"> </span>deps<span class="w"> </span>only
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>run<span class="w"> </span>build<span class="w">             </span>#<span class="w"> </span>Compile<span class="w"> </span>TypeScript,<span class="w"> </span>bundle
+<span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>prune<span class="w"> </span>--production<span class="w">    </span>#<span class="w"> </span>Remove<span class="w"> </span>dev<span class="w"> </span>dependencies
+
+<span class="c"># Stage 2: Runtime (minimal)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">node:18-alpine</span>
+<span class="k">LABEL</span><span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="w"> </span><span class="nv">maintainer</span><span class="o">=</span><span class="s2">&quot;devops@example.com&quot;</span>
+
+<span class="c"># Create non-root user</span>
+<span class="k">RUN</span><span class="w"> </span>addgroup<span class="w"> </span>-g<span class="w"> </span><span class="m">1001</span><span class="w"> </span>-S<span class="w"> </span>nodejs<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>adduser<span class="w"> </span>-S<span class="w"> </span>nodejs<span class="w"> </span>-u<span class="w"> </span><span class="m">1001</span>
+
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+
+<span class="c"># Copy only built artifacts and node_modules</span>
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>--chown<span class="o">=</span>nodejs:nodejs<span class="w"> </span>/build/dist<span class="w"> </span>./dist
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>--chown<span class="o">=</span>nodejs:nodejs<span class="w"> </span>/build/node_modules<span class="w"> </span>./node_modules
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>--chown<span class="o">=</span>nodejs:nodejs<span class="w"> </span>/build/package.json<span class="w"> </span>./
+
+<span class="c"># Health check</span>
+<span class="k">HEALTHCHECK</span><span class="w"> </span>--interval<span class="o">=</span>30s<span class="w"> </span>--timeout<span class="o">=</span>3s<span class="w"> </span>--start-period<span class="o">=</span>5s<span class="w"> </span>--retries<span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>CMD<span class="w"> </span>node<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;require(&#39;http&#39;).get(&#39;http://localhost:3000/health&#39;, (r) =&gt; {if (r.statusCode !== 200) throw new Error(r.statusCode)})&quot;</span>
+
+<span class="k">USER</span><span class="w"> </span><span class="s">nodejs</span>
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">3000</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;node&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dist/index.js&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p>Build and push:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Build with version tag</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:v1.0.0<span class="w"> </span>-f<span class="w"> </span>Dockerfile.prod<span class="w"> </span>.
+
+<span class="c1"># Verify image size</span>
+docker<span class="w"> </span>images<span class="w"> </span>myapp:v1.0.0
+<span class="c1"># SIZE: ~250MB (Node app with dependencies)</span>
+
+<span class="c1"># Scan for vulnerabilities</span>
+docker<span class="w"> </span>scout<span class="w"> </span>cves<span class="w"> </span>myapp:v1.0.0
+
+<span class="c1"># Tag for registry</span>
+docker<span class="w"> </span>tag<span class="w"> </span>myapp:v1.0.0<span class="w"> </span>myregistry.com/team/myapp:v1.0.0
+
+<span class="c1"># Push to registry</span>
+docker<span class="w"> </span>push<span class="w"> </span>myregistry.com/team/myapp:v1.0.0
+</code></pre></div>
+<h2 id="production-insights">Production Insights</h2>
+<ol>
+<li><strong>Image immutability is a feature</strong> - Same image runs identically everywhere</li>
+<li><strong>Layers enable efficient distribution</strong> - Only changed layers transfer</li>
+<li><strong>Build cache speeds development</strong> - Strategic Dockerfile arrangement matters</li>
+<li><strong>Small images reduce risk</strong> - Fewer binaries = fewer vulnerabilities</li>
+<li><strong>Specific versions over latest</strong> - latest is convenient, versions are reliable</li>
+<li><strong>Non-root is mandatory</strong> - Always specify USER in production images</li>
+</ol>
+<hr />
+<h2 id="practice-exam-questions">Practice: Exam Questions</h2>
+<ol>
+<li><strong>What is the primary difference between a Docker image layer and the final image?</strong></li>
+<li>A) Layers are compressed; images are uncompressed</li>
+<li>B) A layer is a difference (delta); the image is the union of all layers</li>
+<li>C) Layers are read-write; images are read-only</li>
+<li>
+<p>D) There is no difference; they are the same thing</p>
+</li>
+<li>
+<p><strong>When you modify a file in a running container that exists in an image layer, what happens?</strong></p>
+</li>
+<li>A) The image layer is modified</li>
+<li>B) Copy-on-write: file is copied to container's writable layer, then modified</li>
+<li>C) Modification is prevented (read-only)</li>
+<li>
+<p>D) Modification is written back to the image</p>
+</li>
+<li>
+<p><strong>Which Dockerfile instruction creates a new layer?</strong></p>
+</li>
+<li>A) LABEL</li>
+<li>B) ENV</li>
+<li>C) RUN</li>
+<li>
+<p>D) EXPOSE</p>
+</li>
+<li>
+<p><strong>In a multi-stage build, what is the primary advantage?</strong></p>
+</li>
+<li>A) Faster builds</li>
+<li>B) Smaller final image (build tools not included)</li>
+<li>C) Easier to read Dockerfile</li>
+<li>
+<p>D) Automatic caching</p>
+</li>
+<li>
+<p><strong>How can you maximize Docker's build cache?</strong></p>
+</li>
+<li>A) Use smaller base images</li>
+<li>B) Combine all RUN commands into one</li>
+<li>C) Place frequently-changing files AFTER less-frequently-changing files</li>
+<li>
+<p>D) Use latest tags</p>
+</li>
+<li>
+<p><strong>What is a Docker image digest?</strong></p>
+</li>
+<li>A) A summary of the Dockerfile commands</li>
+<li>B) A SHA256 hash that uniquely identifies an image version</li>
+<li>C) The compressed size of an image</li>
+<li>D) A registry index</li>
+</ol>
+<hr />
+<h2 id="hands-on-labs">Hands-On Labs</h2>
+<h3 id="lab-1-build-images-and-observe-layer-creation">Lab 1: Build Images and Observe Layer Creation</h3>
+<p><strong>Objective:</strong> See how Dockerfile commands create layers.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create simple app</span>
+mkdir<span class="w"> </span>docker-lab<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>docker-lab
+cat<span class="w"> </span>&gt;<span class="w"> </span>app.py<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">import time</span>
+<span class="s">while True:</span>
+<span class="s">    print(&quot;Hello from container&quot;)</span>
+<span class="s">    time.sleep(1)</span>
+<span class="s">EOF</span>
+
+<span class="c1"># Create Dockerfile</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span>Dockerfile<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">FROM python:3.11-slim</span>
+<span class="s">RUN apt-get update &amp;&amp; apt-get install -y curl</span>
+<span class="s">RUN apt-get install -y wget</span>
+<span class="s">COPY app.py /app/app.py</span>
+<span class="s">EXPOSE 5000</span>
+<span class="s">CMD [&quot;python3&quot;, &quot;/app/app.py&quot;]</span>
+<span class="s">EOF</span>
+
+<span class="c1"># Build first version</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:v1.0<span class="w"> </span>.
+docker<span class="w"> </span><span class="nb">history</span><span class="w"> </span>myapp:v1.0
+<span class="c1"># Shows each layer with its size and command</span>
+
+<span class="c1"># Modify app</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;print(&#39;Modified&#39;)&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>app.py
+
+<span class="c1"># Build again</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:v1.1<span class="w"> </span>.
+<span class="c1"># Cache is used for first 3 layers</span>
+<span class="c1"># Only COPY layer is recreated (app.py changed)</span>
+
+<span class="c1"># Compare histories</span>
+docker<span class="w"> </span><span class="nb">history</span><span class="w"> </span>myapp:v1.0
+docker<span class="w"> </span><span class="nb">history</span><span class="w"> </span>myapp:v1.1
+<span class="c1"># Same layers except COPY and everything after</span>
+
+<span class="c1"># Verify cache reuse (timing)</span>
+<span class="c1"># First build: slow</span>
+<span class="c1"># Second build: fast (layers cached)</span>
+<span class="nb">time</span><span class="w"> </span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:v1.0<span class="w"> </span>.
+<span class="nb">time</span><span class="w"> </span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:v1.0<span class="w"> </span>.<span class="w">  </span><span class="c1"># Much faster</span>
+</code></pre></div>
+<p><strong>What you're observing:</strong>
+- Each RUN/COPY/ADD command creates a layer
+- Layers are cached and reused
+- Cache invalidation is sequential (one change invalidates subsequent layers)</p>
+<h3 id="lab-2-multi-stage-build">Lab 2: Multi-Stage Build</h3>
+<p><strong>Objective:</strong> Understand size reduction with multi-stage builds.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create Go app (small compiled binary)</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span>main.go<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">package main</span>
+<span class="s">import (</span>
+<span class="s">    &quot;fmt&quot;</span>
+<span class="s">    &quot;net/http&quot;</span>
+<span class="s">)</span>
+<span class="s">func main() {</span>
+<span class="s">    http.HandleFunc(&quot;/&quot;, func(w http.ResponseWriter, r *http.Request) {</span>
+<span class="s">        fmt.Fprintf(w, &quot;Hello\n&quot;)</span>
+<span class="s">    })</span>
+<span class="s">    http.ListenAndServe(&quot;:8080&quot;, nil)</span>
+<span class="s">}</span>
+<span class="s">EOF</span>
+
+<span class="c1"># Single-stage build (not ideal)</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span>Dockerfile.single<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">FROM golang:1.20</span>
+<span class="s">WORKDIR /src</span>
+<span class="s">COPY main.go .</span>
+<span class="s">RUN go build -o app main.go</span>
+<span class="s">EXPOSE 8080</span>
+<span class="s">CMD [&quot;./app&quot;]</span>
+<span class="s">EOF</span>
+
+<span class="c1"># Multi-stage build (optimized)</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span>Dockerfile.multi<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">FROM golang:1.20 AS builder</span>
+<span class="s">WORKDIR /src</span>
+<span class="s">COPY main.go .</span>
+<span class="s">RUN go build -o app main.go</span>
+
+<span class="s">FROM alpine:3.18</span>
+<span class="s">COPY --from=builder /src/app /app</span>
+<span class="s">EXPOSE 8080</span>
+<span class="s">CMD [&quot;/app&quot;]</span>
+<span class="s">EOF</span>
+
+<span class="c1"># Build both</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>demo:single<span class="w"> </span>-f<span class="w"> </span>Dockerfile.single<span class="w"> </span>.
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>demo:multi<span class="w"> </span>-f<span class="w"> </span>Dockerfile.multi<span class="w"> </span>.
+
+<span class="c1"># Compare sizes</span>
+docker<span class="w"> </span>images<span class="w"> </span>demo
+<span class="c1"># Single: ~900MB (includes golang toolchain)</span>
+<span class="c1"># Multi: ~15MB (only the binary)</span>
+
+<span class="c1"># Both produce same app output</span>
+docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>demo:single<span class="w">    </span><span class="c1"># Works</span>
+docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>demo:multi<span class="w">     </span><span class="c1"># Works, much smaller</span>
+</code></pre></div>
+<p><strong>What you're observing:</strong>
+- Multi-stage separates build from runtime
+- Final image includes only what's needed
+- Dramatic size reduction (60x in this case)</p>
+<hr />
+<h2 id="failure-scenario-layer-cache-invalidation-gone-wrong">Failure Scenario: Layer Cache Invalidation Gone Wrong</h2>
+<p><strong>Scenario:</strong>
+Your team's build pipeline is getting slower each day. A build that took 2 minutes now takes 15 minutes. Meanwhile, a refactor to the Dockerfile didn't improve speed - it made it worse.</p>
+<p><strong>Original Dockerfile:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.11-slim</span>
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<span class="k">COPY</span><span class="w"> </span>app.py<span class="w"> </span>.
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;app.py&quot;</span><span class="p">]</span>
+</code></pre></div></p>
+<p><strong>"Refactored" Dockerfile:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.11-slim</span>
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.<span class="w">                          </span>#<span class="w"> </span>Copy<span class="w"> </span>everything<span class="w"> </span>first!
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;app.py&quot;</span><span class="p">]</span>
+</code></pre></div></p>
+<p><strong>Problem:</strong>
+The refactored version invalidates the pip layer when ANY file changes (including .git, test files, etc.). Now every commit causes a full pip reinstall (slow).</p>
+<p><strong>Debugging:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Check build time with verbose output</span>
+docker<span class="w"> </span>build<span class="w"> </span>--progress<span class="o">=</span>plain<span class="w"> </span>-t<span class="w"> </span>app<span class="w"> </span>.<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;run pip&quot;</span>
+
+<span class="c1"># Original: Uses cache, instant</span>
+<span class="c1"># Refactored: Rebuilds, 5+ minutes</span>
+</code></pre></div></p>
+<p><strong>Solution:</strong>
+Return to careful COPY ordering. Copy dependencies before code.</p>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.11-slim</span>
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.<span class="w">           </span>#<span class="w"> </span>Rarely<span class="w"> </span>changes
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt<span class="w">  </span>#<span class="w"> </span>Only<span class="w"> </span>runs<span class="w"> </span><span class="k">if</span><span class="w"> </span>requirements.txt<span class="w"> </span>changed
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.<span class="w">                           </span>#<span class="w"> </span>Changes<span class="w"> </span>frequently
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;app.py&quot;</span><span class="p">]</span><span class="w">          </span>#<span class="w"> </span>Doesn<span class="err">&#39;</span>t<span class="w"> </span>create<span class="w"> </span>layer
+</code></pre></div>
+<p><strong>Learning point:</strong>
+Cache invalidation is about file dependencies. Know what changes frequently and order your Dockerfile accordingly.</p>
+<hr />
+<p>Next: <a href="../04-docker-containers/">Module 4: Docker Containers</a></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../02-docker-architecture/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 02 Architecture" rel="prev">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                02 Architecture
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../04-docker-containers/" class="md-footer__link md-footer__link--next" aria-label="Next: 04 Containers" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                04 Containers
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="mailto:contact@example.com" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480v-83.6c0-4 1.5-7.8 4.2-10.7l167.6-182.9c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8l-88.3-44.2C7.1 311.3.3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "navigation.footer", "navigation.tracking", "navigation.indexes", "navigation.pruned", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tooltips", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.4e0fa4ba.min.js"></script>
+      
+    
+  </body>
+</html>

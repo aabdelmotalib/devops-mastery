@@ -1,0 +1,280 @@
+site_name: DevOps Engineering Mastery
+site_url: https://devops-mastery.io
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - navigation.footer
+    - navigation.tracking
+    - navigation.indexes
+    - navigation.pruned
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tooltips
+    - content.tabs.link
+    - toc.follow
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.magiclink
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+nav:
+  - Home: index.md
+  - My Portfolio: portfolio.md
+  - AWS Essentials:
+      - Introduction: aws-essentials-tutorial/START_HERE.md
+      - Modules:
+          - 01 Fundamentals: aws-essentials-tutorial/docs/01-aws-fundamentals.md
+          - 02 IAM: aws-essentials-tutorial/docs/02-identity-access-management.md
+          - 03 Compute: aws-essentials-tutorial/docs/03-compute-services.md
+          - 04 Storage & DBs: aws-essentials-tutorial/docs/04-storage-databases.md
+          - 05 Networking: aws-essentials-tutorial/docs/05-networking-content-delivery.md
+          - 06 CI/CD: aws-essentials-tutorial/docs/06-cicd-devops-integration.md
+          - 07 Monitoring: aws-essentials-tutorial/docs/07-monitoring-observability.md
+          - 08 Security: aws-essentials-tutorial/docs/08-security-compliance.md
+          - 09 Cost Management: aws-essentials-tutorial/docs/09-cost-management.md
+          - 10 Advanced Services: aws-essentials-tutorial/docs/10-advanced-services.md
+      - Final Project: aws-essentials-tutorial/final-project.md
+      - Reference: aws-essentials-tutorial/QUICK_REFERENCE.md
+      - Resources:
+          - Index: aws-essentials-tutorial/INDEX.md
+          - Completion Report: aws-essentials-tutorial/COMPLETION_REPORT.md
+          - Delivery Summary: aws-essentials-tutorial/DELIVERY_SUMMARY.md
+          - README: aws-essentials-tutorial/README.md
+  
+  - Docker Essentials:
+      - Overview: docker-essentials-tutorial/README.md
+      - Modules:
+          - 01 Fundamentals: docker-essentials-tutorial/01-container-fundamentals.md
+          - 02 Architecture: docker-essentials-tutorial/02-docker-architecture.md
+          - 03 Images: docker-essentials-tutorial/03-docker-images.md
+          - 04 Containers: docker-essentials-tutorial/04-docker-containers.md
+          - 05 Networking: docker-essentials-tutorial/05-docker-networking.md
+          - 06 Storage: docker-essentials-tutorial/06-docker-volumes-storage.md
+          - 07 Compose: docker-essentials-tutorial/07-docker-compose.md
+          - 08 Security: docker-essentials-tutorial/08-docker-security.md
+          - 09 CI/CD: docker-essentials-tutorial/09-docker-cicd.md
+          - 10 Kubernetes Readiness: docker-essentials-tutorial/10-docker-kubernetes-readiness.md
+      - Final Project: docker-essentials-tutorial/final-project.md
+      - Resources:
+          - Summary: docker-essentials-tutorial/TUTORIAL_SUMMARY.md
+          - README: docker-essentials-tutorial/README.md
+
+  - Kubernetes Essentials:
+      - Introduction: kubernetes-essentials-tutorial/START_HERE.md
+      - Modules:
+          - 01 Fundamentals: kubernetes-essentials-tutorial/docs/01-kubernetes-fundamentals.md
+          - 02 Kubectl: kubernetes-essentials-tutorial/docs/02-kubectl-cluster-interaction.md
+          - 03 Pods & Workloads: kubernetes-essentials-tutorial/docs/03-pods-workloads.md
+          - 04 Services: kubernetes-essentials-tutorial/docs/04-services-networking.md
+          - 05 Config & Secrets: kubernetes-essentials-tutorial/docs/05-configmaps-secrets.md
+          - 06 Storage: kubernetes-essentials-tutorial/docs/06-storage-volumes.md
+          - 07 Resource Mgmt: kubernetes-essentials-tutorial/docs/07-resource-management.md
+          - 08 Health & Logging: kubernetes-essentials-tutorial/docs/08-health-probes-logging.md
+          - 09 Security: kubernetes-essentials-tutorial/docs/09-rbac-security.md
+          - 10 Helm: kubernetes-essentials-tutorial/docs/10-helm-package-management.md
+          - 11 Advanced Ops: kubernetes-essentials-tutorial/docs/11-advanced-cluster-operations.md
+          - 12 CI/CD: kubernetes-essentials-tutorial/docs/12-kubernetes-cicd-docker.md
+      - Final Project: kubernetes-essentials-tutorial/FINAL_PROJECT.md
+      - Reference: kubernetes-essentials-tutorial/QUICK_REFERENCE.md
+      - Resources:
+          - Index: kubernetes-essentials-tutorial/INDEX.md
+          - Completion Report: kubernetes-essentials-tutorial/COMPLETION_REPORT.md
+          - Exam & Practice: kubernetes-essentials-tutorial/EXAM_AND_PRACTICE.md
+          - README: kubernetes-essentials-tutorial/README.md
+
+  - CI/CD Essentials:
+      - Overview: cicd-essentials-tutorial/README.md
+      - Modules:
+          - 01 Fundamentals: cicd-essentials-tutorial/docs/01-cicd-fundamentals.md
+          - 02 Triggers: cicd-essentials-tutorial/docs/02-source-control-triggers.md
+          - 03 Pipeline Design: cicd-essentials-tutorial/docs/03-ci-pipeline-design.md
+          - 04 Artifacts: cicd-essentials-tutorial/docs/04-artifact-management.md
+          - 05 Security: cicd-essentials-tutorial/docs/05-security-in-cicd.md
+          - 06 CD: cicd-essentials-tutorial/docs/06-continuous-deployment.md
+          - 07 IaC: cicd-essentials-tutorial/docs/07-infrastructure-as-code.md
+          - 08 Observability: cicd-essentials-tutorial/docs/08-pipeline-observability.md
+          - 09 Tooling: cicd-essentials-tutorial/docs/09-cicd-tools-comparison.md
+          - 10 Recovery: cicd-essentials-tutorial/docs/10-failure-recovery.md
+      - Final Project: cicd-essentials-tutorial/docs/final-project.md
+      - Reference: cicd-essentials-tutorial/QUICK_REFERENCE.md
+      - Resources:
+          - Index: cicd-essentials-tutorial/INDEX.md
+          - Completion Report: cicd-essentials-tutorial/COMPLETION_REPORT.md
+          - Delivery Summary: cicd-essentials-tutorial/DELIVERY_SUMMARY.md
+          - README: cicd-essentials-tutorial/README.md
+
+  - Database Essentials:
+      - Overview: database-essentials-tutorial/README.md
+      - Modules:
+          - 01 Fundamentals: database-essentials-tutorial/docs/01-fundamentals.md
+          - 02 PostgreSQL: database-essentials-tutorial/docs/02-postgresql.md
+          - 03 NoSQL: database-essentials-tutorial/docs/03-nosql.md
+          - 04 DB Design: database-essentials-tutorial/docs/04-database-design.md
+          - 05 SQLAlchemy: database-essentials-tutorial/docs/05-sqlalchemy-orm.md
+          - 06 Migrations: database-essentials-tutorial/docs/06-migrations.md
+          - 07 Performance: database-essentials-tutorial/docs/07-performance.md
+          - 08 Transactions: database-essentials-tutorial/docs/08-transactions.md
+      - Final Project: database-essentials-tutorial/docs/09-final-project.md
+
+  - Networking Essentials:
+      - Start Here: networking-essentials-tutorial/GETTING_STARTED.md
+      - Modules:
+          - 01 Fundamentals: networking-essentials-tutorial/docs/01-networking-fundamentals.md
+          - 02 HTTP/S: networking-essentials-tutorial/docs/02-http-https-protocol.md
+          - 03 API Design: networking-essentials-tutorial/docs/03-rest-api-design.md
+          - 04 WebSockets: networking-essentials-tutorial/docs/04-websockets.md
+          - 05 Load Balancing: networking-essentials-tutorial/docs/05-load-balancing.md
+          - 06 Nginx: networking-essentials-tutorial/docs/06-reverse-proxy-nginx.md
+          - 07 DNS: networking-essentials-tutorial/docs/07-dns-domain-management.md
+          - 08 SSL/TLS: networking-essentials-tutorial/docs/08-ssl-tls-certificates.md
+      - Final Project: networking-essentials-tutorial/docs/09-final-project.md
+      - Resources:
+          - README: networking-essentials-tutorial/README.md
+
+  - Observability Essentials:
+      - Introduction: observability-essentials-tutorial/START_HERE.md
+      - Modules:
+          - 01 Fundamentals: observability-essentials-tutorial/docs/01-observability-fundamentals.md
+          - 02 Prometheus: observability-essentials-tutorial/docs/02-prometheus-metrics.md
+          - 03 Logging: observability-essentials-tutorial/docs/03-logging-fundamentals.md
+          - 04 Loki: observability-essentials-tutorial/docs/04-loki-fluent-bit.md
+          - 05 Grafana: observability-essentials-tutorial/docs/05-grafana-dashboards.md
+          - 06 CloudWatch: observability-essentials-tutorial/docs/06-aws-cloudwatch.md
+          - 07 Alerting: observability-essentials-tutorial/docs/07-alerting-incident-response.md
+          - 08 Advanced Patterns: observability-essentials-tutorial/docs/08-advanced-patterns.md
+      - Final Project: observability-essentials-tutorial/FINAL_PROJECT.md
+      - Reference: observability-essentials-tutorial/QUICK_REFERENCE.md
+      - Resources:
+          - Index: observability-essentials-tutorial/INDEX.md
+          - Completion Report: observability-essentials-tutorial/COMPLETION_REPORT.md
+          - Delivery Summary: observability-essentials-tutorial/DELIVERY_SUMMARY.md
+          - README: observability-essentials-tutorial/README.md
+
+  - Distributed Systems:
+      - Introduction: distributed-systems-tutorial/START_HERE.md
+      - Modules:
+          - 01 Fundamentals: distributed-systems-tutorial/docs/01-fundamentals.md
+          - 02 Scalability: distributed-systems-tutorial/docs/02-scalability.md
+          - 03 Storage: distributed-systems-tutorial/docs/03-data-storage-replication.md
+          - 04 Messaging: distributed-systems-tutorial/docs/04-messaging-event-driven.md
+          - 05 Fault Tolerance: distributed-systems-tutorial/docs/05-fault-tolerance.md
+          - 06 Performance: distributed-systems-tutorial/docs/06-performance-optimization.md
+          - 07 Transactions: distributed-systems-tutorial/docs/07-consistency-transactions.md
+          - 08 Microservices: distributed-systems-tutorial/docs/08-microservices-patterns.md
+          - 09 Observability: distributed-systems-tutorial/docs/09-observability.md
+          - 10 Deployment: distributed-systems-tutorial/docs/10-deployment-scaling.md
+      - Final Project: distributed-systems-tutorial/FINAL_PROJECT.md
+      - Resources:
+          - Index: distributed-systems-tutorial/INDEX.md
+          - Reference: distributed-systems-tutorial/QUICK_REFERENCE.md
+          - Exam & Practice: distributed-systems-tutorial/EXAM_AND_PRACTICE.md
+          - README: distributed-systems-tutorial/README.md
+
+  - Flask Backend:
+      - Overview: flask-backend-tutorial/README.md
+      - Modules:
+          - 01 Fundamentals: flask-backend-tutorial/docs/01-flask-fundamentals.md
+          - 02 Architecture: flask-backend-tutorial/docs/02-flask-architecture.md
+          - 03 Routing: flask-backend-tutorial/docs/03-routing-and-views.md
+          - 04 Requests: flask-backend-tutorial/docs/04-request-handling.md
+          - 05 Response: flask-backend-tutorial/docs/05-response-formats.md
+          - 06 Templates: flask-backend-tutorial/docs/06-templates-static.md
+          - 07 Blueprints: flask-backend-tutorial/docs/07-flask-blueprints.md
+          - 08 Errors: flask-backend-tutorial/docs/08-error-handling.md
+          - 09 Auth: flask-backend-tutorial/docs/09-authentication-authorization.md
+          - 10 Extensions: flask-backend-tutorial/docs/10-flask-extensions.md
+      - Final Project: flask-backend-tutorial/docs/11-final-project.md
+
+  - Capstone Projects:
+      - Start Here: devops-capstone-projects/README_START_HERE.md
+      - Platform Engineering:
+          - Overview: devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/README.md
+          - Infrastructure: devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/aws/infrastructure.md
+          - Architecture Decisions: devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/decisions.md
+          - Security: devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/security.md
+          - Scaling: devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/scaling.md
+          - Cost Awareness: devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/cost-awareness.md
+          - Interview Notes: devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/interview-notes.md
+      - Distributed Systems:
+          - Overview: devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/README.md
+          - Architecture Decisions: devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/docs/decisions.md
+          - Scaling: devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/docs/scaling.md
+      - Overview: devops-capstone-projects/PORTFOLIO_OVERVIEW.md
+      - Resources:
+          - Completion Summary: devops-capstone-projects/COMPLETION_SUMMARY.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/
+    - icon: fontawesome/solid/paper-plane
+      link: mailto:contact@example.com
+
+extra_css:
+  - stylesheets/extra.css
+
+plugins:
+  - search
+
+docs_dir: docs
+site_dir: site
+exclude_docs: |
+  **/backend/**
+  **/migrations/**
+  **/tests/**
+  **/reference-configs/**
+  **/projects/**
+  **/nginx*.conf
+  **/.*
+  **/node_modules/**
+  **/venv/**
+  task.md
+  implementation_plan.md
+  walkthrough.md

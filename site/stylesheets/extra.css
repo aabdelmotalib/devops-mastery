@@ -1,0 +1,84 @@
+/* Custom styles for the DevOps Dashboard */
+
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+    --card-bg: #1e293b;
+}
+
+[data-md-color-scheme="default"] {
+    --glass-bg: rgba(0, 0, 0, 0.02);
+    --glass-border: rgba(0, 0, 0, 0.08);
+    --card-bg: #f8fafc;
+}
+
+.md-content__inner .grid.cards ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+    list-style: none;
+    padding: 0;
+}
+
+.md-content__inner .grid.cards ul li {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    margin-bottom: 0 !important;
+}
+
+.md-content__inner .grid.cards ul li:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    border-color: var(--md-accent-fg-color);
+}
+
+.md-content__inner .grid.cards ul li p {
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.md-content__inner .grid.cards ul li a {
+    font-weight: 700;
+    margin-top: auto;
+}
+
+/* Icons */
+.md-content__inner .grid.cards ul li :first-child {
+    font-size: 1.5rem;
+    color: var(--md-primary-fg-color);
+}
+
+/* Sidebar Enhancements */
+.md-nav__link--active {
+    background-color: rgba(99, 102, 241, 0.1);
+    border-left: 3px solid var(--md-accent-fg-color);
+    padding-left: 0.8rem !important;
+}
+
+/* Title Styling */
+.md-typeset h1 {
+    font-weight: 800;
+    letter-spacing: -0.025em;
+}
+
+.dashboard-hero {
+    background: var(--accent-gradient);
+    color: white;
+    padding: 3rem 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 3rem;
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+}
