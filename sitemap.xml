@@ -386,6 +386,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://devops-mastery.io/docker-essentials-tutorial/00-bash-and-yaml-fundamentals/</loc>
+         <lastmod>2026-01-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://devops-mastery.io/docker-essentials-tutorial/01-container-fundamentals/</loc>
          <lastmod>2026-01-02</lastmod>
          <changefreq>daily</changefreq>
