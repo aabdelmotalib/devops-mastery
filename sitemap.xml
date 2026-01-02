@@ -451,6 +451,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://devops-mastery.io/flask-backend-tutorial/docs/00-prerequisites-and-basics/</loc>
+         <lastmod>2026-01-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://devops-mastery.io/flask-backend-tutorial/docs/01-flask-fundamentals/</loc>
          <lastmod>2026-01-02</lastmod>
          <changefreq>daily</changefreq>
