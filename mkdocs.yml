@@ -84,11 +84,13 @@ nav:
           - Index: aws-essentials-tutorial/INDEX.md
           - Completion Report: aws-essentials-tutorial/COMPLETION_REPORT.md
           - Delivery Summary: aws-essentials-tutorial/DELIVERY_SUMMARY.md
+          - Reference Implementation: aws-essentials-tutorial/examples/REFERENCE_IMPLEMENTATIONS.md
           - README: aws-essentials-tutorial/README.md
   
   - Docker Essentials:
       - Overview: docker-essentials-tutorial/README.md
       - Modules:
+          - 00 Bash & YAML: docker-essentials-tutorial/00-bash-and-yaml-fundamentals.md
           - 01 Fundamentals: docker-essentials-tutorial/01-container-fundamentals.md
           - 02 Architecture: docker-essentials-tutorial/02-docker-architecture.md
           - 03 Images: docker-essentials-tutorial/03-docker-images.md
@@ -119,12 +121,16 @@ nav:
           - 10 Helm: kubernetes-essentials-tutorial/docs/10-helm-package-management.md
           - 11 Advanced Ops: kubernetes-essentials-tutorial/docs/11-advanced-cluster-operations.md
           - 12 CI/CD: kubernetes-essentials-tutorial/docs/12-kubernetes-cicd-docker.md
+          - 13 Gateway API: kubernetes-essentials-tutorial/docs/13-gateway-api.md
       - Final Project: kubernetes-essentials-tutorial/FINAL_PROJECT.md
       - Reference: kubernetes-essentials-tutorial/QUICK_REFERENCE.md
+      - Gateway API Reference: kubernetes-essentials-tutorial/docs/GATEWAY_API_QUICK_REFERENCE.md
       - Resources:
           - Index: kubernetes-essentials-tutorial/INDEX.md
           - Completion Report: kubernetes-essentials-tutorial/COMPLETION_REPORT.md
           - Exam & Practice: kubernetes-essentials-tutorial/EXAM_AND_PRACTICE.md
+          - Module 13 Summary: kubernetes-essentials-tutorial/MODULE_13_UPDATE_SUMMARY.md
+          - Completion Summary: kubernetes-essentials-tutorial/COMPLETION_SUMMARY.md
           - README: kubernetes-essentials-tutorial/README.md
 
   - CI/CD Essentials:
@@ -146,6 +152,7 @@ nav:
           - Index: cicd-essentials-tutorial/INDEX.md
           - Completion Report: cicd-essentials-tutorial/COMPLETION_REPORT.md
           - Delivery Summary: cicd-essentials-tutorial/DELIVERY_SUMMARY.md
+          - Reference Implementation: cicd-essentials-tutorial/examples/REFERENCE_IMPLEMENTATIONS.md
           - README: cicd-essentials-tutorial/README.md
 
   - Database Essentials:
@@ -174,6 +181,7 @@ nav:
           - 08 SSL/TLS: networking-essentials-tutorial/docs/08-ssl-tls-certificates.md
       - Final Project: networking-essentials-tutorial/docs/09-final-project.md
       - Resources:
+          - Quick Reference: networking-essentials-tutorial/examples/QUICK_REFERENCE.md
           - README: networking-essentials-tutorial/README.md
 
   - Observability Essentials:
@@ -193,6 +201,7 @@ nav:
           - Index: observability-essentials-tutorial/INDEX.md
           - Completion Report: observability-essentials-tutorial/COMPLETION_REPORT.md
           - Delivery Summary: observability-essentials-tutorial/DELIVERY_SUMMARY.md
+          - Reference Implementation: observability-essentials-tutorial/examples/REFERENCE_IMPLEMENTATIONS.md
           - README: observability-essentials-tutorial/README.md
 
   - Distributed Systems:
@@ -218,6 +227,7 @@ nav:
   - Flask Backend:
       - Overview: flask-backend-tutorial/README.md
       - Modules:
+          - 00 Prerequisites: flask-backend-tutorial/docs/00-prerequisites-and-basics.md
           - 01 Fundamentals: flask-backend-tutorial/docs/01-flask-fundamentals.md
           - 02 Architecture: flask-backend-tutorial/docs/02-flask-architecture.md
           - 03 Routing: flask-backend-tutorial/docs/03-routing-and-views.md
@@ -266,13 +276,10 @@ plugins:
 docs_dir: docs
 site_dir: site
 exclude_docs: |
-  **/backend/**
   **/migrations/**
   **/tests/**
   **/reference-configs/**
-  **/projects/**
   **/nginx*.conf
-  **/.*
   **/node_modules/**
   **/venv/**
   task.md
