@@ -8,28 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://aabdelmotalib.github.io/devops-mastery/aws-essentials-tutorial/docs-advanced/12-advanced-lambda/">
+        <link rel="canonical" href="https://aabdelmotalib.github.io/devops-mastery/aws-essentials-tutorial/11-advanced-ecs/">
       
       
-        <link rel="prev" href="../11-advanced-ecs/">
+        <link rel="prev" href="../">
       
       
-        <link rel="next" href="../13-advanced-fargate/">
+        <link rel="next" href="../12-advanced-lambda/">
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.0">
     
     
       
-        <title>12 Advanced Lambda - DevOps Engineering Mastery</title>
+        <title>11 Advanced ECS - DevOps Engineering Mastery</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.9f615399.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.9f615399.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.649f08f9.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.649f08f9.min.css">
       
       
 
@@ -48,9 +48,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -79,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#advanced-aws-serverless-lambda-at-scale" class="md-skip">
+        <a href="#advanced-aws-ecs-container-orchestration" class="md-skip">
           Skip to content
         </a>
       
@@ -95,7 +95,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="DevOps Engineering Mastery" class="md-header__button md-logo" aria-label="DevOps Engineering Mastery" data-md-component="logo">
+    <a href="../.." title="DevOps Engineering Mastery" class="md-header__button md-logo" aria-label="DevOps Engineering Mastery" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              12 Advanced Lambda
+              11 Advanced ECS
             
           </span>
         </div>
@@ -220,7 +220,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="DevOps Engineering Mastery" class="md-nav__button md-logo" aria-label="DevOps Engineering Mastery" data-md-component="logo">
+    <a href="../.." title="DevOps Engineering Mastery" class="md-nav__button md-logo" aria-label="DevOps Engineering Mastery" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -237,7 +237,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -256,7 +256,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../portfolio/" class="md-nav__link">
+      <a href="../../portfolio/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -306,7 +306,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../programming-fundamentals-with-ai/" class="md-nav__link ">
+            <a href="../../programming-fundamentals-with-ai/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -335,7 +335,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../programming-fundamentals-with-ai/START_HERE/" class="md-nav__link">
+      <a href="../../programming-fundamentals-with-ai/START_HERE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -405,7 +405,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../programming-fundamentals-with-ai/docs/01-programming-thinking/" class="md-nav__link">
+      <a href="../../programming-fundamentals-with-ai/docs/01-programming-thinking/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -425,7 +425,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../programming-fundamentals-with-ai/docs/02-core-programming-concepts/" class="md-nav__link">
+      <a href="../../programming-fundamentals-with-ai/docs/02-core-programming-concepts/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -445,7 +445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../programming-fundamentals-with-ai/docs/03-software-architecture-basics/" class="md-nav__link">
+      <a href="../../programming-fundamentals-with-ai/docs/03-software-architecture-basics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -465,7 +465,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../programming-fundamentals-with-ai/docs/04-thinking-like-an-engineer/" class="md-nav__link">
+      <a href="../../programming-fundamentals-with-ai/docs/04-thinking-like-an-engineer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -485,7 +485,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../programming-fundamentals-with-ai/docs/05-programming-with-ai/" class="md-nav__link">
+      <a href="../../programming-fundamentals-with-ai/docs/05-programming-with-ai/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -505,7 +505,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../programming-fundamentals-with-ai/docs/06-practical-examples/" class="md-nav__link">
+      <a href="../../programming-fundamentals-with-ai/docs/06-practical-examples/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -533,7 +533,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../programming-fundamentals-with-ai/FINAL_PROJECT/" class="md-nav__link">
+      <a href="../../programming-fundamentals-with-ai/FINAL_PROJECT/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -553,7 +553,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../programming-fundamentals-with-ai/QUICK_REFERENCE/" class="md-nav__link">
+      <a href="../../programming-fundamentals-with-ai/QUICK_REFERENCE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -632,7 +632,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../START_HERE/" class="md-nav__link">
+      <a href="../START_HERE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -710,7 +710,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/01-aws-fundamentals/" class="md-nav__link">
+      <a href="../docs/01-aws-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -730,7 +730,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/02-identity-access-management/" class="md-nav__link">
+      <a href="../docs/02-identity-access-management/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -750,7 +750,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/03-compute-services/" class="md-nav__link">
+      <a href="../docs/03-compute-services/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -770,7 +770,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/04-storage-databases/" class="md-nav__link">
+      <a href="../docs/04-storage-databases/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -790,7 +790,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/05-networking-content-delivery/" class="md-nav__link">
+      <a href="../docs/05-networking-content-delivery/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -810,7 +810,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/06-cicd-devops-integration/" class="md-nav__link">
+      <a href="../docs/06-cicd-devops-integration/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -830,7 +830,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/07-monitoring-observability/" class="md-nav__link">
+      <a href="../docs/07-monitoring-observability/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -850,7 +850,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/08-security-compliance/" class="md-nav__link">
+      <a href="../docs/08-security-compliance/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -870,7 +870,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/09-cost-management/" class="md-nav__link">
+      <a href="../docs/09-cost-management/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -890,7 +890,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/10-advanced-services/" class="md-nav__link">
+      <a href="../docs/10-advanced-services/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -918,7 +918,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../final-project/" class="md-nav__link">
+      <a href="../final-project/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -938,7 +938,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../QUICK_REFERENCE/" class="md-nav__link">
+      <a href="../QUICK_REFERENCE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -987,7 +987,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1016,7 +1016,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../INDEX/" class="md-nav__link">
+      <a href="../INDEX/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1036,7 +1036,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../COMPLETION_REPORT/" class="md-nav__link">
+      <a href="../COMPLETION_REPORT/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1056,7 +1056,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../DELIVERY_SUMMARY/" class="md-nav__link">
+      <a href="../DELIVERY_SUMMARY/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1076,7 +1076,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../examples/REFERENCE_IMPLEMENTATIONS/" class="md-nav__link">
+      <a href="../examples/REFERENCE_IMPLEMENTATIONS/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1142,7 +1142,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../docker-essentials-tutorial/" class="md-nav__link ">
+            <a href="../../docker-essentials-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1233,7 +1233,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/00-bash-and-yaml-fundamentals/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/00-bash-and-yaml-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1253,7 +1253,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/01-container-fundamentals/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/01-container-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1273,7 +1273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/02-docker-architecture/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/02-docker-architecture/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1293,7 +1293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/03-docker-images/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/03-docker-images/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1313,7 +1313,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/04-docker-containers/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/04-docker-containers/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1333,7 +1333,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/05-docker-networking/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/05-docker-networking/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1353,7 +1353,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/06-docker-volumes-storage/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/06-docker-volumes-storage/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1373,7 +1373,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/07-docker-compose/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/07-docker-compose/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1393,7 +1393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/08-docker-security/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/08-docker-security/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1413,7 +1413,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/09-docker-cicd/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/09-docker-cicd/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1433,7 +1433,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/10-docker-kubernetes-readiness/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/10-docker-kubernetes-readiness/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1461,7 +1461,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/final-project/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/final-project/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1504,7 +1504,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../docker-essentials-tutorial/" class="md-nav__link ">
+            <a href="../../docker-essentials-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1533,7 +1533,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/TUTORIAL_SUMMARY/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/TUTORIAL_SUMMARY/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1622,7 +1622,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/START_HERE/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/START_HERE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1706,7 +1706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/01-kubernetes-fundamentals/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/01-kubernetes-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1726,7 +1726,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/02-kubectl-cluster-interaction/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/02-kubectl-cluster-interaction/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1746,7 +1746,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/03-pods-workloads/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/03-pods-workloads/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1766,7 +1766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/04-services-networking/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/04-services-networking/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1786,7 +1786,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/05-configmaps-secrets/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/05-configmaps-secrets/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1806,7 +1806,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/06-storage-volumes/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/06-storage-volumes/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1826,7 +1826,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/07-resource-management/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/07-resource-management/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1846,7 +1846,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/08-health-probes-logging/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/08-health-probes-logging/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1866,7 +1866,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/09-rbac-security/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/09-rbac-security/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1886,7 +1886,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/10-helm-package-management/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/10-helm-package-management/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1906,7 +1906,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/11-advanced-cluster-operations/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/11-advanced-cluster-operations/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1926,7 +1926,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/12-kubernetes-cicd-docker/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/12-kubernetes-cicd-docker/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1946,7 +1946,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/13-gateway-api/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/13-gateway-api/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1974,7 +1974,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/FINAL_PROJECT/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/FINAL_PROJECT/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1994,7 +1994,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2014,7 +2014,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/GATEWAY_API_QUICK_REFERENCE/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/GATEWAY_API_QUICK_REFERENCE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2065,7 +2065,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../kubernetes-essentials-tutorial/" class="md-nav__link ">
+            <a href="../../kubernetes-essentials-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2094,7 +2094,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/INDEX/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/INDEX/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2114,7 +2114,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2134,7 +2134,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/EXAM_AND_PRACTICE/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/EXAM_AND_PRACTICE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2154,7 +2154,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/MODULE_13_UPDATE_SUMMARY/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/MODULE_13_UPDATE_SUMMARY/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2174,7 +2174,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/COMPLETION_SUMMARY/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/COMPLETION_SUMMARY/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2242,7 +2242,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../cicd-essentials-tutorial/" class="md-nav__link ">
+            <a href="../../cicd-essentials-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2331,7 +2331,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/01-cicd-fundamentals/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/01-cicd-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2351,7 +2351,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/02-source-control-triggers/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/02-source-control-triggers/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2371,7 +2371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/03-ci-pipeline-design/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/03-ci-pipeline-design/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2391,7 +2391,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/04-artifact-management/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/04-artifact-management/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2411,7 +2411,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/05-security-in-cicd/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/05-security-in-cicd/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2431,7 +2431,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/06-continuous-deployment/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/06-continuous-deployment/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2451,7 +2451,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/07-infrastructure-as-code/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/07-infrastructure-as-code/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2471,7 +2471,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/08-pipeline-observability/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/08-pipeline-observability/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2491,7 +2491,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/09-cicd-tools-comparison/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/09-cicd-tools-comparison/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2511,7 +2511,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/10-failure-recovery/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/10-failure-recovery/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2539,7 +2539,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/final-project/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/final-project/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2559,7 +2559,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2608,7 +2608,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../cicd-essentials-tutorial/" class="md-nav__link ">
+            <a href="../../cicd-essentials-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2637,7 +2637,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/INDEX/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/INDEX/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2657,7 +2657,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2677,7 +2677,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/DELIVERY_SUMMARY/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/DELIVERY_SUMMARY/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2697,7 +2697,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/examples/REFERENCE_IMPLEMENTATIONS/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/examples/REFERENCE_IMPLEMENTATIONS/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2761,7 +2761,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../database-essentials-tutorial/" class="md-nav__link ">
+            <a href="../../database-essentials-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2846,7 +2846,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../database-essentials-tutorial/docs/01-fundamentals/" class="md-nav__link">
+      <a href="../../database-essentials-tutorial/docs/01-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2866,7 +2866,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../database-essentials-tutorial/docs/02-postgresql/" class="md-nav__link">
+      <a href="../../database-essentials-tutorial/docs/02-postgresql/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2886,7 +2886,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../database-essentials-tutorial/docs/03-nosql/" class="md-nav__link">
+      <a href="../../database-essentials-tutorial/docs/03-nosql/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2906,7 +2906,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../database-essentials-tutorial/docs/04-database-design/" class="md-nav__link">
+      <a href="../../database-essentials-tutorial/docs/04-database-design/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2926,7 +2926,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../database-essentials-tutorial/docs/05-sqlalchemy-orm/" class="md-nav__link">
+      <a href="../../database-essentials-tutorial/docs/05-sqlalchemy-orm/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2946,7 +2946,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../database-essentials-tutorial/docs/06-migrations/" class="md-nav__link">
+      <a href="../../database-essentials-tutorial/docs/06-migrations/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2966,7 +2966,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../database-essentials-tutorial/docs/07-performance/" class="md-nav__link">
+      <a href="../../database-essentials-tutorial/docs/07-performance/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2986,7 +2986,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../database-essentials-tutorial/docs/08-transactions/" class="md-nav__link">
+      <a href="../../database-essentials-tutorial/docs/08-transactions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3014,7 +3014,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../database-essentials-tutorial/docs/09-final-project/" class="md-nav__link">
+      <a href="../../database-essentials-tutorial/docs/09-final-project/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3089,7 +3089,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/GETTING_STARTED/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/GETTING_STARTED/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3163,7 +3163,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/docs/01-networking-fundamentals/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/docs/01-networking-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3183,7 +3183,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/docs/02-http-https-protocol/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/docs/02-http-https-protocol/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3203,7 +3203,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/docs/03-rest-api-design/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/docs/03-rest-api-design/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3223,7 +3223,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/docs/04-websockets/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/docs/04-websockets/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3243,7 +3243,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/docs/05-load-balancing/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/docs/05-load-balancing/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3263,7 +3263,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/docs/06-reverse-proxy-nginx/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/docs/06-reverse-proxy-nginx/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3283,7 +3283,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/docs/07-dns-domain-management/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/docs/07-dns-domain-management/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3303,7 +3303,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/docs/08-ssl-tls-certificates/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/docs/08-ssl-tls-certificates/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3331,7 +3331,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/docs/09-final-project/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/docs/09-final-project/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3374,7 +3374,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../networking-essentials-tutorial/" class="md-nav__link ">
+            <a href="../../networking-essentials-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -3403,7 +3403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/examples/QUICK_REFERENCE/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/examples/QUICK_REFERENCE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3490,7 +3490,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/START_HERE/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/START_HERE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3564,7 +3564,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/docs/01-observability-fundamentals/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/docs/01-observability-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3584,7 +3584,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/docs/02-prometheus-metrics/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/docs/02-prometheus-metrics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3604,7 +3604,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/docs/03-logging-fundamentals/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/docs/03-logging-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3624,7 +3624,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/docs/04-loki-fluent-bit/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/docs/04-loki-fluent-bit/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3644,7 +3644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/docs/05-grafana-dashboards/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/docs/05-grafana-dashboards/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3664,7 +3664,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/docs/06-aws-cloudwatch/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/docs/06-aws-cloudwatch/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3684,7 +3684,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/docs/07-alerting-incident-response/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/docs/07-alerting-incident-response/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3704,7 +3704,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/docs/08-advanced-patterns/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/docs/08-advanced-patterns/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3732,7 +3732,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/FINAL_PROJECT/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/FINAL_PROJECT/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3752,7 +3752,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3801,7 +3801,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../observability-essentials-tutorial/" class="md-nav__link ">
+            <a href="../../observability-essentials-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -3830,7 +3830,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/INDEX/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/INDEX/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3850,7 +3850,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3870,7 +3870,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/DELIVERY_SUMMARY/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/DELIVERY_SUMMARY/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3890,7 +3890,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/examples/REFERENCE_IMPLEMENTATIONS/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/examples/REFERENCE_IMPLEMENTATIONS/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3975,7 +3975,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/START_HERE/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/START_HERE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4053,7 +4053,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/docs/01-fundamentals/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/docs/01-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4073,7 +4073,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/docs/02-scalability/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/docs/02-scalability/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4093,7 +4093,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/docs/03-data-storage-replication/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/docs/03-data-storage-replication/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4113,7 +4113,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/docs/04-messaging-event-driven/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/docs/04-messaging-event-driven/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4133,7 +4133,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/docs/05-fault-tolerance/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/docs/05-fault-tolerance/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4153,7 +4153,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/docs/06-performance-optimization/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/docs/06-performance-optimization/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4173,7 +4173,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/docs/07-consistency-transactions/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/docs/07-consistency-transactions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4193,7 +4193,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/docs/08-microservices-patterns/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/docs/08-microservices-patterns/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4213,7 +4213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/docs/09-observability/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/docs/09-observability/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4233,7 +4233,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/docs/10-deployment-scaling/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/docs/10-deployment-scaling/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4261,7 +4261,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/FINAL_PROJECT/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/FINAL_PROJECT/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4308,7 +4308,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../distributed-systems-tutorial/" class="md-nav__link ">
+            <a href="../../distributed-systems-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -4337,7 +4337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/INDEX/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/INDEX/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4357,7 +4357,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/QUICK_REFERENCE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4377,7 +4377,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/EXAM_AND_PRACTICE/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/EXAM_AND_PRACTICE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4441,7 +4441,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../flask-backend-tutorial/" class="md-nav__link ">
+            <a href="../../flask-backend-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -4532,7 +4532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/00-prerequisites-and-basics/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/00-prerequisites-and-basics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4552,7 +4552,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/01-flask-fundamentals/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/01-flask-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4572,7 +4572,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/02-flask-architecture/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/02-flask-architecture/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4592,7 +4592,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/03-routing-and-views/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/03-routing-and-views/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4612,7 +4612,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/04-request-handling/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/04-request-handling/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4632,7 +4632,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/05-response-formats/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/05-response-formats/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4652,7 +4652,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/06-templates-static/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/06-templates-static/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4672,7 +4672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/07-flask-blueprints/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/07-flask-blueprints/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4692,7 +4692,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/08-error-handling/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/08-error-handling/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4712,7 +4712,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/09-authentication-authorization/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/09-authentication-authorization/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4732,7 +4732,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/10-flask-extensions/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/10-flask-extensions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4760,7 +4760,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/11-final-project/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/11-final-project/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4792,6 +4792,12 @@
     
       
         
+          
+        
+      
+        
+      
+        
       
         
       
@@ -4811,16 +4817,24 @@
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" checked>
         
-          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
-            
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
   
   <span class="md-ellipsis">
     AWS Advanced
   </span>
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              <label class="md-nav__link " for="__nav_13">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_13">
@@ -4829,44 +4843,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../README.md" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Overview
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../11-advanced-ecs/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    11 Advanced ECS
-  </span>
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -4888,7 +4864,7 @@
           
   
   <span class="md-ellipsis">
-    12 Advanced Lambda
+    11 Advanced ECS
   </span>
   
 
@@ -4899,7 +4875,7 @@
         
   
   <span class="md-ellipsis">
-    12 Advanced Lambda
+    11 Advanced ECS
   </span>
   
 
@@ -4950,22 +4926,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#lambda-execution-model" class="md-nav__link">
-    Lambda Execution Model
+  <a href="#ecs-task-definition" class="md-nav__link">
+    ECS Task Definition
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#lambda-memory-and-cpu" class="md-nav__link">
-    Lambda Memory and CPU
+  <a href="#ecs-task-vs-service" class="md-nav__link">
+    ECS Task vs Service
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#lambda-with-api-gateway" class="md-nav__link">
-    Lambda with API Gateway
+  <a href="#ec2-vs-fargate-launch-types" class="md-nav__link">
+    EC2 vs Fargate Launch Types
   </a>
   
 </li>
@@ -4976,43 +4952,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#cold-start-mitigation" class="md-nav__link">
-    Cold Start Mitigation
+  <a href="#production-ecs-pattern" class="md-nav__link">
+    Production ECS Pattern
   </a>
   
-    <nav class="md-nav" aria-label="Cold Start Mitigation">
+    <nav class="md-nav" aria-label="Production ECS Pattern">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#strategy-1-provisioned-concurrency" class="md-nav__link">
-    Strategy 1: Provisioned Concurrency
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#strategy-2-keep-functions-small" class="md-nav__link">
-    Strategy 2: Keep Functions Small
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#strategy-3-use-lambda-layers-for-common-code" class="md-nav__link">
-    Strategy 3: Use Lambda Layers for Common Code
+  <a href="#complete-example-web-application-with-auto-scaling" class="md-nav__link">
+    Complete Example: Web Application with Auto Scaling
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#production-pattern-async-processing-with-sqs" class="md-nav__link">
-    Production Pattern: Async Processing with SQS
-  </a>
   
 </li>
       
@@ -5032,8 +4987,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#scenario-lambda-functions-randomly-timing-out-under-load" class="md-nav__link">
-    Scenario: "Lambda functions randomly timing out under load"
+  <a href="#scenario-sudden-increase-in-task-failures-after-deployment" class="md-nav__link">
+    Scenario: "Sudden increase in task failures after deployment"
   </a>
   
 </li>
@@ -5072,11 +5027,71 @@
   
   
     <li class="md-nav__item">
+      <a href="../12-advanced-lambda/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12 Advanced Lambda
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../13-advanced-fargate/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     13 Advanced Fargate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-terraform-deep-dive/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    14 Terraform Deep Dive
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-ansible-deep-dive/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    15 Ansible Deep Dive
   </span>
   
 
@@ -5128,7 +5143,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../modern-devops-patterns-tutorial/" class="md-nav__link ">
+            <a href="../../modern-devops-patterns-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -5159,7 +5174,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../modern-devops-patterns-tutorial/01-gitops-fundamentals/" class="md-nav__link">
+      <a href="../../modern-devops-patterns-tutorial/01-gitops-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5179,7 +5194,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../modern-devops-patterns-tutorial/02-service-mesh-fundamentals/" class="md-nav__link">
+      <a href="../../modern-devops-patterns-tutorial/02-service-mesh-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5199,7 +5214,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../modern-devops-patterns-tutorial/03-ebpf-fundamentals/" class="md-nav__link">
+      <a href="../../modern-devops-patterns-tutorial/03-ebpf-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5208,6 +5223,225 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_15" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../security-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Security Essentials
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_15">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            Security Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_15_2" >
+        
+          <label class="md-nav__link" for="__nav_15_2" id="__nav_15_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security-essentials-tutorial/01-application-security-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Application Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security-essentials-tutorial/02-infrastructure-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Infrastructure Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security-essentials-tutorial/03-supply-chain-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Supply Chain Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security-essentials-tutorial/04-compliance-audit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Compliance & Audit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security-essentials-tutorial/05-incident-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Incident Response
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -5250,9 +5484,9 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_15" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16" >
         
-          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -5263,8 +5497,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16">
             <span class="md-nav__icon md-icon"></span>
             Capstone Projects
           </label>
@@ -5276,7 +5510,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/README_START_HERE/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/README_START_HERE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5324,12 +5558,12 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_15_2" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16_2" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/" class="md-nav__link ">
+            <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -5339,14 +5573,14 @@
 
             </a>
             
-              <label class="md-nav__link " for="__nav_15_2">
+              <label class="md-nav__link " for="__nav_16_2">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15_2">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16_2">
             <span class="md-nav__icon md-icon"></span>
             Platform Engineering
           </label>
@@ -5360,7 +5594,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/aws/infrastructure/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/aws/infrastructure/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5380,7 +5614,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/decisions/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/decisions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5400,7 +5634,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/security/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/security/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5420,7 +5654,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/scaling/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/scaling/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5440,7 +5674,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/cost-awareness/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/cost-awareness/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5460,7 +5694,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/interview-notes/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/interview-notes/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5508,12 +5742,12 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_15_3" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16_3" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/" class="md-nav__link ">
+            <a href="../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -5523,14 +5757,14 @@
 
             </a>
             
-              <label class="md-nav__link " for="__nav_15_3">
+              <label class="md-nav__link " for="__nav_16_3">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16_3">
             <span class="md-nav__icon md-icon"></span>
             Distributed Systems
           </label>
@@ -5544,7 +5778,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/docs/decisions/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/docs/decisions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5564,7 +5798,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/docs/scaling/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/docs/scaling/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5592,7 +5826,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/PORTFOLIO_OVERVIEW/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/PORTFOLIO_OVERVIEW/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5626,9 +5860,9 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_15_5" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16_5" >
         
-          <label class="md-nav__link" for="__nav_15_5" id="__nav_15_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_16_5" id="__nav_16_5_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -5639,8 +5873,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15_5">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16_5">
             <span class="md-nav__icon md-icon"></span>
             Resources
           </label>
@@ -5652,7 +5886,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/COMPLETION_SUMMARY/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/COMPLETION_SUMMARY/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5737,22 +5971,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#lambda-execution-model" class="md-nav__link">
-    Lambda Execution Model
+  <a href="#ecs-task-definition" class="md-nav__link">
+    ECS Task Definition
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#lambda-memory-and-cpu" class="md-nav__link">
-    Lambda Memory and CPU
+  <a href="#ecs-task-vs-service" class="md-nav__link">
+    ECS Task vs Service
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#lambda-with-api-gateway" class="md-nav__link">
-    Lambda with API Gateway
+  <a href="#ec2-vs-fargate-launch-types" class="md-nav__link">
+    EC2 vs Fargate Launch Types
   </a>
   
 </li>
@@ -5763,43 +5997,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#cold-start-mitigation" class="md-nav__link">
-    Cold Start Mitigation
+  <a href="#production-ecs-pattern" class="md-nav__link">
+    Production ECS Pattern
   </a>
   
-    <nav class="md-nav" aria-label="Cold Start Mitigation">
+    <nav class="md-nav" aria-label="Production ECS Pattern">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#strategy-1-provisioned-concurrency" class="md-nav__link">
-    Strategy 1: Provisioned Concurrency
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#strategy-2-keep-functions-small" class="md-nav__link">
-    Strategy 2: Keep Functions Small
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#strategy-3-use-lambda-layers-for-common-code" class="md-nav__link">
-    Strategy 3: Use Lambda Layers for Common Code
+  <a href="#complete-example-web-application-with-auto-scaling" class="md-nav__link">
+    Complete Example: Web Application with Auto Scaling
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#production-pattern-async-processing-with-sqs" class="md-nav__link">
-    Production Pattern: Async Processing with SQS
-  </a>
   
 </li>
       
@@ -5819,8 +6032,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#scenario-lambda-functions-randomly-timing-out-under-load" class="md-nav__link">
-    Scenario: "Lambda functions randomly timing out under load"
+  <a href="#scenario-sudden-increase-in-task-failures-after-deployment" class="md-nav__link">
+    Scenario: "Sudden increase in task failures after deployment"
   </a>
   
 </li>
@@ -5859,350 +6072,312 @@
                   
 
 
-<h1 id="advanced-aws-serverless-lambda-at-scale">Advanced AWS: Serverless &amp; Lambda at Scale</h1>
+<h1 id="advanced-aws-ecs-container-orchestration">Advanced AWS: ECS &amp; Container Orchestration</h1>
 <h2 id="overview">Overview</h2>
-<p>This module covers <strong>AWS Lambda</strong> and serverless computing patterns for production workloads. You'll learn how Lambda fits into your infrastructure, cost optimization, cold start mitigation, and when serverless is the right choice.</p>
+<p>This module covers <strong>Amazon Elastic Container Service (ECS)</strong>, AWS's container orchestration platform, and how it compares to and complements Kubernetes. You'll learn when to choose ECS, how to manage production container workloads, and integration patterns with other AWS services.</p>
 <h2 id="mental-model">Mental Model</h2>
-<div class="highlight"><pre><span></span><code>Event Source (API Gateway, S3, DynamoDB)
+<div class="highlight"><pre><span></span><code>Your Application (Docker Container)
         ↓
-    CloudWatch Event / SNS / SQS
+    ECS Task
+    (Single container instance)
         ↓
-    Lambda Function Invocation
+    ECS Service
+    (Manages multiple task replicas)
         ↓
-    Cold Start (first invocation) OR Warm Start (reused container)
+    ECS Cluster
+    (Collection of compute resources: EC2 or Fargate)
         ↓
-    Function Execution
-    - Code runs
-    - AWS services are called
+    Container Registry (ECR)
+    (Where images live)
         ↓
-    Response to caller
+    Load Balancer (ALB/NLB)
+    (Routes traffic to tasks)
         ↓
-    CloudWatch Logs
-    (Execution metrics, custom logs)
-        ↓
-    Cost = (GB-seconds × $0.0000166667) + (invocations × $0.0000002)
+    Auto Scaling &amp; Monitoring
+    (CloudWatch metrics)
 </code></pre></div>
+<p>Key difference from Kubernetes:
+- <strong>ECS:</strong> AWS-native, simpler, less configuration, less flexibility
+- <strong>Kubernetes:</strong> Open-source, portable, more configuration options, more flexibility</p>
 <h2 id="what-this-module-covers">What This Module Covers</h2>
 <ol>
-<li><strong>Lambda Fundamentals</strong> - Functions, execution model, permissions</li>
-<li><strong>Lambda Event Sources</strong> - API Gateway, SQS, DynamoDB Streams</li>
-<li><strong>Cold Start Optimization</strong> - Reducing initialization time</li>
-<li><strong>Lambda Concurrency</strong> - Reserved vs provisioned capacity</li>
-<li><strong>Production Patterns</strong> - Error handling, retries, dead letter queues</li>
-<li><strong>Cost Optimization</strong> - Right-sizing memory, timeout tuning</li>
-<li><strong>Observability</strong> - CloudWatch metrics, X-Ray tracing</li>
-<li><strong>Lambda Limitations</strong> - When NOT to use serverless</li>
+<li><strong>ECS Fundamentals</strong> - Task definitions, services, clusters</li>
+<li><strong>ECS vs Kubernetes</strong> - When to choose each</li>
+<li><strong>EC2 vs Fargate Launch Types</strong> - Trade-offs</li>
+<li><strong>Production ECS Patterns</strong> - Rolling updates, canary deployments</li>
+<li><strong>Integration with AWS Services</strong> - Load balancing, monitoring, scaling</li>
+<li><strong>ECS Best Practices</strong> - Security, cost optimization, reliability</li>
+<li><strong>Advanced Scenarios</strong> - Multi-AZ deployment, service discovery</li>
 </ol>
 <h2 id="key-concepts">Key Concepts</h2>
-<h3 id="lambda-execution-model">Lambda Execution Model</h3>
-<div class="highlight"><pre><span></span><code>┌─────────────────────────────────┐
-│ Lambda Container (created once) │
-│                                 │
-│  1. Initialize runtime (Python, Node, etc.)
-│  2. Run function code
-│  3. Create global variables (reused across invocations)
-│
-│  Subsequent calls reuse this container
-└─────────────────────────────────┘
-
-Cold Start: ~1000ms (create container + init runtime)
-Warm Start: ~10ms (reuse container)
+<h3 id="ecs-task-definition">ECS Task Definition</h3>
+<p>A <strong>task definition</strong> is like a Dockerfile but for ECS—it specifies:
+- Which Docker image to run
+- How much CPU/memory to allocate
+- Environment variables
+- Volume mounts
+- Logging configuration
+- IAM role</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">{</span>
+<span class="w">  </span><span class="s">&quot;family&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;web-app&quot;</span><span class="p p-Indicator">,</span>
+<span class="w">  </span><span class="s">&quot;networkMode&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;awsvpc&quot;</span><span class="p p-Indicator">,</span>
+<span class="w">  </span><span class="s">&quot;requiresCompatibilities&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;FARGATE&quot;</span><span class="p p-Indicator">],</span>
+<span class="w">  </span><span class="s">&quot;cpu&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;256&quot;</span><span class="p p-Indicator">,</span>
+<span class="w">  </span><span class="s">&quot;memory&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;512&quot;</span><span class="p p-Indicator">,</span>
+<span class="w">  </span><span class="s">&quot;containerDefinitions&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span>
+<span class="w">    </span><span class="p p-Indicator">{</span>
+<span class="w">      </span><span class="s">&quot;name&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;web-container&quot;</span><span class="p p-Indicator">,</span>
+<span class="w">      </span><span class="s">&quot;image&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;123456789.dkr.ecr.us-east-1.amazonaws.com/web-app:latest&quot;</span><span class="p p-Indicator">,</span>
+<span class="w">      </span><span class="s">&quot;portMappings&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span>
+<span class="w">        </span><span class="p p-Indicator">{</span>
+<span class="w">          </span><span class="s">&quot;containerPort&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">8000</span><span class="p p-Indicator">,</span>
+<span class="w">          </span><span class="s">&quot;protocol&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;tcp&quot;</span>
+<span class="w">        </span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="p p-Indicator">],</span>
+<span class="w">      </span><span class="s">&quot;environment&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span>
+<span class="w">        </span><span class="p p-Indicator">{</span>
+<span class="w">          </span><span class="s">&quot;name&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;ENVIRONMENT&quot;</span><span class="p p-Indicator">,</span>
+<span class="w">          </span><span class="s">&quot;value&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;production&quot;</span>
+<span class="w">        </span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="p p-Indicator">],</span>
+<span class="w">      </span><span class="s">&quot;logConfiguration&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">{</span>
+<span class="w">        </span><span class="s">&quot;logDriver&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;awslogs&quot;</span><span class="p p-Indicator">,</span>
+<span class="w">        </span><span class="s">&quot;options&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">{</span>
+<span class="w">          </span><span class="s">&quot;awslogs-group&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;/ecs/web-app&quot;</span><span class="p p-Indicator">,</span>
+<span class="w">          </span><span class="s">&quot;awslogs-region&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;us-east-1&quot;</span><span class="p p-Indicator">,</span>
+<span class="w">          </span><span class="s">&quot;awslogs-stream-prefix&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;ecs&quot;</span>
+<span class="w">        </span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="p p-Indicator">},</span>
+<span class="w">      </span><span class="s">&quot;essential&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">true</span>
+<span class="w">    </span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="p p-Indicator">],</span>
+<span class="w">  </span><span class="s">&quot;executionRoleArn&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;arn:aws:iam::123456789:role/ecsTaskExecutionRole&quot;</span>
+<span class="p p-Indicator">}</span>
 </code></pre></div>
-<h3 id="lambda-memory-and-cpu">Lambda Memory and CPU</h3>
-<p>Lambda <strong>memory allocation determines CPU allocation</strong>:</p>
-<div class="highlight"><pre><span></span><code>Memory | CPU Cores | Price per GB-second | Good for
--------|-----------|---------------------|----------
-128MB  | 0.125     | $0.000016667        | Simple webhooks
-512MB  | 0.5       | $0.000016667        | API endpoints
-1024MB | 1         | $0.000016667        | Processing jobs
-3008MB | 2         | $0.000016667        | Heavy computation
+<h3 id="ecs-task-vs-service">ECS Task vs Service</h3>
+<p><strong>Task:</strong> A single instance of your container. Runs once and stops.
+- Use for: Batch jobs, scheduled tasks, one-off operations</p>
+<p><strong>Service:</strong> Manages multiple task replicas, replaces failed tasks, handles updates.
+- Use for: Long-running applications, APIs, web services</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run a single task (like docker run)</span>
+aws<span class="w"> </span>ecs<span class="w"> </span>run-task<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cluster<span class="w"> </span>my-cluster<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--task-definition<span class="w"> </span>web-app:1<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--launch-type<span class="w"> </span>FARGATE<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--network-configuration<span class="w"> </span><span class="nv">awsvpcConfiguration</span><span class="o">={</span><span class="nv">subnets</span><span class="o">=[</span>subnet-12345<span class="o">]</span>,securityGroups<span class="o">=[</span>sg-12345<span class="o">]}</span>
+
+<span class="c1"># Create a service (manages replicas)</span>
+aws<span class="w"> </span>ecs<span class="w"> </span>create-service<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cluster<span class="w"> </span>my-cluster<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--service-name<span class="w"> </span>web-app<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--task-definition<span class="w"> </span>web-app:1<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--desired-count<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--launch-type<span class="w"> </span>FARGATE
 </code></pre></div>
-<p><strong>Key insight:</strong> More memory = more CPU = faster execution = sometimes cheaper!</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Example: Processing a 100MB file</span>
-<span class="c1"># Option 1: 512MB, takes 60 seconds</span>
-<span class="c1">#   Cost: 60 × 0.512GB × $0.0000167 = $0.000512</span>
+<h3 id="ec2-vs-fargate-launch-types">EC2 vs Fargate Launch Types</h3>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>EC2</th>
+<th>Fargate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>You manage</strong></td>
+<td>Cluster, instance lifecycle, scaling</td>
+<td>Nothing—it's serverless</td>
+</tr>
+<tr>
+<td><strong>Cost</strong></td>
+<td>Per instance (even if idle)</td>
+<td>Per task (second-level billing)</td>
+</tr>
+<tr>
+<td><strong>Control</strong></td>
+<td>Full—customize everything</td>
+<td>Limited—pre-configured</td>
+</tr>
+<tr>
+<td><strong>Good for</strong></td>
+<td>Stateful, always-on, cost-sensitive</td>
+<td>Bursty, predictable, simple workloads</td>
+</tr>
+<tr>
+<td><strong>Example</strong></td>
+<td>24/7 web server on reserved instances</td>
+<td>Scheduled batch job, event-driven task</td>
+</tr>
+</tbody>
+</table>
+<h2 id="production-ecs-pattern">Production ECS Pattern</h2>
+<h3 id="complete-example-web-application-with-auto-scaling">Complete Example: Web Application with Auto Scaling</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Step 1: Create VPC and security groups</span>
+<span class="l l-Scalar l-Scalar-Plain">aws ec2 create-vpc --cidr-block 10.0.0.0/16</span>
+<span class="l l-Scalar l-Scalar-Plain"># Create public subnets, private subnets, NAT gateway, etc.</span>
 
-<span class="c1"># Option 2: 1024MB, takes 30 seconds (2x CPU)</span>
-<span class="c1">#   Cost: 30 × 1.024GB × $0.0000167 = $0.000512</span>
-<span class="c1"># Same cost but 2x faster!</span>
-</code></pre></div>
-<h3 id="lambda-with-api-gateway">Lambda with API Gateway</h3>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="l l-Scalar l-Scalar-Plain"># Step 2</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create ECR repository</span>
+<span class="l l-Scalar l-Scalar-Plain">aws ecr create-repository --repository-name my-web-app</span>
 
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    API Gateway sends HTTP request as event.</span>
-<span class="sd">    We must return in a specific format.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="c1"># Step 3: Build and push Docker image</span>
+<span class="l l-Scalar l-Scalar-Plain">docker build -t my-web-app:latest .</span>
+<span class="l l-Scalar l-Scalar-Plain">aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 123456789.dkr.ecr.us-east-1.amazonaws.com</span>
+<span class="l l-Scalar l-Scalar-Plain">docker tag my-web-app:latest 123456789.dkr.ecr.us-east-1.amazonaws.com/my-web-app:latest</span>
+<span class="l l-Scalar l-Scalar-Plain">docker push 123456789.dkr.ecr.us-east-1.amazonaws.com/my-web-app:latest</span>
 
-    <span class="c1"># Parse request</span>
-    <span class="n">http_method</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;httpMethod&#39;</span><span class="p">]</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">]</span>
-    <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="p">))</span>
+<span class="c1"># Step 4: Create ECS task definition</span>
+<span class="l l-Scalar l-Scalar-Plain">aws ecs register-task-definition --cli-input-json file://task-definition.json</span>
 
-    <span class="c1"># Process</span>
-    <span class="k">if</span> <span class="n">http_method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">path</span> <span class="o">==</span> <span class="s1">&#39;/users&#39;</span><span class="p">:</span>
-        <span class="n">user_id</span> <span class="o">=</span> <span class="n">create_user</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;statusCode&#39;</span><span class="p">:</span> <span class="mi">201</span><span class="p">,</span>
-            <span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">}),</span>
-            <span class="s1">&#39;headers&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">}</span>
-        <span class="p">}</span>
+<span class="c1"># Step 5: Create ECS cluster</span>
+<span class="l l-Scalar l-Scalar-Plain">aws ecs create-cluster --cluster-name production</span>
 
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;statusCode&#39;</span><span class="p">:</span> <span class="mi">404</span><span class="p">,</span>
-        <span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Not found&#39;</span><span class="p">})</span>
-    <span class="p">}</span>
-</code></pre></div>
-<h2 id="cold-start-mitigation">Cold Start Mitigation</h2>
-<p>Cold starts are Lambda's biggest pain point. Here's how to minimize them:</p>
-<h3 id="strategy-1-provisioned-concurrency">Strategy 1: Provisioned Concurrency</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Reserve container capacity—guaranteed warm starts</span>
-aws<span class="w"> </span>lambda<span class="w"> </span>put-provisioned-concurrency-config<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--function-name<span class="w"> </span>my-api<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--provisioned-concurrent-executions<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--qualifier<span class="w"> </span>LIVE
+<span class="c1"># Step 6: Create ECS service with load balancer</span>
+<span class="l l-Scalar l-Scalar-Plain">aws ecs create-service \</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">--cluster production \</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">--service-name web-app \</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">--task-definition my-web-app:1 \</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">--desired-count 3 \</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">--launch-type FARGATE \</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">--network-configuration awsvpcConfiguration={subnets=[subnet-public-1,subnet-public-2],securityGroups=[sg-web]} \</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">--load-balancers targetGroupArn=arn:aws:elasticloadbalancing:us-east-1:123456789:targetgroup/web-app/1234567890,containerName=web-container,containerPort=8000</span>
 
-<span class="c1"># Cost: ~$0.015/hour per concurrent execution</span>
-<span class="c1"># Trade-off: Pay even if not used, but guaranteed fast response</span>
-</code></pre></div>
-<h3 id="strategy-2-keep-functions-small">Strategy 2: Keep Functions Small</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># ❌ WRONG: Heavy initialization in handler</span>
-<span class="kn">import</span> <span class="nn">pandas</span>  <span class="c1"># Large library, 50MB</span>
-<span class="kn">import</span> <span class="nn">numpy</span>
-
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-    <span class="c1"># Initialization happens EVERY cold start</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">])</span>
-    <span class="c1"># ...process...</span>
-    <span class="k">return</span> <span class="n">result</span>
-
-<span class="c1"># ✅ RIGHT: Move heavy imports outside handler</span>
-<span class="c1"># Initialization happens once, reused across requests</span>
-<span class="kn">import</span> <span class="nn">pandas</span>
-<span class="kn">import</span> <span class="nn">numpy</span>
-
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-    <span class="c1"># This code reuses pandas library from previous invocation</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">result</span>
-</code></pre></div>
-<h3 id="strategy-3-use-lambda-layers-for-common-code">Strategy 3: Use Lambda Layers for Common Code</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Package common libraries</span>
-mkdir<span class="w"> </span>python
-pip<span class="w"> </span>install<span class="w"> </span>requests<span class="w"> </span>-t<span class="w"> </span>python/lib/python3.9/site-packages/
-
-zip<span class="w"> </span>-r<span class="w"> </span>layer.zip<span class="w"> </span>python/
-
-<span class="c1"># Upload layer</span>
-aws<span class="w"> </span>lambda<span class="w"> </span>publish-layer-version<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--layer-name<span class="w"> </span>common-libs<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--zip-file<span class="w"> </span>fileb://layer.zip<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--compatible-runtimes<span class="w"> </span>python3.9
-
-<span class="c1"># Reference in function</span>
-aws<span class="w"> </span>lambda<span class="w"> </span>update-function-code<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--function-name<span class="w"> </span>my-function<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--zip-file<span class="w"> </span>fileb://function.zip
-
-aws<span class="w"> </span>lambda<span class="w"> </span>update-function-configuration<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--function-name<span class="w"> </span>my-function<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--layers<span class="w"> </span>arn:aws:lambda:us-east-1:123456789:layer:common-libs:1
-</code></pre></div>
-<h2 id="production-pattern-async-processing-with-sqs">Production Pattern: Async Processing with SQS</h2>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">boto3</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
-
-<span class="n">sqs</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;sqs&#39;</span><span class="p">)</span>
-<span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
-
-<span class="n">QUEUE_URL</span> <span class="o">=</span> <span class="s1">&#39;https://sqs.us-east-1.amazonaws.com/123456789/process-queue&#39;</span>
-
-<span class="k">def</span> <span class="nf">api_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;API endpoint: receive request, queue for processing&quot;&quot;&quot;</span>
-
-    <span class="c1"># Quick response to user</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])</span>
-
-    <span class="c1"># Send to processing queue</span>
-    <span class="n">sqs</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span>
-        <span class="n">QueueUrl</span><span class="o">=</span><span class="n">QUEUE_URL</span><span class="p">,</span>
-        <span class="n">MessageBody</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
-            <span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;user_id&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;file_url&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;file_url&#39;</span><span class="p">]</span>
-        <span class="p">})</span>
-    <span class="p">)</span>
-
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;statusCode&#39;</span><span class="p">:</span> <span class="mi">202</span><span class="p">,</span>
-        <span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;Processing started&#39;</span><span class="p">})</span>
-    <span class="p">}</span>
-
-<span class="k">def</span> <span class="nf">processor_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;SQS consumer: process messages from queue&quot;&quot;&quot;</span>
-
-    <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;Records&#39;</span><span class="p">]:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">record</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])</span>
-
-            <span class="c1"># Do actual processing</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">process_file</span><span class="p">(</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;file_url&#39;</span><span class="p">])</span>
-
-            <span class="c1"># Save result</span>
-            <span class="n">s3</span><span class="o">.</span><span class="n">put_object</span><span class="p">(</span>
-                <span class="n">Bucket</span><span class="o">=</span><span class="s1">&#39;results&#39;</span><span class="p">,</span>
-                <span class="n">Key</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;user_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/result.json&quot;</span><span class="p">,</span>
-                <span class="n">Body</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-            <span class="p">)</span>
-
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to process: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="c1"># Message goes to DLQ (Dead Letter Queue)</span>
-            <span class="k">raise</span>
+<span class="c1"># Step 7: Set up auto scaling</span>
+<span class="l l-Scalar l-Scalar-Plain">aws autoscaling create-auto-scaling-group \</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">--auto-scaling-group-name web-app-asg \</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">--cluster production \</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">--service-name web-app \</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">--max-capacity 10 \</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">--min-capacity 1 \</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">--target-tracking-scaling-policy-configuration ...</span>
 </code></pre></div>
 <h2 id="common-mistakes">Common Mistakes</h2>
-<p><strong>Mistake 1: Expecting immediate responses from async operations</strong>
-<div class="highlight"><pre><span></span><code><span class="c1"># ❌ WRONG</span>
-<span class="k">def</span> <span class="nf">api_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">process_large_file</span><span class="p">()</span>  <span class="c1"># Takes 60 seconds!</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;statusCode&#39;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="n">result</span><span class="p">}</span>
-    <span class="c1"># Client times out after 30 seconds</span>
+<p><strong>Mistake 1: Task definition with hardcoded environment variables</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># ❌ WRONG: Hardcoded secrets</span>
+<span class="s">&quot;environment&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span>
+<span class="w">  </span><span class="p p-Indicator">{</span><span class="s">&quot;name&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;DB_PASSWORD&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;value&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;super-secret-password&quot;</span><span class="p p-Indicator">}</span>
+<span class="p p-Indicator">]</span>
 
-<span class="c1"># ✅ RIGHT: Use SQS for async work</span>
-<span class="k">def</span> <span class="nf">api_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-    <span class="n">sqs</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">QueueUrl</span><span class="o">=</span><span class="n">QUEUE_URL</span><span class="p">,</span> <span class="n">MessageBody</span><span class="o">=</span><span class="n">event</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;statusCode&#39;</span><span class="p">:</span> <span class="mi">202</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="s1">&#39;Processing started&#39;</span><span class="p">}</span>
+<span class="c1"># ✅ RIGHT: Use Secrets Manager</span>
+<span class="s">&quot;secrets&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span>
+<span class="w">  </span><span class="p p-Indicator">{</span>
+<span class="w">    </span><span class="s">&quot;name&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;DB_PASSWORD&quot;</span><span class="p p-Indicator">,</span>
+<span class="w">    </span><span class="s">&quot;valueFrom&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;arn:aws:secretsmanager:us-east-1:123456789:secret:db-password&quot;</span>
+<span class="w">  </span><span class="p p-Indicator">}</span>
+<span class="p p-Indicator">]</span>
 </code></pre></div></p>
-<p><strong>Mistake 2: Not setting timeout appropriately</strong>
-<div class="highlight"><pre><span></span><code><span class="c1"># ❌ WRONG: Default 3 second timeout for 60-second job</span>
-aws<span class="w"> </span>lambda<span class="w"> </span>create-function<span class="w"> </span>--function-name<span class="w"> </span>process-job<span class="w"> </span>--timeout<span class="w"> </span><span class="m">3</span>
+<p><strong>Mistake 2: Not setting resource requests/limits</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># ❌ WRONG: Task will use whatever it wants</span>
+<span class="p p-Indicator">{</span>
+<span class="w">  </span><span class="s">&quot;containerDefinitions&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[{</span><span class="s">&quot;name&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;app&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;image&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;app:latest&quot;</span><span class="p p-Indicator">}]</span>
+<span class="p p-Indicator">}</span>
 
-<span class="c1"># ✅ RIGHT: Match job requirements</span>
-aws<span class="w"> </span>lambda<span class="w"> </span>create-function<span class="w"> </span>--function-name<span class="w"> </span>process-job<span class="w"> </span>--timeout<span class="w"> </span><span class="m">900</span><span class="w">  </span><span class="c1"># 15 minutes</span>
+<span class="c1"># ✅ RIGHT: Explicit resource requirements</span>
+<span class="p p-Indicator">{</span>
+<span class="w">  </span><span class="s">&quot;family&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;app&quot;</span><span class="p p-Indicator">,</span>
+<span class="w">  </span><span class="s">&quot;cpu&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;512&quot;</span><span class="p p-Indicator">,</span>
+<span class="w">  </span><span class="s">&quot;memory&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;1024&quot;</span><span class="p p-Indicator">,</span>
+<span class="w">  </span><span class="s">&quot;containerDefinitions&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[{</span><span class="s">&quot;name&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;app&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;image&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;app:latest&quot;</span><span class="p p-Indicator">}]</span>
+<span class="p p-Indicator">}</span>
 </code></pre></div></p>
-<p><strong>Mistake 3: No error handling in SQS consumer</strong>
-<div class="highlight"><pre><span></span><code><span class="c1"># ❌ WRONG: Silent failures</span>
-<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;Records&#39;</span><span class="p">]:</span>
-        <span class="n">process_record</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>  <span class="c1"># If this fails, message lost</span>
+<p><strong>Mistake 3: Using EC2 for unpredictable workloads</strong>
+<div class="highlight"><pre><span></span><code># ❌ WRONG: 24/7 EC2 instances for traffic that spikes 5x/day
+$40/month × 24 hours = expensive idle time
 
-<span class="c1"># ✅ RIGHT: Structured error handling</span>
-<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;Records&#39;</span><span class="p">]:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">process_record</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="k">raise</span>  <span class="c1"># Lambda will retry, eventually DLQ</span>
+# ✅ RIGHT: Use Fargate with auto scaling
+Pay only for running tasks + compute time
 </code></pre></div></p>
-<p><strong>Mistake 4: Storing state in global variables across invocations</strong>
-<div class="highlight"><pre><span></span><code><span class="c1"># ❌ WRONG: Assumes same container reused</span>
-<span class="n">CACHE</span> <span class="o">=</span> <span class="p">{}</span>
+<p><strong>Mistake 4: Not monitoring task health</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># ❌ WRONG: No health checks, dead tasks keep running</span>
+aws<span class="w"> </span>ecs<span class="w"> </span>create-service<span class="w"> </span>--service-name<span class="w"> </span>app<span class="w"> </span>...
 
-<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-    <span class="n">key</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CACHE</span><span class="p">:</span>
-        <span class="n">CACHE</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">expensive_lookup</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>  <span class="c1"># Empty on cold start</span>
-    <span class="k">return</span> <span class="n">CACHE</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-
-<span class="c1"># ✅ RIGHT: Use ElastiCache or DynamoDB</span>
-<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="n">dynamodb</span><span class="o">.</span><span class="n">get_item</span><span class="p">(</span><span class="n">Key</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]})</span>
-    <span class="k">return</span> <span class="n">value</span>
+<span class="c1"># ✅ RIGHT: Enable health checks</span>
+aws<span class="w"> </span>ecs<span class="w"> </span>register-task-definition<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--health-check<span class="w"> </span><span class="s2">&quot;command=[CMD-SHELL, curl -f http://localhost:8000/health || exit 1],interval=30,timeout=5,retries=3&quot;</span>
 </code></pre></div></p>
-<p><strong>Mistake 5: Lambda function doing too much</strong>
-<div class="highlight"><pre><span></span><code><span class="c1"># ❌ WRONG: Single function handles everything</span>
-<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;user.created&#39;</span><span class="p">:</span>
-        <span class="n">send_welcome_email</span><span class="p">()</span>
-    <span class="k">elif</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;order.placed&#39;</span><span class="p">:</span>
-        <span class="n">process_payment</span><span class="p">()</span>
-    <span class="k">elif</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;inventory.low&#39;</span><span class="p">:</span>
-        <span class="n">reorder_stock</span><span class="p">()</span>
-    <span class="c1"># 30 different responsibilities = hard to test, hard to scale</span>
+<p><strong>Mistake 5: Rolling updates without canary deployment</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># ❌ WRONG: Deploy new version to all tasks immediately</span>
+<span class="c1"># If new code has a bug, all traffic goes to broken version</span>
+
+<span class="c1"># ✅ RIGHT: Canary deployment—test new version first</span>
+<span class="c1"># Deploy to 1 task, monitor metrics, gradually shift traffic</span>
 </code></pre></div></p>
 <h2 id="production-incident-scenario">Production Incident Scenario</h2>
-<h3 id="scenario-lambda-functions-randomly-timing-out-under-load">Scenario: "Lambda functions randomly timing out under load"</h3>
+<h3 id="scenario-sudden-increase-in-task-failures-after-deployment">Scenario: "Sudden increase in task failures after deployment"</h3>
 <p><strong>Symptoms:</strong>
-- Functions complete in 5 seconds normally
-- Under load, 20% fail with timeout error
-- Timeout is 30 seconds
-- CloudWatch shows high duration but not exceeding timeout</p>
-<p><strong>Investigation:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="c1"># 1. Check CloudWatch metrics</span>
-aws<span class="w"> </span>cloudwatch<span class="w"> </span>get-metric-statistics<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--namespace<span class="w"> </span>AWS/Lambda<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--metric-name<span class="w"> </span>Duration<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--start-time<span class="w"> </span><span class="m">2025</span>-01-06T10:00:00Z<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--end-time<span class="w"> </span><span class="m">2025</span>-01-06T11:00:00Z<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--period<span class="w"> </span><span class="m">60</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--statistics<span class="w"> </span>Average,Maximum
+- ECS service showing "Desired: 5, Running: 2"
+- Logs show "OutOfMemory" errors
+- Traffic is slow, some requests timeout</p>
+<p><strong>Investigation Steps:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Check task definition for latest version</span>
+aws<span class="w"> </span>ecs<span class="w"> </span>describe-task-definition<span class="w"> </span>--task-definition<span class="w"> </span>app-name:latest
 
-<span class="c1"># Result: Average 5s, Maximum 28s, but graph shows spikes</span>
+<span class="c1"># 2. Compare memory allocation</span>
+<span class="c1"># Previous: 512 MB</span>
+<span class="c1"># New: 256 MB (someone changed it!)</span>
 
-<span class="c1"># 2. Check concurrent execution limit</span>
-aws<span class="w"> </span>lambda<span class="w"> </span>get-concurrency<span class="w"> </span>--function-name<span class="w"> </span>my-api
+<span class="c1"># 3. Check which tasks are failing</span>
+aws<span class="w"> </span>ecs<span class="w"> </span>describe-tasks<span class="w"> </span>--cluster<span class="w"> </span>production<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--tasks<span class="w"> </span>arn:aws:ecs:...
 
-<span class="c1"># 3. See CloudWatch logs</span>
-aws<span class="w"> </span>logs<span class="w"> </span>tail<span class="w"> </span>/aws/lambda/my-api<span class="w"> </span>--follow
+<span class="c1"># 4. Check application logs</span>
+aws<span class="w"> </span>logs<span class="w"> </span>tail<span class="w"> </span>/ecs/app-name<span class="w"> </span>--follow
 
-<span class="c1"># Logs show: &quot;Waiting in queue... for 15 seconds before execution&quot;</span>
+<span class="c1"># 5. See the error</span>
+<span class="c1"># &quot;Java heap size exceeded 256MB&quot;</span>
 </code></pre></div>
-<p><strong>Root Cause:</strong> Function hit <strong>concurrent execution limit</strong> (default 1000 per account, can be lower). Extra invocations queue up, then timeout while waiting.</p>
+<p><strong>Root Cause:</strong> Task definition memory was reduced from 512MB to 256MB, but application needs more.</p>
 <p><strong>Solution:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="c1"># 1. Increase reserved concurrency</span>
-aws<span class="w"> </span>lambda<span class="w"> </span>put-function-concurrency<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--function-name<span class="w"> </span>my-api<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--reserved-concurrent-executions<span class="w"> </span><span class="m">500</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Register new task definition with correct memory</span>
+<span class="c1"># Edit task-definition.json: &quot;memory&quot;: &quot;512&quot;</span>
 
-<span class="c1"># 2. Monitor again</span>
-aws<span class="w"> </span>cloudwatch<span class="w"> </span>get-metric-statistics<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--namespace<span class="w"> </span>AWS/Lambda<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--metric-name<span class="w"> </span>Duration<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--statistics<span class="w"> </span>Maximum
+aws<span class="w"> </span>ecs<span class="w"> </span>register-task-definition<span class="w"> </span>--cli-input-json<span class="w"> </span>file://task-definition.json
 
-<span class="c1"># 3. Alert when duration approaches timeout</span>
-aws<span class="w"> </span>cloudwatch<span class="w"> </span>put-metric-alarm<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--alarm-name<span class="w"> </span>lambda-duration-high<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--metric-name<span class="w"> </span>Duration<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--namespace<span class="w"> </span>AWS/Lambda<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--statistic<span class="w"> </span>Maximum<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--threshold<span class="w"> </span><span class="m">20</span><span class="w">  </span><span class="c1"># Alert if any function takes &gt; 20 seconds</span>
+<span class="c1"># 2. Update service to use new task definition</span>
+aws<span class="w"> </span>ecs<span class="w"> </span>update-service<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cluster<span class="w"> </span>production<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--service<span class="w"> </span>app-name<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--task-definition<span class="w"> </span>app-name:2<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--force-new-deployment
+
+<span class="c1"># 3. Monitor rollout</span>
+aws<span class="w"> </span>ecs<span class="w"> </span>describe-services<span class="w"> </span>--cluster<span class="w"> </span>production<span class="w"> </span>--services<span class="w"> </span>app-name
+
+<span class="c1"># 4. Verify traffic returns to normal</span>
+<span class="c1"># Check ALB target group health</span>
+aws<span class="w"> </span>elbv2<span class="w"> </span>describe-target-health<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--target-group-arn<span class="w"> </span>arn:aws:elasticloadbalancing:...
 </code></pre></div>
 <p><strong>Prevention:</strong>
-- Monitor concurrency utilization continuously
-- Set alarms when approaching limits
-- Use provisioned concurrency for critical functions
-- Test with realistic load before deploying</p>
+- Code review all task definition changes
+- Monitor memory/CPU utilization before deployment
+- Use canary deployments for resource changes
+- Alert when task repeatedly fails</p>
 <h2 id="practice-questions">Practice Questions</h2>
 <ol>
-<li><strong>Scenario:</strong> Your Lambda function needs to fetch data from RDS every invocation. It's slow. What's the problem?</li>
+<li><strong>Scenario:</strong> Your application needs to run a batch job once per day. Should you use ECS Task or Service?</li>
 <li>
-<p>Why? RDS connection setup is slow. Solution: Use RDS Proxy, connection pooling, or cache with ElastiCache.</p>
+<p>Why? Services are for long-running applications. A task is sufficient for one-time jobs.</p>
 </li>
 <li>
-<p><strong>Decision:</strong> You need to process 10,000 images daily. Lambda or EC2?</p>
+<p><strong>Decision:</strong> You're deploying a stateless REST API that receives bursty traffic. EC2 or Fargate?</p>
 </li>
 <li>
-<p>Why? Lambda if bursty (all 10K at once), EC2 if steady (spread throughout day).</p>
+<p>Why? Fargate is better for unpredictable workloads. You pay per task, not per instance.</p>
 </li>
 <li>
-<p><strong>Cost:</strong> Function runs 1 million times/month, average 300MB memory, 5 seconds duration. Estimate monthly cost.</p>
+<p><strong>Troubleshooting:</strong> Your ECS tasks keep stopping after 30 seconds. What would you check first?</p>
 </li>
-<li>Calculation: 1M invocations × $0.0000002 + (1M × 5s × 0.3GB × $0.0000167) = $0.25</li>
+<li>Why? Check task logs and health checks. Tasks stop when they exit or fail health checks.</li>
 </ol>
 <h2 id="further-reading">Further Reading</h2>
 <ul>
-<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html">AWS Lambda best practices</a></li>
-<li><a href="https://mikhail.io/serverless/coldstarts/aws/">Lambda cold start benchmark</a></li>
-<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">Concurrency limits and scaling</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-considerations.html">AWS ECS Best Practices Guide</a></li>
+<li><a href="https://aws.amazon.com/blogs/compute/amazon-ecs-vs-kubernetes/">ECS vs Kubernetes comparison</a></li>
+<li><a href="https://aws.amazon.com/fargate/pricing/">Fargate pricing calculator</a></li>
 </ul>
 <hr />
-<p><strong>Next:</strong> Explore AWS RDS and database patterns in the final advanced module.</p>
+<p><strong>Next:</strong> Learn about AWS Lambda and serverless patterns in the next advanced module.</p>
 
 
 
@@ -6232,7 +6407,7 @@ aws<span class="w"> </span>cloudwatch<span class="w"> </span>put-metric-alarm<sp
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../11-advanced-ecs/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 11 Advanced ECS" rel="prev">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview" rel="prev">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -6242,20 +6417,20 @@ aws<span class="w"> </span>cloudwatch<span class="w"> </span>put-metric-alarm<sp
                 Previous
               </span>
               <div class="md-ellipsis">
-                11 Advanced ECS
+                Overview
               </div>
             </div>
           </a>
         
         
           
-          <a href="../13-advanced-fargate/" class="md-footer__link md-footer__link--next" aria-label="Next: 13 Advanced Fargate" rel="next">
+          <a href="../12-advanced-lambda/" class="md-footer__link md-footer__link--next" aria-label="Next: 12 Advanced Lambda" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                13 Advanced Fargate
+                12 Advanced Lambda
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -6322,10 +6497,10 @@ aws<span class="w"> </span>cloudwatch<span class="w"> </span>put-metric-alarm<sp
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "navigation.footer", "navigation.tracking", "navigation.indexes", "navigation.pruned", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tooltips", "content.tabs.link", "toc.follow"], "search": "../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "navigation.footer", "navigation.tracking", "navigation.indexes", "navigation.pruned", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tooltips", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.4e0fa4ba.min.js"></script>
+      <script src="../../assets/javascripts/bundle.4e0fa4ba.min.js"></script>
       
     
   </body>

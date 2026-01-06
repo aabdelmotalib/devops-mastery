@@ -8,28 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://aabdelmotalib.github.io/devops-mastery/aws-essentials-tutorial/docs-advanced/13-advanced-fargate/">
+        <link rel="canonical" href="https://aabdelmotalib.github.io/devops-mastery/security-essentials-tutorial/01-application-security-fundamentals/">
       
       
-        <link rel="prev" href="../12-advanced-lambda/">
+        <link rel="prev" href="../">
       
       
-        <link rel="next" href="../../../modern-devops-patterns-tutorial/">
+        <link rel="next" href="../02-infrastructure-security/">
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.0">
     
     
       
-        <title>13 Advanced Fargate - DevOps Engineering Mastery</title>
+        <title>01 Application Security - DevOps Engineering Mastery</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.9f615399.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.9f615399.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.649f08f9.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.649f08f9.min.css">
       
       
 
@@ -48,9 +48,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -79,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#advanced-aws-fargate-managed-container-services" class="md-skip">
+        <a href="#application-security-fundamentals" class="md-skip">
           Skip to content
         </a>
       
@@ -95,7 +95,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="DevOps Engineering Mastery" class="md-header__button md-logo" aria-label="DevOps Engineering Mastery" data-md-component="logo">
+    <a href="../.." title="DevOps Engineering Mastery" class="md-header__button md-logo" aria-label="DevOps Engineering Mastery" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              13 Advanced Fargate
+              01 Application Security
             
           </span>
         </div>
@@ -220,7 +220,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="DevOps Engineering Mastery" class="md-nav__button md-logo" aria-label="DevOps Engineering Mastery" data-md-component="logo">
+    <a href="../.." title="DevOps Engineering Mastery" class="md-nav__button md-logo" aria-label="DevOps Engineering Mastery" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -237,7 +237,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -256,7 +256,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../portfolio/" class="md-nav__link">
+      <a href="../../portfolio/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -306,7 +306,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../programming-fundamentals-with-ai/" class="md-nav__link ">
+            <a href="../../programming-fundamentals-with-ai/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -335,7 +335,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../programming-fundamentals-with-ai/START_HERE/" class="md-nav__link">
+      <a href="../../programming-fundamentals-with-ai/START_HERE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -405,7 +405,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../programming-fundamentals-with-ai/docs/01-programming-thinking/" class="md-nav__link">
+      <a href="../../programming-fundamentals-with-ai/docs/01-programming-thinking/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -425,7 +425,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../programming-fundamentals-with-ai/docs/02-core-programming-concepts/" class="md-nav__link">
+      <a href="../../programming-fundamentals-with-ai/docs/02-core-programming-concepts/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -445,7 +445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../programming-fundamentals-with-ai/docs/03-software-architecture-basics/" class="md-nav__link">
+      <a href="../../programming-fundamentals-with-ai/docs/03-software-architecture-basics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -465,7 +465,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../programming-fundamentals-with-ai/docs/04-thinking-like-an-engineer/" class="md-nav__link">
+      <a href="../../programming-fundamentals-with-ai/docs/04-thinking-like-an-engineer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -485,7 +485,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../programming-fundamentals-with-ai/docs/05-programming-with-ai/" class="md-nav__link">
+      <a href="../../programming-fundamentals-with-ai/docs/05-programming-with-ai/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -505,7 +505,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../programming-fundamentals-with-ai/docs/06-practical-examples/" class="md-nav__link">
+      <a href="../../programming-fundamentals-with-ai/docs/06-practical-examples/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -533,7 +533,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../programming-fundamentals-with-ai/FINAL_PROJECT/" class="md-nav__link">
+      <a href="../../programming-fundamentals-with-ai/FINAL_PROJECT/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -553,7 +553,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../programming-fundamentals-with-ai/QUICK_REFERENCE/" class="md-nav__link">
+      <a href="../../programming-fundamentals-with-ai/QUICK_REFERENCE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -632,7 +632,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../START_HERE/" class="md-nav__link">
+      <a href="../../aws-essentials-tutorial/START_HERE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -710,7 +710,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/01-aws-fundamentals/" class="md-nav__link">
+      <a href="../../aws-essentials-tutorial/docs/01-aws-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -730,7 +730,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/02-identity-access-management/" class="md-nav__link">
+      <a href="../../aws-essentials-tutorial/docs/02-identity-access-management/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -750,7 +750,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/03-compute-services/" class="md-nav__link">
+      <a href="../../aws-essentials-tutorial/docs/03-compute-services/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -770,7 +770,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/04-storage-databases/" class="md-nav__link">
+      <a href="../../aws-essentials-tutorial/docs/04-storage-databases/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -790,7 +790,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/05-networking-content-delivery/" class="md-nav__link">
+      <a href="../../aws-essentials-tutorial/docs/05-networking-content-delivery/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -810,7 +810,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/06-cicd-devops-integration/" class="md-nav__link">
+      <a href="../../aws-essentials-tutorial/docs/06-cicd-devops-integration/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -830,7 +830,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/07-monitoring-observability/" class="md-nav__link">
+      <a href="../../aws-essentials-tutorial/docs/07-monitoring-observability/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -850,7 +850,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/08-security-compliance/" class="md-nav__link">
+      <a href="../../aws-essentials-tutorial/docs/08-security-compliance/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -870,7 +870,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/09-cost-management/" class="md-nav__link">
+      <a href="../../aws-essentials-tutorial/docs/09-cost-management/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -890,7 +890,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/10-advanced-services/" class="md-nav__link">
+      <a href="../../aws-essentials-tutorial/docs/10-advanced-services/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -918,7 +918,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../final-project/" class="md-nav__link">
+      <a href="../../aws-essentials-tutorial/final-project/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -938,7 +938,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../QUICK_REFERENCE/" class="md-nav__link">
+      <a href="../../aws-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -987,7 +987,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
+            <a href="../../aws-essentials-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1016,7 +1016,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../INDEX/" class="md-nav__link">
+      <a href="../../aws-essentials-tutorial/INDEX/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1036,7 +1036,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../COMPLETION_REPORT/" class="md-nav__link">
+      <a href="../../aws-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1056,7 +1056,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../DELIVERY_SUMMARY/" class="md-nav__link">
+      <a href="../../aws-essentials-tutorial/DELIVERY_SUMMARY/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1076,7 +1076,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../examples/REFERENCE_IMPLEMENTATIONS/" class="md-nav__link">
+      <a href="../../aws-essentials-tutorial/examples/REFERENCE_IMPLEMENTATIONS/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1142,7 +1142,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../docker-essentials-tutorial/" class="md-nav__link ">
+            <a href="../../docker-essentials-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1233,7 +1233,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/00-bash-and-yaml-fundamentals/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/00-bash-and-yaml-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1253,7 +1253,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/01-container-fundamentals/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/01-container-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1273,7 +1273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/02-docker-architecture/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/02-docker-architecture/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1293,7 +1293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/03-docker-images/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/03-docker-images/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1313,7 +1313,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/04-docker-containers/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/04-docker-containers/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1333,7 +1333,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/05-docker-networking/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/05-docker-networking/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1353,7 +1353,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/06-docker-volumes-storage/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/06-docker-volumes-storage/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1373,7 +1373,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/07-docker-compose/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/07-docker-compose/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1393,7 +1393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/08-docker-security/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/08-docker-security/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1413,7 +1413,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/09-docker-cicd/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/09-docker-cicd/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1433,7 +1433,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/10-docker-kubernetes-readiness/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/10-docker-kubernetes-readiness/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1461,7 +1461,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/final-project/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/final-project/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1504,7 +1504,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../docker-essentials-tutorial/" class="md-nav__link ">
+            <a href="../../docker-essentials-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1533,7 +1533,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker-essentials-tutorial/TUTORIAL_SUMMARY/" class="md-nav__link">
+      <a href="../../docker-essentials-tutorial/TUTORIAL_SUMMARY/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1622,7 +1622,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/START_HERE/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/START_HERE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1706,7 +1706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/01-kubernetes-fundamentals/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/01-kubernetes-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1726,7 +1726,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/02-kubectl-cluster-interaction/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/02-kubectl-cluster-interaction/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1746,7 +1746,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/03-pods-workloads/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/03-pods-workloads/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1766,7 +1766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/04-services-networking/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/04-services-networking/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1786,7 +1786,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/05-configmaps-secrets/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/05-configmaps-secrets/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1806,7 +1806,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/06-storage-volumes/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/06-storage-volumes/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1826,7 +1826,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/07-resource-management/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/07-resource-management/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1846,7 +1846,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/08-health-probes-logging/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/08-health-probes-logging/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1866,7 +1866,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/09-rbac-security/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/09-rbac-security/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1886,7 +1886,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/10-helm-package-management/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/10-helm-package-management/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1906,7 +1906,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/11-advanced-cluster-operations/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/11-advanced-cluster-operations/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1926,7 +1926,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/12-kubernetes-cicd-docker/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/12-kubernetes-cicd-docker/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1946,7 +1946,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/13-gateway-api/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/13-gateway-api/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1974,7 +1974,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/FINAL_PROJECT/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/FINAL_PROJECT/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1994,7 +1994,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2014,7 +2014,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/docs/GATEWAY_API_QUICK_REFERENCE/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/docs/GATEWAY_API_QUICK_REFERENCE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2065,7 +2065,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../kubernetes-essentials-tutorial/" class="md-nav__link ">
+            <a href="../../kubernetes-essentials-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2094,7 +2094,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/INDEX/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/INDEX/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2114,7 +2114,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2134,7 +2134,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/EXAM_AND_PRACTICE/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/EXAM_AND_PRACTICE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2154,7 +2154,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/MODULE_13_UPDATE_SUMMARY/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/MODULE_13_UPDATE_SUMMARY/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2174,7 +2174,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes-essentials-tutorial/COMPLETION_SUMMARY/" class="md-nav__link">
+      <a href="../../kubernetes-essentials-tutorial/COMPLETION_SUMMARY/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2242,7 +2242,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../cicd-essentials-tutorial/" class="md-nav__link ">
+            <a href="../../cicd-essentials-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2331,7 +2331,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/01-cicd-fundamentals/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/01-cicd-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2351,7 +2351,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/02-source-control-triggers/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/02-source-control-triggers/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2371,7 +2371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/03-ci-pipeline-design/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/03-ci-pipeline-design/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2391,7 +2391,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/04-artifact-management/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/04-artifact-management/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2411,7 +2411,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/05-security-in-cicd/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/05-security-in-cicd/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2431,7 +2431,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/06-continuous-deployment/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/06-continuous-deployment/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2451,7 +2451,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/07-infrastructure-as-code/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/07-infrastructure-as-code/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2471,7 +2471,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/08-pipeline-observability/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/08-pipeline-observability/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2491,7 +2491,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/09-cicd-tools-comparison/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/09-cicd-tools-comparison/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2511,7 +2511,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/10-failure-recovery/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/10-failure-recovery/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2539,7 +2539,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/docs/final-project/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/docs/final-project/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2559,7 +2559,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2608,7 +2608,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../cicd-essentials-tutorial/" class="md-nav__link ">
+            <a href="../../cicd-essentials-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2637,7 +2637,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/INDEX/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/INDEX/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2657,7 +2657,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2677,7 +2677,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/DELIVERY_SUMMARY/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/DELIVERY_SUMMARY/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2697,7 +2697,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd-essentials-tutorial/examples/REFERENCE_IMPLEMENTATIONS/" class="md-nav__link">
+      <a href="../../cicd-essentials-tutorial/examples/REFERENCE_IMPLEMENTATIONS/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2761,7 +2761,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../database-essentials-tutorial/" class="md-nav__link ">
+            <a href="../../database-essentials-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2846,7 +2846,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../database-essentials-tutorial/docs/01-fundamentals/" class="md-nav__link">
+      <a href="../../database-essentials-tutorial/docs/01-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2866,7 +2866,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../database-essentials-tutorial/docs/02-postgresql/" class="md-nav__link">
+      <a href="../../database-essentials-tutorial/docs/02-postgresql/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2886,7 +2886,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../database-essentials-tutorial/docs/03-nosql/" class="md-nav__link">
+      <a href="../../database-essentials-tutorial/docs/03-nosql/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2906,7 +2906,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../database-essentials-tutorial/docs/04-database-design/" class="md-nav__link">
+      <a href="../../database-essentials-tutorial/docs/04-database-design/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2926,7 +2926,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../database-essentials-tutorial/docs/05-sqlalchemy-orm/" class="md-nav__link">
+      <a href="../../database-essentials-tutorial/docs/05-sqlalchemy-orm/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2946,7 +2946,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../database-essentials-tutorial/docs/06-migrations/" class="md-nav__link">
+      <a href="../../database-essentials-tutorial/docs/06-migrations/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2966,7 +2966,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../database-essentials-tutorial/docs/07-performance/" class="md-nav__link">
+      <a href="../../database-essentials-tutorial/docs/07-performance/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2986,7 +2986,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../database-essentials-tutorial/docs/08-transactions/" class="md-nav__link">
+      <a href="../../database-essentials-tutorial/docs/08-transactions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3014,7 +3014,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../database-essentials-tutorial/docs/09-final-project/" class="md-nav__link">
+      <a href="../../database-essentials-tutorial/docs/09-final-project/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3089,7 +3089,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/GETTING_STARTED/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/GETTING_STARTED/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3163,7 +3163,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/docs/01-networking-fundamentals/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/docs/01-networking-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3183,7 +3183,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/docs/02-http-https-protocol/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/docs/02-http-https-protocol/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3203,7 +3203,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/docs/03-rest-api-design/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/docs/03-rest-api-design/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3223,7 +3223,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/docs/04-websockets/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/docs/04-websockets/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3243,7 +3243,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/docs/05-load-balancing/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/docs/05-load-balancing/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3263,7 +3263,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/docs/06-reverse-proxy-nginx/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/docs/06-reverse-proxy-nginx/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3283,7 +3283,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/docs/07-dns-domain-management/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/docs/07-dns-domain-management/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3303,7 +3303,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/docs/08-ssl-tls-certificates/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/docs/08-ssl-tls-certificates/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3331,7 +3331,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/docs/09-final-project/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/docs/09-final-project/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3374,7 +3374,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../networking-essentials-tutorial/" class="md-nav__link ">
+            <a href="../../networking-essentials-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -3403,7 +3403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../networking-essentials-tutorial/examples/QUICK_REFERENCE/" class="md-nav__link">
+      <a href="../../networking-essentials-tutorial/examples/QUICK_REFERENCE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3490,7 +3490,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/START_HERE/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/START_HERE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3564,7 +3564,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/docs/01-observability-fundamentals/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/docs/01-observability-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3584,7 +3584,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/docs/02-prometheus-metrics/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/docs/02-prometheus-metrics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3604,7 +3604,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/docs/03-logging-fundamentals/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/docs/03-logging-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3624,7 +3624,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/docs/04-loki-fluent-bit/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/docs/04-loki-fluent-bit/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3644,7 +3644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/docs/05-grafana-dashboards/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/docs/05-grafana-dashboards/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3664,7 +3664,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/docs/06-aws-cloudwatch/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/docs/06-aws-cloudwatch/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3684,7 +3684,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/docs/07-alerting-incident-response/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/docs/07-alerting-incident-response/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3704,7 +3704,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/docs/08-advanced-patterns/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/docs/08-advanced-patterns/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3732,7 +3732,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/FINAL_PROJECT/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/FINAL_PROJECT/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3752,7 +3752,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3801,7 +3801,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../observability-essentials-tutorial/" class="md-nav__link ">
+            <a href="../../observability-essentials-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -3830,7 +3830,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/INDEX/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/INDEX/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3850,7 +3850,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3870,7 +3870,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/DELIVERY_SUMMARY/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/DELIVERY_SUMMARY/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3890,7 +3890,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../observability-essentials-tutorial/examples/REFERENCE_IMPLEMENTATIONS/" class="md-nav__link">
+      <a href="../../observability-essentials-tutorial/examples/REFERENCE_IMPLEMENTATIONS/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3975,7 +3975,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/START_HERE/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/START_HERE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4053,7 +4053,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/docs/01-fundamentals/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/docs/01-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4073,7 +4073,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/docs/02-scalability/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/docs/02-scalability/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4093,7 +4093,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/docs/03-data-storage-replication/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/docs/03-data-storage-replication/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4113,7 +4113,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/docs/04-messaging-event-driven/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/docs/04-messaging-event-driven/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4133,7 +4133,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/docs/05-fault-tolerance/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/docs/05-fault-tolerance/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4153,7 +4153,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/docs/06-performance-optimization/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/docs/06-performance-optimization/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4173,7 +4173,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/docs/07-consistency-transactions/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/docs/07-consistency-transactions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4193,7 +4193,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/docs/08-microservices-patterns/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/docs/08-microservices-patterns/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4213,7 +4213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/docs/09-observability/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/docs/09-observability/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4233,7 +4233,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/docs/10-deployment-scaling/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/docs/10-deployment-scaling/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4261,7 +4261,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/FINAL_PROJECT/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/FINAL_PROJECT/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4308,7 +4308,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../distributed-systems-tutorial/" class="md-nav__link ">
+            <a href="../../distributed-systems-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -4337,7 +4337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/INDEX/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/INDEX/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4357,7 +4357,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/QUICK_REFERENCE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4377,7 +4377,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../distributed-systems-tutorial/EXAM_AND_PRACTICE/" class="md-nav__link">
+      <a href="../../distributed-systems-tutorial/EXAM_AND_PRACTICE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4441,7 +4441,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../flask-backend-tutorial/" class="md-nav__link ">
+            <a href="../../flask-backend-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -4532,7 +4532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/00-prerequisites-and-basics/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/00-prerequisites-and-basics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4552,7 +4552,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/01-flask-fundamentals/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/01-flask-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4572,7 +4572,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/02-flask-architecture/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/02-flask-architecture/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4592,7 +4592,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/03-routing-and-views/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/03-routing-and-views/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4612,7 +4612,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/04-request-handling/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/04-request-handling/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4632,7 +4632,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/05-response-formats/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/05-response-formats/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4652,7 +4652,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/06-templates-static/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/06-templates-static/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4672,7 +4672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/07-flask-blueprints/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/07-flask-blueprints/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4692,7 +4692,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/08-error-handling/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/08-error-handling/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4712,7 +4712,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/09-authentication-authorization/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/09-authentication-authorization/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4732,7 +4732,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/10-flask-extensions/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/10-flask-extensions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4760,7 +4760,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../flask-backend-tutorial/docs/11-final-project/" class="md-nav__link">
+      <a href="../../flask-backend-tutorial/docs/11-final-project/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4785,13 +4785,17 @@
       
   
   
-    
-  
   
     
     
       
         
+          
+        
+      
+        
+      
+        
       
         
       
@@ -4803,26 +4807,36 @@
     
       
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" checked>
+          
         
-          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
-            
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../aws-essentials-tutorial/" class="md-nav__link ">
+              
   
   <span class="md-ellipsis">
     AWS Advanced
   </span>
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              <label class="md-nav__link " for="__nav_13">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_13">
             <span class="md-nav__icon md-icon"></span>
             AWS Advanced
@@ -4830,24 +4844,6 @@
           <ul class="md-nav__list" data-md-scrollfix>
             
               
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../README.md" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Overview
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -4855,7 +4851,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../11-advanced-ecs/" class="md-nav__link">
+      <a href="../../aws-essentials-tutorial/11-advanced-ecs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4875,7 +4871,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../12-advanced-lambda/" class="md-nav__link">
+      <a href="../../aws-essentials-tutorial/12-advanced-lambda/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4893,29 +4889,9 @@
                 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    13 Advanced Fargate
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/13-advanced-fargate/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4924,143 +4900,46 @@
   
 
       </a>
-      
-        
+    </li>
+  
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+              
+            
+              
+                
   
   
   
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    Overview
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mental-model" class="md-nav__link">
-    Mental Model
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#key-insight" class="md-nav__link">
-    Key Insight
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cost-model-deep-dive" class="md-nav__link">
-    Cost Model Deep Dive
-  </a>
-  
-    <nav class="md-nav" aria-label="Cost Model Deep Dive">
-      <ul class="md-nav__list">
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/14-terraform-deep-dive/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#ec2-launch-type" class="md-nav__link">
-    EC2 Launch Type
-  </a>
   
-</li>
+  <span class="md-ellipsis">
+    14 Terraform Deep Dive
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/15-ansible-deep-dive/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#fargate-launch-type" class="md-nav__link">
-    Fargate Launch Type
-  </a>
   
-</li>
-        
-      </ul>
-    </nav>
+  <span class="md-ellipsis">
+    15 Ansible Deep Dive
+  </span>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#when-not-to-use-fargate" class="md-nav__link">
-    When NOT to Use Fargate
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#production-pattern-fargate-with-auto-scaling" class="md-nav__link">
-    Production Pattern: Fargate with Auto Scaling
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#networking-in-fargate" class="md-nav__link">
-    Networking in Fargate
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#logging-in-fargate" class="md-nav__link">
-    Logging in Fargate
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#common-mistakes" class="md-nav__link">
-    Common Mistakes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#production-incident-scenario" class="md-nav__link">
-    Production Incident Scenario
-  </a>
-  
-    <nav class="md-nav" aria-label="Production Incident Scenario">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#scenario-fargate-tasks-failing-after-scaling-up" class="md-nav__link">
-    Scenario: "Fargate tasks failing after scaling up"
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#practice-questions" class="md-nav__link">
-    Practice Questions
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#further-reading" class="md-nav__link">
-    Further Reading
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
+
+      </a>
     </li>
   
 
@@ -5108,7 +4987,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../modern-devops-patterns-tutorial/" class="md-nav__link ">
+            <a href="../../modern-devops-patterns-tutorial/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -5139,7 +5018,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../modern-devops-patterns-tutorial/01-gitops-fundamentals/" class="md-nav__link">
+      <a href="../../modern-devops-patterns-tutorial/01-gitops-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5159,7 +5038,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../modern-devops-patterns-tutorial/02-service-mesh-fundamentals/" class="md-nav__link">
+      <a href="../../modern-devops-patterns-tutorial/02-service-mesh-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5179,7 +5058,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../modern-devops-patterns-tutorial/03-ebpf-fundamentals/" class="md-nav__link">
+      <a href="../../modern-devops-patterns-tutorial/03-ebpf-fundamentals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5188,6 +5067,457 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Security Essentials
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_15">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            Security Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_2" checked>
+        
+          <label class="md-nav__link" for="__nav_15_2" id="__nav_15_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_15_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    01 Application Security
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    01 Application Security
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mental-model" class="md-nav__link">
+    Mental Model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#owasp-top-10-2021" class="md-nav__link">
+    OWASP Top 10 (2021)
+  </a>
+  
+    <nav class="md-nav" aria-label="OWASP Top 10 (2021)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-broken-access-control" class="md-nav__link">
+    1. Broken Access Control
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-cryptographic-failures" class="md-nav__link">
+    2. Cryptographic Failures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-injection-sql-command-etc" class="md-nav__link">
+    3. Injection (SQL, Command, etc.)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-insecure-design" class="md-nav__link">
+    4. Insecure Design
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-broken-authentication" class="md-nav__link">
+    5. Broken Authentication
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-10-other-top-vulnerabilities" class="md-nav__link">
+    6-10: Other Top Vulnerabilities
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependency-scanning-sca" class="md-nav__link">
+    Dependency Scanning (SCA)
+  </a>
+  
+    <nav class="md-nav" aria-label="Dependency Scanning (SCA)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-sca" class="md-nav__link">
+    What is SCA?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snyk-comprehensive-dependency-scanner" class="md-nav__link">
+    Snyk: Comprehensive Dependency Scanner
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trivy-container-image-scanning" class="md-nav__link">
+    Trivy: Container Image Scanning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sast-static-application-security-testing" class="md-nav__link">
+    SAST: Static Application Security Testing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#secrets-detection" class="md-nav__link">
+    Secrets Detection
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hands-on-secure-development-pipeline" class="md-nav__link">
+    Hands-On: Secure Development Pipeline
+  </a>
+  
+    <nav class="md-nav" aria-label="Hands-On: Secure Development Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-setup-sast-scanning" class="md-nav__link">
+    Step 1: Setup SAST Scanning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-dependency-scanning" class="md-nav__link">
+    Step 2: Dependency Scanning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-container-image-scanning" class="md-nav__link">
+    Step 3: Container Image Scanning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-mistakes" class="md-nav__link">
+    Common Mistakes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production-incident-scenario" class="md-nav__link">
+    Production Incident Scenario
+  </a>
+  
+    <nav class="md-nav" aria-label="Production Incident Scenario">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scenario-we-deployed-code-with-hardcoded-api-key-attacker-accessed-our-cloud-account" class="md-nav__link">
+    Scenario: "We deployed code with hardcoded API key; attacker accessed our cloud account"
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-questions" class="md-nav__link">
+    Practice Questions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    Further Reading
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-infrastructure-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Infrastructure Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-supply-chain-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Supply Chain Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-compliance-audit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Compliance & Audit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-incident-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Incident Response
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -5230,9 +5560,9 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_15" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16" >
         
-          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -5243,8 +5573,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16">
             <span class="md-nav__icon md-icon"></span>
             Capstone Projects
           </label>
@@ -5256,7 +5586,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/README_START_HERE/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/README_START_HERE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5304,12 +5634,12 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_15_2" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16_2" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/" class="md-nav__link ">
+            <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -5319,14 +5649,14 @@
 
             </a>
             
-              <label class="md-nav__link " for="__nav_15_2">
+              <label class="md-nav__link " for="__nav_16_2">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15_2">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16_2">
             <span class="md-nav__icon md-icon"></span>
             Platform Engineering
           </label>
@@ -5340,7 +5670,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/aws/infrastructure/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/aws/infrastructure/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5360,7 +5690,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/decisions/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/decisions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5380,7 +5710,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/security/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/security/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5400,7 +5730,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/scaling/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/scaling/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5420,7 +5750,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/cost-awareness/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/cost-awareness/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5440,7 +5770,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/interview-notes/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/interview-notes/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5488,12 +5818,12 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_15_3" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16_3" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/" class="md-nav__link ">
+            <a href="../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -5503,14 +5833,14 @@
 
             </a>
             
-              <label class="md-nav__link " for="__nav_15_3">
+              <label class="md-nav__link " for="__nav_16_3">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16_3">
             <span class="md-nav__icon md-icon"></span>
             Distributed Systems
           </label>
@@ -5524,7 +5854,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/docs/decisions/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/docs/decisions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5544,7 +5874,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/docs/scaling/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/docs/scaling/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5572,7 +5902,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/PORTFOLIO_OVERVIEW/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/PORTFOLIO_OVERVIEW/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5606,9 +5936,9 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_15_5" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16_5" >
         
-          <label class="md-nav__link" for="__nav_15_5" id="__nav_15_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_16_5" id="__nav_16_5_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -5619,8 +5949,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15_5">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16_5">
             <span class="md-nav__icon md-icon"></span>
             Resources
           </label>
@@ -5632,7 +5962,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../devops-capstone-projects/COMPLETION_SUMMARY/" class="md-nav__link">
+      <a href="../../devops-capstone-projects/COMPLETION_SUMMARY/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5702,30 +6032,51 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#key-insight" class="md-nav__link">
-    Key Insight
+  <a href="#owasp-top-10-2021" class="md-nav__link">
+    OWASP Top 10 (2021)
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cost-model-deep-dive" class="md-nav__link">
-    Cost Model Deep Dive
-  </a>
-  
-    <nav class="md-nav" aria-label="Cost Model Deep Dive">
+    <nav class="md-nav" aria-label="OWASP Top 10 (2021)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ec2-launch-type" class="md-nav__link">
-    EC2 Launch Type
+  <a href="#1-broken-access-control" class="md-nav__link">
+    1. Broken Access Control
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#fargate-launch-type" class="md-nav__link">
-    Fargate Launch Type
+  <a href="#2-cryptographic-failures" class="md-nav__link">
+    2. Cryptographic Failures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-injection-sql-command-etc" class="md-nav__link">
+    3. Injection (SQL, Command, etc.)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-insecure-design" class="md-nav__link">
+    4. Insecure Design
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-broken-authentication" class="md-nav__link">
+    5. Broken Authentication
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-10-other-top-vulnerabilities" class="md-nav__link">
+    6-10: Other Top Vulnerabilities
   </a>
   
 </li>
@@ -5736,30 +6087,84 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#when-not-to-use-fargate" class="md-nav__link">
-    When NOT to Use Fargate
+  <a href="#dependency-scanning-sca" class="md-nav__link">
+    Dependency Scanning (SCA)
+  </a>
+  
+    <nav class="md-nav" aria-label="Dependency Scanning (SCA)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-sca" class="md-nav__link">
+    What is SCA?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snyk-comprehensive-dependency-scanner" class="md-nav__link">
+    Snyk: Comprehensive Dependency Scanner
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trivy-container-image-scanning" class="md-nav__link">
+    Trivy: Container Image Scanning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sast-static-application-security-testing" class="md-nav__link">
+    SAST: Static Application Security Testing
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#production-pattern-fargate-with-auto-scaling" class="md-nav__link">
-    Production Pattern: Fargate with Auto Scaling
+  <a href="#secrets-detection" class="md-nav__link">
+    Secrets Detection
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#networking-in-fargate" class="md-nav__link">
-    Networking in Fargate
+  <a href="#hands-on-secure-development-pipeline" class="md-nav__link">
+    Hands-On: Secure Development Pipeline
+  </a>
+  
+    <nav class="md-nav" aria-label="Hands-On: Secure Development Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-setup-sast-scanning" class="md-nav__link">
+    Step 1: Setup SAST Scanning
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#logging-in-fargate" class="md-nav__link">
-    Logging in Fargate
+        
+          <li class="md-nav__item">
+  <a href="#step-2-dependency-scanning" class="md-nav__link">
+    Step 2: Dependency Scanning
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-container-image-scanning" class="md-nav__link">
+    Step 3: Container Image Scanning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -5779,8 +6184,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#scenario-fargate-tasks-failing-after-scaling-up" class="md-nav__link">
-    Scenario: "Fargate tasks failing after scaling up"
+  <a href="#scenario-we-deployed-code-with-hardcoded-api-key-attacker-accessed-our-cloud-account" class="md-nav__link">
+    Scenario: "We deployed code with hardcoded API key; attacker accessed our cloud account"
   </a>
   
 </li>
@@ -5819,330 +6224,441 @@
                   
 
 
-<h1 id="advanced-aws-fargate-managed-container-services">Advanced AWS: Fargate &amp; Managed Container Services</h1>
+<h1 id="application-security-fundamentals">Application Security Fundamentals</h1>
 <h2 id="overview">Overview</h2>
-<p>This module covers <strong>AWS Fargate</strong>, AWS's fully managed container execution platform, and how it differs from EC2-based container orchestration. You'll learn when Fargate makes sense, cost modeling, and production patterns.</p>
+<p><strong>Application Security</strong> is about preventing vulnerabilities in code before they reach production. This includes protecting against injection attacks, broken authentication, insecure dependencies, and insecure configurations.</p>
 <h2 id="mental-model">Mental Model</h2>
-<div class="highlight"><pre><span></span><code>Traditional EC2:
-You launch instance → manage OS → manage networking → run container → scale instances
-(You manage compute)
+<div class="highlight"><pre><span></span><code>Security Layers in Application Development:
 
-Fargate:
-You define container spec → AWS handles everything else → focus on application
-(AWS manages compute)
+┌─────────────────────────────────────────────────────┐
+│  Deployment (Already Breached)                      │
+│  ❌ Too Late: Attacker has access to data          │
+│  Minutes to contain, hours to assess damage         │
+└─────────────────────────────────────────────────────┘
+         ↑
+┌─────────────────────────────────────────────────────┐
+│  Production Runtime (Last Minute)                   │
+│  ⚠️ WAF, authentication, rate limiting              │
+│  Still possible to be breached                      │
+└─────────────────────────────────────────────────────┘
+         ↑
+┌─────────────────────────────────────────────────────┐
+│  Pre-Deployment Scanning (Sweet Spot)               │
+│  ✅ SAST: Find code vulnerabilities                │
+│  ✅ SCA: Scan dependencies for known CVEs          │
+│  ✅ Secrets: Detect hardcoded passwords            │
+│  ✅ Fix before production = Zero cost              │
+└─────────────────────────────────────────────────────┘
+         ↑
+┌─────────────────────────────────────────────────────┐
+│  Development (Prevention Phase)                     │
+│  ✅ Secure coding practices                        │
+│  ✅ Code review                                    │
+│  ✅ Developer education on OWASP Top 10           │
+└─────────────────────────────────────────────────────┘
 
-         Container Code
-                ↓
-         Task Definition
-                ↓
-          Fargate (managed)
-                ↓
-         Automatic Scaling
-                ↓
-         Automatic Networking
+Best Practice: Shift left (catch issues early)
+Cost of fix in development: ~$100
+Cost of fix in testing: ~$1,000
+Cost of fix in production: ~$100,000+
 </code></pre></div>
-<h2 id="key-insight">Key Insight</h2>
-<p>Fargate is <strong>not cheaper</strong>, but it's <strong>simpler</strong>. Choose based on:
-- <strong>Use Fargate if:</strong> Unpredictable load, startup/shutdown quickly, don't need custom OS
-- <strong>Use EC2 if:</strong> Predictable baseline, always-on workloads, need full OS control</p>
-<h2 id="cost-model-deep-dive">Cost Model Deep Dive</h2>
-<h3 id="ec2-launch-type">EC2 Launch Type</h3>
-<div class="highlight"><pre><span></span><code>Fixed cost: m5.large instance = $0.096/hour = ~$70/month
-            (even if empty)
+<h2 id="owasp-top-10-2021">OWASP Top 10 (2021)</h2>
+<p>The <strong>Open Web Application Security Project</strong> identifies the 10 most critical security risks:</p>
+<h3 id="1-broken-access-control">1. Broken Access Control</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># ❌ VULNERABLE: No authorization check</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/admin/users/&lt;user_id&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;DELETE&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">delete_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>  <span class="c1"># Any authenticated user can delete anyone</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;deleted&quot;</span><span class="p">}</span>
 
-Variable: Depends on utilization
-          CPU + Memory allocated to tasks
+<span class="c1"># ✅ SECURE: Verify user has permission</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/admin/users/&lt;user_id&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;DELETE&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">delete_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_admin</span><span class="p">:</span>  <span class="c1"># Check permission</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Unauthorized&quot;</span><span class="p">},</span> <span class="mi">403</span>
 
-Example: Single m5.large instance
-- 2 vCPU, 8GB RAM
-- Run 1 task (2 vCPU, 4GB) = $70/month
-- Run 4 tasks (0.5 vCPU, 1GB each) = $70/month
-✅ Better for steady-state workloads
+    <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">user_id</span><span class="p">:</span>  <span class="c1"># Can&#39;t delete yourself</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Cannot delete self&quot;</span><span class="p">},</span> <span class="mi">400</span>
+
+    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;deleted&quot;</span><span class="p">}</span>
 </code></pre></div>
-<h3 id="fargate-launch-type">Fargate Launch Type</h3>
-<div class="highlight"><pre><span></span><code>No fixed cost—pay per task execution
+<h3 id="2-cryptographic-failures">2. Cryptographic Failures</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># ❌ VULNERABLE: Storing plaintext passwords</span>
+<span class="n">user</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span>  <span class="c1"># NEVER do this</span>
+<span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
 
-Pricing per task:
-= (GB-hours × $0.04746) + (vCPU-hours × $0.04556)
+<span class="c1"># ✅ SECURE: Hash passwords with salt</span>
+<span class="kn">from</span> <span class="nn">werkzeug.security</span> <span class="kn">import</span> <span class="n">generate_password_hash</span>
+<span class="n">user</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">generate_password_hash</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">])</span>
+<span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
 
-Example: 0.25 vCPU, 512MB RAM, 24/7
-= (730 hours × 0.512GB × $0.04746) + (730 × 0.25 × $0.04556)
-= $17.89 + $8.34 = $26.23/month
-
-✅ Better for bursty workloads
+<span class="c1"># ✅ ALSO SECURE: Use bcrypt</span>
+<span class="kn">import</span> <span class="nn">bcrypt</span>
+<span class="n">hashed</span> <span class="o">=</span> <span class="n">bcrypt</span><span class="o">.</span><span class="n">hashpw</span><span class="p">(</span><span class="n">password</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">bcrypt</span><span class="o">.</span><span class="n">gensalt</span><span class="p">())</span>
 </code></pre></div>
-<h2 id="when-not-to-use-fargate">When NOT to Use Fargate</h2>
-<div class="highlight"><pre><span></span><code>❌ GPU workloads (not available on Fargate)
-❌ Require &gt;4 vCPU (Fargate max) and high RAM
-❌ Need direct instance access (no SSH into Fargate)
-❌ Domain-specific hardware accelerators
-❌ Cost-sensitive always-on workloads (EC2 reserved instances cheaper)
+<h3 id="3-injection-sql-command-etc">3. Injection (SQL, Command, etc.)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># ❌ VULNERABLE: String concatenation (SQL injection)</span>
+<span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;SELECT * FROM users WHERE email = &#39;</span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>  <span class="c1"># If email = &quot;&#39;; DROP TABLE users; --&quot;</span>
+                             <span class="c1"># Entire table deleted!</span>
+
+<span class="c1"># ✅ SECURE: Use parameterized queries</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users WHERE email = ?&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">email</span><span class="p">,))</span>
+<span class="c1"># Database driver escapes email automatically</span>
 </code></pre></div>
-<h2 id="production-pattern-fargate-with-auto-scaling">Production Pattern: Fargate with Auto Scaling</h2>
-<div class="highlight"><pre><span></span><code><span class="c1"># Step 1: Create task definition (remember: CPU in 256 increments)</span>
-aws<span class="w"> </span>ecs<span class="w"> </span>register-task-definition<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--family<span class="w"> </span>web-api<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--requires-compatibilities<span class="w"> </span>FARGATE<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--network-mode<span class="w"> </span>awsvpc<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--cpu<span class="w"> </span><span class="m">512</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--memory<span class="w"> </span><span class="m">1024</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--container-definitions<span class="w"> </span><span class="s1">&#39;[{</span>
-<span class="s1">    &quot;name&quot;: &quot;api&quot;,</span>
-<span class="s1">    &quot;image&quot;: &quot;123456789.dkr.ecr.us-east-1.amazonaws.com/api:latest&quot;,</span>
-<span class="s1">    &quot;portMappings&quot;: [{&quot;containerPort&quot;: 8000}],</span>
-<span class="s1">    &quot;logConfiguration&quot;: {</span>
-<span class="s1">      &quot;logDriver&quot;: &quot;awslogs&quot;,</span>
-<span class="s1">      &quot;options&quot;: {</span>
-<span class="s1">        &quot;awslogs-group&quot;: &quot;/ecs/api&quot;,</span>
-<span class="s1">        &quot;awslogs-region&quot;: &quot;us-east-1&quot;,</span>
-<span class="s1">        &quot;awslogs-stream-prefix&quot;: &quot;ecs&quot;</span>
-<span class="s1">      }</span>
-<span class="s1">    }</span>
-<span class="s1">  }]&#39;</span>
+<h3 id="4-insecure-design">4. Insecure Design</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># ❌ VULNERABLE: Sending password in email for password reset</span>
+<span class="nt">Email body</span><span class="p">:</span>
+<span class="w">  </span><span class="s">&quot;Click</span><span class="nv"> </span><span class="s">here</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">reset</span><span class="nv"> </span><span class="s">password:</span><span class="nv"> </span><span class="s">reset.com/reset?token=mysecuretoken</span>
+<span class="w">   </span><span class="s">Your</span><span class="nv"> </span><span class="s">new</span><span class="nv"> </span><span class="s">password</span><span class="nv"> </span><span class="s">is:</span><span class="nv"> </span><span class="s">MyPassword123&quot;</span>
 
-<span class="c1"># Step 2: Create Fargate service</span>
-aws<span class="w"> </span>ecs<span class="w"> </span>create-service<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--cluster<span class="w"> </span>production<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--service-name<span class="w"> </span>api<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--task-definition<span class="w"> </span>web-api<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--desired-count<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--launch-type<span class="w"> </span>FARGATE<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--network-configuration<span class="w"> </span><span class="s2">&quot;awsvpcConfiguration={subnets=[subnet-1,subnet-2],securityGroups=[sg-fargate],assignPublicIp=DISABLED}&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--load-balancers<span class="w"> </span><span class="s2">&quot;targetGroupArn=arn:aws:elasticloadbalancing:...,containerName=api,containerPort=8000&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--service-registries<span class="w"> </span><span class="s2">&quot;registryArn=arn:aws:servicediscovery:...&quot;</span>
+<span class="c1"># ✅ SECURE: Send temporary reset link, user sets own password</span>
+<span class="nt">Email body</span><span class="p">:</span>
+<span class="w">  </span><span class="s">&quot;Click</span><span class="nv"> </span><span class="s">here</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">reset</span><span class="nv"> </span><span class="s">password:</span><span class="nv"> </span><span class="s">reset.com/reset?token=&lt;random_32_bytes&gt;</span>
+<span class="w">  </span><span class="s">Token</span><span class="nv"> </span><span class="s">expires</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">hour&quot;</span>
 
-<span class="c1"># Step 3: Set up auto scaling policy</span>
-aws<span class="w"> </span>application-autoscaling<span class="w"> </span>register-scalable-target<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--service-namespace<span class="w"> </span>ecs<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--resource-id<span class="w"> </span>service/production/api<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--scalable-dimension<span class="w"> </span>ecs:service:DesiredCount<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--min-capacity<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--max-capacity<span class="w"> </span><span class="m">20</span>
-
-<span class="c1"># CPU-based scaling</span>
-aws<span class="w"> </span>application-autoscaling<span class="w"> </span>put-scaling-policy<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--policy-name<span class="w"> </span>cpu-scaling<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--service-namespace<span class="w"> </span>ecs<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--resource-id<span class="w"> </span>service/production/api<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--scalable-dimension<span class="w"> </span>ecs:service:DesiredCount<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--policy-type<span class="w"> </span>TargetTrackingScaling<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--target-tracking-scaling-policy-configuration<span class="w"> </span><span class="s2">&quot;TargetValue=70,PredefinedMetricSpecification={PredefinedMetricType=ECSServiceAverageCPUUtilization},ScaleOutCooldown=60,ScaleInCooldown=300&quot;</span>
-
-<span class="c1"># Memory-based scaling</span>
-aws<span class="w"> </span>application-autoscaling<span class="w"> </span>put-scaling-policy<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--policy-name<span class="w"> </span>memory-scaling<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--service-namespace<span class="w"> </span>ecs<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--resource-id<span class="w"> </span>service/production/api<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--scalable-dimension<span class="w"> </span>ecs:service:DesiredCount<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--policy-type<span class="w"> </span>TargetTrackingScaling<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--target-tracking-scaling-policy-configuration<span class="w"> </span><span class="s2">&quot;TargetValue=80,PredefinedMetricSpecification={PredefinedMetricType=ECSServiceAverageMemoryUtilization},ScaleOutCooldown=60,ScaleInCooldown=300&quot;</span>
-
-<span class="c1"># Step 4: Monitor</span>
-aws<span class="w"> </span>cloudwatch<span class="w"> </span>get-metric-statistics<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--namespace<span class="w"> </span>AWS/ECS<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--metric-name<span class="w"> </span>CPUUtilization<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--dimensions<span class="w"> </span><span class="nv">Name</span><span class="o">=</span>ServiceName,Value<span class="o">=</span>api<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--start-time<span class="w"> </span><span class="m">2025</span>-01-06T00:00:00Z<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--end-time<span class="w"> </span><span class="m">2025</span>-01-06T23:59:59Z<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--period<span class="w"> </span><span class="m">300</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--statistics<span class="w"> </span>Average,Maximum
+<span class="l l-Scalar l-Scalar-Plain">User enters new password through HTTPS form</span>
 </code></pre></div>
-<h2 id="networking-in-fargate">Networking in Fargate</h2>
-<p>Fargate requires <strong>awsvpc network mode</strong>:</p>
-<div class="highlight"><pre><span></span><code>Each task gets its own ENI (Elastic Network Interface)
-with its own IP address, security group, network rules
+<h3 id="5-broken-authentication">5. Broken Authentication</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># ❌ VULNERABLE: Weak session handling</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">login</span><span class="p">():</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span>
 
-┌────────────────────────┐
-│  VPC (10.0.0.0/16)     │
-│  ┌──────────────────┐  │
-│  │  Public Subnet   │  │
-│  │  10.0.1.0/24     │  │
-│  │                  │  │
-│  │  Task 1: ENI     │  │
-│  │  Task 2: ENI     │  │
-│  │  Task 3: ENI     │  │
-│  └──────────────────┘  │
-│  ┌──────────────────┐  │
-│  │  Private Subnet  │  │
-│  │  10.0.2.0/24     │  │
-│  │  (RDS, cache)    │  │
-│  └──────────────────┘  │
-└────────────────────────┘
+    <span class="c1"># Session ID = user ID (predictable)</span>
+    <span class="n">session</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>  <span class="c1"># Can guess next user&#39;s session</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;logged in&quot;</span><span class="p">}</span>
+
+<span class="c1"># ✅ SECURE: Random, long session tokens</span>
+<span class="kn">import</span> <span class="nn">secrets</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">login</span><span class="p">():</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span>
+
+    <span class="c1"># Session token is cryptographically random</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="n">secrets</span><span class="o">.</span><span class="n">token_urlsafe</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>  <span class="c1"># 256-bit random</span>
+    <span class="n">session</span><span class="p">[</span><span class="s1">&#39;token&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">token</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;token&quot;</span><span class="p">:</span> <span class="n">token</span><span class="p">}</span>
 </code></pre></div>
-<p><strong>Best practice:</strong> Run tasks in private subnets, use NAT gateway for outbound traffic</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Security group for Fargate tasks</span>
-aws<span class="w"> </span>ec2<span class="w"> </span>create-security-group<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--group-name<span class="w"> </span>fargate-tasks<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--description<span class="w"> </span><span class="s2">&quot;Fargate task security group&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--vpc-id<span class="w"> </span>vpc-12345
+<h3 id="6-10-other-top-vulnerabilities">6-10: Other Top Vulnerabilities</h3>
+<ul>
+<li><strong>6. Vulnerable &amp; Outdated Components</strong> - Use outdated libraries with known CVEs</li>
+<li><strong>7. Authentication &amp; Session Mgmt</strong> - Session fixation, weak password reset</li>
+<li><strong>8. Software &amp; Data Integrity Failures</strong> - Unsigned updates, untrusted CI/CD</li>
+<li><strong>9. Logging &amp; Monitoring Failures</strong> - Insufficient logging of security events</li>
+<li><strong>10. Server-Side Request Forgery (SSRF)</strong> - App fetches attacker-controlled URL</li>
+</ul>
+<h2 id="dependency-scanning-sca">Dependency Scanning (SCA)</h2>
+<h3 id="what-is-sca">What is SCA?</h3>
+<p><strong>Software Composition Analysis</strong> scans your dependencies for known vulnerabilities.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Example: Your app uses lodash 4.15.0</span>
+<span class="c1"># CVE-2021-23337: Remote code execution in lodash</span>
 
-<span class="c1"># Allow inbound from ALB</span>
-aws<span class="w"> </span>ec2<span class="w"> </span>authorize-security-group-ingress<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--group-id<span class="w"> </span>sg-fargate<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--protocol<span class="w"> </span>tcp<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--port<span class="w"> </span><span class="m">8000</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--source-security-group-id<span class="w"> </span>sg-alb
-
-<span class="c1"># Allow outbound to RDS</span>
-aws<span class="w"> </span>ec2<span class="w"> </span>authorize-security-group-egress<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--group-id<span class="w"> </span>sg-fargate<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--protocol<span class="w"> </span>tcp<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--port<span class="w"> </span><span class="m">5432</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--destination-security-group-id<span class="w"> </span>sg-rds
+<span class="c1"># Tools find this automatically:</span>
+npm<span class="w"> </span>audit
+pip<span class="w"> </span>install<span class="w"> </span>pip-audit<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pip-audit
+cargo<span class="w"> </span>audit
 </code></pre></div>
-<h2 id="logging-in-fargate">Logging in Fargate</h2>
-<p>Fargate automatically sends logs to CloudWatch:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Your code just prints to stdout</span>
-<span class="kn">import</span> <span class="nn">logging</span>
+<h3 id="snyk-comprehensive-dependency-scanner">Snyk: Comprehensive Dependency Scanner</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install Snyk</span>
+npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>snyk
 
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="c1"># Test dependencies for known vulnerabilities</span>
+snyk<span class="w"> </span><span class="nb">test</span>
 
-<span class="k">def</span> <span class="nf">handler</span><span class="p">():</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting processing...&quot;</span><span class="p">)</span>  <span class="c1"># Goes to CloudWatch</span>
-    <span class="n">process_data</span><span class="p">()</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Complete&quot;</span><span class="p">)</span>
+<span class="c1"># Example output:</span>
+<span class="c1"># ✗ High severity vulnerability found in lodash</span>
+<span class="c1">#   Affected versions: &lt; 4.17.21</span>
+<span class="c1">#   Currently installed: 4.15.0</span>
+<span class="c1">#   Fix available: 4.17.21</span>
+<span class="c1">#   Action: npm install lodash@4.17.21</span>
 
-<span class="c1"># CloudWatch log group: /ecs/{task-family}</span>
-<span class="c1"># CloudWatch log stream: {task-family}/{task-id}</span>
+<span class="c1"># Fix automatically (where possible)</span>
+snyk<span class="w"> </span>fix
+</code></pre></div>
+<h3 id="trivy-container-image-scanning">Trivy: Container Image Scanning</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Scan Docker image for vulnerabilities</span>
+trivy<span class="w"> </span>image<span class="w"> </span>myapp:1.0
+
+<span class="c1"># Output:</span>
+<span class="c1"># myapp:1.0 (debian 11.1)</span>
+<span class="c1"># </span>
+<span class="c1"># Total: 45 vulnerabilities</span>
+<span class="c1"># CRITICAL: 5</span>
+<span class="c1"># HIGH: 12</span>
+<span class="c1"># MEDIUM: 28</span>
+<span class="c1"># </span>
+<span class="c1"># libc (2.31-13+deb11u1)</span>
+<span class="c1"># ID             DESCRIPTION          SEVERITY</span>
+<span class="c1"># CVE-2021-3999  Buffer overflow       CRITICAL</span>
+<span class="c1"># ...</span>
+</code></pre></div>
+<h2 id="sast-static-application-security-testing">SAST: Static Application Security Testing</h2>
+<p>Find vulnerabilities without running code:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># SonarQube: Scan code for security issues</span>
+sonar-scanner<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-Dsonar.projectKey<span class="o">=</span>myapp<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-Dsonar.sources<span class="o">=</span>src<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-Dsonar.host.url<span class="o">=</span>http://sonarqube:9000
+
+<span class="c1"># Output categories:</span>
+<span class="c1"># - Security Hotspots: Code that needs review</span>
+<span class="c1"># - Vulnerabilities: Known insecure patterns</span>
+<span class="c1"># - Code Smells: Poor practices (not security)</span>
+</code></pre></div>
+<h2 id="secrets-detection">Secrets Detection</h2>
+<p>Never commit passwords, API keys, or tokens to Git:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># TruffleHog: Scan for secrets in repo</span>
+pip<span class="w"> </span>install<span class="w"> </span>truffleHog
+truffleHog<span class="w"> </span>filesystem<span class="w"> </span>.<span class="w"> </span>--json
+
+<span class="c1"># gitguardian: Pre-commit hook for secrets</span>
+pip<span class="w"> </span>install<span class="w"> </span>detect-secrets
+detect-secrets<span class="w"> </span>scan
+
+<span class="c1"># Found secrets:</span>
+<span class="c1"># .env:DB_PASSWORD=supersecret123</span>
+<span class="c1"># config.yaml:aws_access_key_id=AKIA...</span>
+</code></pre></div>
+<h2 id="hands-on-secure-development-pipeline">Hands-On: Secure Development Pipeline</h2>
+<h3 id="step-1-setup-sast-scanning">Step 1: Setup SAST Scanning</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create sample vulnerable app</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span>app.py<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">from flask import Flask, request</span>
+<span class="s">app = Flask(__name__)</span>
+
+<span class="s">@app.route(&#39;/search&#39;)</span>
+<span class="s">def search():</span>
+<span class="s">    # SQL injection vulnerability</span>
+<span class="s">    query = f&quot;SELECT * FROM users WHERE name = &#39;{request.args.get(&#39;q&#39;)}&#39;&quot;</span>
+<span class="s">    return query</span>
+
+<span class="s">@app.route(&#39;/login&#39;, methods=[&#39;POST&#39;])</span>
+<span class="s">def login():</span>
+<span class="s">    # Hardcoded API key</span>
+<span class="s">    api_key = &quot;sk-1234567890abcdef&quot;</span>
+<span class="s">    # Weak password</span>
+<span class="s">    password = request.json[&#39;password&#39;]</span>
+<span class="s">    if len(password) &lt; 4:  # Should be 12+</span>
+<span class="s">        return &quot;Password too short&quot;</span>
+<span class="s">    return &quot;OK&quot;</span>
+<span class="s">EOF</span>
+
+<span class="c1"># Scan with Bandit (SAST for Python)</span>
+pip<span class="w"> </span>install<span class="w"> </span>bandit
+bandit<span class="w"> </span>app.py
+
+<span class="c1"># Output:</span>
+<span class="c1"># B608: hardcoded_sql_string</span>
+<span class="c1">#   Line 7: Potential SQL injection</span>
+<span class="c1">#</span>
+<span class="c1"># B105: hardcoded_password_string</span>
+<span class="c1">#   Line 11: Hardcoded password API key</span>
+</code></pre></div>
+<h3 id="step-2-dependency-scanning">Step 2: Dependency Scanning</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create requirements with vulnerable library</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span>requirements.txt<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">Flask==2.0.0</span>
+<span class="s">requests==2.20.0  # CVE-2018-18074</span>
+<span class="s">EOF</span>
+
+<span class="c1"># Scan dependencies</span>
+pip<span class="w"> </span>install<span class="w"> </span>pip-audit
+pip-audit
+
+<span class="c1"># Output:</span>
+<span class="c1"># Found 1 known vulnerability in 1 package:</span>
+<span class="c1"># requests [2.20.0]</span>
+<span class="c1"># Vulnerability ID: GHSA-r9hx-8q95-8chw</span>
+<span class="c1"># Description: Unintended leak of Proxy-Authorization header</span>
+</code></pre></div>
+<h3 id="step-3-container-image-scanning">Step 3: Container Image Scanning</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Build vulnerable image</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span>Dockerfile<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">FROM ubuntu:18.04</span>
+<span class="s">RUN apt-get update &amp;&amp; apt-get install -y openssl=1.1.0g-2ubuntu4.1</span>
+<span class="s">COPY app.py /app/</span>
+<span class="s">CMD [&quot;python&quot;, &quot;app.py&quot;]</span>
+<span class="s">EOF</span>
+
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:1.0<span class="w"> </span>.
+
+<span class="c1"># Scan image</span>
+trivy<span class="w"> </span>image<span class="w"> </span>myapp:1.0
+
+<span class="c1"># Output shows vulnerable openssl version</span>
 </code></pre></div>
 <h2 id="common-mistakes">Common Mistakes</h2>
-<p><strong>Mistake 1: Wrong CPU/memory combination</strong>
-<div class="highlight"><pre><span></span><code><span class="c1"># ❌ WRONG: Invalid combination (CPU must be 256, 512, 1024, 2048, 4096)</span>
-aws<span class="w"> </span>ecs<span class="w"> </span>register-task-definition<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--cpu<span class="w"> </span><span class="m">500</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--memory<span class="w"> </span><span class="m">512</span>
+<p><strong>Mistake 1: Scanning only in pre-production</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># ❌ WRONG: Scan once before deploy</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy to staging</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run security scan</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">If issues found, fix and redeploy (delays release)</span>
 
-<span class="c1"># ✅ RIGHT: Valid combinations</span>
-CPU<span class="w"> </span><span class="m">256</span>:<span class="w">  </span>512MB,<span class="w"> </span>1GB,<span class="w"> </span>2GB
-CPU<span class="w"> </span><span class="m">512</span>:<span class="w">  </span>1GB,<span class="w"> </span>2GB,<span class="w"> </span>3GB,<span class="w"> </span>4GB
-CPU<span class="w"> </span><span class="m">1024</span>:<span class="w"> </span>2GB-8GB<span class="w"> </span><span class="o">(</span><span class="k">in</span><span class="w"> </span>1GB<span class="w"> </span>increments<span class="o">)</span>
-CPU<span class="w"> </span><span class="m">2048</span>:<span class="w"> </span>4GB-16GB<span class="w"> </span><span class="o">(</span><span class="k">in</span><span class="w"> </span>1GB<span class="w"> </span>increments<span class="o">)</span>
+<span class="c1"># ✅ RIGHT: Scan early and often</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Developer commits code</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CI/CD runs SAST scan (unit test equivalent)</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Auto-scan dependencies in build</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Merge only if scan passes</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Scan production images weekly</span>
 </code></pre></div></p>
-<p><strong>Mistake 2: Tasks in public subnet with public IP</strong>
-<div class="highlight"><pre><span></span><code><span class="c1"># ❌ WRONG: Directly exposed to internet</span>
-aws<span class="w"> </span>ecs<span class="w"> </span>create-service<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--network-configuration<span class="w"> </span><span class="s2">&quot;awsvpcConfiguration={subnets=[public-subnet],assignPublicIp=ENABLED}&quot;</span>
+<p><strong>Mistake 2: Ignoring low-severity findings</strong>
+<div class="highlight"><pre><span></span><code># ❌ WRONG: &quot;It&#39;s just low severity, ignore it&quot;
+# Low severity vulnerability in dependency
+# → Attacker uses it with other low-severity vulns
+# → Combined impact becomes critical
 
-<span class="c1"># ✅ RIGHT: Private subnet, behind ALB</span>
-aws<span class="w"> </span>ecs<span class="w"> </span>create-service<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--network-configuration<span class="w"> </span><span class="s2">&quot;awsvpcConfiguration={subnets=[private-subnet],securityGroups=[sg-fargate],assignPublicIp=DISABLED}&quot;</span>
+# ✅ RIGHT: Fix low-severity issues
+# Maintain zero-known-vulnerability posture
+# Update dependencies regularly
 </code></pre></div></p>
-<p><strong>Mistake 3: No health check defined</strong>
-<div class="highlight"><pre><span></span><code><span class="c1"># ❌ WRONG: ALB doesn&#39;t know if task is healthy</span>
-aws<span class="w"> </span>ecs<span class="w"> </span>create-service<span class="w"> </span>--service-name<span class="w"> </span>api<span class="w"> </span>--load-balancers<span class="w"> </span>...
+<p><strong>Mistake 3: Storing secrets in .env files</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># ❌ WRONG:</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span>.env<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">DATABASE_PASSWORD=supersecret123</span>
+<span class="s">AWS_ACCESS_KEY=AKIA...</span>
+<span class="s">SLACK_WEBHOOK=https://hooks.slack.com/...</span>
+<span class="s">EOF</span>
 
-<span class="c1"># ✅ RIGHT: Define health check path</span>
-aws<span class="w"> </span>elbv2<span class="w"> </span>modify-target-group<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--target-group-arn<span class="w"> </span>arn:...<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--health-check-path<span class="w"> </span>/health<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--health-check-interval-seconds<span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--health-check-timeout-seconds<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--healthy-threshold-count<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--unhealthy-threshold-count<span class="w"> </span><span class="m">3</span>
+git<span class="w"> </span>add<span class="w"> </span>.env<span class="w">  </span><span class="c1"># Accidentally committed!</span>
+git<span class="w"> </span>push<span class="w">      </span><span class="c1"># Secret exposed to all developers</span>
+
+<span class="c1"># ✅ RIGHT: Use secrets manager</span>
+<span class="c1"># .env.example shows structure only</span>
+<span class="nv">DATABASE_PASSWORD</span><span class="o">=</span>***CHANGE_ME***
+
+<span class="c1"># Actual secrets in:</span>
+<span class="c1"># - AWS Secrets Manager</span>
+<span class="c1"># - HashiCorp Vault</span>
+<span class="c1"># - Kubernetes Secrets</span>
+<span class="c1"># - GitHub Secrets</span>
 </code></pre></div></p>
-<p><strong>Mistake 4: Scaling on wrong metric</strong>
-<div class="highlight"><pre><span></span><code><span class="c1"># ❌ WRONG: Scale on CPU when memory is bottleneck</span>
-aws<span class="w"> </span>application-autoscaling<span class="w"> </span>put-scaling-policy<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--target-tracking-scaling-policy-configuration<span class="w"> </span><span class="s2">&quot;{PredefinedMetricSpecification={PredefinedMetricType=ECSServiceAverageCPUUtilization},TargetValue=70}&quot;</span>
+<p><strong>Mistake 4: No process for vulnerability remediation</strong>
+<div class="highlight"><pre><span></span><code># ❌ WRONG:
+# Scan finds CVE
+# Alert sent to team
+# No clear owner, no timeline, no follow-up
+# CVE never fixed
 
-<span class="c1"># ✅ RIGHT: Monitor both, scale on the actual bottleneck</span>
-<span class="c1"># Use CloudWatch metrics to identify: Is it CPU or memory?</span>
-<span class="c1"># Scale on whichever hits limit first</span>
+# ✅ RIGHT: Clear process
+# SLA for remediation by severity:
+# - CRITICAL: 24 hours
+# - HIGH: 7 days
+# - MEDIUM: 30 days
+# - LOW: 90 days
+# 
+# Tracked in issue tracker
+# Escalate if SLA approaching
 </code></pre></div></p>
-<p><strong>Mistake 5: No resource requests in ECS service</strong>
-<div class="highlight"><pre><span></span><code><span class="c1"># ❌ WRONG: No constraints on task resource requirements</span>
-aws<span class="w"> </span>ecs<span class="w"> </span>register-task-definition<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--container-definitions<span class="w"> </span><span class="s1">&#39;[{&quot;name&quot;:&quot;app&quot;,&quot;image&quot;:&quot;app:latest&quot;}]&#39;</span>
+<p><strong>Mistake 5: Cargo cult scanning (tools without context)</strong>
+<div class="highlight"><pre><span></span><code># ❌ WRONG:
+# Run 5 different SAST tools
+# False positive rate: 80%
+# Team ignores all alerts (alert fatigue)
+# Real vulnerability missed
 
-<span class="c1"># ✅ RIGHT: Explicit resource requests</span>
-aws<span class="w"> </span>ecs<span class="w"> </span>register-task-definition<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--cpu<span class="w"> </span><span class="m">512</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--memory<span class="w"> </span><span class="m">1024</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--container-definitions<span class="w"> </span><span class="s1">&#39;[{&quot;name&quot;:&quot;app&quot;,&quot;image&quot;:&quot;app:latest&quot;,&quot;memory&quot;:1024}]&#39;</span>
+# ✅ RIGHT: Curated tool selection
+# Choose 1-2 tools per language
+# Configure to reduce false positives
+# Team reviews alerts actively
+# Actually fix issues
 </code></pre></div></p>
 <h2 id="production-incident-scenario">Production Incident Scenario</h2>
-<h3 id="scenario-fargate-tasks-failing-after-scaling-up">Scenario: "Fargate tasks failing after scaling up"</h3>
+<h3 id="scenario-we-deployed-code-with-hardcoded-api-key-attacker-accessed-our-cloud-account">Scenario: "We deployed code with hardcoded API key; attacker accessed our cloud account"</h3>
 <p><strong>Symptoms:</strong>
-- Service scaled from 3 to 20 tasks
-- New tasks stuck in "PROVISIONING" state
-- After 1 minute, status changes to "STOPPED"
-- CloudWatch logs: "InsufficientMemory"</p>
+- Unauthorized API calls from random IPs
+- Cloud provider disabled suspicious access key
+- Credentials found in public GitHub repo</p>
 <p><strong>Investigation:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="c1"># 1. Check task status</span>
-aws<span class="w"> </span>ecs<span class="w"> </span>describe-tasks<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--cluster<span class="w"> </span>production<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--tasks<span class="w"> </span>arn:aws:ecs:...<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>lastStatus
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Find when secret was committed</span>
+git<span class="w"> </span>log<span class="w"> </span>--all<span class="w"> </span>--full-history<span class="w"> </span>--<span class="w"> </span>config.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-5
+<span class="c1"># Found commit from 3 weeks ago</span>
 
-<span class="c1"># Result: &quot;STOPPED&quot; with stopCode: &quot;InsufficientMemory&quot;</span>
+<span class="c1"># 2. Check all branches</span>
+git<span class="w"> </span>log<span class="w"> </span>--all<span class="w"> </span>--oneline<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>secret
+<span class="c1"># 5 commits with &quot;secret&quot; or &quot;credentials&quot; in message</span>
 
-<span class="c1"># 2. Check subnet IP availability</span>
-aws<span class="w"> </span>ec2<span class="w"> </span>describe-subnets<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--subnet-ids<span class="w"> </span>subnet-1<span class="w"> </span>subnet-2<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--query<span class="w"> </span><span class="s1">&#39;Subnets[].{Subnet:SubnetId,AvailableIPs:AvailableIpAddressCount}&#39;</span>
+<span class="c1"># 3. Check git history for secrets</span>
+gitleaks<span class="w"> </span>detect<span class="w"> </span>--report-path<span class="w"> </span>vulns.json
+<span class="c1"># Found AWS_SECRET_ACCESS_KEY in commit abc123d</span>
 
-<span class="c1"># Result: subnet-1 has 0 available IPs!</span>
-<span class="c1"># Each Fargate task needs an IP address</span>
+<span class="c1"># 4. Determine blast radius</span>
+<span class="c1"># When was secret first exposed?</span>
+<span class="c1"># Who has access to repo?</span>
+<span class="c1"># What did attacker do with credentials?</span>
 </code></pre></div>
-<p><strong>Root Cause:</strong> Subnets ran out of IP addresses. With 20 tasks × 3 subnets, needed 60 IPs, but subnets only had /28 (16 IPs).</p>
+<p><strong>Root Cause:</strong>
+- No pre-commit hook to detect secrets
+- Code review didn't catch hardcoded key
+- No automated secret scanning in CI/CD
+- Secret remained in history even after deletion</p>
 <p><strong>Solution:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="c1"># 1. Expand subnet CIDR (requires recreating subnet - disruptive)</span>
-<span class="c1"># Better: Expand VPC CIDR and add more subnets</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Rotate the exposed key immediately</span>
+aws<span class="w"> </span>iam<span class="w"> </span>delete-access-key<span class="w"> </span>--access-key-id<span class="w"> </span>AKIA...
 
-<span class="c1"># 2. Temporarily scale down</span>
-aws<span class="w"> </span>ecs<span class="w"> </span>update-service<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--cluster<span class="w"> </span>production<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--service<span class="w"> </span>api<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--desired-count<span class="w"> </span><span class="m">10</span>
+<span class="c1"># 2. Install pre-commit secret detection</span>
+pip<span class="w"> </span>install<span class="w"> </span>detect-secrets
+detect-secrets<span class="w"> </span>install-hook<span class="w"> </span>.git/hooks/pre-commit
 
-<span class="c1"># 3. Create larger subnet</span>
-aws<span class="w"> </span>ec2<span class="w"> </span>create-subnet<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--vpc-id<span class="w"> </span>vpc-12345<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--cidr-block<span class="w"> </span><span class="m">10</span>.0.4.0/24<span class="w">  </span><span class="c1"># /24 = 256 IPs</span>
+<span class="c1"># 3. Add CI/CD scanning</span>
+<span class="c1"># In pipeline:</span>
+-<span class="w"> </span>truffleHog<span class="w"> </span>filesystem<span class="w"> </span>.<span class="w"> </span>--fail<span class="w">  </span><span class="c1"># Fail if secrets found</span>
+-<span class="w"> </span>bandit<span class="w"> </span>-r<span class="w"> </span>src/<span class="w">  </span><span class="c1"># Code security scan</span>
+-<span class="w"> </span>snyk<span class="w"> </span><span class="nb">test</span><span class="w">  </span><span class="c1"># Dependency scanning</span>
 
-<span class="c1"># 4. Add to ECS task placement</span>
-aws<span class="w"> </span>ecs<span class="w"> </span>update-service<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--cluster<span class="w"> </span>production<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--service<span class="w"> </span>api<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--network-configuration<span class="w"> </span><span class="s2">&quot;awsvpcConfiguration={subnets=[subnet-1,subnet-2,subnet-3,subnet-new]}&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--desired-count<span class="w"> </span><span class="m">20</span>
+<span class="c1"># 4. Remove from git history (if not public repo)</span>
+<span class="c1"># ⚠️ WARNING: This is complex, use carefully</span>
+git<span class="w"> </span>filter-branch<span class="w"> </span>--tree-filter<span class="w"> </span><span class="s1">&#39;rm -f .env&#39;</span><span class="w"> </span>--prune-empty
 
-<span class="c1"># 5. Monitor</span>
-aws<span class="w"> </span>ecs<span class="w"> </span>describe-services<span class="w"> </span>--cluster<span class="w"> </span>production<span class="w"> </span>--services<span class="w"> </span>api
+<span class="c1"># 5. Education: Train developers on secret management</span>
 </code></pre></div>
 <p><strong>Prevention:</strong>
-- Plan IP address space before scaling
-- Use /24 subnets (256 IPs) for production
-- Monitor available IPs in CloudWatch
-- Calculate: max_tasks × 1 IP/task ≤ available IPs</p>
+- Pre-commit hooks detect secrets before commit
+- CI/CD pipeline scans every merge request
+- Automated secret rotation
+- Regular audits of repository history</p>
 <h2 id="practice-questions">Practice Questions</h2>
 <ol>
-<li><strong>Cost calculation:</strong> 100 always-on Fargate tasks at 512 CPU, 1GB RAM. Monthly cost?</li>
-<li>Each task: (730 × 1GB × $0.04746) + (730 × 0.5 vCPU × $0.04556) = $51.88/month</li>
+<li><strong>Scenario:</strong> Your team uses lodash 4.15.0 with CVE-2021-23337 (RCE). Attacker can execute code. What should you do?</li>
 <li>
-<p>100 tasks = $5,188/month</p>
+<p>Answer: Update lodash immediately (4.17.21+). Run snyk fix. Verify no other vulnerable versions elsewhere.</p>
 </li>
 <li>
-<p><strong>Comparison:</strong> Same 100 tasks on 50 × m5.large instances (2 vCPU, 8GB each).</p>
-</li>
-<li>Instance cost: 50 × $0.096/hour × 730 = $3,504/month</li>
-<li>
-<p>Fargate is more expensive for steady workloads!</p>
+<p><strong>Question:</strong> Should secrets (passwords, keys) be stored in environment variables?</p>
 </li>
 <li>
-<p><strong>Networking:</strong> Why run Fargate tasks in private subnets?</p>
+<p>Answer: Better than hardcoded, but best practice is secrets manager (Vault, AWS Secrets, K8s Secrets). Env vars visible in docker history, process listings.</p>
 </li>
-<li>Security isolation, no direct internet exposure, use NAT for outbound</li>
+<li>
+<p><strong>Decision:</strong> Your SAST scanner found 500 security hotspots. What should you do?</p>
+</li>
+<li>
+<p>Answer: Configure tool to reduce false positives. Prioritize HIGH/CRITICAL. Create backlog for MEDIUM/LOW. Don't ignore all alerts (alert fatigue).</p>
+</li>
+<li>
+<p><strong>Comparison:</strong> SAST vs SCA vs DAST?</p>
+</li>
+<li>SAST (Static): Code analysis, finds logical flaws - runs on source code</li>
+<li>SCA (Software Composition): Dependency scanning - finds known CVEs</li>
+<li>DAST (Dynamic): Runtime testing, finds auth/injection issues - requires running app</li>
 </ol>
 <h2 id="further-reading">Further Reading</h2>
 <ul>
-<li><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html">Fargate best practices</a></li>
-<li><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html">Fargate networking deep dive</a></li>
-<li><a href="https://aws.amazon.com/blogs/compute/optimizing-fargate-costs/">Cost optimization guide</a></li>
+<li><a href="https://owasp.org/www-project-top-ten/">OWASP Top 10</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/">OWASP Secure Coding Practices</a></li>
+<li><a href="https://docs.snyk.io/">Snyk Documentation</a></li>
+<li><a href="https://bandit.readthedocs.io/">Bandit for Python Security</a></li>
+<li><a href="https://csrc.nist.gov/publications/detail/sp/800-218/final">NIST Secure Software Development Framework</a></li>
 </ul>
 <hr />
-<p><strong>Next:</strong> These three advanced AWS modules give you the depth to handle enterprise container workloads.</p>
+<p><strong>Next:</strong> Learn to secure the infrastructure where your applications run—<a href="../02-infrastructure-security/">Infrastructure Security</a></p>
 
 
 
@@ -6172,7 +6688,7 @@ aws<span class="w"> </span>ecs<span class="w"> </span>describe-services<span cla
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../12-advanced-lambda/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 12 Advanced Lambda" rel="prev">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview" rel="prev">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -6182,20 +6698,20 @@ aws<span class="w"> </span>ecs<span class="w"> </span>describe-services<span cla
                 Previous
               </span>
               <div class="md-ellipsis">
-                12 Advanced Lambda
+                Overview
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../../modern-devops-patterns-tutorial/" class="md-footer__link md-footer__link--next" aria-label="Next: Overview" rel="next">
+          <a href="../02-infrastructure-security/" class="md-footer__link md-footer__link--next" aria-label="Next: 02 Infrastructure Security" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Overview
+                02 Infrastructure Security
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -6262,10 +6778,10 @@ aws<span class="w"> </span>ecs<span class="w"> </span>describe-services<span cla
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "navigation.footer", "navigation.tracking", "navigation.indexes", "navigation.pruned", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tooltips", "content.tabs.link", "toc.follow"], "search": "../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "navigation.footer", "navigation.tracking", "navigation.indexes", "navigation.pruned", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tooltips", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.4e0fa4ba.min.js"></script>
+      <script src="../../assets/javascripts/bundle.4e0fa4ba.min.js"></script>
       
     
   </body>

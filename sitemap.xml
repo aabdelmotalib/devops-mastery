@@ -16,6 +16,31 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/aws-essentials-tutorial/11-advanced-ecs/</loc>
+         <lastmod>2026-01-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/aws-essentials-tutorial/12-advanced-lambda/</loc>
+         <lastmod>2026-01-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/aws-essentials-tutorial/13-advanced-fargate/</loc>
+         <lastmod>2026-01-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/aws-essentials-tutorial/14-terraform-deep-dive/</loc>
+         <lastmod>2026-01-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/aws-essentials-tutorial/15-ansible-deep-dive/</loc>
+         <lastmod>2026-01-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://aabdelmotalib.github.io/devops-mastery/aws-essentials-tutorial/COMPLETION_REPORT/</loc>
          <lastmod>2026-01-06</lastmod>
          <changefreq>daily</changefreq>
@@ -92,21 +117,6 @@
     </url>
     <url>
          <loc>https://aabdelmotalib.github.io/devops-mastery/aws-essentials-tutorial/docs/10-advanced-services/</loc>
-         <lastmod>2026-01-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://aabdelmotalib.github.io/devops-mastery/aws-essentials-tutorial/docs-advanced/11-advanced-ecs/</loc>
-         <lastmod>2026-01-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://aabdelmotalib.github.io/devops-mastery/aws-essentials-tutorial/docs-advanced/12-advanced-lambda/</loc>
-         <lastmod>2026-01-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://aabdelmotalib.github.io/devops-mastery/aws-essentials-tutorial/docs-advanced/13-advanced-fargate/</loc>
          <lastmod>2026-01-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -862,6 +872,36 @@
     </url>
     <url>
          <loc>https://aabdelmotalib.github.io/devops-mastery/programming-fundamentals-with-ai/docs/06-practical-examples/</loc>
+         <lastmod>2026-01-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/security-essentials-tutorial/</loc>
+         <lastmod>2026-01-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/security-essentials-tutorial/01-application-security-fundamentals/</loc>
+         <lastmod>2026-01-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/security-essentials-tutorial/02-infrastructure-security/</loc>
+         <lastmod>2026-01-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/security-essentials-tutorial/03-supply-chain-security/</loc>
+         <lastmod>2026-01-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/security-essentials-tutorial/04-compliance-audit/</loc>
+         <lastmod>2026-01-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/security-essentials-tutorial/05-incident-response/</loc>
          <lastmod>2026-01-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
