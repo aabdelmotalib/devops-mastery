@@ -11,13 +11,25 @@ A comprehensive, production-oriented Flask backend tutorial designed for junior 
 ## Prerequisites
 
 - Python 3.11+ installed
-- Basic understanding of HTTP and REST APIs
 - Familiarity with command line (Linux environment)
-- Basic SQL knowledge
+
+**Note**: Don't worry if you're new to Python! Start with **Module 0** for a complete introduction.
 
 ## Tutorial Structure
 
-This tutorial consists of 10 progressive modules, each building upon the previous:
+This tutorial consists of 11 progressive modules, each building upon the previous:
+
+### Pre-Module (Foundation)
+
+**[Module 0: Prerequisites & Coding Basics](docs/00-prerequisites-and-basics.md)**
+- Python fundamentals (variables, functions, classes)
+- Control flow and loops
+- Working with collections (lists, dictionaries)
+- Understanding the web (HTTP, REST, JSON)
+- First Python program
+- Introduction to Flask
+
+**Start here if you're new to Python or web development!**
 
 ### Core Modules
 
@@ -149,4 +161,6 @@ This is NOT a beginner blog. This tutorial:
 
 ---
 
-**Ready to begin?** Start with [Module 1: Flask Fundamentals](docs/01-flask-fundamentals.md)
+**Ready to begin?** Start with [Module 0: Prerequisites & Coding Basics](docs/00-prerequisites-and-basics.md)
+
+If you already know Python and web fundamentals, jump directly to [Module 1: Flask Fundamentals](docs/01-flask-fundamentals.md)

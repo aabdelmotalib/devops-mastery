@@ -30,6 +30,10 @@ Keep this in mind throughout: containers are isolated processes on a shared kern
 
 ## Modules
 
+0. [Bash & YAML Fundamentals](00-bash-and-yaml-fundamentals.md) - Shell scripting and configuration essentials
+
+**Start here if you're new to Linux command line or YAML syntax!**
+
 1. [Container Fundamentals](01-container-fundamentals.md) - What containers actually are
 2. [Docker Architecture](02-docker-architecture.md) - Engine, runtime, registry
 3. [Docker Images](03-docker-images.md) - Layers, Dockerfile, best practices
@@ -47,18 +51,20 @@ Keep this in mind throughout: containers are isolated processes on a shared kern
 
 ## How to Use This Tutorial
 
-1. Read each module sequentially
-2. Work through the hands-on labs after each module
-3. Answer the practice questions to verify understanding
-4. Analyze the failure scenarios to build debugging skills
-5. Complete the final project to integrate all concepts
+1. **New to Bash/YAML?** Start with [Module 0: Bash & YAML Fundamentals](00-bash-and-yaml-fundamentals.md)
+2. **Already familiar?** Jump to [Module 1: Container Fundamentals](01-container-fundamentals.md)
+3. Read each module sequentially
+4. Work through the hands-on labs after each module
+5. Answer the practice questions to verify understanding
+6. Analyze the failure scenarios to build debugging skills
+7. Complete the final project to integrate all concepts
 
 ## Prerequisites
 
-- Linux familiarity (processes, filesystem, networking)
-- Shell scripting basics
 - Docker Engine installed (20.10+)
-- Docker CLI knowledge basics
+- Linux environment (or WSL2 on Windows)
+
+**Note**: Don't worry if you're new to Bash or YAML! Start with **Module 0** for a comprehensive introduction.
 
 ## Key Principles
 

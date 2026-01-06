@@ -978,7 +978,7 @@ Runtime:
 - Backend: [backend/app.py](backend/app.py)
 - Docker: [docker/Dockerfile](docker/Dockerfile)
 - Kubernetes: [kubernetes/api-deployment.yaml](kubernetes/api-deployment.yaml)
-- CI/CD: [cicd/.github-workflows-deploy.yml](cicd/.github-workflows-deploy.yml)
+- CI/CD: [cicd/github-workflows-deploy.yml](cicd/github-workflows-deploy.yml)
 - AWS: [aws/infrastructure.md](aws/infrastructure.md)
 - Observability: [observability/prometheus-k8s.yaml](observability/prometheus-k8s.yaml)
 - Docs: [docs/decisions.md](docs/decisions.md)

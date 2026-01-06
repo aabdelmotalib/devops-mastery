@@ -38,7 +38,7 @@ Both are fully documented with architecture decisions, scaling strategies, and s
 - PROJECT_1 [docker/docker-compose.yml](PROJECT_1_PLATFORM_ENGINEERING/docker/docker-compose.yml)
 
 **CI/CD Pipelines:**
-- PROJECT_1 [cicd/.github-workflows-deploy.yml](PROJECT_1_PLATFORM_ENGINEERING/cicd/.github-workflows-deploy.yml)
+- PROJECT_1 [cicd/github-workflows-deploy.yml](PROJECT_1_PLATFORM_ENGINEERING/cicd/github-workflows-deploy.yml)
 
 **Observability:**
 - PROJECT_1 [observability/prometheus-k8s.yaml](PROJECT_1_PLATFORM_ENGINEERING/observability/prometheus-k8s.yaml)
@@ -186,7 +186,7 @@ Both are fully documented with architecture decisions, scaling strategies, and s
 - [PROJECT_1/docker/Dockerfile](PROJECT_1_PLATFORM_ENGINEERING/docker/Dockerfile) - Container image
 
 **Automation:**
-- [PROJECT_1/cicd/.github-workflows-deploy.yml](PROJECT_1_PLATFORM_ENGINEERING/cicd/.github-workflows-deploy.yml) - CI/CD pipeline
+- [PROJECT_1/cicd/github-workflows-deploy.yml](PROJECT_1_PLATFORM_ENGINEERING/cicd/github-workflows-deploy.yml) - CI/CD pipeline
 - [PROJECT_1/docker/docker-compose.yml](PROJECT_1_PLATFORM_ENGINEERING/docker/docker-compose.yml) - Local dev stack
 
 **Documentation:**

@@ -47,7 +47,7 @@ This is a **complete, professional-grade Kubernetes tutorial** designed to:
 
 ## Tutorial Structure
 
-### 12 Core Modules (550-700 lines each)
+### 13 Core Modules (550-800 lines each) - Now Including Gateway API!
 
 | Module | Topic | Focus |
 |--------|-------|-------|
@@ -63,6 +63,7 @@ This is a **complete, professional-grade Kubernetes tutorial** designed to:
 | 10 | **Helm & Package Management** | Charts, templating, best practices |
 | 11 | **Advanced Cluster Operations** | Upgrades, backups, disaster recovery |
 | 12 | **Kubernetes in CI/CD** | Docker integration, GitOps, multi-environment |
+| **13** | **Gateway API** ⭐ | Modern networking, weighted routing, canary deployments |
 
 ### Each Module Contains
 
@@ -97,7 +98,7 @@ This is a **complete, professional-grade Kubernetes tutorial** designed to:
 
 ## Learning Path Recommendations
 
-### For CKA Exam Preparation (60 hours)
+### For CKA Exam Preparation (70+ hours)
 
 1. **Week 1**: Modules 1-2 (Fundamentals & kubectl)
 2. **Week 2**: Modules 3-4 (Workloads & Services)
@@ -105,24 +106,26 @@ This is a **complete, professional-grade Kubernetes tutorial** designed to:
 4. **Week 4**: Modules 7-8 (Resources & Observability)
 5. **Week 5**: Modules 9-10 (Security & Helm)
 6. **Week 6**: Module 11 (Advanced Operations)
-7. **Week 7**: Module 12 + Exam Practice (60 questions)
-8. **Week 8**: Final Project + Mock Exam
+7. **Week 7**: Module 13 (Modern Networking - Gateway API) ⭐
+8. **Week 8**: Module 12 + Exam Practice (60 questions)
+9. **Week 9**: Final Project + Mock Exam
 
-### For Production Deployments (40 hours)
+### For Production Deployments (45+ hours)
 
 1. **Days 1-2**: Modules 1-3 (Architecture & Deployments)
-2. **Days 3-4**: Modules 4-6 (Networking & Storage)
+2. **Days 3-4**: Modules 4, 6, 13 (Networking, Storage, Gateway API)
 3. **Days 5-6**: Modules 7-8 (Resources & Health)
 4. **Days 7-8**: Modules 9-12 (Security, Helm, CI/CD)
 5. **Days 9-10**: Final Project (Deploy real application)
 
-### For Infrastructure Platform (50 hours)
+### For Infrastructure Platform (55+ hours)
 
 1. **Week 1**: Modules 1-4 (Core concepts)
 2. **Week 2**: Modules 5-7 (Configuration, Storage, Resources)
 3. **Week 3**: Modules 8-11 (Observability, Security, Operations)
-4. **Week 4**: Module 12 + Final Project
-5. **Week 5**: Advanced topics (Multi-cluster, networking)
+4. **Week 4**: Module 13 (Gateway API - Modern Networking) ⭐
+5. **Week 5**: Module 12 + Final Project
+6. **Week 6**: Advanced topics (Multi-cluster, networking optimization)
 
 ## Directory Structure
 
@@ -143,7 +146,8 @@ kubernetes-essentials-tutorial/
 │   ├── 09-rbac-security.md                # (700+ lines)
 │   ├── 10-helm-package-management.md      # (650+ lines)
 │   ├── 11-advanced-cluster-operations.md  # (700+ lines)
-│   └── 12-kubernetes-cicd-docker.md       # (650+ lines)
+│   ├── 12-kubernetes-cicd-docker.md       # (650+ lines)
+│   └── 13-gateway-api.md                  # (800+ lines) ⭐ NEW - Modern Networking
 ├── examples/                              # YAML manifests (to be created)
 │   ├── 01-basic-pod.yaml
 │   ├── 02-deployment.yaml

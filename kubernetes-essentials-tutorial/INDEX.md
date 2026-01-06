@@ -105,6 +105,19 @@
     - GitOps with ArgoCD and Flux
     - 5 MCQ + 2 hands-on tasks + 1 failure scenario
 
+13. **[13-gateway-api.md](docs/13-gateway-api.md)** (800+ lines) ⭐ **LATEST - Modern Kubernetes Networking**
+    - Gateway API overview and advantages over Ingress
+    - Architecture (GatewayClass → Gateway → Routes)
+    - HTTPRoute, TCPRoute, UDPRoute implementations
+    - Advanced routing (weighted, hostname, path-based)
+    - Request/response filters and modifications
+    - Traffic splitting and canary deployments
+    - TLS configuration and security best practices
+    - Multi-tenancy and RBAC patterns
+    - Production-ready patterns and examples
+    - Ingress to Gateway API migration strategy
+    - 5 MCQ + 2 hands-on tasks + 1 failure scenario
+
 ### Assessment & Practice
 
 - **[EXAM_AND_PRACTICE.md](EXAM_AND_PRACTICE.md)** (Complete Practice Guide)
@@ -131,7 +144,7 @@
 
 ## 🎯 Learning Paths
 
-### Path 1: CKA Exam Preparation (8 weeks, 25-30 hours)
+### Path 1: CKA Exam Preparation (9 weeks, 28-33 hours)
 
 | Week | Focus | Modules | Tasks |
 |------|-------|---------|-------|
@@ -141,29 +154,32 @@
 | 4 | Resources & Observability | 7-8 | Study + 4 tasks |
 | 5 | Security & Helm | 9-10 | Study + 4 tasks |
 | 6 | Advanced Operations | 11 | Study + 2 tasks |
-| 7 | CI/CD & Practice | 12 + Exam | 60 MCQ questions |
-| 8 | Final Project & Mock | Project | Complete 12-point checklist |
+| 7 | Modern Networking (Gateway API) | 13 | Study + 2 tasks |
+| 8 | CI/CD & Practice | 12 + Exam | 60 MCQ questions |
+| 9 | Final Project & Mock | Project | Complete 12-point checklist |
 
-### Path 2: Production Deployment (5 weeks, 20-25 hours)
+### Path 2: Production Deployment (6 weeks, 23-28 hours)
 
 | Days | Focus | Modules | Output |
 |------|-------|---------|--------|
 | 1-2 | Architecture & Deployments | 1-3 | Understand controllers |
-| 3-4 | Networking & Storage | 4-6 | Setup services, PVC |
+| 3-4 | Networking & Storage | 4, 6, 13 | Setup services, Gateway, PVC |
 | 5-6 | Resources & Health | 7-8 | Configure probes, limits |
 | 7-8 | Security, Helm, CI/CD | 9-12 | RBAC, charts, pipeline |
-| 9-10 | Final Project | Project | Deploy real application |
+| 9-10 | Modern Networking & Final | 13 + Project | Gateway API, deploy real app |
+| 11-12 | Optimization & Hardening | Review | Production readiness |
 
-### Path 3: Platform Engineering (6 weeks, 30-35 hours)
+### Path 3: Platform Engineering (7 weeks, 33-38 hours)
 
 | Week | Focus | Modules | Deliverables |
 |------|-------|---------|--------------|
 | 1 | Fundamentals | 1-2 | Cluster understanding |
 | 2 | Core Concepts | 3-4 | Workload patterns |
-| 3 | Data Layer | 5-6 | Config & storage |
+| 3 | Data & Networking | 5-6 + 13 | Config, storage, Gateway API |
 | 4 | Operations | 7-8 | Scaling & monitoring |
 | 5 | Security & Tools | 9-10 | RBAC & package mgmt |
-| 6 | Automation | 11-12 + Project | CI/CD pipeline |
+| 6 | Automation & Integration | 11-12 | CI/CD pipeline, upgrades |
+| 7 | Modern Architecture | 13 + Project | Gateway API, platform delivery |
 
 ---
 
@@ -262,7 +278,13 @@ minikube start --cpus=4 --memory=4096
 - **Time**: 10-12 hours
 - **Outcome**: Secure, manage, and maintain clusters
 
-### Level 5: Integration
+### Level 5: Modern Networking ⭐ **LATEST**
+- **Module**: 13
+- **Topics**: Gateway API, advanced routing, traffic management, canary deployments
+- **Time**: 5-7 hours
+- **Outcome**: Implement modern, vendor-agnostic networking patterns
+
+### Level 6: Integration
 - **Module**: 12
 - **Topics**: CI/CD, Docker, GitOps
 - **Time**: 4-6 hours
@@ -280,8 +302,9 @@ minikube start --cpus=4 --memory=4096
 | **Week 4** | Manage resources and scale applications |
 | **Week 5** | Implement security (RBAC, Pod Security) |
 | **Week 6** | Use Helm, manage cluster operations |
-| **Week 7** | Integrate with CI/CD, practice exam |
-| **Week 8** | Build production application, ready for CKA |
+| **Week 7** | Master modern networking (Gateway API) ⭐ **NEW** |
+| **Week 8** | Integrate with CI/CD, practice exam |
+| **Week 9** | Build production application, ready for CKA |
 
 ---
 
@@ -397,8 +420,9 @@ Module 2:
 | Resources & Health (Mod 7-8) | Week 4 | ⏳ |
 | Security & Helm (Mod 9-10) | Week 5 | ⏳ |
 | Advanced Ops (Mod 11) | Week 6 | ⏳ |
-| CI/CD & Practice (Mod 12) | Week 7 | ⏳ |
-| Final Project | Week 8 | ⏳ |
+| Modern Networking (Mod 13) ⭐ **NEW** | Week 7 | ⏳ |
+| CI/CD & Practice (Mod 12) | Week 8 | ⏳ |
+| Final Project | Week 9 | ⏳ |
 
 ---
 
@@ -417,7 +441,9 @@ Module 2:
 
 ## 📝 Notes
 
-- **Duration**: 32-43 hours total study time
+- **Duration**: 35-48 hours total study time (increased with Module 13)
+- **Modules**: 13 comprehensive modules covering all Kubernetes aspects
+- **Latest Addition**: Module 13 - Gateway API (Modern Kubernetes Networking) ⭐
 - **Difficulty**: Intermediate to Advanced
 - **Prerequisites**: Docker knowledge, Linux comfort
 - **Goal**: CKA certification or production deployment

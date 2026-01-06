@@ -1,5 +1,5 @@
 site_name: DevOps Engineering Mastery
-site_url: https://devops-mastery.io
+site_url: https://aabdelmotalib.github.io/devops-mastery/
 theme:
   name: material
   palette:
@@ -65,6 +65,19 @@ markdown_extensions:
 nav:
   - Home: index.md
   - My Portfolio: portfolio.md
+  - Programming Fundamentals:
+      - Start Here: programming-fundamentals-with-ai/START_HERE.md
+      - Modules:
+          - 01 Programming Thinking: programming-fundamentals-with-ai/docs/01-programming-thinking.md
+          - 02 Core Concepts: programming-fundamentals-with-ai/docs/02-core-programming-concepts.md
+          - 03 Architecture Basics: programming-fundamentals-with-ai/docs/03-software-architecture-basics.md
+          - 04 Engineering Thinking: programming-fundamentals-with-ai/docs/04-thinking-like-an-engineer.md
+          - 05 Programming with AI: programming-fundamentals-with-ai/docs/05-programming-with-ai.md
+          - 06 Practical Examples: programming-fundamentals-with-ai/docs/06-practical-examples.md
+      - Final Project: programming-fundamentals-with-ai/FINAL_PROJECT.md
+      - Quick Reference: programming-fundamentals-with-ai/QUICK_REFERENCE.md
+      - README: programming-fundamentals-with-ai/README.md
+  
   - AWS Essentials:
       - Introduction: aws-essentials-tutorial/START_HERE.md
       - Modules:
@@ -239,6 +252,18 @@ nav:
           - 09 Auth: flask-backend-tutorial/docs/09-authentication-authorization.md
           - 10 Extensions: flask-backend-tutorial/docs/10-flask-extensions.md
       - Final Project: flask-backend-tutorial/docs/11-final-project.md
+
+  - AWS Advanced:
+      - Overview: aws-essentials-tutorial/docs-advanced/README.md
+      - 11 Advanced ECS: aws-essentials-tutorial/docs-advanced/11-advanced-ecs.md
+      - 12 Advanced Lambda: aws-essentials-tutorial/docs-advanced/12-advanced-lambda.md
+      - 13 Advanced Fargate: aws-essentials-tutorial/docs-advanced/13-advanced-fargate.md
+
+  - Modern DevOps Patterns:
+      - Overview: modern-devops-patterns-tutorial/README.md
+      - 01 GitOps Fundamentals: modern-devops-patterns-tutorial/01-gitops-fundamentals.md
+      - 02 Service Mesh Fundamentals: modern-devops-patterns-tutorial/02-service-mesh-fundamentals.md
+      - 03 eBPF Fundamentals: modern-devops-patterns-tutorial/03-ebpf-fundamentals.md
 
   - Capstone Projects:
       - Start Here: devops-capstone-projects/README_START_HERE.md
