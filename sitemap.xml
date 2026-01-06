@@ -646,6 +646,26 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/modern-devops-patterns-tutorial/</loc>
+         <lastmod>2026-01-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/modern-devops-patterns-tutorial/01-gitops-fundamentals/</loc>
+         <lastmod>2026-01-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/modern-devops-patterns-tutorial/02-service-mesh-fundamentals/</loc>
+         <lastmod>2026-01-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/modern-devops-patterns-tutorial/03-ebpf-fundamentals/</loc>
+         <lastmod>2026-01-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://aabdelmotalib.github.io/devops-mastery/networking-essentials-tutorial/</loc>
          <lastmod>2026-01-06</lastmod>
          <changefreq>daily</changefreq>
