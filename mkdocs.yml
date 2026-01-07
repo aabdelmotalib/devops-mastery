@@ -254,16 +254,27 @@ nav:
       - Final Project: flask-backend-tutorial/docs/11-final-project.md
 
   - AWS Advanced:
-      - Overview: aws-essentials-tutorial/docs-advanced/README.md
-      - 11 Advanced ECS: aws-essentials-tutorial/docs-advanced/11-advanced-ecs.md
-      - 12 Advanced Lambda: aws-essentials-tutorial/docs-advanced/12-advanced-lambda.md
-      - 13 Advanced Fargate: aws-essentials-tutorial/docs-advanced/13-advanced-fargate.md
+      - Overview: aws-essentials-tutorial/README.md
+      - 11 Advanced ECS: aws-essentials-tutorial/11-advanced-ecs.md
+      - 12 Advanced Lambda: aws-essentials-tutorial/12-advanced-lambda.md
+      - 13 Advanced Fargate: aws-essentials-tutorial/13-advanced-fargate.md
+      - 14 Terraform Deep Dive: aws-essentials-tutorial/14-terraform-deep-dive.md
+      - 15 Ansible Deep Dive: aws-essentials-tutorial/15-ansible-deep-dive.md
 
   - Modern DevOps Patterns:
       - Overview: modern-devops-patterns-tutorial/README.md
       - 01 GitOps Fundamentals: modern-devops-patterns-tutorial/01-gitops-fundamentals.md
       - 02 Service Mesh Fundamentals: modern-devops-patterns-tutorial/02-service-mesh-fundamentals.md
       - 03 eBPF Fundamentals: modern-devops-patterns-tutorial/03-ebpf-fundamentals.md
+
+  - Security Essentials:
+      - Overview: security-essentials-tutorial/README.md
+      - Modules:
+          - 01 Application Security: security-essentials-tutorial/01-application-security-fundamentals.md
+          - 02 Infrastructure Security: security-essentials-tutorial/02-infrastructure-security.md
+          - 03 Supply Chain Security: security-essentials-tutorial/03-supply-chain-security.md
+          - 04 Compliance & Audit: security-essentials-tutorial/04-compliance-audit.md
+          - 05 Incident Response: security-essentials-tutorial/05-incident-response.md
 
   - Capstone Projects:
       - Start Here: devops-capstone-projects/README_START_HERE.md

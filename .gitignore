@@ -1,0 +1,41 @@
+# Build artifacts
+site/
+.mkdocs_cache/
+*.egg-info/
+dist/
+build/
+
+# Logs
+*.log
+mkdocs.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+env/
+ENV/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+.temp/
+
+# Node
+node_modules/
+npm-debug.log
+
+# Keep only essential markdown files
+# Status/report files should be in a separate docs/ or archived
