@@ -4626,8 +4626,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#why-application-factory" class="md-nav__link">
-    Why Application Factory?
+  <a href="#the-problem-with-direct-app-creation" class="md-nav__link">
+    The Problem with Direct App Creation
+  </a>
+  
+    <nav class="md-nav" aria-label="The Problem with Direct App Creation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scenario-1-sharing-global-app-the-anti-pattern" class="md-nav__link">
+    Scenario 1: Sharing Global App (The Anti-Pattern)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-factory-pattern-solution" class="md-nav__link">
+    The Factory Pattern Solution
   </a>
   
 </li>
@@ -6065,8 +6085,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#why-application-factory" class="md-nav__link">
-    Why Application Factory?
+  <a href="#the-problem-with-direct-app-creation" class="md-nav__link">
+    The Problem with Direct App Creation
+  </a>
+  
+    <nav class="md-nav" aria-label="The Problem with Direct App Creation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scenario-1-sharing-global-app-the-anti-pattern" class="md-nav__link">
+    Scenario 1: Sharing Global App (The Anti-Pattern)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-factory-pattern-solution" class="md-nav__link">
+    The Factory Pattern Solution
   </a>
   
 </li>
@@ -6304,14 +6344,16 @@
 
 <h1 id="module-2-flask-architecture">Module 2: Flask Architecture</h1>
 <h2 id="the-application-factory-pattern">The Application Factory Pattern</h2>
-<p>The application factory is a function that creates and configures a Flask application instance. This is the <strong>standard pattern</strong> for production Flask applications.</p>
-<h3 id="why-application-factory">Why Application Factory?</h3>
-<p><strong>Without Factory (Bad for Production):</strong></p>
-<div class="highlight"><pre><span></span><code><span class="c1"># app.py - DON&#39;T DO THIS</span>
+<p>The application factory is a function that creates and configures a Flask application instance. This is the <strong>standard pattern</strong> for all production Flask applications and is essential for proper testing.</p>
+<h3 id="the-problem-with-direct-app-creation">The Problem with Direct App Creation</h3>
+<h4 id="scenario-1-sharing-global-app-the-anti-pattern">Scenario 1: Sharing Global App (The Anti-Pattern)</h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># ❌ BAD - Don&#39;t do this!</span>
+<span class="c1"># app.py</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SECRET_KEY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;dev-secret&#39;</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;DATABASE_URL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sqlite:///app.db&#39;</span>
 
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
@@ -6320,45 +6362,227 @@
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </code></pre></div>
-<p><strong>Problems:</strong>
-1. <strong>Cannot create multiple instances</strong> (needed for testing)
-2. <strong>Configuration is fixed</strong> at import time
-3. <strong>Extensions initialize immediately</strong>, before configuration
-4. <strong>Circular imports</strong> become common as app grows</p>
-<p><strong>With Factory (Production Standard):</strong></p>
+<p><strong>Problems this causes:</strong></p>
+<ol>
+<li><strong>Can't create multiple instances</strong></li>
+<li>Testing needs different app config than production</li>
+<li>Can't run different Flask apps in same Python process</li>
+<li>
+<p>Stuck with one configuration</p>
+</li>
+<li>
+<p><strong>Configuration is baked in at import time</strong></p>
+</li>
+<li>Can't use environment variables to override</li>
+<li>Can't have dev/test/prod configs</li>
+<li>
+<p>Have to modify code to change behavior</p>
+</li>
+<li>
+<p><strong>Extensions initialize too early</strong>
+   <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>  <span class="c1"># ❌ Initializes before we can configure</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Circular imports plague your codebase</strong>
+   <div class="highlight"><pre><span></span><code><span class="c1"># routes.py</span>
+<span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">app</span>  <span class="c1"># Import global app</span>
+
+<span class="c1"># models.py</span>
+<span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">db</span>
+
+<span class="c1"># app.py</span>
+<span class="kn">from</span> <span class="nn">routes</span> <span class="kn">import</span> <span class="o">*</span>  <span class="c1"># Circular: routes imports app, app imports routes</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Testing becomes nearly impossible</strong></p>
+</li>
+<li>Can't create isolated app instances</li>
+<li>Tests interfere with each other (shared global state)</li>
+<li>Can't test different configurations</li>
+</ol>
+<h3 id="the-factory-pattern-solution">The Factory Pattern Solution</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># app/__init__.py</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
-<span class="kn">from</span> <span class="nn">app.config</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="kn">from</span> <span class="nn">app.config</span> <span class="kn">import</span> <span class="n">DevelopmentConfig</span><span class="p">,</span> <span class="n">ProductionConfig</span><span class="p">,</span> <span class="n">TestingConfig</span>
 
-<span class="k">def</span> <span class="nf">create_app</span><span class="p">(</span><span class="n">config_name</span><span class="o">=</span><span class="s1">&#39;development&#39;</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Application factory function&quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">create_app</span><span class="p">(</span><span class="n">config_name</span><span class="o">=</span><span class="s1">&#39;development&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Application factory function.</span>
+
+<span class="sd">    Creates and configures a Flask application instance with the given configuration.</span>
+<span class="sd">    This allows us to create multiple app instances with different configs.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        config_name (str): Which config to use (&#39;development&#39;, &#39;production&#39;, &#39;testing&#39;)</span>
+<span class="sd">        **kwargs: Additional config overrides</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Flask: Configured Flask application</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        # Development app</span>
+<span class="sd">        app = create_app(&#39;development&#39;)</span>
+
+<span class="sd">        # Production app</span>
+<span class="sd">        app = create_app(&#39;production&#39;)</span>
+
+<span class="sd">        # Test app with custom config</span>
+<span class="sd">        app = create_app(&#39;testing&#39;, SQLALCHEMY_DATABASE_URI=&#39;sqlite:///:memory:&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Step 1: Create the Flask app instance</span>
     <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-    <span class="c1"># Load configuration</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="n">config_name</span><span class="p">])</span>
+    <span class="c1"># Step 2: Load configuration</span>
+    <span class="n">config_mapping</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;development&#39;</span><span class="p">:</span> <span class="n">DevelopmentConfig</span><span class="p">,</span>
+        <span class="s1">&#39;production&#39;</span><span class="p">:</span> <span class="n">ProductionConfig</span><span class="p">,</span>
+        <span class="s1">&#39;testing&#39;</span><span class="p">:</span> <span class="n">TestingConfig</span>
+    <span class="p">}</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">config_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">config_name</span><span class="p">,</span> <span class="n">DevelopmentConfig</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
 
-    <span class="c1"># Initialize extensions</span>
-    <span class="kn">from</span> <span class="nn">app.extensions</span> <span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">migrate</span>
-    <span class="n">db</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-    <span class="n">migrate</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
+    <span class="c1"># Step 3: Apply any runtime overrides</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
 
-    <span class="c1"># Register blueprints</span>
-    <span class="kn">from</span> <span class="nn">app.routes</span> <span class="kn">import</span> <span class="n">auth</span><span class="p">,</span> <span class="n">users</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">auth</span><span class="o">.</span><span class="n">bp</span><span class="p">)</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">users</span><span class="o">.</span><span class="n">bp</span><span class="p">)</span>
+    <span class="c1"># Step 4: Initialize extensions</span>
+    <span class="c1"># (Extensions delay initialization until init_app is called)</span>
+    <span class="kn">from</span> <span class="nn">app.extensions</span> <span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">migrate</span><span class="p">,</span> <span class="n">cors</span>
 
-    <span class="c1"># Register error handlers</span>
-    <span class="kn">from</span> <span class="nn">app.errors</span> <span class="kn">import</span> <span class="n">register_error_handlers</span>
-    <span class="n">register_error_handlers</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>        <span class="c1"># Initialize SQLAlchemy</span>
+    <span class="n">migrate</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>  <span class="c1"># Initialize Flask-Migrate</span>
+    <span class="n">cors</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>      <span class="c1"># Initialize Flask-CORS</span>
+
+    <span class="c1"># Step 5: Register blueprints (modular routes)</span>
+    <span class="c1"># Blueprints are only registered within this function,</span>
+    <span class="c1"># avoiding circular imports</span>
+    <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
+        <span class="kn">from</span> <span class="nn">app.blueprints</span> <span class="kn">import</span> <span class="n">auth</span><span class="p">,</span> <span class="n">users</span><span class="p">,</span> <span class="n">products</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">auth</span><span class="o">.</span><span class="n">bp</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s1">&#39;/auth&#39;</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">users</span><span class="o">.</span><span class="n">bp</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s1">&#39;/api/users&#39;</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">products</span><span class="o">.</span><span class="n">bp</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s1">&#39;/api/products&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Step 6: Register error handlers</span>
+    <span class="kn">from</span> <span class="nn">app.error_handlers</span> <span class="kn">import</span> <span class="n">register_handlers</span>
+    <span class="n">register_handlers</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+    <span class="c1"># Step 7: Register before/after request hooks</span>
+    <span class="kn">from</span> <span class="nn">app.hooks</span> <span class="kn">import</span> <span class="n">register_hooks</span>
+    <span class="n">register_hooks</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+    <span class="c1"># Step 8: Create tables for testing (if using in-memory SQLite)</span>
+    <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">app</span>
 </code></pre></div>
-<p><strong>Benefits:</strong>
-1. <strong>Multiple instances</strong>: Different configs for dev/test/prod
-2. <strong>Delayed configuration</strong>: Set at runtime, not import time
-3. <strong>Testability</strong>: Create isolated app instances for tests
-4. <strong>Extension management</strong>: Initialize after configuration
-5. <strong>Avoid circular imports</strong>: Import blueprints inside function</p>
+<p><strong>Configuration classes:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># app/config.py</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+
+<span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base configuration (shared settings)&quot;&quot;&quot;</span>
+
+    <span class="c1"># Session configuration</span>
+    <span class="n">PERMANENT_SESSION_LIFETIME</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+    <span class="n">SESSION_COOKIE_SECURE</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">SESSION_COOKIE_HTTPONLY</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">SESSION_COOKIE_SAMESITE</span> <span class="o">=</span> <span class="s1">&#39;Lax&#39;</span>
+
+    <span class="c1"># API settings</span>
+    <span class="n">JSON_SORT_KEYS</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">JSONIFY_PRETTYPRINT_REGULAR</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># Security</span>
+    <span class="n">MAX_CONTENT_LENGTH</span> <span class="o">=</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>  <span class="c1"># 16MB max upload</span>
+
+<span class="k">class</span> <span class="nc">DevelopmentConfig</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Development configuration&quot;&quot;&quot;</span>
+    <span class="n">DEBUG</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">TESTING</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="s1">&#39;dev-secret-key-change-in-production&#39;</span>
+    <span class="n">SQLALCHEMY_DATABASE_URI</span> <span class="o">=</span> <span class="s1">&#39;sqlite:///dev.db&#39;</span>
+    <span class="n">SQLALCHEMY_ECHO</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Log all SQL queries</span>
+
+<span class="k">class</span> <span class="nc">ProductionConfig</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Production configuration&quot;&quot;&quot;</span>
+    <span class="n">DEBUG</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">TESTING</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># Must be set from environment</span>
+    <span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;SECRET_KEY&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">SECRET_KEY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;SECRET_KEY environment variable not set&#39;</span><span class="p">)</span>
+
+    <span class="n">SQLALCHEMY_DATABASE_URI</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;DATABASE_URL&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">SQLALCHEMY_DATABASE_URI</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;DATABASE_URL environment variable not set&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Production security headers</span>
+    <span class="n">SESSION_COOKIE_SECURE</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">REMEMBER_COOKIE_SECURE</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="k">class</span> <span class="nc">TestingConfig</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Testing configuration&quot;&quot;&quot;</span>
+    <span class="n">DEBUG</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">TESTING</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># Use in-memory database for tests</span>
+    <span class="n">SQLALCHEMY_DATABASE_URI</span> <span class="o">=</span> <span class="s1">&#39;sqlite:///:memory:&#39;</span>
+
+    <span class="c1"># Disable CSRF for testing</span>
+    <span class="n">WTF_CSRF_ENABLED</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># Don&#39;t send actual emails in tests</span>
+    <span class="n">MAIL_BACKEND</span> <span class="o">=</span> <span class="s1">&#39;testing&#39;</span>
+</code></pre></div>
+<p><strong>How to use:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># wsgi.py (for Gunicorn)</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">create_app</span>
+
+<span class="n">config_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;FLASK_ENV&#39;</span><span class="p">,</span> <span class="s1">&#39;production&#39;</span><span class="p">)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">(</span><span class="n">config_name</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># tests/conftest.py (for pytest)</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">create_app</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">app</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create and configure a new test app instance for each test&quot;&quot;&quot;</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">(</span><span class="s1">&#39;testing&#39;</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
+        <span class="k">yield</span> <span class="n">app</span>
+        <span class="c1"># Cleanup after test</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">client</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A test client for the app&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">test_client</span><span class="p">()</span>
+
+<span class="c1"># Usage:</span>
+<span class="k">def</span> <span class="nf">test_home_page</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+</code></pre></div>
+<p><strong>Benefits of application factory:</strong></p>
+<p>✅ <strong>Multiple instances</strong>: Create different app instances for dev/test/prod<br />
+✅ <strong>Flexible configuration</strong>: Change config at runtime<br />
+✅ <strong>Testability</strong>: Each test gets isolated app instance<br />
+✅ <strong>No circular imports</strong>: Avoid import hell<br />
+✅ <strong>Scalability</strong>: Easy to modularize as app grows<br />
+✅ <strong>Standard practice</strong>: Every production Flask app uses this</p>
 <h2 id="understanding-flask-contexts">Understanding Flask Contexts</h2>
 <p>Flask has two types of contexts that are crucial to understand for production applications.</p>
 <h3 id="application-context">Application Context</h3>

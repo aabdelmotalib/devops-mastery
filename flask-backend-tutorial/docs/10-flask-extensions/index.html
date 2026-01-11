@@ -4778,6 +4778,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#introduction-extending-flask-for-production-needs" class="md-nav__link">
+    Introduction: Extending Flask for Production Needs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#extension-ecosystem" class="md-nav__link">
     Extension Ecosystem
   </a>
@@ -6146,6 +6153,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#introduction-extending-flask-for-production-needs" class="md-nav__link">
+    Introduction: Extending Flask for Production Needs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#extension-ecosystem" class="md-nav__link">
     Extension Ecosystem
   </a>
@@ -6481,6 +6495,31 @@
 
 
 <h1 id="module-10-flask-extensions">Module 10: Flask Extensions</h1>
+<h2 id="introduction-extending-flask-for-production-needs">Introduction: Extending Flask for Production Needs</h2>
+<p>Flask's philosophy is "lightweight and extensible." The core framework provides HTTP routing and request/response handling—but production applications need much more: database access, user authentication, data validation, caching, and more.</p>
+<p>This is where Flask extensions come in. Extensions are third-party packages that integrate seamlessly with Flask to add capabilities without forcing them onto you. This modularity means you only pay for what you use.</p>
+<p>Key concepts in this module:</p>
+<p><strong>Extension Selection</strong>: Not all extensions are equal. Some are maintained by the Flask core team, some by the community. You need criteria for choosing quality extensions that won't become maintenance burdens.</p>
+<p><strong>Common Production Extensions</strong>:
+- <strong>SQLAlchemy</strong>: Database ORM for data persistence
+- <strong>Flask-Login</strong>: User session management
+- <strong>Flask-JWT-Extended</strong>: JWT token authentication
+- <strong>Flask-CORS</strong>: Cross-origin resource sharing
+- <strong>Flask-Caching</strong>: Request/response caching
+- <strong>Marshmallow</strong>: Data validation and serialization
+- <strong>Click</strong>: Command-line interface building</p>
+<p><strong>Integration Patterns</strong>: Most extensions follow similar patterns—initialization with <code>init_app()</code>, configuration through environment variables, and clean separation from business logic.</p>
+<p><strong>When NOT to Use Extensions</strong>: Sometimes building your own solution is simpler, cleaner, or more suited to your specific needs than a heavyweight third-party package.</p>
+<p>This module teaches you how to:
+- Evaluate extensions for production use
+- Install and configure common extensions
+- Understand the <code>init_app()</code> pattern for better testability
+- Integrate SQLAlchemy for database operations
+- Add authentication with Flask-Login and JWT
+- Validate data with Marshmallow
+- Handle CORS for API access
+- Build extensible application architectures</p>
+<p>By the end of this module, you'll be able to compose a production-grade Flask application using best-of-breed extensions while maintaining clean, testable code.</p>
 <h2 id="extension-ecosystem">Extension Ecosystem</h2>
 <p>Flask extensions add functionality without bloating the core framework. Choose extensions carefully based on your needs.</p>
 <h3 id="when-to-use-extensions">When to Use Extensions</h3>

@@ -4638,11 +4638,38 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#route-decorators" class="md-nav__link">
-    Route Decorators
+  <a href="#introduction-to-routing-and-views" class="md-nav__link">
+    Introduction to Routing and Views
   </a>
   
-    <nav class="md-nav" aria-label="Route Decorators">
+    <nav class="md-nav" aria-label="Introduction to Routing and Views">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#understanding-the-requestrouteresponse-flow" class="md-nav__link">
+    Understanding the Request/Route/Response Flow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-routing-matters" class="md-nav__link">
+    Why Routing Matters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#route-decorators-mapping-urls-to-functions" class="md-nav__link">
+    Route Decorators: Mapping URLs to Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Route Decorators: Mapping URLs to Functions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4653,15 +4680,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#http-methods" class="md-nav__link">
-    HTTP Methods
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#multiple-methods-on-one-route" class="md-nav__link">
-    Multiple Methods on One Route
+  <a href="#http-methods-get-post-put-delete-patch" class="md-nav__link">
+    HTTP Methods: GET, POST, PUT, DELETE, PATCH
   </a>
   
 </li>
@@ -6092,11 +6112,38 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#route-decorators" class="md-nav__link">
-    Route Decorators
+  <a href="#introduction-to-routing-and-views" class="md-nav__link">
+    Introduction to Routing and Views
   </a>
   
-    <nav class="md-nav" aria-label="Route Decorators">
+    <nav class="md-nav" aria-label="Introduction to Routing and Views">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#understanding-the-requestrouteresponse-flow" class="md-nav__link">
+    Understanding the Request/Route/Response Flow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-routing-matters" class="md-nav__link">
+    Why Routing Matters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#route-decorators-mapping-urls-to-functions" class="md-nav__link">
+    Route Decorators: Mapping URLs to Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Route Decorators: Mapping URLs to Functions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -6107,15 +6154,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#http-methods" class="md-nav__link">
-    HTTP Methods
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#multiple-methods-on-one-route" class="md-nav__link">
-    Multiple Methods on One Route
+  <a href="#http-methods-get-post-put-delete-patch" class="md-nav__link">
+    HTTP Methods: GET, POST, PUT, DELETE, PATCH
   </a>
   
 </li>
@@ -6373,63 +6413,299 @@
 
 
 <h1 id="module-3-routing-and-views">Module 3: Routing and Views</h1>
-<h2 id="route-decorators">Route Decorators</h2>
-<p>Routes map URLs to Python functions. Flask provides the <code>@app.route()</code> decorator for this purpose.</p>
+<h2 id="introduction-to-routing-and-views">Introduction to Routing and Views</h2>
+<p>Routing is the mechanism that maps URLs (paths) to Python functions that handle them. Views are the functions that receive requests and return responses. Together, they form the core of your Flask application—the bridge between HTTP requests from clients and your application logic.</p>
+<h3 id="understanding-the-requestrouteresponse-flow">Understanding the Request/Route/Response Flow</h3>
+<div class="highlight"><pre><span></span><code>1. Client makes HTTP request to URL
+   GET /api/users/123
+
+2. Flask receives the request
+
+3. Flask matches URL to a route
+   @app.route(&#39;/api/users/&lt;int:user_id&gt;&#39;)
+
+4. Flask extracts URL parameters
+   user_id = 123
+
+5. Flask calls the view function
+   def get_user(user_id):
+
+6. View function processes and returns response
+   return {&#39;id&#39;: 123, &#39;name&#39;: &#39;Alice&#39;}
+
+7. Flask sends response to client
+   200 OK, {&quot;id&quot;: 123, &quot;name&quot;: &quot;Alice&quot;}
+</code></pre></div>
+<h3 id="why-routing-matters">Why Routing Matters</h3>
+<p><strong>Good routing:</strong>
+- Makes your API predictable and easy to understand
+- URLs are self-documenting ("GET /api/users/123" clearly means get user 123)
+- Enables clean separation between different features
+- RESTful routes reduce confusion about what endpoints do</p>
+<p><strong>Bad routing:</strong>
+- Confusing URLs ("/getData", "/api/v1/user/get", "/processUserRequest")
+- Inconsistent patterns (mixing naming conventions)
+- Hard to maintain as app grows</p>
+<hr />
+<h2 id="route-decorators-mapping-urls-to-functions">Route Decorators: Mapping URLs to Functions</h2>
+<p>Routes map URLs to Python functions. Flask provides the <code>@app.route()</code> decorator for this purpose. When a client makes a request to a URL, Flask finds the matching route and calls its function.</p>
 <h3 id="basic-routing">Basic Routing</h3>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">jsonify</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Root endpoint&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Welcome to the API&#39;</span><span class="p">}</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Root endpoint - GET request only (default)&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Welcome to the API&#39;</span><span class="p">,</span> <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">})</span>
 
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/about&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">about</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;About endpoint&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;My API&#39;</span><span class="p">}</span>
-</code></pre></div>
-<h3 id="http-methods">HTTP Methods</h3>
-<p>By default, routes only respond to GET requests. Specify methods explicitly:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">request</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;My API&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;author&#39;</span><span class="p">:</span> <span class="s1">&#39;Your Name&#39;</span>
+    <span class="p">})</span>
 
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/status&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">status</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Health check endpoint&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;healthy&#39;</span><span class="p">,</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="mi">200</span><span class="p">})</span>
+</code></pre></div>
+<p><strong>Testing these routes:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Test root endpoint</span>
+curl<span class="w"> </span>http://localhost:5000/
+<span class="c1"># Response: {&quot;message&quot;:&quot;Welcome to the API&quot;,&quot;version&quot;:&quot;1.0&quot;}</span>
+
+<span class="c1"># Test about endpoint</span>
+curl<span class="w"> </span>http://localhost:5000/about
+<span class="c1"># Response: {&quot;name&quot;:&quot;My API&quot;,&quot;version&quot;:&quot;1.0.0&quot;,&quot;author&quot;:&quot;Your Name&quot;}</span>
+
+<span class="c1"># Test status endpoint  </span>
+curl<span class="w"> </span>http://localhost:5000/status
+<span class="c1"># Response: {&quot;status&quot;:&quot;healthy&quot;,&quot;code&quot;:200}</span>
+</code></pre></div>
+<h3 id="http-methods-get-post-put-delete-patch">HTTP Methods: GET, POST, PUT, DELETE, PATCH</h3>
+<p>HTTP methods tell the server what action you want to perform. By default, Flask routes only accept GET requests. You specify other methods with the <code>methods</code> parameter.</p>
+<p><strong>RESTful patterns:</strong></p>
+<div class="highlight"><pre><span></span><code>GET    /users          → List all users
+POST   /users          → Create new user
+GET    /users/123      → Get specific user
+PUT    /users/123      → Update user
+DELETE /users/123      → Delete user
+PATCH  /users/123      → Partial update
+</code></pre></div>
+<p><strong>Implementation:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">jsonify</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># ============= GET: Retrieve data =============</span>
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/users&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">list_users</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;List all users&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;users&#39;</span><span class="p">:</span> <span class="p">[]}</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get all users.</span>
 
+<span class="sd">    Handles: GET /users</span>
+<span class="sd">    Query parameters: ?page=1&amp;limit=20</span>
+<span class="sd">    Returns: List of user objects</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">limit</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;limit&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="c1"># Pseudo-code: fetch from database</span>
+    <span class="n">users</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;alice@example.com&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;bob@example.com&#39;</span><span class="p">}</span>
+    <span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+        <span class="s1">&#39;users&#39;</span><span class="p">:</span> <span class="n">users</span><span class="p">,</span>
+        <span class="s1">&#39;page&#39;</span><span class="p">:</span> <span class="n">page</span><span class="p">,</span>
+        <span class="s1">&#39;limit&#39;</span><span class="p">:</span> <span class="n">limit</span><span class="p">,</span>
+        <span class="s1">&#39;total&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">users</span><span class="p">)</span>
+    <span class="p">})</span>
+
+<span class="c1"># ============= GET with ID: Get specific resource =============</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/users/&lt;int:user_id&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get a specific user by ID.</span>
+
+<span class="sd">    Handles: GET /users/123</span>
+<span class="sd">    Parameter: user_id extracted from URL</span>
+<span class="sd">    Returns: Single user object or 404</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Pseudo-code: fetch from database</span>
+    <span class="k">if</span> <span class="n">user_id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Alice&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;alice@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="s1">&#39;2024-01-01T10:00:00Z&#39;</span>
+        <span class="p">})</span>
+
+    <span class="c1"># Return 404 if not found</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;User not found&#39;</span><span class="p">}),</span> <span class="mi">404</span>
+
+<span class="c1"># ============= POST: Create resource =============</span>
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/users&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">create_user</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a new user&quot;&quot;&quot;</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]},</span> <span class="mi">201</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a new user.</span>
 
+<span class="sd">    Handles: POST /users</span>
+<span class="sd">    Expects JSON body:</span>
+<span class="sd">    {</span>
+<span class="sd">        &quot;name&quot;: &quot;Charlie&quot;,</span>
+<span class="sd">        &quot;email&quot;: &quot;charlie@example.com&quot;,</span>
+<span class="sd">        &quot;password&quot;: &quot;secure...&quot;</span>
+<span class="sd">    }</span>
+
+<span class="sd">    Returns: Created user object with ID, status 201</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+
+    <span class="c1"># Validate required fields</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span> <span class="ow">or</span> <span class="s1">&#39;email&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">or</span> <span class="s1">&#39;name&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+            <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Missing required fields&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">]</span>
+        <span class="p">}),</span> <span class="mi">400</span>
+
+    <span class="c1"># Pseudo-code: save to database</span>
+    <span class="n">new_user</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>  <span class="c1"># Database would auto-generate</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="s1">&#39;2024-01-11T15:30:00Z&#39;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">new_user</span><span class="p">),</span> <span class="mi">201</span>  <span class="c1"># 201 Created status code</span>
+
+<span class="c1"># ============= PUT: Replace entire resource =============</span>
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/users/&lt;int:user_id&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PUT&#39;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">update_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update existing user&quot;&quot;&quot;</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span> <span class="s1">&#39;updated&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Update a user (replaces entire user object).</span>
 
+<span class="sd">    Handles: PUT /users/123</span>
+<span class="sd">    Expects JSON body with ALL fields:</span>
+<span class="sd">    {</span>
+<span class="sd">        &quot;name&quot;: &quot;Alice Updated&quot;,</span>
+<span class="sd">        &quot;email&quot;: &quot;newemail@example.com&quot;,</span>
+<span class="sd">        &quot;password&quot;: &quot;newpassword&quot;</span>
+<span class="sd">    }</span>
+
+<span class="sd">    Returns: Updated user object</span>
+
+<span class="sd">    Note: PUT expects complete object. For partial updates, use PATCH.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;No data provided&#39;</span><span class="p">}),</span> <span class="mi">400</span>
+
+    <span class="c1"># Pseudo-code: update in database</span>
+    <span class="n">updated_user</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown@example.com&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;updated_at&#39;</span><span class="p">:</span> <span class="s1">&#39;2024-01-11T15:30:00Z&#39;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">updated_user</span><span class="p">)</span>
+
+<span class="c1"># ============= PATCH: Partial update =============</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/users/&lt;int:user_id&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PATCH&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">patch_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Partially update a user (only specified fields).</span>
+
+<span class="sd">    Handles: PATCH /users/123</span>
+<span class="sd">    Expects JSON with only fields to update:</span>
+<span class="sd">    {&quot;name&quot;: &quot;Alice Updated&quot;}</span>
+
+<span class="sd">    Other fields remain unchanged.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;No data provided&#39;</span><span class="p">}),</span> <span class="mi">400</span>
+
+    <span class="c1"># Pseudo-code: partial update in database</span>
+    <span class="n">updated_user</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span>  <span class="c1"># Only update if provided</span>
+        <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;alice@example.com&#39;</span><span class="p">,</span>  <span class="c1"># Unchanged</span>
+        <span class="s1">&#39;updated_at&#39;</span><span class="p">:</span> <span class="s1">&#39;2024-01-11T15:30:00Z&#39;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">updated_user</span><span class="p">)</span>
+
+<span class="c1"># ============= DELETE: Remove resource =============</span>
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/users/&lt;int:user_id&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;DELETE&#39;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">delete_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Delete user&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">204</span>
-</code></pre></div>
-<h3 id="multiple-methods-on-one-route">Multiple Methods on One Route</h3>
-<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/users/&lt;int:user_id&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;PUT&#39;</span><span class="p">,</span> <span class="s1">&#39;DELETE&#39;</span><span class="p">])</span>
-<span class="k">def</span> <span class="nf">user_detail</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle multiple methods on same endpoint&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;user@example.com&#39;</span><span class="p">}</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Delete a user.</span>
 
-    <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;PUT&#39;</span><span class="p">:</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span> <span class="s1">&#39;updated&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<span class="sd">    Handles: DELETE /users/123</span>
+<span class="sd">    Returns: 204 No Content (successful delete, no response body)</span>
 
-    <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;DELETE&#39;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">204</span>
+<span class="sd">    Alternative: Return 200 with confirmation message</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Pseudo-code: delete from database</span>
+    <span class="c1"># db.query(User).filter(User.id == user_id).delete()</span>
+
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">204</span>  <span class="c1"># 204 No Content (standard for successful DELETE)</span>
+
+    <span class="c1"># Or return confirmation:</span>
+    <span class="c1"># return jsonify({&#39;message&#39;: f&#39;User {user_id} deleted&#39;}), 200</span>
 </code></pre></div>
+<p><strong>Testing all methods:</strong></p>
+<p><div class="highlight"><pre><span></span><code><span class="c1"># GET all users</span>
+curl<span class="w"> </span>http://localhost:5000/users
+
+<span class="c1"># GET specific user</span>
+curl<span class="w"> </span>http://localhost:5000/users/1
+
+<span class="c1"># POST create user</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:5000/users<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;Charlie&quot;,&quot;email&quot;:&quot;charlie@example.com&quot;}&#39;</span>
+
+<span class="c1"># PUT update user (complete)</span>
+curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://localhost:5000/users/1<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;Alice Updated&quot;,&quot;email&quot;:&quot;newemail@example.com&quot;}&#39;</span>
+
+<span class="c1"># PATCH update user (partial)</span>
+curl<span class="w"> </span>-X<span class="w"> </span>PATCH<span class="w"> </span>http://localhost:5000/users/1<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;Alice Final&quot;}&#39;</span>
+
+<span class="c1"># DELETE user</span>
+curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span>http://localhost:5000/users/1
+</code></pre></div>
+    """Delete user"""
+    return '', 204
+<div class="highlight"><pre><span></span><code>### Multiple Methods on One Route
+
+```python
+@app.route(&#39;/users/&lt;int:user_id&gt;&#39;, methods=[&#39;GET&#39;, &#39;PUT&#39;, &#39;DELETE&#39;])
+def user_detail(user_id):
+    &quot;&quot;&quot;Handle multiple methods on same endpoint&quot;&quot;&quot;
+    if request.method == &#39;GET&#39;:
+        return {&#39;id&#39;: user_id, &#39;email&#39;: &#39;user@example.com&#39;}
+
+    elif request.method == &#39;PUT&#39;:
+        data = request.get_json()
+        return {&#39;id&#39;: user_id, &#39;updated&#39;: True}
+
+    elif request.method == &#39;DELETE&#39;:
+        return &#39;&#39;, 204
+</code></pre></div></p>
 <p><strong>When to use:</strong>
 - RESTful resource endpoints
 - Reduces code duplication for shared logic</p>

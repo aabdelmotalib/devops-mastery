@@ -4738,6 +4738,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#introduction-resilient-apis-through-robust-error-handling" class="md-nav__link">
+    Introduction: Resilient APIs Through Robust Error Handling
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#custom-error-handlers" class="md-nav__link">
     Custom Error Handlers
   </a>
@@ -6050,6 +6057,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#introduction-resilient-apis-through-robust-error-handling" class="md-nav__link">
+    Introduction: Resilient APIs Through Robust Error Handling
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#custom-error-handlers" class="md-nav__link">
     Custom Error Handlers
   </a>
@@ -6289,6 +6303,24 @@
 
 
 <h1 id="module-8-error-handling">Module 8: Error Handling</h1>
+<h2 id="introduction-resilient-apis-through-robust-error-handling">Introduction: Resilient APIs Through Robust Error Handling</h2>
+<p>In production environments, errors are inevitable. Network timeouts occur, databases become unavailable, invalid data gets submitted, and unexpected edge cases emerge. The difference between a professional API and an amateur one isn't that it never fails—it's how it handles failures.</p>
+<p>Proper error handling serves multiple critical purposes:</p>
+<ol>
+<li><strong>User Experience</strong>: Clear, actionable error messages help API clients understand what went wrong and how to fix it</li>
+<li><strong>Debugging</strong>: Detailed error logs with context enable rapid incident investigation and resolution</li>
+<li><strong>Security</strong>: Controlled error responses prevent information leakage and help mask internal implementation details</li>
+<li><strong>Reliability</strong>: Graceful error handling prevents cascading failures and allows systems to remain partially functional</li>
+<li><strong>Monitoring</strong>: Structured error logging enables alerting and proactive issue detection before users are affected</li>
+</ol>
+<p>This module teaches you how to:
+- Create custom error handlers for different HTTP status codes
+- Build exception hierarchies for application-specific errors
+- Log errors with appropriate context for debugging
+- Validate input data and handle validation failures
+- Implement graceful degradation and circuit breakers
+- Monitor error patterns and trends</p>
+<p>By the end of this module, you'll be able to build APIs that fail gracefully, communicate clearly with clients about what went wrong, and provide your team with the information needed to fix issues quickly.</p>
 <h2 id="custom-error-handlers">Custom Error Handlers</h2>
 <p>Proper error handling is crucial for production APIs. Flask provides decorators to handle errors globally.</p>
 <h3 id="basic-error-handlers">Basic Error Handlers</h3>
