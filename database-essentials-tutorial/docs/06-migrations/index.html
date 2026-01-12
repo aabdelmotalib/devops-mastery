@@ -2992,6 +2992,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#why-migrations-exist" class="md-nav__link">
     Why Migrations Exist
   </a>
@@ -6086,6 +6093,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#why-migrations-exist" class="md-nav__link">
     Why Migrations Exist
   </a>
@@ -6361,30 +6375,68 @@
 
 
 <h1 id="module-6-database-migrations">Module 6: Database Migrations</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Database migrations are how you safely evolve your schema over time. Every production application needs migrations—they're not optional.</p>
+<p><strong>What you'll master</strong>:
+- <strong>Why migrations matter</strong>: Version control for your database
+- <strong>Alembic fundamentals</strong>: The standard Python migration tool
+- <strong>Safe schema evolution</strong>: Adding, removing, modifying columns
+- <strong>Rollback strategies</strong>: Recovering from mistakes
+- <strong>Zero-downtime migrations</strong>: Deploying without downtime
+- <strong>Production best practices</strong>: Deploying safely to live systems</p>
+<p><strong>The golden rule</strong>: Migrations must be:
+1. <strong>Repeatable</strong> - Run multiple times, same result
+2. <strong>Reversible</strong> - Can undo any change (downgrade)
+3. <strong>Safe</strong> - Never lose data, test before deploying
+4. <strong>Fast</strong> - Don't lock tables for hours</p>
+<hr />
 <h2 id="why-migrations-exist">Why Migrations Exist</h2>
 <h3 id="the-problem">The Problem</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Version 1: Initial schema</span>
+<p>Every developer has lived this nightmare:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Development: Add feature</span>
 <span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">email</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">255</span><span class="p">))</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">50</span><span class="p">))</span>  <span class="c1"># NEW!</span>
 
-<span class="c1"># Version 2: Add username</span>
-<span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">email</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">255</span><span class="p">))</span>
-    <span class="n">username</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">50</span><span class="p">))</span>  <span class="c1"># New column</span>
+<span class="c1"># Production database still has old schema!</span>
+<span class="c1"># What do you do?</span>
 
-<span class="c1"># How do you update production database?</span>
-<span class="c1"># - Can&#39;t drop and recreate (lose data)</span>
-<span class="c1"># - Can&#39;t manually ALTER TABLE (error-prone, not repeatable)</span>
-<span class="c1"># - Need version control for schema changes</span>
+<span class="c1"># Option 1: SSH into production, run ALTER TABLE manually</span>
+<span class="c1"># - Error-prone</span>
+<span class="c1"># - No history</span>
+<span class="c1"># - Can&#39;t rollback</span>
+<span class="c1"># - Other developers don&#39;t know about it</span>
+
+<span class="c1"># Option 2: Drop and recreate database</span>
+<span class="c1"># - LOSE ALL DATA (unacceptable)</span>
+
+<span class="c1"># Option 3: Pray nothing breaks</span>
+<span class="c1"># - Code expects username column</span>
+<span class="c1"># - Database doesn&#39;t have it</span>
+<span class="c1"># - Application crashes in production</span>
 </code></pre></div>
 <h3 id="what-migrations-solve">What Migrations Solve</h3>
+<p>Migrations are version-controlled, reversible SQL scripts that evolve your schema safely.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Workflow:</span>
+git<span class="w"> </span>add<span class="w"> </span>models.py<span class="w">              </span><span class="c1"># Update model definition</span>
+alembic<span class="w"> </span>revision<span class="w"> </span>--autogenerate<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add username&quot;</span><span class="w">  </span><span class="c1"># Generate migration</span>
+<span class="c1"># Review generated migration file</span>
+git<span class="w"> </span>add<span class="w"> </span>migrations/versions/abc123_add_username.py
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add username to users&quot;</span>
+
+<span class="c1"># Deploy to production:</span>
+alembic<span class="w"> </span>upgrade<span class="w"> </span>head<span class="w">           </span><span class="c1"># Apply migration safely</span>
+<span class="c1"># If something breaks: alembic downgrade -1  # Undo instantly</span>
+</code></pre></div>
+<p><strong>Benefits</strong>:
+1. <strong>Version control</strong> - Track every schema change in git
+2. <strong>Repeatability</strong> - Same migration on dev, staging, production
+3. <strong>Rollback capability</strong> - Undo mistakes instantly
+4. <strong>Team collaboration</strong> - Everyone applies same changes
+5. <strong>Auditing</strong> - Know when and what changed
+6. <strong>CI/CD integration</strong> - Auto-deploy with confidence</p>
 <ol>
-<li><strong>Version control for database schema</strong></li>
-<li><strong>Repeatable schema changes</strong></li>
-<li><strong>Rollback capability</strong></li>
-<li><strong>Team collaboration</strong> (everyone applies same changes)</li>
 <li><strong>Production safety</strong> (test migrations before deploying)</li>
 </ol>
 <h2 id="alembic-fundamentals">Alembic Fundamentals</h2>

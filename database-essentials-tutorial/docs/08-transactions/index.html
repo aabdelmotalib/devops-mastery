@@ -3032,6 +3032,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-acid-actually-means-in-practice" class="md-nav__link">
     What ACID Actually Means in Practice
   </a>
@@ -3062,6 +3069,20 @@
         
           <li class="md-nav__item">
   <a href="#durability" class="md-nav__link">
+    Durability
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isolation_1" class="md-nav__link">
+    Isolation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#durability_1" class="md-nav__link">
     Durability
   </a>
   
@@ -6099,6 +6120,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-acid-actually-means-in-practice" class="md-nav__link">
     What ACID Actually Means in Practice
   </a>
@@ -6129,6 +6157,20 @@
         
           <li class="md-nav__item">
   <a href="#durability" class="md-nav__link">
+    Durability
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isolation_1" class="md-nav__link">
+    Isolation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#durability_1" class="md-nav__link">
     Durability
   </a>
   
@@ -6387,29 +6429,174 @@
 
 
 <h1 id="module-8-transactions-and-acid">Module 8: Transactions and ACID</h1>
+<h2 id="introduction">Introduction</h2>
+<p><strong>Transactions are how databases keep data correct when things go wrong.</strong> They're the foundation of reliability in production systems.</p>
+<p><strong>What you'll master</strong>:
+- <strong>ACID properties</strong>: Atomicity, Consistency, Isolation, Durability
+- <strong>Isolation levels</strong>: When transactions see each other's data
+- <strong>Locks and deadlocks</strong>: What happens when transactions conflict
+- <strong>Transaction patterns</strong>: Optimistic locking, pessimistic locking, idempotency
+- <strong>Production patterns</strong>: Handling failures and retries</p>
+<p><strong>Real-world stakes</strong>:
+- Without transactions: Database corruptions, lost money, data inconsistencies
+- With transactions: Reliable systems that handle failures gracefully</p>
+<hr />
 <h2 id="what-acid-actually-means-in-practice">What ACID Actually Means in Practice</h2>
+<p>ACID is not just an acronym—it's a guarantee that your data stays correct even when systems fail.</p>
 <h3 id="atomicity">Atomicity</h3>
-<p><strong>Definition</strong>: All operations in a transaction succeed or all fail</p>
-<p><strong>Example: Bank transfer</strong>
-<div class="highlight"><pre><span></span><code><span class="c1"># BAD: Not atomic</span>
+<p><strong>Definition</strong>: A transaction is all-or-nothing. Either all operations succeed, or all fail (rollback).</p>
+<p><strong>Why it matters</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># BAD: Not atomic - LOSE MONEY</span>
 <span class="k">def</span> <span class="nf">transfer_funds</span><span class="p">(</span><span class="n">from_account</span><span class="p">,</span> <span class="n">to_account</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
-    <span class="n">from_account</span><span class="o">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">amount</span>
-    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>  <span class="c1"># What if this succeeds but next fails?</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Transferring $</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
+    <span class="c1"># Step 1: Debit from_account</span>
+    <span class="n">from_account</span><span class="o">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">amount</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Debit done: </span><span class="si">{</span><span class="n">from_account</span><span class="o">.</span><span class="n">balance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># What if server crashes HERE?</span>
+    <span class="c1"># from_account is debited but to_account is not credited</span>
+    <span class="c1"># $500 vanishes!</span>
+
+    <span class="c1"># Step 2: Credit to_account</span>
     <span class="n">to_account</span><span class="o">.</span><span class="n">balance</span> <span class="o">+=</span> <span class="n">amount</span>
-    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>  <span class="c1"># Money could be lost!</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Credit done: </span><span class="si">{</span><span class="n">to_account</span><span class="o">.</span><span class="n">balance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># SCENARIO: Server crashes between steps</span>
+<span class="c1"># Before: Account A = $1000, Account B = $1000</span>
+<span class="c1"># After crash: Account A = $500, Account B = $1000</span>
+<span class="c1"># Result: $500 lost forever (audit nightmare!)</span>
 
 <span class="c1"># GOOD: Atomic transaction</span>
 <span class="k">def</span> <span class="nf">transfer_funds</span><span class="p">(</span><span class="n">from_account</span><span class="p">,</span> <span class="n">to_account</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">from_account</span><span class="o">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">amount</span>
         <span class="n">to_account</span><span class="o">.</span><span class="n">balance</span> <span class="o">+=</span> <span class="n">amount</span>
-        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>  <span class="c1"># Both or neither</span>
+
+        <span class="c1"># Both changes committed together</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Transfer complete: A=$</span><span class="si">{</span><span class="n">from_account</span><span class="o">.</span><span class="n">balance</span><span class="si">}</span><span class="s2">, B=$</span><span class="si">{</span><span class="n">to_account</span><span class="o">.</span><span class="n">balance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="c1"># If anything fails: ROLLBACK everything</span>
         <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Transfer failed, rolled back: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">raise</span>
-</code></pre></div></p>
+
+<span class="c1"># SCENARIO: Server crashes during commit</span>
+<span class="c1"># PostgreSQL handles the recovery using WAL (Write-Ahead Log)</span>
+<span class="c1"># After restart: Either both changes exist, or neither</span>
+<span class="c1"># No partial state possible!</span>
+</code></pre></div>
+<p><strong>Key guarantee</strong>: If <code>db.session.commit()</code> succeeds, all changes are saved. If it fails or crashes, none are.</p>
 <h3 id="consistency">Consistency</h3>
+<p><strong>Definition</strong>: Database moves from one valid state to another. Constraints are never violated.</p>
+<p><strong>How it works</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Database enforces constraints</span>
+<span class="k">class</span> <span class="nc">Account</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;accounts&#39;</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;users.id&#39;</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">balance</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Numeric</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># Constraint: Balance can&#39;t be negative</span>
+    <span class="n">__table_args__</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">CheckConstraint</span><span class="p">(</span><span class="s1">&#39;balance &gt;= 0&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;positive_balance&#39;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+<span class="c1"># Trying to violate consistency</span>
+<span class="n">account</span> <span class="o">=</span> <span class="n">Account</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">account</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span>  <span class="c1"># INVALID!</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">IntegrityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="c1"># PostgreSQL PREVENTS the invalid state</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Consistency violation prevented: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Database still valid, never entered invalid state</span>
+
+<span class="c1"># Real scenario: Overdraft protection</span>
+<span class="c1"># User tries to withdraw more than balance</span>
+<span class="k">def</span> <span class="nf">withdraw</span><span class="p">(</span><span class="n">account_id</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+    <span class="n">account</span> <span class="o">=</span> <span class="n">Account</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">with_for_update</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">account_id</span><span class="p">)</span>  <span class="c1"># Lock the row</span>
+
+    <span class="k">if</span> <span class="n">account</span><span class="o">.</span><span class="n">balance</span> <span class="o">&lt;</span> <span class="n">amount</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Insufficient funds&quot;</span><span class="p">)</span>
+
+    <span class="n">account</span><span class="o">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">amount</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="c1"># PostgreSQL guarantees: balance never goes negative</span>
+</code></pre></div>
+<h3 id="isolation">Isolation</h3>
+<p><strong>Definition</strong>: Concurrent transactions don't see each other's partial changes.</p>
+<p><strong>Real-world problem</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Scenario: Two users try to book the last seat simultaneously</span>
+
+<span class="c1"># User A&#39;s request (in transaction)</span>
+<span class="k">def</span> <span class="nf">book_seat</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">seat_id</span><span class="p">):</span>
+    <span class="n">seat</span> <span class="o">=</span> <span class="n">Seat</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">seat_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">seat</span><span class="o">.</span><span class="n">available</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;User </span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">: Seat is available&quot;</span><span class="p">)</span>
+        <span class="n">seat</span><span class="o">.</span><span class="n">available</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="s2">&quot;Booked!&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;Not available&quot;</span>
+
+<span class="c1"># At time T=1ms: Both User A and B query the seat</span>
+<span class="c1"># User A: seat.available = True</span>
+<span class="c1"># User B: seat.available = True (B doesn&#39;t see A&#39;s pending change yet)</span>
+
+<span class="c1"># At time T=2ms: User A commits</span>
+<span class="c1"># User B doesn&#39;t see this yet (isolation!)</span>
+
+<span class="c1"># At time T=3ms: User B commits</span>
+<span class="c1"># Result: Both users booked the same seat! (DISASTER!)</span>
+</code></pre></div>
+<p><strong>Fix: Row-level locks</strong>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">book_seat_safe</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">seat_id</span><span class="p">):</span>
+    <span class="c1"># Lock the row BEFORE checking (prevents other transactions from reading)</span>
+    <span class="n">seat</span> <span class="o">=</span> <span class="n">Seat</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">seat_id</span><span class="p">)</span><span class="o">.</span><span class="n">with_for_update</span><span class="p">()</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">seat</span><span class="o">.</span><span class="n">available</span><span class="p">:</span>
+        <span class="n">seat</span><span class="o">.</span><span class="n">available</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="s2">&quot;Booked!&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;Not available&quot;</span>
+
+<span class="c1"># Timeline with locks:</span>
+<span class="c1"># T=1ms: User A locks seat (User B waits)</span>
+<span class="c1"># T=2ms: User A checks available=True</span>
+<span class="c1"># T=3ms: User A books and commits (lock released)</span>
+<span class="c1"># T=4ms: User B gets lock, checks available=False</span>
+<span class="c1"># T=5ms: User B returns &quot;Not available&quot;</span>
+<span class="c1"># Result: Only one user books the seat (CORRECT!)</span>
+</code></pre></div></p>
+<h3 id="durability">Durability</h3>
+<p><strong>Definition</strong>: Once committed, data persists even if system crashes.</p>
+<p><strong>How PostgreSQL ensures it</strong>:</p>
+<ol>
+<li><strong>Write-Ahead Logging (WAL)</strong>: Before modifying a page on disk, write intent to log</li>
+<li><strong>Fsync to disk</strong>: Sync log to physical disk before returning to application</li>
+<li><strong>Crash recovery</strong>: On restart, replay WAL log to recover state</li>
+</ol>
+<p><strong>You don't need to do anything</strong>—PostgreSQL handles this automatically. Your data is safe.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Safe transaction</span>
+<span class="n">account</span> <span class="o">=</span> <span class="n">Account</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">account</span><span class="o">.</span><span class="n">balance</span> <span class="o">+=</span> <span class="mi">100</span>
+<span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>  <span class="c1"># Returns immediately (data safely persisted)</span>
+
+<span class="c1"># Even if:</span>
+<span class="c1"># - Server crashes 1ms later</span>
+<span class="c1"># - Power loss</span>
+<span class="c1"># - Disk fails</span>
+<span class="c1"># - Meteorite hits the datacenter</span>
+<span class="c1">#</span>
+<span class="c1"># That $100 deposit is saved (in the log files)</span>
+<span class="c1"># Recovery process will replay it</span>
+</code></pre></div>
 <p><strong>Definition</strong>: Database moves from one valid state to another</p>
 <p><strong>Example: Constraints enforced</strong>
 <div class="highlight"><pre><span></span><code><span class="c1"># Database ensures constraints</span>
@@ -6424,7 +6611,7 @@
 <span class="n">account</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span>  <span class="c1"># Violates constraint</span>
 <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>  <span class="c1"># Raises IntegrityError</span>
 </code></pre></div></p>
-<h3 id="isolation">Isolation</h3>
+<h3 id="isolation_1">Isolation</h3>
 <p><strong>Definition</strong>: Concurrent transactions don't interfere with each other</p>
 <p><strong>Example: Race condition</strong>
 <div class="highlight"><pre><span></span><code><span class="c1"># Two users try to book the last seat simultaneously</span>
@@ -6450,7 +6637,7 @@
 <span class="k">else</span><span class="p">:</span>
     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Seat already booked&quot;</span><span class="p">)</span>
 </code></pre></div></p>
-<h3 id="durability">Durability</h3>
+<h3 id="durability_1">Durability</h3>
 <p><strong>Definition</strong>: Committed data persists even after crashes</p>
 <p><strong>How PostgreSQL ensures durability</strong>:
 1. Write-Ahead Logging (WAL)

@@ -2972,6 +2972,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#orm-vs-raw-sql" class="md-nav__link">
     ORM vs Raw SQL
   </a>
@@ -6078,6 +6085,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#orm-vs-raw-sql" class="md-nav__link">
     ORM vs Raw SQL
   </a>
@@ -6345,28 +6359,101 @@
 
 
 <h1 id="module-5-sqlalchemy-orm">Module 5: SQLAlchemy ORM</h1>
+<h2 id="introduction">Introduction</h2>
+<p>SQLAlchemy is the most popular Python ORM (Object-Relational Mapper). It bridges the gap between Python objects and relational databases, letting you work with database records as if they were Python classes.</p>
+<p><strong>What you'll learn</strong>:
+- <strong>ORM vs Raw SQL</strong>: When each is appropriate
+- <strong>Building models</strong>: Defining tables as Python classes
+- <strong>Relationships</strong>: Connecting related data (users ↔ posts)
+- <strong>Query optimization</strong>: Avoiding common performance traps
+- <strong>Production patterns</strong>: Repository pattern, transaction safety</p>
+<p><strong>The key benefit</strong>: Type-safe, maintainable database code. The key trade-off: Less control over SQL than raw queries.</p>
+<hr />
 <h2 id="orm-vs-raw-sql">ORM vs Raw SQL</h2>
 <h3 id="what-is-an-orm">What is an ORM?</h3>
-<p><strong>ORM (Object-Relational Mapping)</strong>: Maps database tables to Python classes</p>
-<p><strong>Raw SQL</strong>:
+<p><strong>ORM (Object-Relational Mapping)</strong> maps database tables to Python classes. Each row becomes an object instance, each column becomes an attribute.</p>
+<p><strong>Example comparison</strong>:</p>
+<p><strong>Raw SQL approach</strong>:
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">psycopg2</span>
 
-<span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;dbname=mydb&quot;</span><span class="p">)</span>
+<span class="c1"># Manual connection management</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="n">database</span><span class="o">=</span><span class="s2">&quot;mydb&quot;</span><span class="p">,</span>
+    <span class="n">user</span><span class="o">=</span><span class="s2">&quot;postgres&quot;</span><span class="p">,</span>
+    <span class="n">password</span><span class="o">=</span><span class="s2">&quot;secret&quot;</span>
+<span class="p">)</span>
 <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
-<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users WHERE email = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;user@example.com&#39;</span><span class="p">,))</span>
-<span class="n">user</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+
+<span class="c1"># Manual SQL (easy to get wrong)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+    <span class="s2">&quot;SELECT id, email, full_name, created_at FROM users WHERE email = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;user@example.com&#39;</span><span class="p">,)</span>
+<span class="p">)</span>
+<span class="n">row</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+
+<span class="c1"># Manual unpacking</span>
+<span class="k">if</span> <span class="n">row</span><span class="p">:</span>
+    <span class="n">user_id</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">full_name</span><span class="p">,</span> <span class="n">created_at</span> <span class="o">=</span> <span class="n">row</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="n">full_name</span><span class="p">}</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>  <span class="c1"># Don&#39;t forget!</span>
 </code></pre></div></p>
-<p><strong>SQLAlchemy ORM</strong>:
+<p><strong>ORM approach (SQLAlchemy)</strong>:
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">Session</span>
 
+<span class="c1"># Automatic connection pooling, type safety</span>
 <span class="n">user</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="s1">&#39;user@example.com&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+<span class="c1"># Python object (type-safe, autocomplete)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">full_name</span><span class="p">)</span>  <span class="c1"># IDE knows attribute exists</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">created_at</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>  <span class="c1"># IDE knows it&#39;s a datetime</span>
 </code></pre></div></p>
 <h3 id="when-to-use-each">When to Use Each</h3>
 <p><strong>Use ORM when</strong>:
-- Standard CRUD operations
-- Need type safety and validation
-- Want database-agnostic code
-- Working with relationships</p>
+- Standard CRUD operations (Create, Read, Update, Delete)
+- Need type safety and IDE autocomplete
+- Want database-agnostic code (switch databases without code changes)
+- Working with relationships (users.posts, post.author)
+- Building web frameworks (Flask, FastAPI)</p>
+<p><strong>Use raw SQL when</strong>:
+- Complex queries with CTEs, window functions, custom aggregations
+- Bulk operations (1M rows insert)
+- Database-specific features needed
+- Performance-critical queries needing fine control
+- Reporting and analytics</p>
+<p><strong>Production pattern</strong>: <strong>Use ORM for 90% of code, raw SQL for 10%</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># ORM: Simple queries</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>  <span class="c1"># PRIMARY KEY lookup</span>
+
+<span class="c1"># ORM: Relationships</span>
+<span class="n">orders</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>  <span class="c1"># Foreign key traversal</span>
+
+<span class="c1"># Raw SQL: Complex query</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">text</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">text</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    WITH user_stats AS (</span>
+<span class="s2">        SELECT user_id, COUNT(*) as order_count</span>
+<span class="s2">        FROM orders</span>
+<span class="s2">        GROUP BY user_id</span>
+<span class="s2">    )</span>
+<span class="s2">    SELECT u.*, s.order_count</span>
+<span class="s2">    FROM users u</span>
+<span class="s2">    LEFT JOIN user_stats s ON u.id = s.user_id</span>
+<span class="s2">    ORDER BY s.order_count DESC</span>
+<span class="s2">    LIMIT 10</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">))</span>
+
+<span class="n">top_users</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+</code></pre></div>
+<ul>
+<li>Want database-agnostic code</li>
+<li>Working with relationships</li>
+</ul>
 <p><strong>Use raw SQL when</strong>:
 - Complex queries (CTEs, window functions)
 - Bulk operations

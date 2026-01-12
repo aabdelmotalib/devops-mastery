@@ -2912,6 +2912,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#postgresql-architecture-practical-view" class="md-nav__link">
     PostgreSQL Architecture (Practical View)
   </a>
@@ -2962,6 +2969,13 @@
         
           <li class="md-nav__item">
   <a href="#data-types-what-actually-matters" class="md-nav__link">
+    Data Types (What Actually Matters)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-types-what-actually-matters_1" class="md-nav__link">
     Data Types (What Actually Matters)
   </a>
   
@@ -6092,6 +6106,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#postgresql-architecture-practical-view" class="md-nav__link">
     PostgreSQL Architecture (Practical View)
   </a>
@@ -6142,6 +6163,13 @@
         
           <li class="md-nav__item">
   <a href="#data-types-what-actually-matters" class="md-nav__link">
+    Data Types (What Actually Matters)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-types-what-actually-matters_1" class="md-nav__link">
     Data Types (What Actually Matters)
   </a>
   
@@ -6373,74 +6401,402 @@
 
 
 <h1 id="module-2-sql-databases-postgresql">Module 2: SQL Databases (PostgreSQL)</h1>
+<h2 id="introduction">Introduction</h2>
+<p>PostgreSQL is the most advanced open-source relational database available. In this module, you'll learn how to design and work with PostgreSQL for production backend systems.</p>
+<p><strong>What you'll master</strong>:
+- PostgreSQL architecture and how it guarantees data reliability
+- Creating robust schema with proper types, constraints, and relationships
+- Designing efficient indexes for query performance
+- Writing production-ready SQL queries with proper error handling
+- Understanding transaction semantics and isolation levels
+- Best practices for backend data models</p>
+<p>By the end of this module, you'll be able to design complete production database schemas and understand why each decision matters for reliability and performance.</p>
+<hr />
 <h2 id="postgresql-architecture-practical-view">PostgreSQL Architecture (Practical View)</h2>
 <h3 id="what-postgresql-actually-does">What PostgreSQL Actually Does</h3>
-<p>PostgreSQL is a <strong>process-based</strong> relational database that:
-1. Manages concurrent connections via separate processes
-2. Uses WAL (Write-Ahead Logging) for crash recovery
-3. Implements MVCC (Multi-Version Concurrency Control) for transactions
-4. Stores data in 8KB pages on disk</p>
-<p><strong>You don't need to memorize this</strong>. What matters:
-- PostgreSQL handles concurrency well
-- It's ACID-compliant (reliable for transactions)
-- It scales vertically (better hardware = better performance)</p>
+<p>PostgreSQL is a <strong>process-based</strong> relational database that:</p>
+<ol>
+<li>
+<p><strong>Manages concurrent connections via separate processes</strong> - Each client connection gets its own backend process. This provides true isolation but uses more memory than threaded approaches.</p>
+</li>
+<li>
+<p><strong>Uses WAL (Write-Ahead Logging) for crash recovery</strong> - Before any data is modified on disk, the change is written to a log. If the server crashes, it replays this log to recover. <strong>This is why your data survives crashes</strong>.</p>
+</li>
+<li>
+<p><strong>Implements MVCC (Multi-Version Concurrency Control) for transactions</strong> - Multiple transactions see different versions of the same data simultaneously. Readers never block writers, and writers don't block readers. <strong>This is why concurrent access is fast</strong>.</p>
+</li>
+<li>
+<p><strong>Stores data in 8KB pages on disk</strong> - Data is organized in fixed-size pages. This affects how indexes work and query planning.</p>
+</li>
+</ol>
+<p><strong>What matters for your application</strong>:
+- PostgreSQL handles concurrency extremely well (thousands of simultaneous users)
+- It's fully ACID-compliant (your data is safe)
+- It scales vertically (better hardware = better performance)
+- It's not designed for massive horizontal scaling (but works fine for most applications)</p>
 <h3 id="installation-linux">Installation (Linux)</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Ubuntu/Debian</span>
+<p>The installation process varies slightly by distribution. Here's the most common approach:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ubuntu/Debian/Linux Mint</span>
 sudo<span class="w"> </span>apt<span class="w"> </span>update
-sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>postgresql<span class="w"> </span>postgresql-contrib
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>postgresql<span class="w"> </span>postgresql-contrib<span class="w"> </span>postgresql-client
 
-<span class="c1"># Start service</span>
+<span class="c1"># Verify installation</span>
+sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>psql<span class="w"> </span>--version
+
+<span class="c1"># Start PostgreSQL service</span>
 sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>postgresql
+
+<span class="c1"># Enable auto-start on boot</span>
 sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>postgresql
 
-<span class="c1"># Access PostgreSQL</span>
-sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>psql
+<span class="c1"># Verify it&#39;s running</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>postgresql
 </code></pre></div>
-<h3 id="creating-a-database">Creating a Database</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- As postgres user</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">backend_db</span><span class="p">;</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">backend_user</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="s1">&#39;secure_password&#39;</span><span class="p">;</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">backend_db</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">backend_user</span><span class="p">;</span>
+<p><strong>On a development machine</strong>, PostgreSQL starts automatically after installation.</p>
+<p><strong>On a server</strong>, you might need to configure:
+<div class="highlight"><pre><span></span><code><span class="c1"># Allow remote connections (CAUTION: requires authentication)</span>
+sudo<span class="w"> </span>nano<span class="w"> </span>/etc/postgresql/15/main/postgresql.conf
+<span class="c1"># Find and change: listen_addresses = &#39;localhost&#39; to listen_addresses = &#39;*&#39;</span>
 
-<span class="c1">-- Connect to database</span>
-<span class="err">\</span><span class="k">c</span><span class="w"> </span><span class="n">backend_db</span>
+<span class="c1"># Allow remote authentication</span>
+sudo<span class="w"> </span>nano<span class="w"> </span>/etc/postgresql/15/main/pg_hba.conf
+<span class="c1"># Add: host    all             all             0.0.0.0/0            md5</span>
+</code></pre></div></p>
+<h3 id="creating-a-database">Creating a Database</h3>
+<p>The <code>postgres</code> user is the superuser created during installation. You'll use it to create your application user and database.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Connect as superuser</span>
+<span class="n">sudo</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="n">psql</span>
+
+<span class="c1">-- Create database for application</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">backend_db</span><span class="w"> </span><span class="k">ENCODING</span><span class="w"> </span><span class="s1">&#39;UTF8&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Create user with password (for application to use)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">backend_user</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="s1">&#39;strong_password_here&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Grant privileges on database</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">CONNECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">backend_db</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">backend_user</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">USAGE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">SCHEMA</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">backend_user</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">SCHEMA</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">backend_user</span><span class="p">;</span>
+
+<span class="c1">-- Grant all privileges on all tables (current and future)</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="k">SCHEMA</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">TABLES</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">backend_user</span><span class="p">;</span>
+
+<span class="c1">-- If you created tables as postgres, transfer ownership</span>
+<span class="c1">-- ALTER TABLE table_name OWNER TO backend_user;</span>
+
+<span class="c1">-- Verify user was created</span>
+<span class="err">\</span><span class="n">du</span>
+
+<span class="c1">-- Connect to new database as new user</span>
+<span class="err">\</span><span class="k">c</span><span class="w"> </span><span class="n">backend_db</span><span class="w"> </span><span class="n">backend_user</span>
+
+<span class="c1">-- Exit</span>
+<span class="err">\</span><span class="n">q</span>
 </code></pre></div>
+<p><strong>Connection string for application</strong>:
+<div class="highlight"><pre><span></span><code><span class="c1"># Flask/SQLAlchemy</span>
+<span class="n">DATABASE_URL</span> <span class="o">=</span> <span class="s2">&quot;postgresql://backend_user:password@localhost/backend_db&quot;</span>
+
+<span class="c1"># Or with environment variable (recommended)</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">DATABASE_URL</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;DATABASE_URL&#39;</span><span class="p">,</span> <span class="s1">&#39;postgresql://backend_user:password@localhost/backend_db&#39;</span><span class="p">)</span>
+</code></pre></div></p>
 <h2 id="tables-rows-columns">Tables, Rows, Columns</h2>
 <h3 id="creating-tables">Creating Tables</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Users table</span>
+<p>A table is the fundamental structure in PostgreSQL. Each table represents an entity (users, posts, orders), and each row is an instance of that entity.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Users table - core entity</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w">                              </span><span class="c1">-- Auto-incrementing ID</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">                 </span><span class="c1">-- Email must be unique</span>
+<span class="w">    </span><span class="n">password_hash</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">                </span><span class="c1">-- Password hash (never store plaintext)</span>
+<span class="w">    </span><span class="n">full_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span><span class="w">                             </span><span class="c1">-- Optional full name</span>
+<span class="w">    </span><span class="n">is_active</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">TRUE</span><span class="p">,</span><span class="w">                     </span><span class="c1">-- Active status, defaults to TRUE</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">(),</span><span class="w">                 </span><span class="c1">-- Timestamp when created</span>
+<span class="w">    </span><span class="n">updated_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">(),</span><span class="w">                 </span><span class="c1">-- Timestamp of last update</span>
+
+<span class="w">    </span><span class="c1">-- Optional: explicitly name primary key</span>
+<span class="w">    </span><span class="c1">-- CONSTRAINT pk_users PRIMARY KEY (id)</span>
+<span class="p">);</span>
+
+<span class="c1">-- Posts table - depends on users</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
-<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-<span class="w">    </span><span class="n">password_hash</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-<span class="w">    </span><span class="n">is_active</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">TRUE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">                           </span><span class="c1">-- Foreign key to users</span>
+<span class="w">    </span><span class="n">title</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">content</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span><span class="w">                                       </span><span class="c1">-- Unlimited length</span>
+<span class="w">    </span><span class="n">published</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">FALSE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">view_count</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
 <span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">(),</span>
+
+<span class="w">    </span><span class="c1">-- Relationship: each post belongs to one user</span>
+<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">fk_posts_user_id</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+<span class="w">        </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span>
+<span class="w">        </span><span class="c1">-- ON DELETE CASCADE: Delete posts when user is deleted</span>
+<span class="p">);</span>
+
+<span class="c1">-- Comments table - multiple relationships</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">comments</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">post_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">content</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">(),</span>
+
+<span class="w">    </span><span class="c1">-- Relationships</span>
+<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">fk_comments_post_id</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">post_id</span><span class="p">)</span>
+<span class="w">        </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">posts</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+
+<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">fk_comments_user_id</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+<span class="w">        </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">        </span><span class="c1">-- ON DELETE SET NULL: Keep comment but remove user reference</span>
+<span class="p">);</span>
+</code></pre></div>
+<p><strong>Common table creation mistakes to avoid</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- BAD: Missing NOT NULL constraints</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span><span class="w">  </span><span class="c1">-- Can be NULL (useless)</span>
+<span class="w">    </span><span class="n">password_hash</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w">  </span><span class="c1">-- Can be NULL (security issue!)</span>
+<span class="p">);</span>
+
+<span class="c1">-- GOOD: Enforce required fields</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">  </span><span class="c1">-- Must be provided</span>
+<span class="w">    </span><span class="n">password_hash</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+
+<span class="c1">-- BAD: No defaults for timestamps</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="p">,</span><span class="w">  </span><span class="c1">-- Have to set manually (error-prone)</span>
+<span class="p">);</span>
+
+<span class="c1">-- GOOD: Automatic timestamps</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">(),</span><span class="w">  </span><span class="c1">-- Automatically set</span>
 <span class="w">    </span><span class="n">updated_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
 <span class="p">);</span>
 
-<span class="c1">-- Posts table</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
-<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-<span class="w">    </span><span class="n">title</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-<span class="w">    </span><span class="n">content</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
-<span class="w">    </span><span class="n">published</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">FALSE</span><span class="p">,</span>
-<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
+<span class="c1">-- BAD: VARCHAR with no size limit</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="w">  </span><span class="c1">-- PostgreSQL allows unlimited, but wasteful</span>
+<span class="p">);</span>
+
+<span class="c1">-- GOOD: Reasonable limit</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w">  </span><span class="c1">-- Enough for real names</span>
 <span class="p">);</span>
 </code></pre></div>
 <h3 id="data-types-what-actually-matters">Data Types (What Actually Matters)</h3>
-<p><strong>Text</strong>:
-- <code>VARCHAR(n)</code> - Variable length, max n characters (use for emails, names)
-- <code>TEXT</code> - Unlimited length (use for content, descriptions)</p>
-<p><strong>Numbers</strong>:
-- <code>INTEGER</code> - Whole numbers (-2B to 2B)
-- <code>BIGINT</code> - Large whole numbers (use for IDs if you expect &gt; 2B rows)
-- <code>SERIAL</code> - Auto-incrementing integer (use for primary keys)
-- <code>DECIMAL(p, s)</code> - Exact decimals (use for money: <code>DECIMAL(10, 2)</code>)</p>
-<p><strong>Boolean</strong>:
-- <code>BOOLEAN</code> - TRUE/FALSE (use for flags: is_active, is_verified)</p>
-<p><strong>Date/Time</strong>:
-- <code>TIMESTAMP</code> - Date and time (use for created_at, updated_at)
-- <code>DATE</code> - Date only (use for birthdays, deadlines)</p>
+<p>PostgreSQL has many data types. Focus on these 10 that cover 95% of real applications:</p>
+<h3 id="data-types-what-actually-matters_1">Data Types (What Actually Matters)</h3>
+<p>PostgreSQL has many data types. Focus on these 10 that cover 95% of real applications:</p>
+<p><strong>Text Types</strong>:
+- <strong><code>VARCHAR(n)</code></strong> - Variable length string, max n characters
+  - Use for: emails, usernames, names, phone numbers, URLs
+  - Example: <code>VARCHAR(255)</code> for email (RFC 5321 limit is 254)
+  - Don't use: VARCHAR without size (allows unlimited, causes bloat)</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">  </span><span class="c1">-- Good: reasonable limit</span>
+<span class="w">    </span><span class="n">username</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w">  </span><span class="c1">-- Good: short usernames</span>
+<span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><strong><code>TEXT</code></strong> - Unlimited length string</li>
+<li>Use for: descriptions, content, bio, comments</li>
+<li>Example: Blog post content, user bio, product description</li>
+<li>Benefits: No need to guess max length</li>
+<li>Costs: Slightly slower than VARCHAR for very short strings (usually negligible)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">title</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">  </span><span class="c1">-- Short, bounded</span>
+<span class="w">    </span><span class="n">content</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w">          </span><span class="c1">-- Long, unbounded</span>
+<span class="p">);</span>
+</code></pre></div>
+<p><strong>Numeric Types</strong>:
+- <strong><code>INTEGER</code></strong> - 32-bit signed integer: -2,147,483,648 to 2,147,483,647
+  - Use for: counts, ages, quantities, status codes
+  - Sufficient for: Most applications (2B users? probably don't need it yet)
+  - Size: 4 bytes</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">stock</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">       </span><span class="c1">-- Number in stock</span>
+<span class="w">    </span><span class="n">reorder_point</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">,</span><span class="w">          </span><span class="c1">-- Reorder threshold</span>
+<span class="w">    </span><span class="n">views</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span>
+<span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><strong><code>BIGINT</code></strong> - 64-bit signed integer: -9.2 quintillion to 9.2 quintillion</li>
+<li>Use for: When you'll definitely exceed 2B values</li>
+<li>Example: Total hits counter for viral sites, high-frequency trading</li>
+<li>Size: 8 bytes (twice as much disk/memory)</li>
+<li>When to use: 1M+ events per day × 10 years = probably need BIGINT</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="n">BIGSERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w">      </span><span class="c1">-- Use BIGSERIAL for auto-increment</span>
+<span class="w">    </span><span class="n">event_count</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span>
+<span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><strong><code>SERIAL</code> / <code>BIGSERIAL</code></strong> - Auto-incrementing integer (use for primary keys)</li>
+<li>Use for: Primary key IDs</li>
+<li>SERIAL: Starts at 1, increments by 1, max 2B values</li>
+<li>BIGSERIAL: Same but up to 9.2 quintillion</li>
+<li>Creates a sequence automatically (don't worry about details)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w">          </span><span class="c1">-- Auto-increment from 1</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span>
+<span class="p">);</span>
+
+<span class="c1">-- Or explicit with BIGSERIAL</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="n">BIGSERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w">        </span><span class="c1">-- For very high volume</span>
+<span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><strong><code>DECIMAL(p, s)</code></strong> - Exact decimal number</li>
+<li>Use for: Money, prices, precise calculations</li>
+<li><strong>NEVER</strong> use FLOAT for money (rounding errors!)</li>
+<li><code>p</code> = total digits, <code>s</code> = digits after decimal</li>
+<li>Size: Depends on precision (up to 38 digits)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">total</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">     </span><span class="c1">-- Max 10 digits: $99,999,999.99</span>
+<span class="w">    </span><span class="n">tax</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w">                </span><span class="c1">-- Always 2 decimals for cents</span>
+<span class="w">    </span><span class="n">discount_percent</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">    </span><span class="c1">-- Up to 999.99%</span>
+<span class="p">);</span>
+
+<span class="c1">-- BAD: Don&#39;t use float for money!</span>
+<span class="n">price</span><span class="w"> </span><span class="nb">FLOAT</span><span class="w">  </span><span class="c1">-- Results in 19.99 becoming 19.989999... or 20.000001...</span>
+
+<span class="c1">-- GOOD: Always DECIMAL</span>
+<span class="n">price</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">  </span><span class="c1">-- Exactly 19.99</span>
+</code></pre></div>
+<p><strong>Boolean Type</strong>:
+- <strong><code>BOOLEAN</code></strong> - TRUE or FALSE (not NULL-safe)
+  - Use for: Flags, boolean states, yes/no values
+  - In SQL: <code>TRUE</code>, <code>FALSE</code>, <code>'t'</code>, <code>'f'</code>, <code>1</code>, <code>0</code>
+  - In Python: True, False, None
+  - Size: 1 byte</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">is_active</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">TRUE</span><span class="p">,</span><span class="w">      </span><span class="c1">-- Active by default</span>
+<span class="w">    </span><span class="n">is_verified</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">FALSE</span><span class="p">,</span><span class="w">   </span><span class="c1">-- Not verified by default</span>
+<span class="w">    </span><span class="n">is_admin</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w">            </span><span class="c1">-- Required field</span>
+<span class="p">);</span>
+
+<span class="c1">-- Usage</span>
+<span class="k">UPDATE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">is_active</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">FALSE</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">is_verified</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">TRUE</span><span class="p">;</span>
+</code></pre></div>
+<p><strong>Date/Time Types</strong>:
+- <strong><code>TIMESTAMP</code></strong> - Date and time with timezone awareness
+  - Use for: Timestamps when things happened (created_at, updated_at, logged_in_at)
+  - Includes: Year, month, day, hour, minute, second, millisecond
+  - Size: 8 bytes
+  - Best practice: Always use <code>DEFAULT NOW()</code> to auto-set</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">(),</span><span class="w">           </span><span class="c1">-- When record created</span>
+<span class="w">    </span><span class="n">updated_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">(),</span><span class="w">           </span><span class="c1">-- When last updated</span>
+<span class="w">    </span><span class="n">last_login</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w">                          </span><span class="c1">-- Can be NULL (never logged in)</span>
+<span class="p">);</span>
+
+<span class="c1">-- Query time ranges</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;30 days&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">last_login</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;6 months&#39;</span><span class="p">;</span>
+</code></pre></div>
+<ul>
+<li><strong><code>DATE</code></strong> - Date only, no time component</li>
+<li>Use for: Birthdays, deadlines, dates when time doesn't matter</li>
+<li>Example: User birthdate (9:45am birthday is same as 11:20pm)</li>
+<li>Size: 4 bytes (saves space if time not needed)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">birthdate</span><span class="w"> </span><span class="nb">DATE</span><span class="p">,</span><span class="w">                 </span><span class="c1">-- Just the date</span>
+<span class="w">    </span><span class="n">account_expiry_date</span><span class="w"> </span><span class="nb">DATE</span>
+<span class="p">);</span>
+</code></pre></div>
+<p><strong>JSON Type</strong>:
+- <strong><code>JSONB</code></strong> - Binary JSON (optimized for queries)
+  - Use for: Flexible data, metadata, nested structures
+  - Better than TEXT JSON (JSONB is indexed and queryable)
+  - Supports: Objects, arrays, primitives</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">metadata</span><span class="w"> </span><span class="n">JSONB</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;{}&#39;</span><span class="p">::</span><span class="n">jsonb</span><span class="w">    </span><span class="c1">-- Flexible schema</span>
+<span class="p">);</span>
+
+<span class="c1">-- Insert</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;user@example.com&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;{&quot;preferences&quot;: {&quot;theme&quot;: &quot;dark&quot;, &quot;language&quot;: &quot;en&quot;}, &quot;tags&quot;: [&quot;vip&quot;, &quot;beta&quot;]}&#39;</span><span class="p">::</span><span class="n">jsonb</span>
+<span class="p">);</span>
+
+<span class="c1">-- Query JSONB</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s1">&#39;preferences&#39;</span><span class="w"> </span><span class="o">-&gt;&gt;</span><span class="w"> </span><span class="s1">&#39;theme&#39;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dark&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="o">@&gt;</span><span class="w"> </span><span class="s1">&#39;{&quot;tags&quot;: [&quot;vip&quot;]}&#39;</span><span class="p">::</span><span class="n">jsonb</span><span class="p">;</span>
+</code></pre></div>
+<p><strong>Type Selection Summary</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Need</th>
+<th>Type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Small integer</td>
+<td>INTEGER</td>
+<td>age, stock count</td>
+</tr>
+<tr>
+<td>Huge count</td>
+<td>BIGINT</td>
+<td>total events, impressions</td>
+</tr>
+<tr>
+<td>Auto ID</td>
+<td>SERIAL/BIGSERIAL</td>
+<td>Primary key</td>
+</tr>
+<tr>
+<td>Money</td>
+<td>DECIMAL(10,2)</td>
+<td>Price, salary</td>
+</tr>
+<tr>
+<td>Flag/Status</td>
+<td>BOOLEAN</td>
+<td>is_active, published</td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td>TIMESTAMP</td>
+<td>created_at, updated_at</td>
+</tr>
+<tr>
+<td>Date only</td>
+<td>DATE</td>
+<td>birthdate, deadline</td>
+</tr>
+<tr>
+<td>Short text</td>
+<td>VARCHAR(n)</td>
+<td>email, name, username</td>
+</tr>
+<tr>
+<td>Long text</td>
+<td>TEXT</td>
+<td>description, content, bio</td>
+</tr>
+<tr>
+<td>Flexible</td>
+<td>JSONB</td>
+<td>metadata, preferences</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>DATE</code> - Date only (use for birthdays, deadlines)</li>
+</ul>
 <p><strong>JSON</strong>:
 - <code>JSONB</code> - Binary JSON (use for flexible data, metadata)</p>
 <h3 id="backend-example-user-model">Backend Example: User Model</h3>

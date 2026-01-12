@@ -3012,6 +3012,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#indexing-strategy" class="md-nav__link">
     Indexing Strategy
   </a>
@@ -6099,6 +6106,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#indexing-strategy" class="md-nav__link">
     Indexing Strategy
   </a>
@@ -6387,27 +6401,102 @@
 
 
 <h1 id="module-7-database-performance">Module 7: Database Performance</h1>
+<h2 id="introduction">Introduction</h2>
+<p><strong>Database performance is the difference between a smooth user experience and a system that times out.</strong></p>
+<p>In this module, you'll learn the techniques that separate fast systems from slow ones:</p>
+<p><strong>What you'll master</strong>:
+- <strong>Indexing strategy</strong>: When to add indexes and column order effects
+- <strong>Query analysis</strong>: Using EXPLAIN to find bottlenecks
+- <strong>Connection pooling</strong>: Reusing connections instead of creating new ones
+- <strong>N+1 problem</strong>: Detecting and eliminating the classic performance killer
+- <strong>Caching with Redis</strong>: Caching query results for 100-1000x speedup
+- <strong>Monitoring</strong>: Finding slow queries in production</p>
+<p><strong>The philosophy</strong>: Measure first, optimize second. Don't optimize for problems you don't have.</p>
+<hr />
 <h2 id="indexing-strategy">Indexing Strategy</h2>
 <h3 id="understanding-indexes">Understanding Indexes</h3>
-<p><strong>What indexes do</strong>: Create a separate data structure (B-tree) for fast lookups</p>
+<p>An <strong>index</strong> is a separate data structure (usually B-tree) that lets PostgreSQL find data without scanning every row.</p>
+<p><strong>Visual comparison</strong>:</p>
+<div class="highlight"><pre><span></span><code>Index: Like a book index
+┌─────────────────────┐
+│ B-tree (sorted)     │
+├─────────────────────┤
+│ alice → row 5       │  ← Find &#39;alice&#39; in O(log n) = 20 steps
+│ bob → row 12        │
+│ charlie → row 3     │
+│ diana → row 8       │
+│ ...                 │
+└─────────────────────┘
+
+No index: Like reading word-by-word
+┌──────────────────────────┐
+│ Users table (unsorted)   │
+├──────────────────────────┤
+│ Row 1: zoe              │
+│ Row 2: alice ← FOUND!   │  ← Find &#39;alice&#39; in O(n) = 1M steps
+│ Row 3: charlie          │
+│ ...                     │
+│ Row 1000000: bob        │
+└──────────────────────────┘
+</code></pre></div>
+<p><strong>What indexes do</strong>:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Without index: Sequential scan (slow)</span>
+<span class="c1">-- Even with 100 users, FULL TABLE SCAN happens</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;user@example.com&#39;</span><span class="p">;</span>
-<span class="c1">-- Scans all rows: O(n)</span>
+<span class="c1">-- PostgreSQL: &quot;Check every row... nope... nope... found it!&quot;</span>
+<span class="c1">-- Performance: O(n) - Linear</span>
+<span class="c1">-- Time: 1M users = 3 seconds</span>
 
 <span class="c1">-- With index: Index scan (fast)</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_users_email</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">email</span><span class="p">);</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;user@example.com&#39;</span><span class="p">;</span>
-<span class="c1">-- Uses B-tree: O(log n)</span>
+<span class="c1">-- PostgreSQL: &quot;Check index... found pointer... jump to row&quot;</span>
+<span class="c1">-- Performance: O(log n) - Logarithmic</span>
+<span class="c1">-- Time: 1M users = 0.01 seconds (300x faster!)</span>
 </code></pre></div>
 <h3 id="when-to-create-indexes">When to Create Indexes</h3>
-<p><strong>Always index</strong>:
-1. Primary keys (automatic)
-2. Foreign keys
-3. Columns in WHERE clauses
-4. Columns in JOIN conditions
-5. Columns in ORDER BY
-6. Columns in GROUP BY</p>
-<p><strong>Example</strong>:
+<p><strong>Index the following columns immediately</strong>:</p>
+<ol>
+<li><strong>Primary keys</strong> - Automatic (SERIAL PRIMARY KEY)</li>
+<li><strong>Foreign keys</strong> - Always use in WHERE/JOIN</li>
+<li><strong>Columns in WHERE clauses</strong> - Most common</li>
+<li><strong>Columns in JOIN conditions</strong> - Speeds up joins</li>
+<li><strong>Columns in ORDER BY</strong> - Sorts already-ordered data</li>
+<li><strong>Columns in GROUP BY</strong> - Reduces grouping cost</li>
+</ol>
+<p><strong>Example (real backend schema)</strong>:
+<div class="highlight"><pre><span></span><code><span class="c1">-- Users table</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w">  </span><span class="c1">-- Indexed automatically</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="c1">-- Index email (users search by email)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_users_email</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">email</span><span class="p">);</span>
+
+<span class="c1">-- Index created_at (sort by recent users)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_users_created_at</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">created_at</span><span class="w"> </span><span class="k">DESC</span><span class="p">);</span>
+
+<span class="c1">-- Posts table</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w">  </span><span class="c1">-- Indexed automatically</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="n">published</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">FALSE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="c1">-- Index foreign key (find posts by user)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_posts_user_id</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">posts</span><span class="p">(</span><span class="n">user_id</span><span class="p">);</span>
+
+<span class="c1">-- Index publication status (find published posts)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_posts_published</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">posts</span><span class="p">(</span><span class="n">published</span><span class="p">)</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">published</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">TRUE</span><span class="p">;</span><span class="w">  </span><span class="c1">-- Partial index - smaller, faster</span>
+
+<span class="c1">-- Composite index for common query</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_posts_published_created</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">posts</span><span class="p">(</span><span class="n">published</span><span class="p">,</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="k">DESC</span><span class="p">);</span>
+<span class="c1">-- Helps: WHERE published = TRUE ORDER BY created_at DESC</span>
+</code></pre></div></p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Users table</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_users_email</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">email</span><span class="p">);</span><span class="w">  </span><span class="c1">-- WHERE email = ?</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_users_created_at</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">created_at</span><span class="p">);</span><span class="w">  </span><span class="c1">-- ORDER BY created_at</span>
@@ -6415,7 +6504,7 @@
 <span class="c1">-- Posts table</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_posts_user_id</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">posts</span><span class="p">(</span><span class="n">user_id</span><span class="p">);</span><span class="w">  </span><span class="c1">-- JOIN, WHERE</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_posts_published_created</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">posts</span><span class="p">(</span><span class="n">published</span><span class="p">,</span><span class="w"> </span><span class="n">created_at</span><span class="p">);</span><span class="w">  </span><span class="c1">-- WHERE published = TRUE ORDER BY created_at</span>
-</code></pre></div></p>
+</code></pre></div>
 <h3 id="composite-index-column-order">Composite Index Column Order</h3>
 <p><strong>Rule</strong>: Most selective column first</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- BAD: created_at first (not selective)</span>
