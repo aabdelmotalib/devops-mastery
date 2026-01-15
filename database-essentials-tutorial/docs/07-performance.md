@@ -1,33 +1,119 @@
 # Module 7: Database Performance
 
+## Introduction
+
+**Database performance is the difference between a smooth user experience and a system that times out.**
+
+In this module, you'll learn the techniques that separate fast systems from slow ones:
+
+**What you'll master**:
+- **Indexing strategy**: When to add indexes and column order effects
+- **Query analysis**: Using EXPLAIN to find bottlenecks
+- **Connection pooling**: Reusing connections instead of creating new ones
+- **N+1 problem**: Detecting and eliminating the classic performance killer
+- **Caching with Redis**: Caching query results for 100-1000x speedup
+- **Monitoring**: Finding slow queries in production
+
+**The philosophy**: Measure first, optimize second. Don't optimize for problems you don't have.
+
+---
+
 ## Indexing Strategy
 
 ### Understanding Indexes
 
-**What indexes do**: Create a separate data structure (B-tree) for fast lookups
+An **index** is a separate data structure (usually B-tree) that lets PostgreSQL find data without scanning every row.
+
+**Visual comparison**:
+
+```
+Index: Like a book index
+┌─────────────────────┐
+│ B-tree (sorted)     │
+├─────────────────────┤
+│ alice → row 5       │  ← Find 'alice' in O(log n) = 20 steps
+│ bob → row 12        │
+│ charlie → row 3     │
+│ diana → row 8       │
+│ ...                 │
+└─────────────────────┘
+
+No index: Like reading word-by-word
+┌──────────────────────────┐
+│ Users table (unsorted)   │
+├──────────────────────────┤
+│ Row 1: zoe              │
+│ Row 2: alice ← FOUND!   │  ← Find 'alice' in O(n) = 1M steps
+│ Row 3: charlie          │
+│ ...                     │
+│ Row 1000000: bob        │
+└──────────────────────────┘
+```
+
+**What indexes do**:
 
 ```sql
 -- Without index: Sequential scan (slow)
+-- Even with 100 users, FULL TABLE SCAN happens
 SELECT * FROM users WHERE email = 'user@example.com';
--- Scans all rows: O(n)
+-- PostgreSQL: "Check every row... nope... nope... found it!"
+-- Performance: O(n) - Linear
+-- Time: 1M users = 3 seconds
 
 -- With index: Index scan (fast)
 CREATE INDEX idx_users_email ON users(email);
 SELECT * FROM users WHERE email = 'user@example.com';
--- Uses B-tree: O(log n)
+-- PostgreSQL: "Check index... found pointer... jump to row"
+-- Performance: O(log n) - Logarithmic
+-- Time: 1M users = 0.01 seconds (300x faster!)
 ```
 
 ### When to Create Indexes
 
-**Always index**:
-1. Primary keys (automatic)
-2. Foreign keys
-3. Columns in WHERE clauses
-4. Columns in JOIN conditions
-5. Columns in ORDER BY
-6. Columns in GROUP BY
+**Index the following columns immediately**:
 
-**Example**:
+1. **Primary keys** - Automatic (SERIAL PRIMARY KEY)
+2. **Foreign keys** - Always use in WHERE/JOIN
+3. **Columns in WHERE clauses** - Most common
+4. **Columns in JOIN conditions** - Speeds up joins
+5. **Columns in ORDER BY** - Sorts already-ordered data
+6. **Columns in GROUP BY** - Reduces grouping cost
+
+**Example (real backend schema)**:
+```sql
+-- Users table
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,  -- Indexed automatically
+    email VARCHAR(255) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Index email (users search by email)
+CREATE INDEX idx_users_email ON users(email);
+
+-- Index created_at (sort by recent users)
+CREATE INDEX idx_users_created_at ON users(created_at DESC);
+
+-- Posts table
+CREATE TABLE posts (
+    id SERIAL PRIMARY KEY,  -- Indexed automatically
+    user_id INTEGER NOT NULL REFERENCES users(id),
+    published BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Index foreign key (find posts by user)
+CREATE INDEX idx_posts_user_id ON posts(user_id);
+
+-- Index publication status (find published posts)
+CREATE INDEX idx_posts_published ON posts(published)
+WHERE published = TRUE;  -- Partial index - smaller, faster
+
+-- Composite index for common query
+CREATE INDEX idx_posts_published_created ON posts(published, created_at DESC);
+-- Helps: WHERE published = TRUE ORDER BY created_at DESC
+```
+
 ```sql
 -- Users table
 CREATE INDEX idx_users_email ON users(email);  -- WHERE email = ?

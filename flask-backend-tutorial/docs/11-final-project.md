@@ -1,6 +1,56 @@
 # Final Project: RESTful User Management API
 
-Build a complete, production-ready RESTful API that demonstrates all concepts learned throughout this tutorial.
+## Introduction: Bringing It All Together
+
+You've learned the fundamental concepts of Flask—routing, request handling, responses, authentication, extensions, and error handling. Now it's time to apply everything together in a real-world scenario: building a production-ready User Management API.
+
+This capstone project integrates every concept from Modules 0-10:
+
+**What You'll Build**: A complete RESTful API that manages user accounts with secure authentication, role-based access control, and production-quality code organization. This is the kind of API you'd deploy to production for a real application.
+
+**Key Learning Outcomes**:
+1. **Architecture**: How to structure a Flask application for maintainability and scalability using blueprints
+2. **Database Integration**: Using SQLAlchemy ORM with migrations for data persistence
+3. **Authentication**: Implementing JWT-based authentication with token refresh strategies
+4. **Authorization**: Building role-based access control (RBAC) to enforce security policies
+5. **Validation**: Properly validating input data before processing
+6. **Error Handling**: Consistent error responses with proper HTTP status codes
+7. **Testing**: Writing comprehensive tests for API endpoints
+8. **Deployment**: Preparing your application for production deployment
+9. **Monitoring**: Adding logging and observability to production systems
+10. **Best Practices**: Security, performance, and maintainability patterns
+
+**Project Structure Preview**:
+```
+user-management-api/
+├── config.py              # Environment-based configuration
+├── requirements.txt       # Python dependencies
+├── migrations/            # Database schema changes
+├── tests/                 # Comprehensive test suite
+├── app/
+│   ├── __init__.py       # Application factory
+│   ├── models.py         # Database models (User, Role)
+│   ├── extensions.py     # Initialized extensions (db, jwt, etc.)
+│   ├── auth/
+│   │   ├── routes.py     # Login, register, token refresh
+│   │   └── decorators.py # Authentication/authorization helpers
+│   ├── users/
+│   │   ├── routes.py     # CRUD operations
+│   │   └── utils.py      # User-related utilities
+│   ├── errors/
+│   │   └── handlers.py   # Centralized error handling
+│   └── utils/
+│       └── validators.py # Input validation
+└── run.py               # Application entry point
+```
+
+This structure demonstrates the production patterns you'll use in real companies. It's modular, testable, and scales as your application grows.
+
+**Time Estimate**: 6-8 hours to complete all requirements
+**Difficulty**: Intermediate (assumes solid understanding of preceding modules)
+**Prerequisites**: Complete understanding of Modules 0-10
+
+Let's build something professional.
 
 ## Project Overview
 

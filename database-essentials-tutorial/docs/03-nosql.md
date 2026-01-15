@@ -1,33 +1,144 @@
 # Module 3: NoSQL Databases
 
+## Introduction
+
+NoSQL databases solve different problems than relational databases. They excel at handling flexible schemas, massive write throughput, and distributed systems. However, they sacrifice consistency guarantees that SQL databases provide.
+
+In this module, you'll learn:
+- **MongoDB**: Document storage for flexible schemas
+- **Redis**: In-memory store for caching and real-time features
+- **When to use each** and avoid common mistakes
+- **Production patterns** for combining SQL + NoSQL
+- **Architecture decisions** that affect reliability and performance
+
+The key insight: **Don't replace PostgreSQL with NoSQL. Complement it.** A robust production system uses PostgreSQL for core transactional data and NoSQL for specific problems it solves better.
+
+---
+
 ## MongoDB: Document Database
 
 ### What MongoDB Actually Is
 
-MongoDB stores data as JSON-like documents (BSON internally):
+MongoDB stores data as JSON-like documents (BSON internally). Unlike relational databases with tables and rows, MongoDB has collections and documents.
 
-```javascript
-{
-  "_id": ObjectId("507f1f77bcf86cd799439011"),
-  "email": "user@example.com",
-  "profile": {
-    "name": "John Doe",
-    "age": 30
-  },
-  "tags": ["python", "backend"],
-  "created_at": ISODate("2024-01-01T00:00:00Z")
-}
+**Visual comparison**:
+
+```
+PostgreSQL (Relational):
+┌─ users table ──────────────────────┐
+│ id │ email            │ age │ name  │
+├────┼──────────────────┼─────┼───────┤
+│ 1  │ user@example.com │ 30  │ John  │
+│ 2  │ jane@example.com │ 28  │ Jane  │
+└────────────────────────────────────┘
+
+MongoDB (Document):
+┌─ users collection ────────────────────────────┐
+│ {                                              │
+│   "_id": ObjectId("..."),                      │
+│   "email": "user@example.com",                 │
+│   "age": 30,                                   │
+│   "name": "John",                              │
+│   "profile": {  ← Nested!                      │
+│     "bio": "Engineer",                         │
+│     "skills": ["Python", "React"]              │
+│   }                                            │
+│ }                                              │
+│ {                                              │
+│   "_id": ObjectId("..."),                      │
+│   "email": "jane@example.com",                 │
+│   "age": 28,                                   │
+│   "name": "Jane",                              │
+│   "profile": {  ← Different structure!         │
+│     "bio": "Designer",                         │
+│     "tools": ["Figma", "Adobe XD"]             │
+│   }                                            │
+│ }                                              │
+└───────────────────────────────────────────────┘
 ```
 
 **Key characteristics**:
-- No fixed schema (flexible structure)
-- Nested documents (no joins needed)
-- Horizontal scaling (sharding)
-- Eventually consistent (by default)
+- **No fixed schema** - Each document can have different fields
+- **Nested documents** - No joins needed, data embedded
+- **Horizontal scaling** - Built-in sharding across servers
+- **Eventually consistent** - By default, replicas catch up later (faster writes)
+- **Flexible queries** - Can query any field in any document
+
+**Example document**:
+```javascript
+{
+  "_id": ObjectId("507f1f77bcf86cd799439011"),  // Unique ID (auto-generated)
+  "email": "user@example.com",
+  "profile": {                                   // Nested object
+    "name": "John Doe",
+    "age": 30,
+    "location": "NYC"
+  },
+  "tags": ["python", "backend", "devops"],      // Array
+  "preferences": {
+    "theme": "dark",
+    "notifications": true
+  },
+  "created_at": ISODate("2024-01-01T00:00:00Z"), // Date
+  "verified": true
+}
+```
 
 ### Installation (Linux)
 
+MongoDB installation varies by version. Always check the official MongoDB documentation for your distribution.
+
 ```bash
+# Ubuntu/Debian (MongoDB 6.0)
+# 1. Import GPG key
+wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
+
+# 2. Add MongoDB repository
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+
+# 3. Install
+sudo apt update
+sudo apt install -y mongodb-org
+
+# 4. Start service
+sudo systemctl start mongod
+sudo systemctl enable mongod
+
+# 5. Verify installation
+mongosh --version  # MongoDB Shell
+mongo --version    # Older client (deprecated)
+
+# 6. Connect to MongoDB
+mongosh
+# Shows: test>  (you're in the test database)
+```
+
+**Connect to MongoDB from Python**:
+
+```python
+# Install driver
+# pip install pymongo==4.6.0
+
+from pymongo import MongoClient
+import os
+
+# Connection string
+# Default (local): mongodb://localhost:27017/
+# With auth: mongodb://user:password@host:port/
+client = MongoClient(os.getenv('MONGO_URI', 'mongodb://localhost:27017/'))
+
+# Select database
+db = client['backend_db']  # Creates database if doesn't exist
+
+# Select collection
+users = db['users']  # Creates collection on first insert
+
+# Operations
+document = {"email": "user@example.com", "age": 30}
+result = users.insert_one(document)
+print(f"Inserted ID: {result.inserted_id}")
+```
+
 # Ubuntu/Debian
 wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
 echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
@@ -292,21 +403,243 @@ class ProductRepository:
 
 ---
 
-## Redis: Key-Value Store
+## Redis: In-Memory Data Store
 
 ### What Redis Actually Is
 
-Redis is an **in-memory** key-value store:
+Redis is an **in-memory** key-value store that's extremely fast. It's not a replacement for databases—it's a complement. Think of it as a turbocharger for your application.
+
+**How it works**:
+- Data stored in RAM (memory) - 100-1000x faster than disk databases
+- Single-threaded - No race conditions, atomic operations
+- Optional persistence - Can save to disk, or lose on restart
+- Data structures - Not just strings, but lists, sets, sorted sets, hashes
+
+**Performance comparison**:
+```
+Operation         | PostgreSQL | Redis
+─────────────────────────────────────────
+Simple read       | 1-5ms      | 0.01-0.1ms (100-500x faster)
+Write             | 1-5ms      | 0.01-0.1ms
+Complex query     | 10-100ms   | N/A (no SQL)
+Memory usage      | On disk    | All in RAM (expensive)
+```
+
+**Data structures** (why Redis is powerful):
 
 ```python
-# Simple key-value
-redis.set('user:1:name', 'John Doe')
-redis.get('user:1:name')  # 'John Doe'
+import redis
 
-# Expiration
-redis.setex('session:abc123', 3600, 'user_data')  # Expires in 1 hour
+r = redis.Redis(host='localhost', port=6379)
 
-# Data structures
+# 1. String - Simple value
+r.set('user:1:name', 'John')              # SET
+r.get('user:1:name')                      # GET → 'John'
+
+# 2. List - Ordered collection (like array)
+r.lpush('queue:jobs', job1, job2, job3)  # Add to left (push)
+r.rpop('queue:jobs')                      # Remove from right (pop)
+
+# 3. Set - Unordered unique collection
+r.sadd('tags:python', 'user1', 'user2')  # Add tag
+r.smembers('tags:python')                 # Get all users with tag
+r.sismember('tags:python', 'user1')       # Check membership
+
+# 4. Sorted Set - Ordered by score
+r.zadd('leaderboard', {'user1': 100, 'user2': 95})  # Score is ranking
+r.zrange('leaderboard', 0, -1, withscores=True)     # Top to bottom
+
+# 5. Hash - Dictionary/object
+r.hset('user:1', mapping={                # SET multiple fields
+    'name': 'John',
+    'email': 'john@example.com',
+    'age': 30
+})
+r.hget('user:1', 'name')                  # GET single field → 'John'
+r.hgetall('user:1')                       # GET all fields
+```
+
+### Installation (Linux)
+
+```bash
+# Ubuntu/Debian - Simple installation
+sudo apt update
+sudo apt install -y redis-server redis-cli
+
+# Start Redis service
+sudo systemctl start redis-server
+
+# Enable auto-start
+sudo systemctl enable redis-server
+
+# Verify installation
+redis-cli ping          # Should return PONG
+redis-cli --version
+
+# Connect to Redis CLI
+redis-cli              # Now you can run commands like: SET key value
+127.0.0.1:6379> PING
+PONG
+127.0.0.1:6379> SET mykey "Hello"
+OK
+127.0.0.1:6379> GET mykey
+"Hello"
+```
+
+**Connection from Python**:
+
+```python
+import redis
+
+# Connect to local Redis (default config)
+r = redis.Redis(
+    host='localhost',           # Server host
+    port=6379,                  # Default Redis port
+    db=0,                       # Database 0-15
+    decode_responses=True       # Return strings instead of bytes
+)
+
+# Test connection
+print(r.ping())  # → True
+
+# Operations
+r.set('greeting', 'Hello World')
+value = r.get('greeting')  # → 'Hello World'
+```
+
+**Key-Value Patterns**:
+
+```python
+# Simple get/set
+redis.set('user:1:name', 'John')
+
+# With expiration (auto-delete after time)
+redis.setex('session:token123', 3600, user_data)  # Expires in 1 hour
+redis.expire('cache:key', 300)                     # Set expiration on existing
+
+# Counter (atomic increment)
+redis.incr('page:views')                # Increment by 1
+redis.incrby('page:views', 5)           # Increment by N
+
+# Check if exists
+redis.exists('user:1:name')             # → 1 (exists) or 0 (not exists)
+
+# Delete
+redis.delete('user:1:name')
+
+# Get all keys (useful for development, slow in production)
+redis.keys('user:*')                    # → ['user:1:name', 'user:2:name', ...]
+```
+
+### Real-World Redis Patterns
+
+**Pattern 1: Caching**
+```python
+def get_user(user_id):
+    # Try Redis first (fast)
+    cached = redis.get(f'user:{user_id}')
+    if cached:
+        return json.loads(cached)
+    
+    # Cache miss: load from PostgreSQL
+    user = User.query.get(user_id)
+    if user:
+        # Cache for 5 minutes
+        redis.setex(
+            f'user:{user_id}',
+            300,
+            json.dumps(user.to_dict())
+        )
+    
+    return user.to_dict() if user else None
+```
+
+**Pattern 2: Rate Limiting**
+```python
+def check_rate_limit(user_id, limit=100, window=60):
+    """Allow 100 requests per 60 seconds"""
+    key = f'rate:{user_id}'
+    
+    # Increment counter
+    current = redis.incr(key)
+    
+    # Set expiration on first request
+    if current == 1:
+        redis.expire(key, window)
+    
+    # Check if exceeded
+    return current <= limit
+```
+
+**Pattern 3: Session Storage**
+```python
+def create_session(user_id):
+    session_id = secrets.token_urlsafe(32)
+    session_data = {
+        'user_id': user_id,
+        'created_at': datetime.utcnow().isoformat(),
+        'ip': request.remote_addr
+    }
+    
+    # Store in Redis with 24-hour expiration
+    redis.hset(
+        f'session:{session_id}',
+        mapping=session_data
+    )
+    redis.expire(f'session:{session_id}', 86400)  # 24 hours
+    
+    return session_id
+
+def get_session(session_id):
+    return redis.hgetall(f'session:{session_id}')  # Returns dict
+```
+
+**Pattern 4: Leaderboard**
+```python
+def update_score(user_id, score):
+    # Sorted set: user → score
+    redis.zadd('leaderboard', {f'user:{user_id}': score})
+
+def get_leaderboard(limit=10):
+    # Get top 10 (highest scores first)
+    return redis.zrange(
+        'leaderboard',
+        0, limit-1,
+        withscores=True,
+        desc=True  # Reverse order
+    )
+
+def get_user_rank(user_id):
+    # Returns rank (0 = top)
+    return redis.zrevrank('leaderboard', f'user:{user_id}')
+```
+
+### Redis Persistence Options
+
+Redis can optionally save to disk so data survives restarts:
+
+```python
+# In Redis configuration file (/etc/redis/redis.conf):
+
+# Option 1: RDB (Snapshot)
+# Saves entire dataset to disk periodically
+save 900 1      # Save if 1 key changed in 900 seconds
+save 300 10     # Save if 10 keys changed in 300 seconds
+save 60 10000   # Save if 10000 keys changed in 60 seconds
+
+# Option 2: AOF (Append-Only File)
+# Logs every write operation
+appendonly yes
+appendfsync everysec  # Sync to disk every second
+
+# Option 3: No persistence (fastest, loses data on restart)
+# Don't set any save directives
+```
+
+**When to enable persistence**:
+- Yes: Session data, important cache data
+- No: Throwaway cache, rate limit counters, ephemeral data
+
 redis.lpush('queue:emails', 'email1')  # List
 redis.sadd('tags:python', 'user1', 'user2')  # Set
 redis.hset('user:1', 'name', 'John', 'email', 'john@example.com')  # Hash

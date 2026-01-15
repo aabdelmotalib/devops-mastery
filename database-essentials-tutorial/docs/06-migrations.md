@@ -1,33 +1,81 @@
 # Module 6: Database Migrations
 
+## Introduction
+
+Database migrations are how you safely evolve your schema over time. Every production application needs migrations—they're not optional.
+
+**What you'll master**:
+- **Why migrations matter**: Version control for your database
+- **Alembic fundamentals**: The standard Python migration tool
+- **Safe schema evolution**: Adding, removing, modifying columns
+- **Rollback strategies**: Recovering from mistakes
+- **Zero-downtime migrations**: Deploying without downtime
+- **Production best practices**: Deploying safely to live systems
+
+**The golden rule**: Migrations must be:
+1. **Repeatable** - Run multiple times, same result
+2. **Reversible** - Can undo any change (downgrade)
+3. **Safe** - Never lose data, test before deploying
+4. **Fast** - Don't lock tables for hours
+
+---
+
 ## Why Migrations Exist
 
 ### The Problem
 
+Every developer has lived this nightmare:
+
 ```python
-# Version 1: Initial schema
+# Development: Add feature
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255))
+    username = db.Column(db.String(50))  # NEW!
 
-# Version 2: Add username
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(255))
-    username = db.Column(db.String(50))  # New column
+# Production database still has old schema!
+# What do you do?
 
-# How do you update production database?
-# - Can't drop and recreate (lose data)
-# - Can't manually ALTER TABLE (error-prone, not repeatable)
-# - Need version control for schema changes
+# Option 1: SSH into production, run ALTER TABLE manually
+# - Error-prone
+# - No history
+# - Can't rollback
+# - Other developers don't know about it
+
+# Option 2: Drop and recreate database
+# - LOSE ALL DATA (unacceptable)
+
+# Option 3: Pray nothing breaks
+# - Code expects username column
+# - Database doesn't have it
+# - Application crashes in production
 ```
 
 ### What Migrations Solve
 
-1. **Version control for database schema**
-2. **Repeatable schema changes**
-3. **Rollback capability**
-4. **Team collaboration** (everyone applies same changes)
+Migrations are version-controlled, reversible SQL scripts that evolve your schema safely.
+
+```bash
+# Workflow:
+git add models.py              # Update model definition
+alembic revision --autogenerate -m "Add username"  # Generate migration
+# Review generated migration file
+git add migrations/versions/abc123_add_username.py
+git commit -m "Add username to users"
+
+# Deploy to production:
+alembic upgrade head           # Apply migration safely
+# If something breaks: alembic downgrade -1  # Undo instantly
+```
+
+**Benefits**:
+1. **Version control** - Track every schema change in git
+2. **Repeatability** - Same migration on dev, staging, production
+3. **Rollback capability** - Undo mistakes instantly
+4. **Team collaboration** - Everyone applies same changes
+5. **Auditing** - Know when and what changed
+6. **CI/CD integration** - Auto-deploy with confidence
+
 5. **Production safety** (test migrations before deploying)
 
 ## Alembic Fundamentals

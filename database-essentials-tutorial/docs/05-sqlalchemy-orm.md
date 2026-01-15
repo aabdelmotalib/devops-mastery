@@ -1,33 +1,115 @@
 # Module 5: SQLAlchemy ORM
 
+## Introduction
+
+SQLAlchemy is the most popular Python ORM (Object-Relational Mapper). It bridges the gap between Python objects and relational databases, letting you work with database records as if they were Python classes.
+
+**What you'll learn**:
+- **ORM vs Raw SQL**: When each is appropriate
+- **Building models**: Defining tables as Python classes
+- **Relationships**: Connecting related data (users ↔ posts)
+- **Query optimization**: Avoiding common performance traps
+- **Production patterns**: Repository pattern, transaction safety
+
+**The key benefit**: Type-safe, maintainable database code. The key trade-off: Less control over SQL than raw queries.
+
+---
+
 ## ORM vs Raw SQL
 
 ### What is an ORM?
 
-**ORM (Object-Relational Mapping)**: Maps database tables to Python classes
+**ORM (Object-Relational Mapping)** maps database tables to Python classes. Each row becomes an object instance, each column becomes an attribute.
 
-**Raw SQL**:
+**Example comparison**:
+
+**Raw SQL approach**:
 ```python
 import psycopg2
 
-conn = psycopg2.connect("dbname=mydb")
+# Manual connection management
+conn = psycopg2.connect(
+    host="localhost",
+    database="mydb",
+    user="postgres",
+    password="secret"
+)
 cursor = conn.cursor()
-cursor.execute("SELECT * FROM users WHERE email = %s", ('user@example.com',))
-user = cursor.fetchone()
+
+# Manual SQL (easy to get wrong)
+cursor.execute(
+    "SELECT id, email, full_name, created_at FROM users WHERE email = %s",
+    ('user@example.com',)
+)
+row = cursor.fetchone()
+
+# Manual unpacking
+if row:
+    user_id, email, full_name, created_at = row
+    user = {'id': user_id, 'email': email, 'full_name': full_name}
+else:
+    user = None
+
+cursor.close()
+conn.close()  # Don't forget!
 ```
 
-**SQLAlchemy ORM**:
+**ORM approach (SQLAlchemy)**:
 ```python
 from sqlalchemy.orm import Session
 
+# Automatic connection pooling, type safety
 user = session.query(User).filter_by(email='user@example.com').first()
+
+# Python object (type-safe, autocomplete)
+print(user.full_name)  # IDE knows attribute exists
+print(user.created_at.year)  # IDE knows it's a datetime
 ```
 
 ### When to Use Each
 
 **Use ORM when**:
-- Standard CRUD operations
-- Need type safety and validation
+- Standard CRUD operations (Create, Read, Update, Delete)
+- Need type safety and IDE autocomplete
+- Want database-agnostic code (switch databases without code changes)
+- Working with relationships (users.posts, post.author)
+- Building web frameworks (Flask, FastAPI)
+
+**Use raw SQL when**:
+- Complex queries with CTEs, window functions, custom aggregations
+- Bulk operations (1M rows insert)
+- Database-specific features needed
+- Performance-critical queries needing fine control
+- Reporting and analytics
+
+**Production pattern**: **Use ORM for 90% of code, raw SQL for 10%**
+
+```python
+# ORM: Simple queries
+user = User.query.get(user_id)  # PRIMARY KEY lookup
+
+# ORM: Relationships
+orders = user.orders.all()  # Foreign key traversal
+
+# Raw SQL: Complex query
+from sqlalchemy import text
+
+result = db.session.execute(text("""
+    WITH user_stats AS (
+        SELECT user_id, COUNT(*) as order_count
+        FROM orders
+        GROUP BY user_id
+    )
+    SELECT u.*, s.order_count
+    FROM users u
+    LEFT JOIN user_stats s ON u.id = s.user_id
+    ORDER BY s.order_count DESC
+    LIMIT 10
+"""))
+
+top_users = result.fetchall()
+```
+
 - Want database-agnostic code
 - Working with relationships
 

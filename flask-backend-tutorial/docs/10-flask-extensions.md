@@ -1,5 +1,40 @@
 # Module 10: Flask Extensions
 
+## Introduction: Extending Flask for Production Needs
+
+Flask's philosophy is "lightweight and extensible." The core framework provides HTTP routing and request/response handling—but production applications need much more: database access, user authentication, data validation, caching, and more.
+
+This is where Flask extensions come in. Extensions are third-party packages that integrate seamlessly with Flask to add capabilities without forcing them onto you. This modularity means you only pay for what you use.
+
+Key concepts in this module:
+
+**Extension Selection**: Not all extensions are equal. Some are maintained by the Flask core team, some by the community. You need criteria for choosing quality extensions that won't become maintenance burdens.
+
+**Common Production Extensions**:
+- **SQLAlchemy**: Database ORM for data persistence
+- **Flask-Login**: User session management
+- **Flask-JWT-Extended**: JWT token authentication
+- **Flask-CORS**: Cross-origin resource sharing
+- **Flask-Caching**: Request/response caching
+- **Marshmallow**: Data validation and serialization
+- **Click**: Command-line interface building
+
+**Integration Patterns**: Most extensions follow similar patterns—initialization with `init_app()`, configuration through environment variables, and clean separation from business logic.
+
+**When NOT to Use Extensions**: Sometimes building your own solution is simpler, cleaner, or more suited to your specific needs than a heavyweight third-party package.
+
+This module teaches you how to:
+- Evaluate extensions for production use
+- Install and configure common extensions
+- Understand the `init_app()` pattern for better testability
+- Integrate SQLAlchemy for database operations
+- Add authentication with Flask-Login and JWT
+- Validate data with Marshmallow
+- Handle CORS for API access
+- Build extensible application architectures
+
+By the end of this module, you'll be able to compose a production-grade Flask application using best-of-breed extensions while maintaining clean, testable code.
+
 ## Extension Ecosystem
 
 Flask extensions add functionality without bloating the core framework. Choose extensions carefully based on your needs.

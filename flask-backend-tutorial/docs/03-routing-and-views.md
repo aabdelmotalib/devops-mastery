@@ -1,53 +1,307 @@
 # Module 3: Routing and Views
 
-## Route Decorators
+## Introduction to Routing and Views
 
-Routes map URLs to Python functions. Flask provides the `@app.route()` decorator for this purpose.
+Routing is the mechanism that maps URLs (paths) to Python functions that handle them. Views are the functions that receive requests and return responses. Together, they form the core of your Flask application—the bridge between HTTP requests from clients and your application logic.
+
+### Understanding the Request/Route/Response Flow
+
+```
+1. Client makes HTTP request to URL
+   GET /api/users/123
+
+2. Flask receives the request
+   
+3. Flask matches URL to a route
+   @app.route('/api/users/<int:user_id>')
+   
+4. Flask extracts URL parameters
+   user_id = 123
+   
+5. Flask calls the view function
+   def get_user(user_id):
+   
+6. View function processes and returns response
+   return {'id': 123, 'name': 'Alice'}
+   
+7. Flask sends response to client
+   200 OK, {"id": 123, "name": "Alice"}
+```
+
+### Why Routing Matters
+
+**Good routing:**
+- Makes your API predictable and easy to understand
+- URLs are self-documenting ("GET /api/users/123" clearly means get user 123)
+- Enables clean separation between different features
+- RESTful routes reduce confusion about what endpoints do
+
+**Bad routing:**
+- Confusing URLs ("/getData", "/api/v1/user/get", "/processUserRequest")
+- Inconsistent patterns (mixing naming conventions)
+- Hard to maintain as app grows
+
+---
+
+## Route Decorators: Mapping URLs to Functions
+
+Routes map URLs to Python functions. Flask provides the `@app.route()` decorator for this purpose. When a client makes a request to a URL, Flask finds the matching route and calls its function.
 
 ### Basic Routing
 
 ```python
-from flask import Flask
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    """Root endpoint"""
-    return {'message': 'Welcome to the API'}
+    """Root endpoint - GET request only (default)"""
+    return jsonify({'message': 'Welcome to the API', 'version': '1.0'})
 
 @app.route('/about')
 def about():
     """About endpoint"""
-    return {'version': '1.0.0', 'name': 'My API'}
+    return jsonify({
+        'name': 'My API',
+        'version': '1.0.0',
+        'author': 'Your Name'
+    })
+
+@app.route('/status')
+def status():
+    """Health check endpoint"""
+    return jsonify({'status': 'healthy', 'code': 200})
 ```
 
-### HTTP Methods
+**Testing these routes:**
 
-By default, routes only respond to GET requests. Specify methods explicitly:
+```bash
+# Test root endpoint
+curl http://localhost:5000/
+# Response: {"message":"Welcome to the API","version":"1.0"}
+
+# Test about endpoint
+curl http://localhost:5000/about
+# Response: {"name":"My API","version":"1.0.0","author":"Your Name"}
+
+# Test status endpoint  
+curl http://localhost:5000/status
+# Response: {"status":"healthy","code":200}
+```
+
+### HTTP Methods: GET, POST, PUT, DELETE, PATCH
+
+HTTP methods tell the server what action you want to perform. By default, Flask routes only accept GET requests. You specify other methods with the `methods` parameter.
+
+**RESTful patterns:**
+
+```
+GET    /users          → List all users
+POST   /users          → Create new user
+GET    /users/123      → Get specific user
+PUT    /users/123      → Update user
+DELETE /users/123      → Delete user
+PATCH  /users/123      → Partial update
+```
+
+**Implementation:**
 
 ```python
-from flask import request
+from flask import Flask, request, jsonify
 
+app = Flask(__name__)
+
+# ============= GET: Retrieve data =============
 @app.route('/users', methods=['GET'])
 def list_users():
-    """List all users"""
-    return {'users': []}
+    """
+    Get all users.
+    
+    Handles: GET /users
+    Query parameters: ?page=1&limit=20
+    Returns: List of user objects
+    """
+    page = request.args.get('page', 1, type=int)
+    limit = request.args.get('limit', 20, type=int)
+    
+    # Pseudo-code: fetch from database
+    users = [
+        {'id': 1, 'name': 'Alice', 'email': 'alice@example.com'},
+        {'id': 2, 'name': 'Bob', 'email': 'bob@example.com'}
+    ]
+    
+    return jsonify({
+        'users': users,
+        'page': page,
+        'limit': limit,
+        'total': len(users)
+    })
 
+# ============= GET with ID: Get specific resource =============
+@app.route('/users/<int:user_id>', methods=['GET'])
+def get_user(user_id):
+    """
+    Get a specific user by ID.
+    
+    Handles: GET /users/123
+    Parameter: user_id extracted from URL
+    Returns: Single user object or 404
+    """
+    # Pseudo-code: fetch from database
+    if user_id == 1:
+        return jsonify({
+            'id': 1,
+            'name': 'Alice',
+            'email': 'alice@example.com',
+            'created_at': '2024-01-01T10:00:00Z'
+        })
+    
+    # Return 404 if not found
+    return jsonify({'error': 'User not found'}), 404
+
+# ============= POST: Create resource =============
 @app.route('/users', methods=['POST'])
 def create_user():
-    """Create a new user"""
+    """
+    Create a new user.
+    
+    Handles: POST /users
+    Expects JSON body:
+    {
+        "name": "Charlie",
+        "email": "charlie@example.com",
+        "password": "secure..."
+    }
+    
+    Returns: Created user object with ID, status 201
+    """
     data = request.get_json()
-    return {'id': 1, 'email': data['email']}, 201
+    
+    # Validate required fields
+    if not data or 'email' not in data or 'name' not in data:
+        return jsonify({
+            'error': 'Missing required fields',
+            'required': ['email', 'name']
+        }), 400
+    
+    # Pseudo-code: save to database
+    new_user = {
+        'id': 3,  # Database would auto-generate
+        'name': data['name'],
+        'email': data['email'],
+        'created_at': '2024-01-11T15:30:00Z'
+    }
+    
+    return jsonify(new_user), 201  # 201 Created status code
 
+# ============= PUT: Replace entire resource =============
 @app.route('/users/<int:user_id>', methods=['PUT'])
 def update_user(user_id):
-    """Update existing user"""
+    """
+    Update a user (replaces entire user object).
+    
+    Handles: PUT /users/123
+    Expects JSON body with ALL fields:
+    {
+        "name": "Alice Updated",
+        "email": "newemail@example.com",
+        "password": "newpassword"
+    }
+    
+    Returns: Updated user object
+    
+    Note: PUT expects complete object. For partial updates, use PATCH.
+    """
     data = request.get_json()
-    return {'id': user_id, 'updated': True}
+    
+    if not data:
+        return jsonify({'error': 'No data provided'}), 400
+    
+    # Pseudo-code: update in database
+    updated_user = {
+        'id': user_id,
+        'name': data.get('name', 'Unknown'),
+        'email': data.get('email', 'unknown@example.com'),
+        'updated_at': '2024-01-11T15:30:00Z'
+    }
+    
+    return jsonify(updated_user)
 
+# ============= PATCH: Partial update =============
+@app.route('/users/<int:user_id>', methods=['PATCH'])
+def patch_user(user_id):
+    """
+    Partially update a user (only specified fields).
+    
+    Handles: PATCH /users/123
+    Expects JSON with only fields to update:
+    {"name": "Alice Updated"}
+    
+    Other fields remain unchanged.
+    """
+    data = request.get_json()
+    
+    if not data:
+        return jsonify({'error': 'No data provided'}), 400
+    
+    # Pseudo-code: partial update in database
+    updated_user = {
+        'id': user_id,
+        'name': data.get('name'),  # Only update if provided
+        'email': 'alice@example.com',  # Unchanged
+        'updated_at': '2024-01-11T15:30:00Z'
+    }
+    
+    return jsonify(updated_user)
+
+# ============= DELETE: Remove resource =============
 @app.route('/users/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
+    """
+    Delete a user.
+    
+    Handles: DELETE /users/123
+    Returns: 204 No Content (successful delete, no response body)
+    
+    Alternative: Return 200 with confirmation message
+    """
+    # Pseudo-code: delete from database
+    # db.query(User).filter(User.id == user_id).delete()
+    
+    return '', 204  # 204 No Content (standard for successful DELETE)
+    
+    # Or return confirmation:
+    # return jsonify({'message': f'User {user_id} deleted'}), 200
+```
+
+**Testing all methods:**
+
+```bash
+# GET all users
+curl http://localhost:5000/users
+
+# GET specific user
+curl http://localhost:5000/users/1
+
+# POST create user
+curl -X POST http://localhost:5000/users \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Charlie","email":"charlie@example.com"}'
+
+# PUT update user (complete)
+curl -X PUT http://localhost:5000/users/1 \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Alice Updated","email":"newemail@example.com"}'
+
+# PATCH update user (partial)
+curl -X PATCH http://localhost:5000/users/1 \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Alice Final"}'
+
+# DELETE user
+curl -X DELETE http://localhost:5000/users/1
+```
     """Delete user"""
     return '', 204
 ```

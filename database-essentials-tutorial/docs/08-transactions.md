@@ -1,33 +1,203 @@
 # Module 8: Transactions and ACID
 
+## Introduction
+
+**Transactions are how databases keep data correct when things go wrong.** They're the foundation of reliability in production systems.
+
+**What you'll master**:
+- **ACID properties**: Atomicity, Consistency, Isolation, Durability
+- **Isolation levels**: When transactions see each other's data
+- **Locks and deadlocks**: What happens when transactions conflict
+- **Transaction patterns**: Optimistic locking, pessimistic locking, idempotency
+- **Production patterns**: Handling failures and retries
+
+**Real-world stakes**:
+- Without transactions: Database corruptions, lost money, data inconsistencies
+- With transactions: Reliable systems that handle failures gracefully
+
+---
+
 ## What ACID Actually Means in Practice
+
+ACID is not just an acronym—it's a guarantee that your data stays correct even when systems fail.
 
 ### Atomicity
 
-**Definition**: All operations in a transaction succeed or all fail
+**Definition**: A transaction is all-or-nothing. Either all operations succeed, or all fail (rollback).
 
-**Example: Bank transfer**
+**Why it matters**:
+
 ```python
-# BAD: Not atomic
+# BAD: Not atomic - LOSE MONEY
 def transfer_funds(from_account, to_account, amount):
-    from_account.balance -= amount
-    db.session.commit()  # What if this succeeds but next fails?
+    print(f"Transferring ${amount}")
     
+    # Step 1: Debit from_account
+    from_account.balance -= amount
+    db.session.commit()
+    print(f"Debit done: {from_account.balance}")
+    
+    # What if server crashes HERE?
+    # from_account is debited but to_account is not credited
+    # $500 vanishes!
+    
+    # Step 2: Credit to_account
     to_account.balance += amount
-    db.session.commit()  # Money could be lost!
+    db.session.commit()
+    print(f"Credit done: {to_account.balance}")
+
+# SCENARIO: Server crashes between steps
+# Before: Account A = $1000, Account B = $1000
+# After crash: Account A = $500, Account B = $1000
+# Result: $500 lost forever (audit nightmare!)
 
 # GOOD: Atomic transaction
 def transfer_funds(from_account, to_account, amount):
     try:
         from_account.balance -= amount
         to_account.balance += amount
-        db.session.commit()  # Both or neither
+        
+        # Both changes committed together
+        db.session.commit()
+        print(f"Transfer complete: A=${from_account.balance}, B=${to_account.balance}")
+        
     except Exception as e:
+        # If anything fails: ROLLBACK everything
         db.session.rollback()
+        print(f"Transfer failed, rolled back: {e}")
         raise
+
+# SCENARIO: Server crashes during commit
+# PostgreSQL handles the recovery using WAL (Write-Ahead Log)
+# After restart: Either both changes exist, or neither
+# No partial state possible!
 ```
 
+**Key guarantee**: If `db.session.commit()` succeeds, all changes are saved. If it fails or crashes, none are.
+
 ### Consistency
+
+**Definition**: Database moves from one valid state to another. Constraints are never violated.
+
+**How it works**:
+
+```python
+# Database enforces constraints
+class Account(db.Model):
+    __tablename__ = 'accounts'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    balance = db.Column(db.Numeric(10, 2), nullable=False)
+    
+    # Constraint: Balance can't be negative
+    __table_args__ = (
+        db.CheckConstraint('balance >= 0', name='positive_balance'),
+    )
+
+# Trying to violate consistency
+account = Account.query.get(1)
+account.balance = -100  # INVALID!
+
+try:
+    db.session.commit()
+except IntegrityError as e:
+    # PostgreSQL PREVENTS the invalid state
+    db.session.rollback()
+    print(f"Consistency violation prevented: {e}")
+    # Database still valid, never entered invalid state
+
+# Real scenario: Overdraft protection
+# User tries to withdraw more than balance
+def withdraw(account_id, amount):
+    account = Account.query.with_for_update().get(account_id)  # Lock the row
+    
+    if account.balance < amount:
+        raise ValueError("Insufficient funds")
+    
+    account.balance -= amount
+    db.session.commit()
+    # PostgreSQL guarantees: balance never goes negative
+```
+
+### Isolation
+
+**Definition**: Concurrent transactions don't see each other's partial changes.
+
+**Real-world problem**:
+
+```python
+# Scenario: Two users try to book the last seat simultaneously
+
+# User A's request (in transaction)
+def book_seat(user_id, seat_id):
+    seat = Seat.query.get(seat_id)
+    if seat.available:
+        print(f"User {user_id}: Seat is available")
+        seat.available = False
+        db.session.commit()
+        return "Booked!"
+    return "Not available"
+
+# At time T=1ms: Both User A and B query the seat
+# User A: seat.available = True
+# User B: seat.available = True (B doesn't see A's pending change yet)
+
+# At time T=2ms: User A commits
+# User B doesn't see this yet (isolation!)
+
+# At time T=3ms: User B commits
+# Result: Both users booked the same seat! (DISASTER!)
+```
+
+**Fix: Row-level locks**
+```python
+def book_seat_safe(user_id, seat_id):
+    # Lock the row BEFORE checking (prevents other transactions from reading)
+    seat = Seat.query.filter_by(id=seat_id).with_for_update().first()
+    
+    if seat.available:
+        seat.available = False
+        db.session.commit()
+        return "Booked!"
+    return "Not available"
+
+# Timeline with locks:
+# T=1ms: User A locks seat (User B waits)
+# T=2ms: User A checks available=True
+# T=3ms: User A books and commits (lock released)
+# T=4ms: User B gets lock, checks available=False
+# T=5ms: User B returns "Not available"
+# Result: Only one user books the seat (CORRECT!)
+```
+
+### Durability
+
+**Definition**: Once committed, data persists even if system crashes.
+
+**How PostgreSQL ensures it**:
+
+1. **Write-Ahead Logging (WAL)**: Before modifying a page on disk, write intent to log
+2. **Fsync to disk**: Sync log to physical disk before returning to application
+3. **Crash recovery**: On restart, replay WAL log to recover state
+
+**You don't need to do anything**—PostgreSQL handles this automatically. Your data is safe.
+
+```python
+# Safe transaction
+account = Account.query.get(1)
+account.balance += 100
+db.session.commit()  # Returns immediately (data safely persisted)
+
+# Even if:
+# - Server crashes 1ms later
+# - Power loss
+# - Disk fails
+# - Meteorite hits the datacenter
+#
+# That $100 deposit is saved (in the log files)
+# Recovery process will replay it
+```
+
 
 **Definition**: Database moves from one valid state to another
 

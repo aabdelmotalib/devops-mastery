@@ -1,10 +1,55 @@
 # Module 4: Database Design
 
+## Introduction
+
+**Database design is the most important skill you'll learn in this course.** A good design prevents performance problems, data corruption, and months of refactoring. A bad design haunts you for years.
+
+In this module, you'll learn:
+- **Normalization**: Eliminating redundancy and ensuring data integrity
+- **Denormalization**: Strategic redundancy for performance
+- **Relationship design**: One-to-many, many-to-many, one-to-one patterns
+- **Read vs write optimization**: Different approaches for different workloads
+- **Anti-patterns to avoid**: Common mistakes that blow up in production
+
+The key principle: **Start normalized, denormalize only when profiling shows you need to.** Don't optimize for performance you don't have yet.
+
+---
+
 ## Normalization vs Denormalization
+
+Normalization eliminates redundancy and ensures consistency. Denormalization adds strategic redundancy for performance.
 
 ### Normalization (Relational Databases)
 
-**Goal**: Eliminate data redundancy
+**Goal**: Eliminate data redundancy and prevent inconsistencies
+
+**Why it matters**:
+```sql
+-- BAD: Redundant data
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER,
+    user_email VARCHAR(255),      -- Redundant (stored in users table)
+    user_name VARCHAR(255),       -- Redundant (stored in users table)
+    total DECIMAL(10, 2)
+);
+
+-- Problem: Update user email
+UPDATE users SET email = 'newemail@example.com' WHERE id = 123;
+-- But orders table still has old email!
+-- Data inconsistency: user has 2 different emails
+
+-- GOOD: Normalized
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id),  -- Reference, not copy
+    total DECIMAL(10, 2)
+);
+
+-- Query still works:
+SELECT o.*, u.email FROM orders o JOIN users u ON o.user_id = u.id;
+-- Email always correct (fetched from users table)
+```
 
 **Normal Forms** (what actually matters):
 
@@ -17,6 +62,11 @@ CREATE TABLE users (
     phone_numbers VARCHAR(255)  -- "555-1234, 555-5678" (multiple values)
 );
 
+-- Problem:
+-- Can't query "users with phone 555-1234"
+-- Can't add third phone number
+-- Parsing strings is slow and error-prone
+
 -- GOOD: 1NF compliant
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -28,6 +78,83 @@ CREATE TABLE user_phones (
     user_id INTEGER REFERENCES users(id),
     phone_number VARCHAR(20)
 );
+
+-- Now you can:
+-- SELECT * FROM users WHERE id IN (SELECT user_id FROM user_phones WHERE phone_number = '555-1234');
+-- Add unlimited phones
+-- Query efficiently
+```
+
+**2NF (Second Normal Form)**: No partial dependencies
+```sql
+-- BAD: Violates 2NF
+CREATE TABLE order_items (
+    order_id INTEGER,
+    product_id INTEGER,
+    product_name VARCHAR(255),       -- Depends on product_id, not order
+    product_price DECIMAL(10, 2),    -- Same issue
+    quantity INTEGER,
+    PRIMARY KEY (order_id, product_id)
+);
+
+-- Problem:
+-- Update product name: must update in ALL orders that contain it
+-- Data inconsistency risk
+
+-- GOOD: 2NF compliant
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    price DECIMAL(10, 2)
+);
+
+CREATE TABLE order_items (
+    order_id INTEGER,
+    product_id INTEGER REFERENCES products(id),
+    quantity INTEGER,
+    PRIMARY KEY (order_id, product_id)
+);
+
+-- Benefits:
+-- Product name in one place
+-- Update once, everywhere correct
+```
+
+**3NF (Third Normal Form)**: No transitive dependencies
+```sql
+-- BAD: Violates 3NF
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER,
+    user_email VARCHAR(255),        -- Depends on user_id
+    user_city VARCHAR(100),         -- Depends on user_id
+    total DECIMAL(10, 2)
+);
+
+-- Problem: Non-key columns depend on non-key column (user_id)
+-- Update user's city: must update in all their orders
+-- Risk of inconsistency
+
+-- GOOD: 3NF compliant
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255),
+    city VARCHAR(100)
+);
+
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id),
+    total DECIMAL(10, 2)
+);
+
+-- Benefits:
+-- Update user once, affects all their orders automatically (via join)
+-- Single source of truth for user data
+```
+
+**Production rule**: Aim for 3NF by default. Denormalize only when profiling proves you need to.
+
 ```
 
 **2NF (Second Normal Form)**: No partial dependencies
@@ -82,35 +209,113 @@ CREATE TABLE orders (
 
 ### Denormalization (Performance Optimization)
 
+**The principle**: Redundancy for speed, at the cost of consistency complexity.
+
 **When to denormalize**:
-- Read-heavy workloads
-- Expensive joins
-- Caching not sufficient
+- **Read-heavy workloads** - Data accessed frequently but changed rarely
+- **Expensive joins** - Queries require many joins across tables
+- **Caching insufficient** - Redis/Memcached not available or misses too often
+- **Profiling shows problem** - You measured and joins are actually slow
+
+**When NOT to denormalize**:
+- **High write frequency** - Updates must replicate to multiple places
+- **Consistency critical** - Stale data causes problems
+- **Premature optimization** - "Might be slow" is not a reason
+- **Before measuring** - Profile first, optimize second
 
 **Example: E-commerce orders**
 
-**Normalized (slow)**:
+**Normalized approach (multiple joins)**:
 ```sql
--- Query requires 3 joins
+-- Get order with all details
+-- Requires 4 tables and 3 joins
 SELECT 
     o.id,
-    u.email,
-    u.full_name,
-    p.name as product_name,
-    oi.quantity,
-    oi.price
+    o.created_at,
+    u.email,                    -- From users table (JOIN 1)
+    u.full_name,               -- From users table (JOIN 1)
+    p.name as product_name,    -- From products table (JOIN 2)
+    oi.quantity,               -- From order_items
+    oi.unit_price,
+    (oi.quantity * oi.unit_price) as subtotal
 FROM orders o
-JOIN users u ON o.user_id = u.id
-JOIN order_items oi ON o.id = oi.order_id
-JOIN products p ON oi.product_id = p.id
+JOIN users u ON o.user_id = u.id           -- JOIN 1
+JOIN order_items oi ON o.id = oi.order_id  -- JOIN 2
+JOIN products p ON oi.product_id = p.id    -- JOIN 3
 WHERE o.id = 123;
+
+-- With 1000 concurrent requests:
+-- Each query does 3 joins = 3000 operations
+-- Locks tables, slows down everything
 ```
 
-**Denormalized (fast)**:
+**Performance analysis**:
+- Scan orders: 10ms
+- Join users: 5ms
+- Join order_items: 5ms
+- Join products: 5ms
+- **Total: 25ms per query**
+- **1000 concurrent: 25,000ms overhead**
+
+**Denormalized approach (no joins)**:
 ```sql
+-- Store snapshot of data in orders table
+-- No joins needed
 CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id),
+    user_email VARCHAR(255),       -- Snapshot at order time
+    user_name VARCHAR(255),        -- Snapshot at order time
+    total DECIMAL(10, 2),
+    status VARCHAR(20),
+    created_at TIMESTAMP
+);
+
+-- Store snapshot in order_items
+CREATE TABLE order_items (
+    id SERIAL PRIMARY KEY,
+    order_id INTEGER REFERENCES orders(id),
+    product_id INTEGER REFERENCES products(id),
+    product_name VARCHAR(255),     -- Snapshot at purchase time
+    product_sku VARCHAR(50),       -- Snapshot at purchase time
+    quantity INTEGER,
+    price_per_unit DECIMAL(10, 2), -- Snapshot (important for invoices)
+    created_at TIMESTAMP
+);
+
+-- Query: No joins!
+SELECT * FROM orders WHERE id = 123;
+SELECT * FROM order_items WHERE order_id = 123;
+
+-- Performance: 10ms + 5ms = 15ms (no join overhead)
+-- 1000 concurrent: 15,000ms overhead (40% faster)
+```
+
+**Trade-off and management**:
+```python
+# When user updates email in users table
+def update_user_email(user_id, new_email):
+    # 1. Update primary source (users table)
+    user = User.query.get(user_id)
+    user.email = new_email
+    db.session.commit()
+    
+    # 2. Update denormalized copies
+    # Option A: Update all related orders (eventual consistency)
+    Order.query.filter_by(user_id=user_id).update(
+        {'user_email': new_email}
+    )
+    db.session.commit()
+    
+    # Option B: Don't update old orders (correct - historical data)
+    # Current order shows old email (accurate for that time)
+    
+    # Option C: Invalidate cache (for read-only display)
+    # redis.delete(f'user:profile:{user_id}')
+```
+
+**Key insight**: Denormalization is not just copying data. It's storing snapshots of related data at a point in time. This is often correct—an order should show the price and product name at the time of order, not current values.
+
     user_email VARCHAR(255),  -- Denormalized
     user_name VARCHAR(255),   -- Denormalized
     total DECIMAL(10, 2),

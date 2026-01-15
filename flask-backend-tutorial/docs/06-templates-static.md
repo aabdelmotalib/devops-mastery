@@ -1,53 +1,456 @@
 # Module 6: Templates and Static Files
 
-## When to Use Templates in Backend Services
+## Introduction: Templates in Modern Backend
 
-Templates in Flask are primarily for server-side rendering (SSR). In modern backend development, their use is limited.
+Templates are HTML files with embedded Python logic that Flask renders on the server before sending to clients. Jinja2 is Flask's default templating engine.
 
-### Appropriate Use Cases
+### When Templates Are Useful (and When They're Not)
 
-**1. Admin Dashboards and Internal Tools**
+**✅ Use templates for:**
+- HTML emails (welcome emails, notifications, password resets)
+- Admin dashboards and internal tools
+- API documentation websites
+- Server-side rendered pages (less common in modern APIs)
+- Error pages and status pages
+
+**❌ Don't use templates for:**
+- REST APIs (return JSON instead)
+- Single Page Applications (use React/Vue, not templates)
+- Mobile app backends (return JSON, not HTML)
+- Production web apps (usually use frontend frameworks)
+
+---
+
+## Rendering Templates with Jinja2
+
+Jinja2 is Flask's default template engine. It's a powerful system for generating HTML dynamically.
+
+### Basic Template Rendering
+
+**Python code (view function):**
+
 ```python
-@app.route('/admin/dashboard')
-def admin_dashboard():
-    """Internal monitoring dashboard"""
-    stats = {
-        'users': 1250,
-        'active_sessions': 42,
-        'errors_today': 3
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/user/<int:user_id>')
+def user_profile(user_id):
+    """
+    Render user profile page using template.
+    
+    The render_template function:
+    1. Finds the template file in templates/ folder
+    2. Passes data as variables to the template
+    3. Executes Python code in the template
+    4. Returns rendered HTML string
+    """
+    
+    # Get user data from database (or create for example)
+    user = {
+        'id': user_id,
+        'name': 'Alice Johnson',
+        'email': 'alice@example.com',
+        'created_at': '2024-01-01',
+        'premium': True,
+        'posts_count': 15
     }
-    return render_template('admin/dashboard.html', stats=stats)
+    
+    # render_template(filename, **variables)
+    # Variables become available in the template
+    return render_template('user/profile.html', user=user)
 ```
 
-**2. Email Templates**
+**Template file (templates/user/profile.html):**
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        .profile { background: #f5f5f5; padding: 20px; border-radius: 8px; }
+        .badge { background: #4CAF50; color: white; padding: 5px 10px; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="profile">
+        <!-- Simple variable interpolation -->
+        <h1>{{ user.name }}</h1>
+        <p>Email: {{ user.email }}</p>
+        <p>Member since: {{ user.created_at }}</p>
+        
+        <!-- Conditional rendering (if statement) -->
+        {% if user.premium %}
+            <span class="badge">Premium Member</span>
+        {% else %}
+            <p>Upgrade to premium for more features</p>
+        {% endif %}
+        
+        <!-- Variable logic -->
+        <p>Posts: {{ user.posts_count }}</p>
+    </div>
+</body>
+</html>
+```
+
+**Testing:**
+
+```bash
+curl http://localhost:5000/user/1
+# Returns HTML page with user data filled in
+```
+
+### Template Inheritance: Creating Base Templates
+
+Instead of repeating HTML in every template, use inheritance:
+
+**Base template (templates/base.html):**
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}My Site{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navigation (same on every page) -->
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+    </nav>
+    
+    <!-- Main content (different for each page) -->
+    <main>
+        {% block content %}
+        <!-- Child templates override this block -->
+        {% endblock %}
+    </main>
+    
+    <!-- Footer (same on every page) -->
+    <footer>
+        <p>&copy; 2024 My Company. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+```
+
+**Child template (templates/home.html):**
+
+```html
+{% extends "base.html" %}
+
+{% block title %}Home - My Site{% endblock %}
+
+{% block content %}
+    <h1>Welcome Home</h1>
+    <p>This is the home page content.</p>
+{% endblock %}
+```
+
+**Benefits:**
+- DRY (Don't Repeat Yourself) - write HTML once
+- Consistent navigation and layout across site
+- Easy to change design (modify base.html)
+- Easy to add new pages (just create child template)
+
+### Jinja2 Control Structures
+
+**If/Else statements:**
+
+```html
+{% if user.role == 'admin' %}
+    <button>Delete User</button>
+{% elif user.role == 'moderator' %}
+    <button>Edit User</button>
+{% else %}
+    <p>View only</p>
+{% endif %}
+```
+
+**For loops:**
+
+```html
+<h2>Recent Posts</h2>
+<ul>
+    {% for post in posts %}
+        <li>
+            <a href="{{ url_for('view_post', post_id=post.id) }}">
+                {{ post.title }}
+            </a>
+            <small>by {{ post.author }} on {{ post.date }}</small>
+        </li>
+    {% else %}
+        <li>No posts yet.</li>
+    {% endfor %}
+</ul>
+```
+
+**Filters (transform data):**
+
+```html
+<!-- String filters -->
+<p>{{ 'hello world' | upper }}</p>          <!-- HELLO WORLD -->
+<p>{{ 'HELLO' | lower }}</p>                <!-- hello -->
+<p>{{ 'hello world' | capitalize }}</p>     <!-- Hello world -->
+<p>{{ 'hello world' | title }}</p>          <!-- Hello World -->
+
+<!-- Length -->
+<p>{{ items | length }} items</p>           <!-- 3 items -->
+
+<!-- Default values -->
+<p>{{ user.bio | default('No bio provided') }}</p>
+
+<!-- List filters -->
+<p>{{ [3, 1, 2] | sort }}</p>               <!-- [1, 2, 3] -->
+<p>{{ [1, 2, 3, 2, 1] | unique }}</p>       <!-- [1, 2, 3] -->
+
+<!-- Date formatting -->
+<p>{{ user.created_at | strftime('%Y-%m-%d') }}</p>
+```
+
+### When to Use Templates: Practical Examples
+
+#### Example 1: HTML Email
+
 ```python
 from flask import render_template
-from flask_mail import Message
+from flask_mail import Mail, Message
 
-def send_welcome_email(user):
-    """Send HTML email using template"""
-    html_body = render_template('emails/welcome.html', user=user)
-    text_body = render_template('emails/welcome.txt', user=user)
+mail = Mail(app)
+
+def send_password_reset_email(user, reset_token):
+    """Send password reset email using template"""
     
-    msg = Message(
-        subject='Welcome to Our Service',
-        recipients=[user.email],
-        html=html_body,
-        body=text_body
+    # Render both HTML and plain text versions
+    html = render_template(
+        'emails/password_reset.html',
+        user=user,
+        reset_token=reset_token,
+        reset_url=f'https://myapp.com/reset/{reset_token}'
     )
-    # Send email...
+    
+    text = render_template(
+        'emails/password_reset.txt',
+        user=user,
+        reset_url=f'https://myapp.com/reset/{reset_token}'
+    )
+    
+    # Create and send email
+    msg = Message(
+        subject='Password Reset Request',
+        recipients=[user.email],
+        html=html,
+        body=text
+    )
+    
+    mail.send(msg)
 ```
 
-**3. API Documentation Pages**
-```python
-@app.route('/docs')
-def api_docs():
-    """Serve API documentation"""
-    return render_template('docs/api.html')
+**Email template (templates/emails/password_reset.html):**
+
+```html
+<html>
+<body>
+    <h2>Reset Your Password</h2>
+    <p>Hi {{ user.name }},</p>
+    <p>We received a request to reset your password. Click the link below to create a new password:</p>
+    <p>
+        <a href="{{ reset_url }}" style="background: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+            Reset Password
+        </a>
+    </p>
+    <p>This link expires in 1 hour.</p>
+    <p>If you didn't request a password reset, ignore this email.</p>
+</body>
+</html>
 ```
 
-**4. Health Check Pages**
+#### Example 2: Admin Dashboard
+
 ```python
+from flask import render_template
+from functools import wraps
+
+def admin_required(f):
+    """Decorator to require admin role"""
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        user = get_current_user()
+        if not user or user.role != 'admin':
+            return 'Unauthorized', 401
+        return f(*args, **kwargs)
+    return decorated
+
+@app.route('/admin/dashboard')
+@admin_required
+def admin_dashboard():
+    """Render admin dashboard with system stats"""
+    
+    stats = {
+        'total_users': 1250,
+        'active_today': 342,
+        'new_signups': 23,
+        'errors': 5,
+        'uptime': '99.8%'
+    }
+    
+    recent_users = [
+        {'id': 1, 'name': 'Alice', 'email': 'alice@example.com', 'joined': '2024-01-10'},
+        {'id': 2, 'name': 'Bob', 'email': 'bob@example.com', 'joined': '2024-01-11'},
+    ]
+    
+    return render_template(
+        'admin/dashboard.html',
+        stats=stats,
+        recent_users=recent_users
+    )
+```
+
+---
+
+## Static Files: CSS, JavaScript, Images
+
+Static files are files that don't change (CSS, JavaScript, images) served directly without processing.
+
+### Folder Structure
+
+```
+my-flask-app/
+├── app.py
+├── templates/
+│   ├── base.html
+│   └── user/
+│       └── profile.html
+└── static/               # ← All static files go here
+    ├── css/
+    │   ├── style.css
+    │   └── admin.css
+    ├── js/
+    │   ├── app.js
+    │   └── utils.js
+    └── images/
+        ├── logo.png
+        └── favicon.ico
+```
+
+### Using Static Files in Templates
+
+**In Jinja2 templates, use `url_for('static', ...)`:**
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+</head>
+<body>
+    <!-- Images -->
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+    
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
+```
+
+**Why use `url_for()`?**
+- Works with different deployment setups
+- Handles CDNs automatically
+- Cache busting (add version to URL)
+- Auto-generates correct paths
+
+### Serving Static Files in Flask
+
+Flask automatically serves files from the `static/` folder:
+
+```
+GET /static/css/style.css  → Returns static/css/style.css
+GET /static/js/app.js      → Returns static/js/app.js
+GET /static/images/logo.png → Returns static/images/logo.png
+```
+
+**Behind the scenes:**
+
+```python
+# Flask automatically registers this route
+@app.route('/static/<path:filename>')
+def static_files(filename):
+    """Flask handles this for you"""
+    return send_from_directory('static', filename)
+```
+
+### Organizing Static Files
+
+**Good organization:**
+
+```
+static/
+├── css/
+│   ├── style.css          # Main styles
+│   ├── admin.css          # Admin dashboard styles
+│   └── responsive.css     # Mobile/responsive styles
+├── js/
+│   ├── app.js             # Main app logic
+│   ├── utils.js           # Helper functions
+│   └── vendor/            # Third-party libraries
+│       ├── jquery.js
+│       └── bootstrap.js
+├── images/
+│   ├── logo.png
+│   ├── icons/
+│   │   ├── user.png
+│   │   └── settings.png
+│   └── uploads/           # User-uploaded files
+└── docs/
+    └── API.html
+```
+
+### Production Considerations for Static Files
+
+**In production, don't use Flask to serve static files:**
+
+```bash
+# Development (fine for testing)
+python app.py
+# Flask serves static files itself
+
+# Production (proper way)
+gunicorn -w 4 app:app
+# Use nginx to serve static files separately
+# Flask handles only dynamic API requests
+```
+
+**nginx configuration for production:**
+
+```nginx
+server {
+    listen 80;
+    server_name api.example.com;
+    
+    # Serve static files directly (fast!)
+    location /static {
+        alias /var/www/myapp/static;
+        expires 30d;  # Browser caching
+    }
+    
+    # Forward API requests to Flask/Gunicorn
+    location / {
+        proxy_pass http://localhost:8000;
+    }
+}
+```
+
+**Why this matters:**
+- nginx serves static files 100x faster than Flask
+- Frees Flask workers for actual API logic
+- Enables CDN integration
+- Better caching strategies
 @app.route('/health')
 def health_check():
     """Visual health check page for ops team"""

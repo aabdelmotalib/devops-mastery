@@ -1,5 +1,36 @@
 # Module 9: Authentication & Authorization
 
+## Introduction: Security-First Access Control
+
+Authentication and authorization are the gatekeepers of your API. They determine who can access your system and what they're allowed to do. Mistakes in this layer are among the most exploited security vulnerabilities in production systems.
+
+**Authentication** answers: "Who are you?"
+- Verifying user identity through credentials
+- Establishing trust in the user's claimed identity
+
+**Authorization** answers: "What are you allowed to do?"
+- Determining what resources a user can access
+- Enforcing permissions and role-based access control
+
+Why this matters:
+- **Data Protection**: Prevents unauthorized access to sensitive user or business data
+- **Compliance**: Many regulations (GDPR, HIPAA, PCI-DSS) mandate authentication/authorization controls
+- **API Security**: Token leaks, session hijacking, and privilege escalation are common attack vectors
+- **Multi-Tenancy**: Critical when serving multiple customers from same infrastructure
+- **Audit Trail**: Knowing who did what enables compliance and forensics
+
+This module teaches you how to:
+- Choose between session-based and token-based authentication
+- Implement JWT (JSON Web Tokens) for stateless authentication
+- Secure token generation, storage, and validation
+- Build role-based access control (RBAC) systems
+- Protect against common authentication attacks (brute force, token replay, etc.)
+- Implement refresh token strategies
+- Handle OAuth2 integration for third-party access
+- Create custom authorization decorators
+
+By the end of this module, you'll understand the authentication patterns used in production APIs and how to implement them securely in your Flask applications.
+
 ## Session vs Token-Based Authentication
 
 Understanding the difference is crucial for API design.
