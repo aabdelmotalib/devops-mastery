@@ -277,22 +277,22 @@ nav:
           - 05 Incident Response: security-essentials-tutorial/05-incident-response.md
 
   - Mathematics for MLOps:
-      - Start Here: docs/mathematics-for-mlops/START_HERE.md
+      - Start Here: mathematics-for-mlops/START_HERE.md
       - Modules:
-          - 01 Absolute Basics: docs/mathematics-for-mlops/MODULE_1_Absolute_Basics.md
-          - 02 Functions & Mappings: docs/mathematics-for-mlops/MODULE_2_Functions_and_Mappings.md
-          - 03 Derivatives & Gradients: docs/mathematics-for-mlops/MODULE_3_Derivatives_and_Gradients.md
-          - 04 Optimization Intuition: docs/mathematics-for-mlops/MODULE_4_Optimization_Intuition.md
-          - 05 Probability for ML: docs/mathematics-for-mlops/MODULE_5_Probability_for_ML.md
-          - 06 Statistics for Monitoring: docs/mathematics-for-mlops/MODULE_6_Statistics_for_Monitoring.md
-          - 07 Loss Functions: docs/mathematics-for-mlops/MODULE_7_Loss_Functions.md
-          - 08 Scaling & Normalization: docs/mathematics-for-mlops/MODULE_8_Scaling_and_Normalization.md
+          - 01 Absolute Basics: mathematics-for-mlops/MODULE_1_Absolute_Basics.md
+          - 02 Functions & Mappings: mathematics-for-mlops/MODULE_2_Functions_and_Mappings.md
+          - 03 Derivatives & Gradients: mathematics-for-mlops/MODULE_3_Derivatives_and_Gradients.md
+          - 04 Optimization Intuition: mathematics-for-mlops/MODULE_4_Optimization_Intuition.md
+          - 05 Probability for ML: mathematics-for-mlops/MODULE_5_Probability_for_ML.md
+          - 06 Statistics for Monitoring: mathematics-for-mlops/MODULE_6_Statistics_for_Monitoring.md
+          - 07 Loss Functions: mathematics-for-mlops/MODULE_7_Loss_Functions.md
+          - 08 Scaling & Normalization: mathematics-for-mlops/MODULE_8_Scaling_and_Normalization.md
       - Resources:
-          - Learning Paths: docs/mathematics-for-mlops/LEARNING_PATHS.md
-          - Quick Reference: docs/mathematics-for-mlops/QUICK_REFERENCE_MODULES_1-3.md
-          - Index: docs/mathematics-for-mlops/INDEX.md
-          - Completion Report: docs/mathematics-for-mlops/COMPLETION_REPORT.md
-          - README: docs/mathematics-for-mlops/README.md
+          - Learning Paths: mathematics-for-mlops/LEARNING_PATHS.md
+          - Quick Reference: mathematics-for-mlops/QUICK_REFERENCE_MODULES_1-3.md
+          - Index: mathematics-for-mlops/INDEX.md
+          - Completion Report: mathematics-for-mlops/COMPLETION_REPORT.md
+          - README: mathematics-for-mlops/README.md
 
   - Capstone Projects:
       - Start Here: devops-capstone-projects/README_START_HERE.md
