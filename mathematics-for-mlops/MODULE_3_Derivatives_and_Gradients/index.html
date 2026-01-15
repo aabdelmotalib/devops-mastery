@@ -11,10 +11,6 @@
         <link rel="canonical" href="https://aabdelmotalib.github.io/devops-mastery/mathematics-for-mlops/MODULE_3_Derivatives_and_Gradients/">
       
       
-        <link rel="prev" href="../MODULE_2_Functions_and_Mappings/">
-      
-      
-        <link rel="next" href="../MODULE_4_Optimization_Intuition/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +18,7 @@
     
     
       
-        <title>03 Derivatives & Gradients - DevOps Engineering Mastery</title>
+        <title>MODULE 3: Derivatives and Gradients (How Things Change) - DevOps Engineering Mastery</title>
       
     
     
@@ -115,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              03 Derivatives & Gradients
+              MODULE 3: Derivatives and Gradients (How Things Change)
             
           </span>
         </div>
@@ -5302,8 +5298,6 @@
       
   
   
-    
-  
   
     
     
@@ -5318,13 +5312,15 @@
     
       
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16" >
         
           <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
             
@@ -5337,7 +5333,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_16">
             <span class="md-nav__icon md-icon"></span>
             Mathematics for MLOps
@@ -5350,7 +5346,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../START_HERE/" class="md-nav__link">
+      <a href="../../docs/mathematics-for-mlops/START_HERE.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5368,8 +5364,6 @@
                 
   
   
-    
-  
   
     
     
@@ -5392,13 +5386,15 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16_2" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16_2" >
         
           <label class="md-nav__link" for="__nav_16_2" id="__nav_16_2_label" tabindex="0">
             
@@ -5411,7 +5407,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_16_2">
             <span class="md-nav__icon md-icon"></span>
             Modules
@@ -5424,7 +5420,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../MODULE_1_Absolute_Basics/" class="md-nav__link">
+      <a href="../../docs/mathematics-for-mlops/MODULE_1_Absolute_Basics.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5444,7 +5440,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../MODULE_2_Functions_and_Mappings/" class="md-nav__link">
+      <a href="../../docs/mathematics-for-mlops/MODULE_2_Functions_and_Mappings.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5462,29 +5458,9 @@
                 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    03 Derivatives & Gradients
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../docs/mathematics-for-mlops/MODULE_3_Derivatives_and_Gradients.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5493,504 +5469,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-this-module-is-about" class="md-nav__link">
-    What This Module Is About
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#where-youll-see-this-in-mlops" class="md-nav__link">
-    Where You'll See This in MLOps
-  </a>
-  
-    <nav class="md-nav" aria-label="Where You'll See This in MLOps">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-training-loss-curves" class="md-nav__link">
-    1. Training Loss Curves
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-gradient-descent-the-learning-algorithm" class="md-nav__link">
-    2. Gradient Descent (The Learning Algorithm)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-learning-rate" class="md-nav__link">
-    3. Learning Rate
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-vanishingexploding-gradients" class="md-nav__link">
-    4. Vanishing/Exploding Gradients
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-model-optimization" class="md-nav__link">
-    5. Model Optimization
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6-hyperparameter-tuning" class="md-nav__link">
-    6. Hyperparameter Tuning
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#core-concepts-slow-detailed" class="md-nav__link">
-    Core Concepts (Slow &amp; Detailed)
-  </a>
-  
-    <nav class="md-nav" aria-label="Core Concepts (Slow & Detailed)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#concept-1-what-is-a-derivative" class="md-nav__link">
-    Concept 1: What Is a Derivative?
-  </a>
-  
-    <nav class="md-nav" aria-label="Concept 1: What Is a Derivative?">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#definition" class="md-nav__link">
-    Definition
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#visual-intuition" class="md-nav__link">
-    Visual Intuition
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#real-example-training-loss" class="md-nav__link">
-    Real Example: Training Loss
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#key-property-the-derivative-is-local" class="md-nav__link">
-    Key Property: The Derivative Is Local
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#concept-2-the-gradient-multivariate-derivative" class="md-nav__link">
-    Concept 2: The Gradient (Multivariate Derivative)
-  </a>
-  
-    <nav class="md-nav" aria-label="Concept 2: The Gradient (Multivariate Derivative)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#definition_1" class="md-nav__link">
-    Definition
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-model-loss-with-multiple-weights" class="md-nav__link">
-    Example: Model Loss with Multiple Weights
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#interpretation-direction-of-steepest-increase" class="md-nav__link">
-    Interpretation: Direction of Steepest Increase
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#why-gradient-matters" class="md-nav__link">
-    Why Gradient Matters
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#concept-3-gradient-descent-moving-downhill" class="md-nav__link">
-    Concept 3: Gradient Descent (Moving Downhill)
-  </a>
-  
-    <nav class="md-nav" aria-label="Concept 3: Gradient Descent (Moving Downhill)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#definition_2" class="md-nav__link">
-    Definition
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-by-step-example" class="md-nav__link">
-    Step-by-Step Example
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#why-this-works" class="md-nav__link">
-    Why This Works
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#concept-4-learning-rate-step-size" class="md-nav__link">
-    Concept 4: Learning Rate (Step Size)
-  </a>
-  
-    <nav class="md-nav" aria-label="Concept 4: Learning Rate (Step Size)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#definition_3" class="md-nav__link">
-    Definition
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#visual-example-walking-downhill" class="md-nav__link">
-    Visual Example: Walking Downhill
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#real-examples" class="md-nav__link">
-    Real Examples
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#how-to-choose-learning-rate" class="md-nav__link">
-    How to Choose Learning Rate
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#concept-5-convergence-when-to-stop-training" class="md-nav__link">
-    Concept 5: Convergence (When to Stop Training)
-  </a>
-  
-    <nav class="md-nav" aria-label="Concept 5: Convergence (When to Stop Training)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#definition_4" class="md-nav__link">
-    Definition
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#operationally" class="md-nav__link">
-    Operationally
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#why-it-matters" class="md-nav__link">
-    Why It Matters
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#concept-6-the-problem-of-non-convexity-multiple-valleys" class="md-nav__link">
-    Concept 6: The Problem of Non-Convexity (Multiple Valleys)
-  </a>
-  
-    <nav class="md-nav" aria-label="Concept 6: The Problem of Non-Convexity (Multiple Valleys)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#definition_5" class="md-nav__link">
-    Definition
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#visual-example" class="md-nav__link">
-    Visual Example
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#real-ml-example" class="md-nav__link">
-    Real ML Example
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#why-it-matters_1" class="md-nav__link">
-    Why It Matters
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#worked-examples-step-by-step" class="md-nav__link">
-    Worked Examples (Step-by-Step)
-  </a>
-  
-    <nav class="md-nav" aria-label="Worked Examples (Step-by-Step)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#worked-example-1-understanding-a-training-curve" class="md-nav__link">
-    Worked Example 1: Understanding a Training Curve
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#worked-example-2-diagnosing-a-bad-learning-rate" class="md-nav__link">
-    Worked Example 2: Diagnosing a Bad Learning Rate
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#worked-example-3-gradient-descent-with-multiple-weights" class="md-nav__link">
-    Worked Example 3: Gradient Descent with Multiple Weights
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#common-confusions-traps" class="md-nav__link">
-    Common Confusions &amp; Traps
-  </a>
-  
-    <nav class="md-nav" aria-label="Common Confusions & Traps">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#trap-1-confusing-gradient-is-negative-with-improvement" class="md-nav__link">
-    Trap 1: Confusing "Gradient is Negative" with "Improvement"
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#trap-2-thinking-the-gradient-is-constant" class="md-nav__link">
-    Trap 2: Thinking the Gradient is Constant
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#trap-3-large-gradient-always-better" class="md-nav__link">
-    Trap 3: Large Gradient = Always Better
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#trap-4-thinking-gradient-descent-always-finds-the-global-minimum" class="md-nav__link">
-    Trap 4: Thinking Gradient Descent Always Finds the Global Minimum
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#trap-5-not-checking-if-gradient-calculation-is-correct" class="md-nav__link">
-    Trap 5: Not Checking if Gradient Calculation is Correct
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#practice-questions" class="md-nav__link">
-    Practice Questions
-  </a>
-  
-    <nav class="md-nav" aria-label="Practice Questions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#easy-questions" class="md-nav__link">
-    Easy Questions
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#medium-questions" class="md-nav__link">
-    Medium Questions
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hard-questions" class="md-nav__link">
-    Hard Questions
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mlops-reality-check" class="md-nav__link">
-    MLOps Reality Check
-  </a>
-  
-    <nav class="md-nav" aria-label="MLOps Reality Check">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#failure-mode-1-learning-rate-disaster" class="md-nav__link">
-    Failure Mode 1: Learning Rate Disaster
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#failure-mode-2-ignoring-gradient-signals" class="md-nav__link">
-    Failure Mode 2: Ignoring Gradient Signals
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#failure-mode-3-using-vanishing-gradients-in-production" class="md-nav__link">
-    Failure Mode 3: Using Vanishing Gradients in Production
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#failure-mode-4-not-monitoring-post-deployment-gradients" class="md-nav__link">
-    Failure Mode 4: Not Monitoring Post-Deployment Gradients
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#failure-mode-5-forgetting-that-gradients-are-local" class="md-nav__link">
-    Failure Mode 5: Forgetting That Gradients Are Local
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#summary-next-steps" class="md-nav__link">
-    Summary &amp; Next Steps
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -6002,7 +5480,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../MODULE_4_Optimization_Intuition/" class="md-nav__link">
+      <a href="../../docs/mathematics-for-mlops/MODULE_4_Optimization_Intuition.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -6022,7 +5500,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../MODULE_5_Probability_for_ML/" class="md-nav__link">
+      <a href="../../docs/mathematics-for-mlops/MODULE_5_Probability_for_ML.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -6042,7 +5520,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../MODULE_6_Statistics_for_Monitoring/" class="md-nav__link">
+      <a href="../../docs/mathematics-for-mlops/MODULE_6_Statistics_for_Monitoring.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -6062,7 +5540,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../MODULE_7_Loss_Functions/" class="md-nav__link">
+      <a href="../../docs/mathematics-for-mlops/MODULE_7_Loss_Functions.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -6082,7 +5560,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../MODULE_8_Scaling_and_Normalization/" class="md-nav__link">
+      <a href="../../docs/mathematics-for-mlops/MODULE_8_Scaling_and_Normalization.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -6121,8 +5599,6 @@
         
       
         
-          
-        
       
     
     
@@ -6136,24 +5612,16 @@
         
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16_3" >
         
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
-              
+          <label class="md-nav__link" for="__nav_16_3" id="__nav_16_3_label" tabindex="0">
+            
   
   <span class="md-ellipsis">
     Resources
   </span>
   
 
-            </a>
-            
-              <label class="md-nav__link " for="__nav_16_3">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
+            <span class="md-nav__icon md-icon"></span>
+          </label>
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_16_3">
@@ -6168,7 +5636,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../LEARNING_PATHS/" class="md-nav__link">
+      <a href="../../docs/mathematics-for-mlops/LEARNING_PATHS.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -6188,7 +5656,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../QUICK_REFERENCE_MODULES_1-3/" class="md-nav__link">
+      <a href="../../docs/mathematics-for-mlops/QUICK_REFERENCE_MODULES_1-3.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -6208,7 +5676,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../INDEX/" class="md-nav__link">
+      <a href="../../docs/mathematics-for-mlops/INDEX.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -6228,7 +5696,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../COMPLETION_REPORT/" class="md-nav__link">
+      <a href="../../docs/mathematics-for-mlops/COMPLETION_REPORT.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -6242,6 +5710,24 @@
 
               
             
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/mathematics-for-mlops/README.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    README
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
           </ul>
@@ -8197,44 +7683,6 @@ Lesson: Gradient *decreases* as you approach the optimum. This is normal.
       
         <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
-        
-          
-          <a href="../MODULE_2_Functions_and_Mappings/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 02 Functions &amp; Mappings" rel="prev">
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-            </div>
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              <div class="md-ellipsis">
-                02 Functions & Mappings
-              </div>
-            </div>
-          </a>
-        
-        
-          
-          <a href="../MODULE_4_Optimization_Intuition/" class="md-footer__link md-footer__link--next" aria-label="Next: 04 Optimization Intuition" rel="next">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                04 Optimization Intuition
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">
