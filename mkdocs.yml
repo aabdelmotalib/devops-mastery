@@ -336,6 +336,7 @@ exclude_docs: |
   **/nginx*.conf
   **/node_modules/**
   **/venv/**
+  ../mathematics-for-mlops/**
   task.md
   implementation_plan.md
   walkthrough.md
