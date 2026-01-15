@@ -36,7 +36,7 @@ Follow the modules in order. Each builds on the previous one.
    - Builds on: Modules 1-3
    - Essential for: choosing appropriate loss, understanding convergence
 
-8. **[Module 8: Scaling, Normalization, and Stability](MODULE_8_Scaling_Normalization.md)** (Coming)
+8. **[Module 8: Scaling, Normalization, and Stability](MODULE_8_Scaling_and_Normalization.md)** (Coming)
    - Builds on: Modules 2-3
    - Essential for: feature engineering, numerical stability
 
