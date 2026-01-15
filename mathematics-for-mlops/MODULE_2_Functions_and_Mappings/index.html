@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://aabdelmotalib.github.io/devops-mastery/mathematics-for-mlops/MODULE_2_Functions_and_Mappings/">
       
       
+        <link rel="prev" href="../MODULE_1_Absolute_Basics/">
+      
+      
+        <link rel="next" href="../MODULE_3_Derivatives_and_Gradients/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>MODULE 2: Functions and Mappings (Turning Inputs into Outputs) - DevOps Engineering Mastery</title>
+        <title>02 Functions & Mappings - DevOps Engineering Mastery</title>
       
     
     
@@ -111,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              MODULE 2: Functions and Mappings (Turning Inputs into Outputs)
+              02 Functions & Mappings
             
           </span>
         </div>
@@ -5298,6 +5302,8 @@
       
   
   
+    
+  
   
     
     
@@ -5312,15 +5318,13 @@
     
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" checked>
         
           <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
             
@@ -5333,7 +5337,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_16">
             <span class="md-nav__icon md-icon"></span>
             Mathematics for MLOps
@@ -5346,7 +5350,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/mathematics-for-mlops/START_HERE.md" class="md-nav__link">
+      <a href="../START_HERE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5364,6 +5368,8 @@
                 
   
   
+    
+  
   
     
     
@@ -5386,15 +5392,13 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16_2" checked>
         
           <label class="md-nav__link" for="__nav_16_2" id="__nav_16_2_label" tabindex="0">
             
@@ -5407,7 +5411,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_16_2">
             <span class="md-nav__icon md-icon"></span>
             Modules
@@ -5420,7 +5424,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/mathematics-for-mlops/MODULE_1_Absolute_Basics.md" class="md-nav__link">
+      <a href="../MODULE_1_Absolute_Basics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5438,9 +5442,29 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../docs/mathematics-for-mlops/MODULE_2_Functions_and_Mappings.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    02 Functions & Mappings
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -5449,6 +5473,518 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-this-module-is-about" class="md-nav__link">
+    What This Module Is About
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-youll-see-this-in-mlops" class="md-nav__link">
+    Where You'll See This in MLOps
+  </a>
+  
+    <nav class="md-nav" aria-label="Where You'll See This in MLOps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-your-model-as-a-function" class="md-nav__link">
+    1. Your Model as a Function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-data-pipelines" class="md-nav__link">
+    2. Data Pipelines
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-feature-scaling" class="md-nav__link">
+    3. Feature Scaling
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-predictions-and-thresholds" class="md-nav__link">
+    4. Predictions and Thresholds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-monitoring-metrics" class="md-nav__link">
+    5. Monitoring Metrics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-concepts-slow-detailed" class="md-nav__link">
+    Core Concepts (Slow &amp; Detailed)
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Concepts (Slow & Detailed)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concept-1-what-is-a-function" class="md-nav__link">
+    Concept 1: What Is a Function?
+  </a>
+  
+    <nav class="md-nav" aria-label="Concept 1: What Is a Function?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition" class="md-nav__link">
+    Definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visual-representation" class="md-nav__link">
+    Visual Representation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-example-model-prediction" class="md-nav__link">
+    Real Example: Model Prediction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-property-consistency" class="md-nav__link">
+    Key Property: Consistency
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-2-inputs-and-outputs-domain-and-range" class="md-nav__link">
+    Concept 2: Inputs and Outputs (Domain and Range)
+  </a>
+  
+    <nav class="md-nav" aria-label="Concept 2: Inputs and Outputs (Domain and Range)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition_1" class="md-nav__link">
+    Definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-examples" class="md-nav__link">
+    Real Examples
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    Why This Matters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#production-trap" class="md-nav__link">
+    Production Trap
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-3-composition-chaining-functions" class="md-nav__link">
+    Concept 3: Composition (Chaining Functions)
+  </a>
+  
+    <nav class="md-nav" aria-label="Concept 3: Composition (Chaining Functions)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition_2" class="md-nav__link">
+    Definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-example-data-pipeline" class="md-nav__link">
+    Real Example: Data Pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detailed-walkthrough" class="md-nav__link">
+    Detailed Walkthrough
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-composition-matters" class="md-nav__link">
+    Why Composition Matters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-production-failure" class="md-nav__link">
+    Real Production Failure
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-4-linear-functions-the-simplest-useful-function" class="md-nav__link">
+    Concept 4: Linear Functions (The Simplest Useful Function)
+  </a>
+  
+    <nav class="md-nav" aria-label="Concept 4: Linear Functions (The Simplest Useful Function)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition_3" class="md-nav__link">
+    Definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-examples_1" class="md-nav__link">
+    Real Examples
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-linear-functions-matter" class="md-nav__link">
+    Why Linear Functions Matter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-misconception" class="md-nav__link">
+    Common Misconception
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-5-non-linear-functions-when-things-get-interesting" class="md-nav__link">
+    Concept 5: Non-Linear Functions (When Things Get Interesting)
+  </a>
+  
+    <nav class="md-nav" aria-label="Concept 5: Non-Linear Functions (When Things Get Interesting)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition_4" class="md-nav__link">
+    Definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-examples_2" class="md-nav__link">
+    Real Examples
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-non-linear-functions-matter" class="md-nav__link">
+    Why Non-Linear Functions Matter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-trap-assuming-linearity" class="md-nav__link">
+    Common Trap: Assuming Linearity
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-6-piecewise-functions-different-rules-for-different-inputs" class="md-nav__link">
+    Concept 6: Piecewise Functions (Different Rules for Different Inputs)
+  </a>
+  
+    <nav class="md-nav" aria-label="Concept 6: Piecewise Functions (Different Rules for Different Inputs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition_5" class="md-nav__link">
+    Definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-examples_3" class="md-nav__link">
+    Real Examples
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-piecewise-functions-matter" class="md-nav__link">
+    Why Piecewise Functions Matter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#production-reality" class="md-nav__link">
+    Production Reality
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-examples-step-by-step" class="md-nav__link">
+    Worked Examples (Step-by-Step)
+  </a>
+  
+    <nav class="md-nav" aria-label="Worked Examples (Step-by-Step)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-1-building-a-feature-pipeline" class="md-nav__link">
+    Worked Example 1: Building a Feature Pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-2-understanding-model-behavior-as-a-function" class="md-nav__link">
+    Worked Example 2: Understanding Model Behavior as a Function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-3-debugging-a-pipeline-failure" class="md-nav__link">
+    Worked Example 3: Debugging a Pipeline Failure
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-confusions-traps" class="md-nav__link">
+    Common Confusions &amp; Traps
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Confusions & Traps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trap-1-confusing-function-with-output" class="md-nav__link">
+    Trap 1: Confusing Function with Output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trap-2-not-understanding-pipeline-order" class="md-nav__link">
+    Trap 2: Not Understanding Pipeline Order
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trap-3-assuming-linearity-when-data-is-non-linear" class="md-nav__link">
+    Trap 3: Assuming Linearity When Data Is Non-Linear
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trap-4-changing-a-function-without-realizing-it" class="md-nav__link">
+    Trap 4: Changing a Function Without Realizing It
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trap-5-domainrange-mismatches" class="md-nav__link">
+    Trap 5: Domain/Range Mismatches
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-questions" class="md-nav__link">
+    Practice Questions
+  </a>
+  
+    <nav class="md-nav" aria-label="Practice Questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#easy-questions" class="md-nav__link">
+    Easy Questions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#medium-questions" class="md-nav__link">
+    Medium Questions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hard-questions" class="md-nav__link">
+    Hard Questions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mlops-reality-check" class="md-nav__link">
+    MLOps Reality Check
+  </a>
+  
+    <nav class="md-nav" aria-label="MLOps Reality Check">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#failure-mode-1-changing-a-function-in-the-middle-of-a-pipeline" class="md-nav__link">
+    Failure Mode 1: Changing a Function in the Middle of a Pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failure-mode-2-domain-creep" class="md-nav__link">
+    Failure Mode 2: Domain Creep
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failure-mode-3-pipeline-order-wrong-at-startup-discovered-too-late" class="md-nav__link">
+    Failure Mode 3: Pipeline Order Wrong at Startup, Discovered Too Late
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failure-mode-4-non-linear-behavior-not-accounted-for" class="md-nav__link">
+    Failure Mode 4: Non-Linear Behavior Not Accounted For
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failure-mode-5-composing-incompatible-functions" class="md-nav__link">
+    Failure Mode 5: Composing Incompatible Functions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-next-steps" class="md-nav__link">
+    Summary &amp; Next Steps
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -5460,7 +5996,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/mathematics-for-mlops/MODULE_3_Derivatives_and_Gradients.md" class="md-nav__link">
+      <a href="../MODULE_3_Derivatives_and_Gradients/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5480,7 +6016,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/mathematics-for-mlops/MODULE_4_Optimization_Intuition.md" class="md-nav__link">
+      <a href="../MODULE_4_Optimization_Intuition/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5500,7 +6036,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/mathematics-for-mlops/MODULE_5_Probability_for_ML.md" class="md-nav__link">
+      <a href="../MODULE_5_Probability_for_ML/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5520,7 +6056,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/mathematics-for-mlops/MODULE_6_Statistics_for_Monitoring.md" class="md-nav__link">
+      <a href="../MODULE_6_Statistics_for_Monitoring/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5540,7 +6076,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/mathematics-for-mlops/MODULE_7_Loss_Functions.md" class="md-nav__link">
+      <a href="../MODULE_7_Loss_Functions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5560,7 +6096,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/mathematics-for-mlops/MODULE_8_Scaling_and_Normalization.md" class="md-nav__link">
+      <a href="../MODULE_8_Scaling_and_Normalization/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5599,6 +6135,8 @@
         
       
         
+          
+        
       
     
     
@@ -5612,16 +6150,24 @@
         
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16_3" >
         
-          <label class="md-nav__link" for="__nav_16_3" id="__nav_16_3_label" tabindex="0">
-            
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
   
   <span class="md-ellipsis">
     Resources
   </span>
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              <label class="md-nav__link " for="__nav_16_3">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_16_3">
@@ -5636,7 +6182,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/mathematics-for-mlops/LEARNING_PATHS.md" class="md-nav__link">
+      <a href="../LEARNING_PATHS/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5656,7 +6202,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/mathematics-for-mlops/QUICK_REFERENCE_MODULES_1-3.md" class="md-nav__link">
+      <a href="../QUICK_REFERENCE_MODULES_1-3/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5676,7 +6222,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/mathematics-for-mlops/INDEX.md" class="md-nav__link">
+      <a href="../INDEX/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5696,7 +6242,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/mathematics-for-mlops/COMPLETION_REPORT.md" class="md-nav__link">
+      <a href="../COMPLETION_REPORT/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -5710,24 +6256,6 @@
 
               
             
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../docs/mathematics-for-mlops/README.md" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    README
-  </span>
-  
-
-      </a>
-    </li>
-  
-
               
             
           </ul>
@@ -7753,6 +8281,44 @@ Lesson: Always verify that output type and range of one function matches input e
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../MODULE_1_Absolute_Basics/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 01 Absolute Basics" rel="prev">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                01 Absolute Basics
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../MODULE_3_Derivatives_and_Gradients/" class="md-footer__link md-footer__link--next" aria-label="Next: 03 Derivatives &amp; Gradients" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                03 Derivatives & Gradients
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
