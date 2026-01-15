@@ -1,0 +1,7649 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://aabdelmotalib.github.io/devops-mastery/mathematics-for-mlops/MODULE_8_Scaling_and_Normalization/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.0">
+    
+    
+      
+        <title>MODULE 8: Scaling, Normalization, and Numerical Stability - DevOps Engineering Mastery</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.9f615399.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.649f08f9.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#module-8-scaling-normalization-and-numerical-stability" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="DevOps Engineering Mastery" class="md-header__button md-logo" aria-label="DevOps Engineering Mastery" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DevOps Engineering Mastery
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              MODULE 8: Scaling, Normalization, and Numerical Stability
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="DevOps Engineering Mastery" class="md-nav__button md-logo" aria-label="DevOps Engineering Mastery" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    DevOps Engineering Mastery
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../portfolio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    My Portfolio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../programming-fundamentals-with-ai/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Programming Fundamentals
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_3">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Programming Fundamentals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../programming-fundamentals-with-ai/START_HERE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Start Here
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../programming-fundamentals-with-ai/docs/01-programming-thinking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Programming Thinking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../programming-fundamentals-with-ai/docs/02-core-programming-concepts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Core Concepts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../programming-fundamentals-with-ai/docs/03-software-architecture-basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Architecture Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../programming-fundamentals-with-ai/docs/04-thinking-like-an-engineer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Engineering Thinking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../programming-fundamentals-with-ai/docs/05-programming-with-ai/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Programming with AI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../programming-fundamentals-with-ai/docs/06-practical-examples/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Practical Examples
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../programming-fundamentals-with-ai/FINAL_PROJECT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../programming-fundamentals-with-ai/QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quick Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AWS Essentials
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            AWS Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/START_HERE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/docs/01-aws-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/docs/02-identity-access-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 IAM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/docs/03-compute-services/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Compute
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/docs/04-storage-databases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Storage & DBs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/docs/05-networking-content-delivery/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Networking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/docs/06-cicd-devops-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 CI/CD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/docs/07-monitoring-observability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Monitoring
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/docs/08-security-compliance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/docs/09-cost-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 Cost Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/docs/10-advanced-services/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 Advanced Services
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/final-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../aws-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_4_5">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/INDEX/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completion Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/DELIVERY_SUMMARY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Delivery Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/examples/REFERENCE_IMPLEMENTATIONS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference Implementation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../docker-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Docker Essentials
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_5">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Docker Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker-essentials-tutorial/00-bash-and-yaml-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    00 Bash & YAML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker-essentials-tutorial/01-container-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker-essentials-tutorial/02-docker-architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker-essentials-tutorial/03-docker-images/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Images
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker-essentials-tutorial/04-docker-containers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Containers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker-essentials-tutorial/05-docker-networking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Networking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker-essentials-tutorial/06-docker-volumes-storage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Storage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker-essentials-tutorial/07-docker-compose/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Compose
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker-essentials-tutorial/08-docker-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker-essentials-tutorial/09-docker-cicd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 CI/CD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker-essentials-tutorial/10-docker-kubernetes-readiness/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 Kubernetes Readiness
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker-essentials-tutorial/final-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../docker-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_5_4">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker-essentials-tutorial/TUTORIAL_SUMMARY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Kubernetes Essentials
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Kubernetes Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/START_HERE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
+        
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/01-kubernetes-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/02-kubectl-cluster-interaction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Kubectl
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/03-pods-workloads/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Pods & Workloads
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/04-services-networking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Services
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/05-configmaps-secrets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Config & Secrets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/06-storage-volumes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Storage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/07-resource-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Resource Mgmt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/08-health-probes-logging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Health & Logging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/09-rbac-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/10-helm-package-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 Helm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/11-advanced-cluster-operations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11 Advanced Ops
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/12-kubernetes-cicd-docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12 CI/CD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/13-gateway-api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    13 Gateway API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/FINAL_PROJECT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/docs/GATEWAY_API_QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gateway API Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_6" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../kubernetes-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_6_6">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_6">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/INDEX/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completion Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/EXAM_AND_PRACTICE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exam & Practice
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/MODULE_13_UPDATE_SUMMARY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module 13 Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-essentials-tutorial/COMPLETION_SUMMARY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completion Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../cicd-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    CI/CD Essentials
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_7">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            CI/CD Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/01-cicd-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/02-source-control-triggers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Triggers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/03-ci-pipeline-design/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Pipeline Design
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/04-artifact-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Artifacts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/05-security-in-cicd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/06-continuous-deployment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 CD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/07-infrastructure-as-code/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 IaC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/08-pipeline-observability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Observability
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/09-cicd-tools-comparison/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 Tooling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/10-failure-recovery/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 Recovery
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/docs/final-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../cicd-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_7_5">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_5">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/INDEX/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completion Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/DELIVERY_SUMMARY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Delivery Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd-essentials-tutorial/examples/REFERENCE_IMPLEMENTATIONS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference Implementation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../database-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Database Essentials
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_8">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Database Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_2" >
+        
+          <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database-essentials-tutorial/docs/01-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database-essentials-tutorial/docs/02-postgresql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 PostgreSQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database-essentials-tutorial/docs/03-nosql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 NoSQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database-essentials-tutorial/docs/04-database-design/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 DB Design
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database-essentials-tutorial/docs/05-sqlalchemy-orm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 SQLAlchemy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database-essentials-tutorial/docs/06-migrations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Migrations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database-essentials-tutorial/docs/07-performance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database-essentials-tutorial/docs/08-transactions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Transactions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database-essentials-tutorial/docs/09-final-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Networking Essentials
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Networking Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/GETTING_STARTED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Start Here
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_2" >
+        
+          <label class="md-nav__link" for="__nav_9_2" id="__nav_9_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/docs/01-networking-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/docs/02-http-https-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 HTTP/S
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/docs/03-rest-api-design/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 API Design
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/docs/04-websockets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 WebSockets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/docs/05-load-balancing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Load Balancing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/docs/06-reverse-proxy-nginx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Nginx
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/docs/07-dns-domain-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 DNS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/docs/08-ssl-tls-certificates/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 SSL/TLS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/docs/09-final-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../networking-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_9_4">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_4">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking-essentials-tutorial/examples/QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quick Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Observability Essentials
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Observability Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/START_HERE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_2" >
+        
+          <label class="md-nav__link" for="__nav_10_2" id="__nav_10_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/docs/01-observability-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/docs/02-prometheus-metrics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Prometheus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/docs/03-logging-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Logging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/docs/04-loki-fluent-bit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Loki
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/docs/05-grafana-dashboards/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Grafana
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/docs/06-aws-cloudwatch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 CloudWatch
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/docs/07-alerting-incident-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Alerting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/docs/08-advanced-patterns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Advanced Patterns
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/FINAL_PROJECT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../observability-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_10_5">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_5">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/INDEX/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completion Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/DELIVERY_SUMMARY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Delivery Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observability-essentials-tutorial/examples/REFERENCE_IMPLEMENTATIONS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference Implementation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Distributed Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Distributed Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/START_HERE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11_2" >
+        
+          <label class="md-nav__link" for="__nav_11_2" id="__nav_11_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/docs/01-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/docs/02-scalability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Scalability
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/docs/03-data-storage-replication/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Storage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/docs/04-messaging-event-driven/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Messaging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/docs/05-fault-tolerance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Fault Tolerance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/docs/06-performance-optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/docs/07-consistency-transactions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Transactions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/docs/08-microservices-patterns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Microservices
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/docs/09-observability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 Observability
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/docs/10-deployment-scaling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 Deployment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/FINAL_PROJECT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../distributed-systems-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_11_4">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11_4">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/INDEX/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributed-systems-tutorial/EXAM_AND_PRACTICE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exam & Practice
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../flask-backend-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Flask Backend
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_12">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            Flask Backend
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12_2" >
+        
+          <label class="md-nav__link" for="__nav_12_2" id="__nav_12_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_12_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/00-prerequisites-and-basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    00 Prerequisites
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/01-flask-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/02-flask-architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/03-routing-and-views/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Routing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/04-request-handling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Requests
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/05-response-formats/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Response
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/06-templates-static/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Templates
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/07-flask-blueprints/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Blueprints
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/08-error-handling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Errors
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/09-authentication-authorization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 Auth
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/10-flask-extensions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 Extensions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flask-backend-tutorial/docs/11-final-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../aws-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    AWS Advanced
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_13">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            AWS Advanced
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/11-advanced-ecs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11 Advanced ECS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/12-advanced-lambda/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12 Advanced Lambda
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/13-advanced-fargate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    13 Advanced Fargate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/14-terraform-deep-dive/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    14 Terraform Deep Dive
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws-essentials-tutorial/15-ansible-deep-dive/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    15 Ansible Deep Dive
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_14" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../modern-devops-patterns-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Modern DevOps Patterns
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_14">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            Modern DevOps Patterns
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modern-devops-patterns-tutorial/01-gitops-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 GitOps Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modern-devops-patterns-tutorial/02-service-mesh-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Service Mesh Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modern-devops-patterns-tutorial/03-ebpf-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 eBPF Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_15" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../security-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Security Essentials
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_15">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            Security Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_15_2" >
+        
+          <label class="md-nav__link" for="__nav_15_2" id="__nav_15_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security-essentials-tutorial/01-application-security-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Application Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security-essentials-tutorial/02-infrastructure-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Infrastructure Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security-essentials-tutorial/03-supply-chain-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Supply Chain Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security-essentials-tutorial/04-compliance-audit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Compliance & Audit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security-essentials-tutorial/05-incident-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Incident Response
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16" >
+        
+          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mathematics for MLOps
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16">
+            <span class="md-nav__icon md-icon"></span>
+            Mathematics for MLOps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/mathematics-for-mlops/START_HERE.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Start Here
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16_2" >
+        
+          <label class="md-nav__link" for="__nav_16_2" id="__nav_16_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/mathematics-for-mlops/MODULE_1_Absolute_Basics.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Absolute Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/mathematics-for-mlops/MODULE_2_Functions_and_Mappings.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Functions & Mappings
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/mathematics-for-mlops/MODULE_3_Derivatives_and_Gradients.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Derivatives & Gradients
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/mathematics-for-mlops/MODULE_4_Optimization_Intuition.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Optimization Intuition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/mathematics-for-mlops/MODULE_5_Probability_for_ML.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Probability for ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/mathematics-for-mlops/MODULE_6_Statistics_for_Monitoring.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Statistics for Monitoring
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/mathematics-for-mlops/MODULE_7_Loss_Functions.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Loss Functions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/mathematics-for-mlops/MODULE_8_Scaling_and_Normalization.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Scaling & Normalization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16_3" >
+        
+          <label class="md-nav__link" for="__nav_16_3" id="__nav_16_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16_3">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/mathematics-for-mlops/LEARNING_PATHS.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning Paths
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/mathematics-for-mlops/QUICK_REFERENCE_MODULES_1-3.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quick Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/mathematics-for-mlops/INDEX.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/mathematics-for-mlops/COMPLETION_REPORT.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completion Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/mathematics-for-mlops/README.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    README
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_17" >
+        
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Capstone Projects
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
+            <span class="md-nav__icon md-icon"></span>
+            Capstone Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/README_START_HERE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Start Here
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_17_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Platform Engineering
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_17_2">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_17_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17_2">
+            <span class="md-nav__icon md-icon"></span>
+            Platform Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/aws/infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/decisions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Architecture Decisions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/scaling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scaling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/cost-awareness/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cost Awareness
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/interview-notes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interview Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_17_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Distributed Systems
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_17_3">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_17_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17_3">
+            <span class="md-nav__icon md-icon"></span>
+            Distributed Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/docs/decisions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Architecture Decisions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/docs/scaling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scaling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/PORTFOLIO_OVERVIEW/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_17_5" >
+        
+          <label class="md-nav__link" for="__nav_17_5" id="__nav_17_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_17_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17_5">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-capstone-projects/COMPLETION_SUMMARY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completion Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-this-module-is-about" class="md-nav__link">
+    What This Module Is About
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-youll-see-this-in-mlops" class="md-nav__link">
+    Where You'll See This in MLOps
+  </a>
+  
+    <nav class="md-nav" aria-label="Where You'll See This in MLOps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-feature-scaling-before-training" class="md-nav__link">
+    1. Feature Scaling Before Training
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-numerical-stability" class="md-nav__link">
+    2. Numerical Stability
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-model-comparison" class="md-nav__link">
+    3. Model Comparison
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-deploy-to-edge-devices" class="md-nav__link">
+    4. Deploy to Edge Devices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-handling-outliers" class="md-nav__link">
+    5. Handling Outliers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-concepts-slow-detailed" class="md-nav__link">
+    Core Concepts (Slow &amp; Detailed)
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Concepts (Slow & Detailed)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concept-1-why-scaling-matters-fairness-and-speed" class="md-nav__link">
+    Concept 1: Why Scaling Matters (Fairness and Speed)
+  </a>
+  
+    <nav class="md-nav" aria-label="Concept 1: Why Scaling Matters (Fairness and Speed)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition" class="md-nav__link">
+    Definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-it-matters" class="md-nav__link">
+    Why It Matters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fairness-perspective" class="md-nav__link">
+    Fairness Perspective
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-2-min-max-scaling-0-to-1-range" class="md-nav__link">
+    Concept 2: Min-Max Scaling (0 to 1 Range)
+  </a>
+  
+    <nav class="md-nav" aria-label="Concept 2: Min-Max Scaling (0 to 1 Range)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition_1" class="md-nav__link">
+    Definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formula" class="md-nav__link">
+    Formula
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intuition" class="md-nav__link">
+    Intuition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practical-example" class="md-nav__link">
+    Practical Example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem" class="md-nav__link">
+    Problem
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-3-standardization-z-score-normalization" class="md-nav__link">
+    Concept 3: Standardization (Z-Score Normalization)
+  </a>
+  
+    <nav class="md-nav" aria-label="Concept 3: Standardization (Z-Score Normalization)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition_2" class="md-nav__link">
+    Definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formula_1" class="md-nav__link">
+    Formula
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intuition_1" class="md-nav__link">
+    Intuition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practical-example_1" class="md-nav__link">
+    Practical Example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advantage-over-min-max" class="md-nav__link">
+    Advantage Over Min-Max
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-4-log-scaling-for-skewed-data" class="md-nav__link">
+    Concept 4: Log Scaling (For Skewed Data)
+  </a>
+  
+    <nav class="md-nav" aria-label="Concept 4: Log Scaling (For Skewed Data)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition_3" class="md-nav__link">
+    Definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formula_2" class="md-nav__link">
+    Formula
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use" class="md-nav__link">
+    When to Use
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-5-batch-normalization-normalizing-during-training" class="md-nav__link">
+    Concept 5: Batch Normalization (Normalizing During Training)
+  </a>
+  
+    <nav class="md-nav" aria-label="Concept 5: Batch Normalization (Normalizing During Training)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition_4" class="md-nav__link">
+    Definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-it-matters_1" class="md-nav__link">
+    Why It Matters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practical-impact" class="md-nav__link">
+    Practical Impact
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-6-numerical-stability-avoiding-overflowunderflow" class="md-nav__link">
+    Concept 6: Numerical Stability (Avoiding Overflow/Underflow)
+  </a>
+  
+    <nav class="md-nav" aria-label="Concept 6: Numerical Stability (Avoiding Overflow/Underflow)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition_5" class="md-nav__link">
+    Definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-problem-softmax-overflow" class="md-nav__link">
+    Common Problem: Softmax Overflow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-problem-log-underflow" class="md-nav__link">
+    Common Problem: Log Underflow
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-examples-step-by-step" class="md-nav__link">
+    Worked Examples (Step-by-Step)
+  </a>
+  
+    <nav class="md-nav" aria-label="Worked Examples (Step-by-Step)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-1-scaling-features-for-fair-training" class="md-nav__link">
+    Worked Example 1: Scaling Features for Fair Training
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-2-detecting-and-handling-outliers" class="md-nav__link">
+    Worked Example 2: Detecting and Handling Outliers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-3-numerical-stability-in-softmax" class="md-nav__link">
+    Worked Example 3: Numerical Stability in Softmax
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-confusions-traps" class="md-nav__link">
+    Common Confusions &amp; Traps
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Confusions & Traps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trap-1-scaling-training-but-forgetting-testproduction" class="md-nav__link">
+    Trap 1: Scaling Training But Forgetting Test/Production
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trap-2-fitting-scaler-on-both-train-and-test" class="md-nav__link">
+    Trap 2: Fitting Scaler on Both Train and Test
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trap-3-scaling-categorical-variables" class="md-nav__link">
+    Trap 3: Scaling Categorical Variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trap-4-log-scaling-zero-values" class="md-nav__link">
+    Trap 4: Log Scaling Zero Values
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-questions" class="md-nav__link">
+    Practice Questions
+  </a>
+  
+    <nav class="md-nav" aria-label="Practice Questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#easy-questions" class="md-nav__link">
+    Easy Questions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#medium-questions" class="md-nav__link">
+    Medium Questions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hard-questions" class="md-nav__link">
+    Hard Questions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mlops-reality-check" class="md-nav__link">
+    MLOps Reality Check
+  </a>
+  
+    <nav class="md-nav" aria-label="MLOps Reality Check">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#failure-mode-1-unscaled-features-in-production" class="md-nav__link">
+    Failure Mode 1: Unscaled Features in Production
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failure-mode-2-numerical-overflow-in-softmax" class="md-nav__link">
+    Failure Mode 2: Numerical Overflow in Softmax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failure-mode-3-wrong-scaler-in-deployment" class="md-nav__link">
+    Failure Mode 3: Wrong Scaler in Deployment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failure-mode-4-outliers-cause-extreme-scaling" class="md-nav__link">
+    Failure Mode 4: Outliers Cause Extreme Scaling
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-next-steps" class="md-nav__link">
+    Summary &amp; Next Steps
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#completion-full-mathematics-for-mlops-curriculum" class="md-nav__link">
+    Completion: Full Mathematics for MLOps Curriculum
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="module-8-scaling-normalization-and-numerical-stability">MODULE 8: Scaling, Normalization, and Numerical Stability</h1>
+<hr />
+<h2 id="what-this-module-is-about">What This Module Is About</h2>
+<p><strong>Plain English:</strong> Your numbers matter. Big numbers vs. small numbers affect how the model trains. Scaling is about putting all numbers on a fair playing field.</p>
+<p>Without understanding scaling:
+- Your model trains slowly or fails
+- Some features dominate others unfairly
+- You get numerical errors (overflow, underflow)
+- You can't compare models across datasets</p>
+<p>With understanding scaling:
+- Model trains faster and more reliably
+- All features contribute equally
+- You avoid numerical disasters
+- You understand why preprocessing matters</p>
+<hr />
+<h2 id="where-youll-see-this-in-mlops">Where You'll See This in MLOps</h2>
+<h3 id="1-feature-scaling-before-training"><strong>1. Feature Scaling Before Training</strong></h3>
+<div class="highlight"><pre><span></span><code>Feature A: House size (1000-5000 square feet)
+Feature B: House color (coded as 1-4 for colors)
+
+Without scaling:
+  Size dominates (numbers 1000x larger)
+  Color is ignored (gradient too small)
+
+With scaling:
+  Size: [0-1]
+  Color: [0-1]
+  Both contribute equally
+</code></pre></div>
+<h3 id="2-numerical-stability"><strong>2. Numerical Stability</strong></h3>
+<div class="highlight"><pre><span></span><code>Computing probability: exp(x)
+
+If x = 1000: exp(1000) = infinity (overflow!)
+If x = -1000: exp(-1000) = 0 (underflow)
+
+Solution: Subtract max before exp (log-sum-exp trick)
+Result: Numerically stable, no overflow
+</code></pre></div>
+<h3 id="3-model-comparison"><strong>3. Model Comparison</strong></h3>
+<div class="highlight"><pre><span></span><code>Model A trained on raw values (1-10000)
+Model B trained on scaled values (0-1)
+
+Model A&#39;s loss: 500,000
+Model B&#39;s loss: 0.05
+
+Which is better? Can&#39;t compare! Different scales.
+
+With normalization: Both on same scale, comparison is fair.
+</code></pre></div>
+<h3 id="4-deploy-to-edge-devices"><strong>4. Deploy to Edge Devices</strong></h3>
+<div class="highlight"><pre><span></span><code>Training: Float32 (full precision)
+Edge device: Int8 (low precision)
+
+Numbers must be carefully scaled to fit in Int8 without losing too much info.
+Requires understanding of range and precision.
+</code></pre></div>
+<h3 id="5-handling-outliers"><strong>5. Handling Outliers</strong></h3>
+<div class="highlight"><pre><span></span><code>Feature: House price
+Range: $100k - $10M
+Outlier: $500M mansion
+
+Without handling:
+  Mean shifts to $8M
+  Normal homes (1-3M) look cheap by comparison
+
+With scaling/outlier handling:
+  Use median instead of mean (robust to outliers)
+  Or cap extreme values
+</code></pre></div>
+<hr />
+<h2 id="core-concepts-slow-detailed">Core Concepts (Slow &amp; Detailed)</h2>
+<h3 id="concept-1-why-scaling-matters-fairness-and-speed"><strong>Concept 1: Why Scaling Matters (Fairness and Speed)</strong></h3>
+<h4 id="definition">Definition</h4>
+<p><strong>Scaling</strong> is converting features to a standard range (typically 0-1 or -1 to 1).</p>
+<h4 id="why-it-matters">Why It Matters</h4>
+<div class="highlight"><pre><span></span><code>Feature A: 0 to 10,000 (size in sqft)
+Feature B: 0 to 1 (is_basement: no/yes)
+
+Gradient descent step:
+  Adjustment to feature A: Δweight_A = -learning_rate × gradient_A
+  Adjustment to feature B: Δweight_B = -learning_rate × gradient_B
+
+  gradient_A is huge (due to large numbers)
+  gradient_B is tiny (due to small numbers)
+
+Result:
+  Weight A changes quickly
+  Weight B changes slowly or not at all
+  Model effectively ignores feature B
+
+Solution: Scale all features to [0,1]
+  Now both contribute equally
+</code></pre></div>
+<h4 id="fairness-perspective">Fairness Perspective</h4>
+<div class="highlight"><pre><span></span><code>Unscaled model:
+  &quot;I care 1000x more about size than basement&quot;
+
+Scaled model:
+  &quot;I&#39;ll let the data tell me what matters&quot;
+
+Scaling ensures features compete on merit, not magnitude.
+</code></pre></div>
+<hr />
+<h3 id="concept-2-min-max-scaling-0-to-1-range"><strong>Concept 2: Min-Max Scaling (0 to 1 Range)</strong></h3>
+<h4 id="definition_1">Definition</h4>
+<p><strong>Min-Max scaling</strong> transforms values to [0, 1] range.</p>
+<h4 id="formula">Formula</h4>
+<div class="highlight"><pre><span></span><code>scaled_value = (value - min) / (max - min)
+
+Example:
+  House price: $200,000
+  Min: $100,000
+  Max: $500,000
+
+  scaled = (200,000 - 100,000) / (500,000 - 100,000)
+  scaled = 100,000 / 400,000
+  scaled = 0.25
+</code></pre></div>
+<h4 id="intuition">Intuition</h4>
+<div class="highlight"><pre><span></span><code>min = 0.0 (the minimum value maps to 0)
+max = 1.0 (the maximum value maps to 1)
+middle = ~0.5 (median maps to 0.5)
+</code></pre></div>
+<h4 id="practical-example">Practical Example</h4>
+<div class="highlight"><pre><span></span><code>Age data:
+  Values: 18, 25, 35, 42, 60, 75
+  Min: 18
+  Max: 75
+  Range: 57
+
+  18 → (18-18)/(75-18) = 0/57 = 0.0
+  25 → (25-18)/(75-18) = 7/57 = 0.12
+  35 → (35-18)/(75-18) = 17/57 = 0.30
+  75 → (75-18)/(75-18) = 57/57 = 1.0
+</code></pre></div>
+<h4 id="problem">Problem</h4>
+<div class="highlight"><pre><span></span><code>What if new data has values outside [min, max]?
+
+Example: Age 85 (older than training max of 75)
+  scaled = (85-18)/(75-18) = 67/57 = 1.18 (outside [0,1]!)
+
+Solution: Clamp to [0,1] or use standardization instead.
+</code></pre></div>
+<hr />
+<h3 id="concept-3-standardization-z-score-normalization"><strong>Concept 3: Standardization (Z-Score Normalization)</strong></h3>
+<h4 id="definition_2">Definition</h4>
+<p><strong>Standardization</strong> transforms data to mean=0, SD=1.</p>
+<h4 id="formula_1">Formula</h4>
+<div class="highlight"><pre><span></span><code>z = (value - mean) / standard_deviation
+
+Example:
+  Age: 35
+  Mean age: 40
+  SD: 8
+
+  z = (35 - 40) / 8 = -5/8 = -0.625
+</code></pre></div>
+<h4 id="intuition_1">Intuition</h4>
+<div class="highlight"><pre><span></span><code>Mean = 0.0 (center of distribution)
+SD away = ±1.0
+2 SDs away = ±2.0
+
+Values typically fall in [-3, +3] range
+Outliers can be &gt; 3
+</code></pre></div>
+<h4 id="practical-example_1">Practical Example</h4>
+<div class="highlight"><pre><span></span><code>Income data:
+  Values: $40k, $50k, $60k, $70k, $80k
+  Mean: $60k
+  SD: $14.14k
+
+  $40k → (40-60)/14.14 = -20/14.14 = -1.41 (1.4 SDs below mean)
+  $60k → (60-60)/14.14 = 0/14.14 = 0.0 (at the mean)
+  $80k → (80-60)/14.14 = 20/14.14 = 1.41 (1.4 SDs above mean)
+</code></pre></div>
+<h4 id="advantage-over-min-max">Advantage Over Min-Max</h4>
+<div class="highlight"><pre><span></span><code>New data can be outside original range:
+
+Age 85 (training max 75):
+  Standardized: (85-40)/8 = 5.625 (still meaningful, &quot;5.6 SDs above mean&quot;)
+  Min-max: 1.18 (outside [0,1], breaks assumptions)
+
+Standardization handles extrapolation naturally.
+</code></pre></div>
+<hr />
+<h3 id="concept-4-log-scaling-for-skewed-data"><strong>Concept 4: Log Scaling (For Skewed Data)</strong></h3>
+<h4 id="definition_3">Definition</h4>
+<p><strong>Log scaling</strong> applies logarithm to compress large ranges.</p>
+<h4 id="formula_2">Formula</h4>
+<div class="highlight"><pre><span></span><code>log_value = log(value)
+
+Example:
+  Income: $20k, $100k, $1M, $10M
+  Regular: Range is 500x (huge)
+
+  Log:
+    log(20k) ≈ 4.3
+    log(100k) ≈ 4.6 (ratio 20x, but only difference 0.3)
+    log(1M) ≈ 6.0 (difference 1.4)
+    log(10M) ≈ 6.3 (difference 0.3)
+
+  Range becomes [4.3, 6.3] = 2.0 (manageable)
+</code></pre></div>
+<h4 id="when-to-use">When to Use</h4>
+<div class="highlight"><pre><span></span><code>Data with:
+- Very large ranges (100x to 1000000x)
+- Exponential growth (prices, populations, network traffic)
+- Right-skewed distribution (tail on high end)
+
+Examples:
+  Income: Log scale
+  Network latency: Log scale (microseconds to seconds)
+  Server capacity: Log scale (megabytes to petabytes)
+</code></pre></div>
+<h4 id="example">Example</h4>
+<div class="highlight"><pre><span></span><code>Network latency (microseconds):
+  Values: 100μs, 1000μs, 10000μs, 100000μs (100x range)
+
+  Log scale:
+    log(100) = 2.0
+    log(1000) = 3.0
+    log(10000) = 4.0
+    log(100000) = 5.0
+
+  Now range is [2, 5] (manageable for model)
+  Ratios preserved (10x difference becomes 1.0 on log scale)
+</code></pre></div>
+<hr />
+<h3 id="concept-5-batch-normalization-normalizing-during-training"><strong>Concept 5: Batch Normalization (Normalizing During Training)</strong></h3>
+<h4 id="definition_4">Definition</h4>
+<p><strong>Batch normalization</strong> normalizes data within each training batch to stabilize training.</p>
+<h4 id="why-it-matters_1">Why It Matters</h4>
+<div class="highlight"><pre><span></span><code>Without batch norm:
+  Epoch 1: First layer sees raw features (large numbers)
+  After first layer: Weights scale those features
+  Second layer sees scaled features
+  Problem: Scales can change unpredictably, training is unstable
+
+With batch norm:
+  After each layer: Normalize outputs to mean=0, SD=1
+  Next layer always sees normalized inputs
+  Result: Stable, predictable training
+</code></pre></div>
+<h4 id="practical-impact">Practical Impact</h4>
+<div class="highlight"><pre><span></span><code>Without batch norm: Learning rate 0.001 (very small, needs tuning)
+With batch norm: Learning rate 0.01-0.1 (10-100x larger, less sensitive)
+Result: Faster convergence, easier to tune
+</code></pre></div>
+<hr />
+<h3 id="concept-6-numerical-stability-avoiding-overflowunderflow"><strong>Concept 6: Numerical Stability (Avoiding Overflow/Underflow)</strong></h3>
+<h4 id="definition_5">Definition</h4>
+<p><strong>Numerical stability</strong> is ensuring computations don't produce infinity, NaN, or zero.</p>
+<h4 id="common-problem-softmax-overflow">Common Problem: Softmax Overflow</h4>
+<div class="highlight"><pre><span></span><code>Softmax formula: exp(x) / sum(exp(x))
+
+If x = 1000:
+  exp(1000) = infinity (overflow!)
+
+Solution: Subtract max before exp
+  shift = max(x_1, x_2, ..., x_n)
+  exp(x_i - shift) (will be [0, 1])
+
+Example:
+  x = [100, 101, 102]
+  shift = 102
+  exp(100-102) = exp(-2) ≈ 0.135
+  exp(101-102) = exp(-1) ≈ 0.368
+  exp(102-102) = exp(0) = 1.0
+
+  sum = 1.503
+  softmax = [0.09, 0.24, 0.67]
+
+Result: No overflow, numerically stable.
+</code></pre></div>
+<h4 id="common-problem-log-underflow">Common Problem: Log Underflow</h4>
+<div class="highlight"><pre><span></span><code>log(0) = undefined (negative infinity)
+
+If probability = 0 (from softmax underflow):
+  log(0) breaks your loss calculation
+
+Solution: Clamp to minimum value
+  prob = max(prob, 1e-7)
+  log(max(prob, 1e-7))
+
+Or use log-softmax directly (numerically stable version)
+</code></pre></div>
+<hr />
+<h2 id="worked-examples-step-by-step">Worked Examples (Step-by-Step)</h2>
+<h3 id="worked-example-1-scaling-features-for-fair-training"><strong>Worked Example 1: Scaling Features for Fair Training</strong></h3>
+<p><strong>Scenario:</strong> You have two features for house valuation:</p>
+<p>Feature A: Square footage (500-5000)
+Feature B: Number of bathrooms (1-10)</p>
+<p>Without scaling, what happens?</p>
+<p><strong>Step 1: Calculate ranges</strong>
+<div class="highlight"><pre><span></span><code>Feature A range: 5000 - 500 = 4500
+Feature B range: 10 - 1 = 9
+
+Ratio: 4500 / 9 = 500
+
+Feature A is 500x larger in magnitude.
+</code></pre></div></p>
+<p><strong>Step 2: See the problem</strong>
+<div class="highlight"><pre><span></span><code>Initialize weights randomly:
+  w_A = 0.001
+  w_B = 0.001
+
+Compute prediction:
+  prediction = w_A × sqft + w_B × bathrooms
+
+On a typical house (2000 sqft, 3 bathrooms):
+  prediction = 0.001 × 2000 + 0.001 × 3 = 2.0 + 0.003 = 2.003
+
+Gradient:
+  ∂loss/∂w_A depends on sqft values (large)
+  ∂loss/∂w_B depends on bathroom values (small)
+
+  gradient_A ≈ 2000 × error (large)
+  gradient_B ≈ 3 × error (small)
+
+  Weight A updates much faster than weight B!
+</code></pre></div></p>
+<p><strong>Step 3: Apply min-max scaling</strong>
+<div class="highlight"><pre><span></span><code>Feature A (sqft):
+  min = 500, max = 5000
+  scaled = (sqft - 500) / 4500
+
+  500 → 0.0
+  2500 → 0.44
+  5000 → 1.0
+
+Feature B (bathrooms):
+  min = 1, max = 10
+  scaled = (bathrooms - 1) / 9
+
+  1 → 0.0
+  3 → 0.22
+  10 → 1.0
+</code></pre></div></p>
+<p><strong>Step 4: Result</strong>
+<div class="highlight"><pre><span></span><code>Both features now [0, 1]
+Gradients are comparable in magnitude
+Weights update fairly
+Both features contribute proportionally to accuracy
+</code></pre></div></p>
+<hr />
+<h3 id="worked-example-2-detecting-and-handling-outliers"><strong>Worked Example 2: Detecting and Handling Outliers</strong></h3>
+<p><strong>Scenario:</strong> You're training a model on customer spending.</p>
+<p>Data:
+<div class="highlight"><pre><span></span><code>Customer spending: $100, $200, $150, $300, $250, $400, $180, $1,000,000
+</code></pre></div></p>
+<p><strong>Question:</strong> How does the outlier affect scaling?</p>
+<p><strong>Step 1: Analyze without outlier handling</strong>
+<div class="highlight"><pre><span></span><code>Without outlier:
+  min = $100
+  max = $400
+  mean = $225
+
+  Scaling: $150 → (150-100)/(400-100) = 0.17
+
+With outlier:
+  min = $100
+  max = $1,000,000
+  mean = $132,000 (!!)
+
+  Scaling: $150 → (150-100)/(1M-100) ≈ 0.00005 (almost zero!)
+
+The outlier compresses normal values to near-zero range.
+</code></pre></div></p>
+<p><strong>Step 2: Impact on training</strong>
+<div class="highlight"><pre><span></span><code>Normal customers ($100-$400):
+  Unscaled (no outlier): [0, 1] range (good)
+  Unscaled (with outlier): [0.0001, 0.0004] (gradient too small)
+
+Model can&#39;t learn from compressed normal range.
+</code></pre></div></p>
+<p><strong>Step 3: Outlier handling options</strong>
+<div class="highlight"><pre><span></span><code>Option 1: Remove outlier
+  Good if outlier is data error
+  Bad if outlier is real (e.g., VIP customer)
+
+Option 2: Cap at 99th percentile
+  99th percentile = $400
+  Cap $1M to $400
+
+  Reasoning: VIP is valuable but shouldn&#39;t break model
+  New max = $400, all data fits [100, 400]
+
+Option 3: Use robust scaling (median, IQR)
+  median = $225
+  IQR (25th to 75th percentile) = $200
+
+  Robust scaling = (value - median) / IQR
+  (150 - 225) / 200 = -0.375 (not compressed!)
+  (1M - 225) / 200 = 5000 (outlier is far, but normal values preserved)
+</code></pre></div></p>
+<p><strong>Step 4: Decision</strong>
+<div class="highlight"><pre><span></span><code>For this problem: Option 2 (cap at 99th percentile)
+  Reasoning:
+  - Outlier is real (VIP customer), don&#39;t remove
+  - Don&#39;t need exact outlier value (just &quot;high spender&quot; matters)
+  - Capping preserves normal value range for good learning
+
+Result: All data in [100, 400], model trains well
+</code></pre></div></p>
+<hr />
+<h3 id="worked-example-3-numerical-stability-in-softmax"><strong>Worked Example 3: Numerical Stability in Softmax</strong></h3>
+<p><strong>Scenario:</strong> Computing softmax for 3-class classification.</p>
+<p>Raw scores: [100, 101, 102]</p>
+<p><strong>Step 1: Compute naively (overflow)</strong>
+<div class="highlight"><pre><span></span><code>Softmax = exp(x) / sum(exp(x))
+
+exp(100) = 3.7 × 10^43 (huge!)
+exp(101) = 2.7 × 10^44 (huge!)
+exp(102) = 3.7 × 10^44 (huge!)
+
+All overflowed, result = NaN or infinity
+</code></pre></div></p>
+<p><strong>Step 2: Apply the fix (subtract max)</strong>
+<div class="highlight"><pre><span></span><code>max_score = 102
+shifted_scores = [100-102, 101-102, 102-102] = [-2, -1, 0]
+
+exp(-2) = 0.135
+exp(-1) = 0.368
+exp(0) = 1.0
+
+sum = 1.503
+softmax = [0.135/1.503, 0.368/1.503, 1.0/1.503]
+softmax = [0.090, 0.245, 0.665]
+</code></pre></div></p>
+<p><strong>Step 3: Verify</strong>
+<div class="highlight"><pre><span></span><code>Result is valid probabilities:
+  - All between 0 and 1 ✓
+  - Sum to 1 ✓
+  - No overflow ✓
+  - No NaN ✓
+
+Numerically stable and correct.
+</code></pre></div></p>
+<p><strong>Step 4: Why it works</strong>
+<div class="highlight"><pre><span></span><code>Mathematically:
+  softmax(x) = exp(x) / sum(exp(x))
+           = exp(x - c) / sum(exp(x - c))  (same result, c = max)
+
+Subtracting max:
+  - Doesn&#39;t change the result (ratios preserved)
+  - Prevents overflow (all exponents now &lt; 0)
+  - Prevents underflow (all exponents now &gt; a negative number)
+</code></pre></div></p>
+<hr />
+<h2 id="common-confusions-traps">Common Confusions &amp; Traps</h2>
+<h3 id="trap-1-scaling-training-but-forgetting-testproduction"><strong>Trap 1: Scaling Training But Forgetting Test/Production</strong></h3>
+<div class="highlight"><pre><span></span><code>Training:
+  Data: 100-500
+  Scaled: (x - 100) / 400
+
+Test data:
+  Apply same scaling using training min/max ✓
+
+Production data:
+  Forget to scale! ✗
+  Model gets raw data (100-500) instead of scaled (0-1)
+  Predictions are garbage
+
+Fix: Always save the scaler (min, max, or mean, std)
+     Apply exact same transformation to all data
+
+Code:
+  train_scaler = MinMaxScaler()
+  train_scaler.fit(train_data)
+
+  train_scaled = train_scaler.transform(train_data)
+  test_scaled = train_scaler.transform(test_data)  ← use same scaler
+  prod_scaled = train_scaler.transform(prod_data)  ← use same scaler
+</code></pre></div>
+<hr />
+<h3 id="trap-2-fitting-scaler-on-both-train-and-test"><strong>Trap 2: Fitting Scaler on Both Train and Test</strong></h3>
+<div class="highlight"><pre><span></span><code>Wrong:
+  scaler_train = MinMaxScaler()
+  scaler_train.fit(train_data)
+  train_scaled = scaler_train.transform(train_data)
+
+  scaler_test = MinMaxScaler()  ← Different scaler!
+  scaler_test.fit(test_data)    ← fit on test data!
+  test_scaled = scaler_test.transform(test_data)
+
+Problem: Scaler is different for test
+         Model gets different scale than training
+         Fair evaluation impossible
+
+Right:
+  scaler = MinMaxScaler()
+  scaler.fit(train_data)  ← fit only on training
+
+  train_scaled = scaler.transform(train_data)
+  test_scaled = scaler.transform(test_data)  ← same scaler
+</code></pre></div>
+<hr />
+<h3 id="trap-3-scaling-categorical-variables"><strong>Trap 3: Scaling Categorical Variables</strong></h3>
+<div class="highlight"><pre><span></span><code>Feature: Color (red=1, blue=2, green=3)
+
+Wrong:
+  Assume blue (2) is &quot;between&quot; red (1) and green (3)
+  Scale to [0, 1]
+
+Problem: No such order exists
+         Color is categorical, not ordinal
+
+Right:
+  One-hot encode: red=[1,0,0], blue=[0,1,0], green=[0,0,1]
+  Don&#39;t scale (already [0, 1])
+
+Or: Leave as-is, let model learn the meaning
+</code></pre></div>
+<hr />
+<h3 id="trap-4-log-scaling-zero-values"><strong>Trap 4: Log Scaling Zero Values</strong></h3>
+<div class="highlight"><pre><span></span><code>Data: 0, 1, 10, 100, 1000
+
+Apply log:
+  log(0) = -infinity (undefined!)
+  log(1) = 0
+  log(10) = 1.0
+  log(100) = 2.0
+  log(1000) = 3.0
+
+Problem: log(0) breaks
+
+Solution:
+  log(max(x, 1e-7))  ← clamp to small value
+  or
+  log(x + 1)  ← add 1 before log
+
+Result: log(1) = 0, log(2) ≈ 0.69, log(11) ≈ 2.4 (all valid)
+</code></pre></div>
+<hr />
+<h2 id="practice-questions">Practice Questions</h2>
+<h3 id="easy-questions"><strong>Easy Questions</strong></h3>
+<p><strong>Q1: Why Scale?</strong>
+Feature A ranges [0, 10000]
+Feature B ranges [0, 1]</p>
+<p>Without scaling, what happens?</p>
+<details>
+<summary>Click to see answer</summary>
+
+**Answer:** Feature A dominates.
+
+Why: Gradient with respect to A is 10,000x larger.
+Weight A updates much faster than weight B.
+Model effectively ignores B.
+
+Solution: Scale both to [0, 1], then both contribute fairly.
+
+</details>
+
+<hr />
+<p><strong>Q2: Min-Max Scaling</strong>
+Value: 30
+Min in data: 10
+Max in data: 50</p>
+<p>What's the scaled value?</p>
+<details>
+<summary>Click to see answer</summary>
+
+**Answer:**
+scaled = (30 - 10) / (50 - 10) = 20 / 40 = 0.5
+
+Interpretation: Value 30 is halfway between min and max.
+
+</details>
+
+<hr />
+<p><strong>Q3: Standardization vs. Min-Max</strong>
+Which handles values outside the original range better?</p>
+<details>
+<summary>Click to see answer</summary>
+
+**Answer:** Standardization (z-score).
+
+Why:
+- Min-Max: New value outside [original_min, original_max] breaks
+- Standardization: New value can be any z-score, still meaningful
+
+Example:
+  Training max age: 80
+  Test age: 85 (outside)
+
+  Min-max: (85-min)/range → outside [0,1]
+  Standardization: (85-mean)/sd → valid z-score
+
+Standardization is more robust.
+
+</details>
+
+<hr />
+<h3 id="medium-questions"><strong>Medium Questions</strong></h3>
+<p><strong>Q4: Outlier Detection</strong>
+Income data: $20k, $25k, $30k, $35k, $1M</p>
+<p>What's a reasonable handling strategy?</p>
+<details>
+<summary>Click to see answer</summary>
+
+**Answer:** Cap at 99th percentile or use robust scaling.
+
+Option 1: Cap
+  99th percentile ≈ $35k
+  Cap $1M to $35k
+  Result: All values in [$20k, $35k]
+
+Option 2: Robust scaling (median, IQR)
+  Median: $30k
+  IQR: ~$10k
+  Preserves normal range, handles outlier naturally
+
+Choose capping if outlier is error or unnecessary precision.
+Choose robust scaling if outlier is real but should be dampened.
+
+</details>
+
+<hr />
+<p><strong>Q5: Log Scaling</strong>
+Data: 1, 10, 100, 1000, 10000</p>
+<p>Range is 10,000x. After log scaling, what's the range?</p>
+<details>
+<summary>Click to see answer</summary>
+
+**Answer:**
+log(1) = 0
+log(10) = 1.0
+log(100) = 2.0
+log(1000) = 3.0
+log(10000) = 4.0
+
+Range: [0, 4] = 4 (much more manageable than 10,000x)
+
+Log scaling compresses exponential ranges.
+
+</details>
+
+<hr />
+<p><strong>Q6: Scaler Fit/Transform</strong>
+You have train and test data.</p>
+<p>Should you:
+A) Fit scaler on train, apply to both train and test
+B) Fit scaler on train, fit separate scaler on test
+C) Fit scaler on combined train+test</p>
+<details>
+<summary>Click to see answer</summary>
+
+**Answer:** Option A (fit on train, apply to both).
+
+Why:
+- A: Fair evaluation (test scaled by training statistics)
+- B: Wrong (test scaler is different, unfair comparison)
+- C: Wrong (test data leaks into training scaler)
+
+Always: Fit on training only, apply to all other data.
+
+</details>
+
+<hr />
+<h3 id="hard-questions"><strong>Hard Questions</strong></h3>
+<p><strong>Q7: Batch Normalization Advantage</strong>
+Why does batch norm allow larger learning rates?</p>
+<details>
+<summary>Click to see answer</summary>
+
+**Answer:** Batch norm stabilizes internal activations.
+
+Without batch norm:
+  Large learning rate → weights change a lot
+  → activations change unpredictably
+  → training becomes unstable, diverges
+
+With batch norm:
+  Batch norm normalizes outputs after each layer
+  → next layer always sees mean=0, sd=1 input
+  → stable, predictable training
+  → can use larger learning rate without diverging
+
+Benefit: Faster convergence, less learning rate tuning needed.
+
+</details>
+
+<hr />
+<p><strong>Q8: Numerical Stability in Practice</strong>
+You compute: loss = -log(softmax(scores))</p>
+<p>Scores are [100, 101, 102]. What happens?</p>
+<details>
+<summary>Click to see answer</summary>
+
+**Answer:** Overflow and NaN loss.
+
+Step by step:
+  softmax = exp(scores) / sum(exp(scores))
+  exp(100) = 3.7e43 (overflow!)
+  Result: NaN or infinity
+
+  log(NaN) or log(infinity) = NaN
+  loss = NaN (training breaks)
+
+Fix: Use log-softmax directly
+  log_softmax(scores) = (scores - max(scores)) - log(sum(exp(scores - max(scores))))
+
+  = (scores - 102) - log(sum(exp(scores - 102)))
+  = [-2, -1, 0] - log(exp(-2) + exp(-1) + exp(0))
+  = [-2, -1, 0] - log(0.135 + 0.368 + 1.0)
+  = [-2, -1, 0] - 0.405
+  = [-2.405, -1.405, -0.405]
+
+Result: All valid (no overflow, numerically stable)
+
+</details>
+
+<hr />
+<h2 id="mlops-reality-check">MLOps Reality Check</h2>
+<h3 id="failure-mode-1-unscaled-features-in-production"><strong>Failure Mode 1: Unscaled Features in Production</strong></h3>
+<div class="highlight"><pre><span></span><code>Training:
+  Features scaled to [0, 1]
+  Model trained on scaled data
+  Accuracy: 95%
+
+Production:
+  Forgot to scale features
+  Model gets raw data
+  Accuracy: 25% (garbage!)
+
+Why: Model was trained on [0, 1] data, expects that scale
+     Gets 100-10000 instead, completely outside training distribution
+
+Fix: Serialize scaler with model
+     Apply scaler before prediction
+     Code review to ensure scaler used consistently
+</code></pre></div>
+<hr />
+<h3 id="failure-mode-2-numerical-overflow-in-softmax"><strong>Failure Mode 2: Numerical Overflow in Softmax</strong></h3>
+<div class="highlight"><pre><span></span><code>Model training goes well, then suddenly:
+  loss = NaN
+  model stops learning
+
+Investigation:
+  Some scores reached 1000+ (overflow in softmax)
+  exp(1000) = infinity
+  softmax = NaN
+
+Root cause:
+  Learning rate too high, weights grew too large
+
+Fix:
+  1. Reduce learning rate
+  2. Add weight regularization
+  3. Use log-softmax (numerically stable)
+</code></pre></div>
+<hr />
+<h3 id="failure-mode-3-wrong-scaler-in-deployment"><strong>Failure Mode 3: Wrong Scaler in Deployment</strong></h3>
+<div class="highlight"><pre><span></span><code>Dev environment:
+  Train data scaled: mean=100, std=20
+  Scaler saved to pickle file
+  Model works: 91% accuracy
+
+Production:
+  Different scaler used: mean=102, std=19
+  (from production data statistics)
+
+Result:
+  Model performance drops: 87% accuracy
+  Different scale than training
+
+Fix:
+  Use training data scaler, not production data scaler
+  Apply exact same transformation to all data
+  Code: train_data.scaler → production_data (never refit scaler)
+</code></pre></div>
+<hr />
+<h3 id="failure-mode-4-outliers-cause-extreme-scaling"><strong>Failure Mode 4: Outliers Cause Extreme Scaling</strong></h3>
+<div class="highlight"><pre><span></span><code>Training data: Income $30k-$100k
+Outlier: $10B (typo or fraud)
+
+Min-max scaling:
+  min = $30k
+  max = $10B
+
+  Normal customer $50k: (50k-30k)/(10B-30k) ≈ 0 (compressed!)
+  Normal range is squeezed to near-zero
+
+Model can&#39;t learn from compressed range.
+
+Fix:
+  Detect outliers: IQR method or isolation forest
+  Remove or cap outliers before scaling
+  Result: Normal range preserved, model trains well
+</code></pre></div>
+<hr />
+<h2 id="summary-next-steps">Summary &amp; Next Steps</h2>
+<p><strong>You now understand:</strong></p>
+<ol>
+<li><strong>Why scaling:</strong> Fair feature comparison, faster training</li>
+<li><strong>Min-Max scaling:</strong> Map to [0, 1] range</li>
+<li><strong>Standardization:</strong> Z-score normalization, handles extrapolation</li>
+<li><strong>Log scaling:</strong> Compress exponential ranges</li>
+<li><strong>Batch normalization:</strong> Stabilize training, allow larger learning rates</li>
+<li><strong>Numerical stability:</strong> Avoid overflow, underflow, NaN</li>
+<li><strong>Common mistakes:</strong> Scaling inconsistently, forgetting outliers, fitting on test data</li>
+</ol>
+<p><strong>In your pipeline, you can now:</strong>
+- Scale features appropriately for your problem
+- Handle outliers without breaking your model
+- Avoid numerical errors in production
+- Understand why preprocessing matters
+- Deploy models with consistent scaling</p>
+<hr />
+<h2 id="completion-full-mathematics-for-mlops-curriculum">Completion: Full Mathematics for MLOps Curriculum</h2>
+<p><strong>You have completed all 8 modules:</strong></p>
+<ol>
+<li>✅ Absolute Basics (numbers, trends, percentages)</li>
+<li>✅ Functions and Mappings (data pipelines, transformations)</li>
+<li>✅ Derivatives and Gradients (model training, optimization)</li>
+<li>✅ Optimization Intuition (hyperparameters, overfitting)</li>
+<li>✅ Probability for ML (uncertainty, thresholds, risk)</li>
+<li>✅ Statistics for Monitoring (drift, control limits, significance)</li>
+<li>✅ Loss Functions (convergence, overfitting detection)</li>
+<li>✅ Scaling &amp; Normalization (fairness, stability)</li>
+</ol>
+<p><strong>What you can now do:</strong></p>
+<ul>
+<li>Understand the mathematics behind your models</li>
+<li>Debug training issues and interpret curves</li>
+<li>Make informed decisions about hyperparameters</li>
+<li>Monitor models in production for degradation</li>
+<li>Handle edge cases and numerical problems</li>
+<li>Explain ML concepts without the elitism</li>
+</ul>
+<p><strong>Next steps in your MLOps journey:</strong></p>
+<ol>
+<li>Apply these concepts to your actual models</li>
+<li>Build monitoring dashboards based on statistical concepts</li>
+<li>Experiment with different loss functions and metrics</li>
+<li>Implement proper scaling and preprocessing pipelines</li>
+<li>Set up early stopping and convergence detection</li>
+</ol>
+<hr />
+<p><strong>End of Module 8. End of Curriculum.</strong></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="mailto:contact@example.com" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480v-83.6c0-4 1.5-7.8 4.2-10.7l167.6-182.9c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8l-88.3-44.2C7.1 311.3.3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "navigation.footer", "navigation.tracking", "navigation.indexes", "navigation.pruned", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tooltips", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.4e0fa4ba.min.js"></script>
+      
+    
+  </body>
+</html>
