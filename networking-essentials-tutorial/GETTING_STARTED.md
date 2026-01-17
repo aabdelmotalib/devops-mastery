@@ -4,18 +4,25 @@
 
 ### 1. Read the Tutorial
 
-Start with the README and then each module in order:
+Start with the README and then choose your path:
 
 ```bash
 # Start here
 cat README.md
 
-# Then Module 1
+# NEW TO NETWORKING? Read the premodule first
+less docs/00-networking-basics-a-to-z.md    # Complete A-Z basics (2-3 hours)
+
+# THEN continue to Module 1
 less docs/01-networking-fundamentals.md
 
 # Continue through all 9 modules
 # Each module is self-contained but builds on previous concepts
 ```
+
+**Which path is for me?**
+- **Premodule (00):** If you're brand new to networking or need a refresher
+- **Module 1 onwards:** If you have networking fundamentals down already
 
 ### 2. Run the Examples
 

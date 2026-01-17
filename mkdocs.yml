@@ -184,6 +184,7 @@ nav:
   - Networking Essentials:
       - Start Here: networking-essentials-tutorial/GETTING_STARTED.md
       - Modules:
+          - 00 Basics A-Z: networking-essentials-tutorial/docs/00-networking-basics-a-to-z.md
           - 01 Fundamentals: networking-essentials-tutorial/docs/01-networking-fundamentals.md
           - 02 HTTP/S: networking-essentials-tutorial/docs/02-http-https-protocol.md
           - 03 API Design: networking-essentials-tutorial/docs/03-rest-api-design.md

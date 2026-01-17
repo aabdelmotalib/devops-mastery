@@ -51,6 +51,7 @@ This model is referenced consistently throughout all modules.
 
 | Module | Focus | Duration |
 |--------|-------|----------|
+| **PREMODULE** | **Networking Basics A-Z** | **2-3 hours** |
 | 1. Networking Fundamentals | IP, ports, sockets, TCP/UDP | 2 hours |
 | 2. HTTP/HTTPS Protocol | Request/response, encryption | 2 hours |
 | 3. REST API Design | Resource design, versioning | 2.5 hours |
@@ -61,7 +62,13 @@ This model is referenced consistently throughout all modules.
 | 8. SSL/TLS Certificates | Encryption, keys, Let's Encrypt | 2.5 hours |
 | 9. Final Project | Production-ready setup | 4 hours |
 
-**Total: ~22.5 hours of material**
+**Total: ~24.5-25.5 hours of material**
+
+### Where to Start
+
+**New to networking?** → Start with the [**Premodule: Networking Basics A-Z**](docs/00-networking-basics-a-to-z.md)
+
+**Have some networking background?** → Jump to [**Module 1: Networking Fundamentals**](docs/01-networking-fundamentals.md)
 
 ## How to Use This Tutorial
 
