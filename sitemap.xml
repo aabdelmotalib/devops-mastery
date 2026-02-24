@@ -826,6 +826,36 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/networking-essentials-tutorial/examples/01-flask-app/</loc>
+         <lastmod>2026-02-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/networking-essentials-tutorial/examples/02-dockerfile/</loc>
+         <lastmod>2026-02-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/networking-essentials-tutorial/examples/03-docker-compose/</loc>
+         <lastmod>2026-02-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/networking-essentials-tutorial/examples/04-nginx-docker-conf/</loc>
+         <lastmod>2026-02-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/networking-essentials-tutorial/examples/05-nginx-production-conf/</loc>
+         <lastmod>2026-02-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/networking-essentials-tutorial/examples/06-requirements-txt/</loc>
+         <lastmod>2026-02-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://aabdelmotalib.github.io/devops-mastery/networking-essentials-tutorial/examples/EXAMPLES/</loc>
          <lastmod>2026-02-24</lastmod>
          <changefreq>daily</changefreq>
