@@ -3032,18 +3032,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
+  <a href="#table-of-contents" class="md-nav__link">
+    Table of Contents
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-acid-actually-means-in-practice" class="md-nav__link">
-    What ACID Actually Means in Practice
+  <a href="#introduction" class="md-nav__link">
+    Introduction
   </a>
   
-    <nav class="md-nav" aria-label="What ACID Actually Means in Practice">
+    <nav class="md-nav" aria-label="Introduction">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3292,12 +3292,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#module-8-exam" class="md-nav__link">
-    Module 8 Exam
+  <a href="#anti-patterns" class="md-nav__link">
+    Anti-Patterns
   </a>
   
-    <nav class="md-nav" aria-label="Module 8 Exam">
+    <nav class="md-nav" aria-label="Anti-Patterns">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-1-missing-transaction-boundaries" class="md-nav__link">
+    ❌ Anti-Pattern 1: Missing Transaction Boundaries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-2-race-conditions-from-insufficient-locking" class="md-nav__link">
+    ❌ Anti-Pattern 2: Race Conditions from Insufficient Locking
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-3-long-running-transactions" class="md-nav__link">
+    ❌ Anti-Pattern 3: Long Running Transactions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-4-ignoring-serialization-errors" class="md-nav__link">
+    ❌ Anti-Pattern 4: Ignoring Serialization Errors
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-implications" class="md-nav__link">
+    Performance Implications
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance Implications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#when-transactions-hurt" class="md-nav__link">
+    When Transactions Hurt
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#multiple-choice-questions" class="md-nav__link">
@@ -6791,18 +6839,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
+  <a href="#table-of-contents" class="md-nav__link">
+    Table of Contents
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-acid-actually-means-in-practice" class="md-nav__link">
-    What ACID Actually Means in Practice
+  <a href="#introduction" class="md-nav__link">
+    Introduction
   </a>
   
-    <nav class="md-nav" aria-label="What ACID Actually Means in Practice">
+    <nav class="md-nav" aria-label="Introduction">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -7051,12 +7099,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#module-8-exam" class="md-nav__link">
-    Module 8 Exam
+  <a href="#anti-patterns" class="md-nav__link">
+    Anti-Patterns
   </a>
   
-    <nav class="md-nav" aria-label="Module 8 Exam">
+    <nav class="md-nav" aria-label="Anti-Patterns">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-1-missing-transaction-boundaries" class="md-nav__link">
+    ❌ Anti-Pattern 1: Missing Transaction Boundaries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-2-race-conditions-from-insufficient-locking" class="md-nav__link">
+    ❌ Anti-Pattern 2: Race Conditions from Insufficient Locking
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-3-long-running-transactions" class="md-nav__link">
+    ❌ Anti-Pattern 3: Long Running Transactions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-4-ignoring-serialization-errors" class="md-nav__link">
+    ❌ Anti-Pattern 4: Ignoring Serialization Errors
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-implications" class="md-nav__link">
+    Performance Implications
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance Implications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#when-transactions-hurt" class="md-nav__link">
+    When Transactions Hurt
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#multiple-choice-questions" class="md-nav__link">
@@ -7100,19 +7196,21 @@
 
 
 <h1 id="module-8-transactions-and-acid">Module 8: Transactions and ACID</h1>
-<h2 id="introduction">Introduction</h2>
-<p><strong>Transactions are how databases keep data correct when things go wrong.</strong> They're the foundation of reliability in production systems.</p>
-<p><strong>What you'll master</strong>:
-- <strong>ACID properties</strong>: Atomicity, Consistency, Isolation, Durability
-- <strong>Isolation levels</strong>: When transactions see each other's data
-- <strong>Locks and deadlocks</strong>: What happens when transactions conflict
-- <strong>Transaction patterns</strong>: Optimistic locking, pessimistic locking, idempotency
-- <strong>Production patterns</strong>: Handling failures and retries</p>
-<p><strong>Real-world stakes</strong>:
-- Without transactions: Database corruptions, lost money, data inconsistencies
-- With transactions: Reliable systems that handle failures gracefully</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#acid-properties-explained">ACID Properties Explained</a></li>
+<li><a href="#isolation-levels">Isolation Levels</a></li>
+<li><a href="#locks-and-deadlocks">Locks and Deadlocks</a></li>
+<li><a href="#transaction-patterns">Transaction Patterns</a></li>
+<li><a href="#error-handling">Error Handling</a></li>
+<li><a href="#anti-patterns">Anti-Patterns</a></li>
+<li><a href="#performance-implications">Performance Implications</a></li>
+<li><a href="#real-world-scenarios">Real-World Scenarios</a></li>
+<li><a href="#assessment--practice">Assessment &amp; Practice</a></li>
+</ol>
 <hr />
-<h2 id="what-acid-actually-means-in-practice">What ACID Actually Means in Practice</h2>
+<h2 id="introduction">Introduction</h2>
 <p>ACID is not just an acronym—it's a guarantee that your data stays correct even when systems fail.</p>
 <h3 id="atomicity">Atomicity</h3>
 <p><strong>Definition</strong>: A transaction is all-or-nothing. Either all operations succeed, or all fail (rollback).</p>
@@ -7697,8 +7795,158 @@ DETAIL: Process 1234 waits for ShareLock on transaction 5678
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Long transaction: </span><span class="si">{</span><span class="n">duration</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">response</span>
 </code></pre></div>
+<h2 id="anti-patterns">Anti-Patterns</h2>
+<h3 id="anti-pattern-1-missing-transaction-boundaries">❌ Anti-Pattern 1: Missing Transaction Boundaries</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># BAD: No transaction (multiple separate commits)</span>
+<span class="k">def</span> <span class="nf">process_order</span><span class="p">(</span><span class="n">order_data</span><span class="p">):</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;user_id&#39;</span><span class="p">])</span>
+    <span class="n">user</span><span class="o">.</span><span class="n">order_count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>  <span class="c1"># Commit 1</span>
+
+    <span class="c1"># Server crashes HERE - order is not created yet</span>
+    <span class="c1"># user.order_count is incremented but order doesn&#39;t exist!</span>
+
+    <span class="n">order</span> <span class="o">=</span> <span class="n">Order</span><span class="p">(</span><span class="o">**</span><span class="n">order_data</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>  <span class="c1"># Commit 2</span>
+
+    <span class="c1"># Result: Inconsistent state (count wrong)</span>
+
+<span class="c1"># GOOD: Single atomic transaction</span>
+<span class="k">def</span> <span class="nf">process_order</span><span class="p">(</span><span class="n">order_data</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;user_id&#39;</span><span class="p">])</span>
+        <span class="n">user</span><span class="o">.</span><span class="n">order_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">order</span> <span class="o">=</span> <span class="n">Order</span><span class="p">(</span><span class="o">**</span><span class="n">order_data</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+
+        <span class="c1"># Both succeed or both fail - guaranteed</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+        <span class="k">raise</span>
+</code></pre></div>
+<h3 id="anti-pattern-2-race-conditions-from-insufficient-locking">❌ Anti-Pattern 2: Race Conditions from Insufficient Locking</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># BAD: Lost update (race condition)</span>
+<span class="k">def</span> <span class="nf">decrement_inventory</span><span class="p">(</span><span class="n">product_id</span><span class="p">,</span> <span class="n">quantity</span><span class="p">):</span>
+    <span class="n">product</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">product_id</span><span class="p">)</span>
+
+    <span class="c1"># T=1ms: Process A reads inventory = 5</span>
+    <span class="c1"># T=2ms: Process B reads inventory = 5</span>
+    <span class="c1"># T=3ms: Process A: inventory = 5 - 3 = 2, commits</span>
+    <span class="c1"># T=4ms: Process B: inventory = 5 - 2 = 3, commits</span>
+    <span class="c1"># Result: Inventory = 3 (should be 0!)</span>
+    <span class="c1"># Oversold!</span>
+
+    <span class="k">if</span> <span class="n">product</span><span class="o">.</span><span class="n">inventory</span> <span class="o">&gt;=</span> <span class="n">quantity</span><span class="p">:</span>
+        <span class="n">product</span><span class="o">.</span><span class="n">inventory</span> <span class="o">-=</span> <span class="n">quantity</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
+
+<span class="c1"># GOOD: Use SELECT FOR UPDATE (row lock)</span>
+<span class="k">def</span> <span class="nf">decrement_inventory</span><span class="p">(</span><span class="n">product_id</span><span class="p">,</span> <span class="n">quantity</span><span class="p">):</span>
+    <span class="c1"># Lock the row before reading</span>
+    <span class="n">product</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">product_id</span><span class="p">)</span><span class="o">.</span><span class="n">with_for_update</span><span class="p">()</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">product</span><span class="o">.</span><span class="n">inventory</span> <span class="o">&gt;=</span> <span class="n">quantity</span><span class="p">:</span>
+        <span class="n">product</span><span class="o">.</span><span class="n">inventory</span> <span class="o">-=</span> <span class="n">quantity</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+    <span class="k">return</span> <span class="kc">False</span>
+</code></pre></div>
+<h3 id="anti-pattern-3-long-running-transactions">❌ Anti-Pattern 3: Long Running Transactions</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># BAD: Transaction held forever</span>
+<span class="k">def</span> <span class="nf">export_report</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">begin</span><span class="p">():</span>
+        <span class="c1"># Locks tables here</span>
+        <span class="n">large_dataset</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>  <span class="c1"># Loads 1M posts</span>
+
+        <span class="c1"># Holds lock for minutes while processing</span>
+        <span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">large_dataset</span><span class="p">:</span>
+            <span class="n">expensive_calculation</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>  <span class="c1"># CPU-intensive</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># I/O operations</span>
+
+        <span class="c1"># Lock held the ENTIRE time (disaster!)</span>
+        <span class="c1"># Other requests blocked waiting for lock</span>
+
+<span class="c1"># GOOD: Short transactions</span>
+<span class="k">def</span> <span class="nf">export_report</span><span class="p">():</span>
+    <span class="c1"># Fetch data without lock</span>
+    <span class="n">large_dataset</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>  <span class="c1"># No lock</span>
+
+    <span class="c1"># Do slow work outside transaction</span>
+    <span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">large_dataset</span><span class="p">:</span>
+        <span class="n">expensive_calculation</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>  <span class="c1"># Still no lock</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+
+    <span class="c1"># Brief transaction only for final write</span>
+    <span class="k">with</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">begin</span><span class="p">():</span>
+        <span class="n">report</span> <span class="o">=</span> <span class="n">Report</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">processed_data</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">report</span><span class="p">)</span>
+        <span class="c1"># Lock held for microseconds only</span>
+</code></pre></div>
+<h3 id="anti-pattern-4-ignoring-serialization-errors">❌ Anti-Pattern 4: Ignoring Serialization Errors</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># BAD: No retry logic</span>
+<span class="k">def</span> <span class="nf">transfer_funds</span><span class="p">(</span><span class="n">from_id</span><span class="p">,</span> <span class="n">to_id</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+    <span class="n">from_account</span> <span class="o">=</span> <span class="n">Account</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">from_id</span><span class="p">)</span><span class="o">.</span><span class="n">with_for_update</span><span class="p">()</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="n">to_account</span> <span class="o">=</span> <span class="n">Account</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">to_id</span><span class="p">)</span><span class="o">.</span><span class="n">with_for_update</span><span class="p">()</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+    <span class="n">from_account</span><span class="o">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">amount</span>
+    <span class="n">to_account</span><span class="o">.</span><span class="n">balance</span> <span class="o">+=</span> <span class="n">amount</span>
+
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>  <span class="c1"># Might get serialization error!</span>
+    <span class="c1"># Exception: deadlock detected</span>
+    <span class="c1"># Money lost? Unclear state?</span>
+
+<span class="c1"># GOOD: Retry with exponential backoff</span>
+<span class="k">def</span> <span class="nf">transfer_funds_with_retry</span><span class="p">(</span><span class="n">from_id</span><span class="p">,</span> <span class="n">to_id</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_retries</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">from_account</span> <span class="o">=</span> <span class="n">Account</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">from_id</span><span class="p">)</span>\
+                <span class="o">.</span><span class="n">with_for_update</span><span class="p">()</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+            <span class="n">to_account</span> <span class="o">=</span> <span class="n">Account</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">to_id</span><span class="p">)</span>\
+                <span class="o">.</span><span class="n">with_for_update</span><span class="p">()</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+            <span class="n">from_account</span><span class="o">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">amount</span>
+            <span class="n">to_account</span><span class="o">.</span><span class="n">balance</span> <span class="o">+=</span> <span class="n">amount</span>
+
+            <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="n">OperationalError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;deadlock detected&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">attempt</span> <span class="o">&lt;</span> <span class="n">max_retries</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="c1"># Exponential backoff: wait longer each time</span>
+                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">attempt</span><span class="p">))</span>
+                    <span class="k">continue</span>
+            <span class="k">raise</span>
+    <span class="k">return</span> <span class="kc">False</span>
+</code></pre></div>
+<h2 id="performance-implications">Performance Implications</h2>
+<h3 id="when-transactions-hurt">When Transactions Hurt</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># BAD: Transaction holds lock during slow work</span>
+<span class="k">with</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">begin</span><span class="p">():</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">with_for_update</span><span class="p">()</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+    <span class="c1"># 🚨 Lock is HELD while doing this:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://external-api.com/data&#39;</span><span class="p">)</span>  <span class="c1"># Network request</span>
+
+    <span class="c1"># Could wait 30 seconds! Other queries blocked!</span>
+    <span class="n">user</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="c1"># GOOD: Do slow work OUTSIDE transaction</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://external-api.com/data&#39;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">begin</span><span class="p">():</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">with_for_update</span><span class="p">()</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="c1"># Lock held only for microseconds</span>
+    <span class="n">user</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div>
 <hr />
-<h2 id="module-8-exam">Module 8 Exam</h2>
 <h3 id="multiple-choice-questions">Multiple Choice Questions</h3>
 <ol>
 <li>

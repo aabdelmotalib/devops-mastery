@@ -79,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#module-4-database-design" class="md-skip">
+        <a href="#module-4-database-design-fundamentals" class="md-skip">
           Skip to content
         </a>
       
@@ -2952,19 +2952,352 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
+  <a href="#table-of-contents" class="md-nav__link">
+    Table of Contents
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#normalization-vs-denormalization" class="md-nav__link">
-    Normalization vs Denormalization
+  <a href="#introduction-core-principles" class="md-nav__link">
+    Introduction &amp; Core Principles
   </a>
   
-    <nav class="md-nav" aria-label="Normalization vs Denormalization">
+    <nav class="md-nav" aria-label="Introduction & Core Principles">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-database-design-matters" class="md-nav__link">
+    Why Database Design Matters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-golden-rules" class="md-nav__link">
+    The Golden Rules
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#normalization-data-integrity" class="md-nav__link">
+    Normalization: Data Integrity
+  </a>
+  
+    <nav class="md-nav" aria-label="Normalization: Data Integrity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-normalization" class="md-nav__link">
+    What is Normalization?
+  </a>
+  
+    <nav class="md-nav" aria-label="What is Normalization?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problem-without-normalization" class="md-nav__link">
+    The Problem Without Normalization
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-solution-normalized-design" class="md-nav__link">
+    The Solution: Normalized Design
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normalization-forms-explained" class="md-nav__link">
+    Normalization Forms Explained
+  </a>
+  
+    <nav class="md-nav" aria-label="Normalization Forms Explained">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1nf-first-normal-form-no-repeating-groups" class="md-nav__link">
+    1NF: First Normal Form - No Repeating Groups
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2nf-second-normal-form-no-partial-dependencies" class="md-nav__link">
+    2NF: Second Normal Form - No Partial Dependencies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3nf-third-normal-form-no-transitive-dependencies" class="md-nav__link">
+    3NF: Third Normal Form - No Transitive Dependencies
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-stop-normalizing" class="md-nav__link">
+    When to Stop Normalizing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#denormalization-performance" class="md-nav__link">
+    Denormalization: Performance
+  </a>
+  
+    <nav class="md-nav" aria-label="Denormalization: Performance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-denormalization" class="md-nav__link">
+    What is Denormalization?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-denormalize" class="md-nav__link">
+    When to Denormalize
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#denormalization-example-e-commerce-orders" class="md-nav__link">
+    Denormalization Example: E-commerce Orders
+  </a>
+  
+    <nav class="md-nav" aria-label="Denormalization Example: E-commerce Orders">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#normalized-approach-many-joins" class="md-nav__link">
+    Normalized Approach (Many joins)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#denormalized-approach-no-joins" class="md-nav__link">
+    Denormalized Approach (No joins)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#managing-denormalized-updates" class="md-nav__link">
+    Managing Denormalized Updates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#denormalization-strategies" class="md-nav__link">
+    Denormalization Strategies
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entity-relationships" class="md-nav__link">
+    Entity Relationships
+  </a>
+  
+    <nav class="md-nav" aria-label="Entity Relationships">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#one-to-many-1n" class="md-nav__link">
+    One-to-Many (1:N)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#many-to-many-mn" class="md-nav__link">
+    Many-to-Many (M:N)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#one-to-one-11" class="md-nav__link">
+    One-to-One (1:1)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-patterns" class="md-nav__link">
+    Design Patterns
+  </a>
+  
+    <nav class="md-nav" aria-label="Design Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#account-system-pattern" class="md-nav__link">
+    Account System Pattern
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hierarchical-data-pattern" class="md-nav__link">
+    Hierarchical Data Pattern
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#audit-log-pattern" class="md-nav__link">
+    Audit Log Pattern
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anti-patterns-to-avoid" class="md-nav__link">
+    Anti-Patterns to Avoid
+  </a>
+  
+    <nav class="md-nav" aria-label="Anti-Patterns to Avoid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-1-god-table" class="md-nav__link">
+    ❌ Anti-Pattern 1: God Table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-2-eav-entity-attribute-value" class="md-nav__link">
+    ❌ Anti-Pattern 2: EAV (Entity-Attribute-Value)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-3-surrogate-keys-without-natural-keys" class="md-nav__link">
+    ❌ Anti-Pattern 3: Surrogate Keys Without Natural Keys
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-4-ignoring-cascade-behavior" class="md-nav__link">
+    ❌ Anti-Pattern 4: Ignoring Cascade Behavior
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-world-examples" class="md-nav__link">
+    Real-World Examples
+  </a>
+  
+    <nav class="md-nav" aria-label="Real-World Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#e-commerce-platform" class="md-nav__link">
+    E-commerce Platform
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blog-platform" class="md-nav__link">
+    Blog Platform
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment-practice" class="md-nav__link">
+    Assessment &amp; Practice
+  </a>
+  
+    <nav class="md-nav" aria-label="Assessment & Practice">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multiple-choice-quiz" class="md-nav__link">
+    Multiple Choice Quiz
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-tasks" class="md-nav__link">
+    Design Tasks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incident-scenario" class="md-nav__link">
+    Incident Scenario
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#normalization-relational-databases" class="md-nav__link">
@@ -3035,14 +3368,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#anti-pattern-1-god-table" class="md-nav__link">
+  <a href="#anti-pattern-1-god-table_1" class="md-nav__link">
     Anti-Pattern 1: God Table
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#anti-pattern-2-eav-entity-attribute-value" class="md-nav__link">
+  <a href="#anti-pattern-2-eav-entity-attribute-value_1" class="md-nav__link">
     Anti-Pattern 2: EAV (Entity-Attribute-Value)
   </a>
   
@@ -3097,7 +3430,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#incident-scenario" class="md-nav__link">
+  <a href="#incident-scenario_1" class="md-nav__link">
     Incident Scenario
   </a>
   
@@ -6654,19 +6987,352 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
+  <a href="#table-of-contents" class="md-nav__link">
+    Table of Contents
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#normalization-vs-denormalization" class="md-nav__link">
-    Normalization vs Denormalization
+  <a href="#introduction-core-principles" class="md-nav__link">
+    Introduction &amp; Core Principles
   </a>
   
-    <nav class="md-nav" aria-label="Normalization vs Denormalization">
+    <nav class="md-nav" aria-label="Introduction & Core Principles">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-database-design-matters" class="md-nav__link">
+    Why Database Design Matters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-golden-rules" class="md-nav__link">
+    The Golden Rules
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#normalization-data-integrity" class="md-nav__link">
+    Normalization: Data Integrity
+  </a>
+  
+    <nav class="md-nav" aria-label="Normalization: Data Integrity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-normalization" class="md-nav__link">
+    What is Normalization?
+  </a>
+  
+    <nav class="md-nav" aria-label="What is Normalization?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problem-without-normalization" class="md-nav__link">
+    The Problem Without Normalization
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-solution-normalized-design" class="md-nav__link">
+    The Solution: Normalized Design
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normalization-forms-explained" class="md-nav__link">
+    Normalization Forms Explained
+  </a>
+  
+    <nav class="md-nav" aria-label="Normalization Forms Explained">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1nf-first-normal-form-no-repeating-groups" class="md-nav__link">
+    1NF: First Normal Form - No Repeating Groups
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2nf-second-normal-form-no-partial-dependencies" class="md-nav__link">
+    2NF: Second Normal Form - No Partial Dependencies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3nf-third-normal-form-no-transitive-dependencies" class="md-nav__link">
+    3NF: Third Normal Form - No Transitive Dependencies
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-stop-normalizing" class="md-nav__link">
+    When to Stop Normalizing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#denormalization-performance" class="md-nav__link">
+    Denormalization: Performance
+  </a>
+  
+    <nav class="md-nav" aria-label="Denormalization: Performance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-denormalization" class="md-nav__link">
+    What is Denormalization?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-denormalize" class="md-nav__link">
+    When to Denormalize
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#denormalization-example-e-commerce-orders" class="md-nav__link">
+    Denormalization Example: E-commerce Orders
+  </a>
+  
+    <nav class="md-nav" aria-label="Denormalization Example: E-commerce Orders">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#normalized-approach-many-joins" class="md-nav__link">
+    Normalized Approach (Many joins)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#denormalized-approach-no-joins" class="md-nav__link">
+    Denormalized Approach (No joins)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#managing-denormalized-updates" class="md-nav__link">
+    Managing Denormalized Updates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#denormalization-strategies" class="md-nav__link">
+    Denormalization Strategies
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entity-relationships" class="md-nav__link">
+    Entity Relationships
+  </a>
+  
+    <nav class="md-nav" aria-label="Entity Relationships">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#one-to-many-1n" class="md-nav__link">
+    One-to-Many (1:N)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#many-to-many-mn" class="md-nav__link">
+    Many-to-Many (M:N)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#one-to-one-11" class="md-nav__link">
+    One-to-One (1:1)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-patterns" class="md-nav__link">
+    Design Patterns
+  </a>
+  
+    <nav class="md-nav" aria-label="Design Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#account-system-pattern" class="md-nav__link">
+    Account System Pattern
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hierarchical-data-pattern" class="md-nav__link">
+    Hierarchical Data Pattern
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#audit-log-pattern" class="md-nav__link">
+    Audit Log Pattern
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anti-patterns-to-avoid" class="md-nav__link">
+    Anti-Patterns to Avoid
+  </a>
+  
+    <nav class="md-nav" aria-label="Anti-Patterns to Avoid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-1-god-table" class="md-nav__link">
+    ❌ Anti-Pattern 1: God Table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-2-eav-entity-attribute-value" class="md-nav__link">
+    ❌ Anti-Pattern 2: EAV (Entity-Attribute-Value)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-3-surrogate-keys-without-natural-keys" class="md-nav__link">
+    ❌ Anti-Pattern 3: Surrogate Keys Without Natural Keys
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-4-ignoring-cascade-behavior" class="md-nav__link">
+    ❌ Anti-Pattern 4: Ignoring Cascade Behavior
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-world-examples" class="md-nav__link">
+    Real-World Examples
+  </a>
+  
+    <nav class="md-nav" aria-label="Real-World Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#e-commerce-platform" class="md-nav__link">
+    E-commerce Platform
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blog-platform" class="md-nav__link">
+    Blog Platform
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment-practice" class="md-nav__link">
+    Assessment &amp; Practice
+  </a>
+  
+    <nav class="md-nav" aria-label="Assessment & Practice">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multiple-choice-quiz" class="md-nav__link">
+    Multiple Choice Quiz
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-tasks" class="md-nav__link">
+    Design Tasks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incident-scenario" class="md-nav__link">
+    Incident Scenario
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#normalization-relational-databases" class="md-nav__link">
@@ -6737,14 +7403,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#anti-pattern-1-god-table" class="md-nav__link">
+  <a href="#anti-pattern-1-god-table_1" class="md-nav__link">
     Anti-Pattern 1: God Table
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#anti-pattern-2-eav-entity-attribute-value" class="md-nav__link">
+  <a href="#anti-pattern-2-eav-entity-attribute-value_1" class="md-nav__link">
     Anti-Pattern 2: EAV (Entity-Attribute-Value)
   </a>
   
@@ -6799,7 +7465,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#incident-scenario" class="md-nav__link">
+  <a href="#incident-scenario_1" class="md-nav__link">
     Incident Scenario
   </a>
   
@@ -6825,18 +7491,890 @@
                   
 
 
-<h1 id="module-4-database-design">Module 4: Database Design</h1>
-<h2 id="introduction">Introduction</h2>
-<p><strong>Database design is the most important skill you'll learn in this course.</strong> A good design prevents performance problems, data corruption, and months of refactoring. A bad design haunts you for years.</p>
-<p>In this module, you'll learn:
-- <strong>Normalization</strong>: Eliminating redundancy and ensuring data integrity
-- <strong>Denormalization</strong>: Strategic redundancy for performance
-- <strong>Relationship design</strong>: One-to-many, many-to-many, one-to-one patterns
-- <strong>Read vs write optimization</strong>: Different approaches for different workloads
-- <strong>Anti-patterns to avoid</strong>: Common mistakes that blow up in production</p>
-<p>The key principle: <strong>Start normalized, denormalize only when profiling shows you need to.</strong> Don't optimize for performance you don't have yet.</p>
+<h1 id="module-4-database-design-fundamentals">Module 4: Database Design Fundamentals</h1>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#introduction--core-principles">Introduction &amp; Core Principles</a></li>
+<li><a href="#normalization-data-integrity">Normalization: Data Integrity</a></li>
+<li><a href="#denormalization-performance">Denormalization: Performance</a></li>
+<li><a href="#entity-relationships">Entity Relationships</a></li>
+<li><a href="#design-patterns">Design Patterns</a></li>
+<li><a href="#anti-patterns-to-avoid">Anti-Patterns to Avoid</a></li>
+<li><a href="#real-world-examples">Real-World Examples</a></li>
+<li><a href="#assessment--practice">Assessment &amp; Practice</a></li>
+</ol>
 <hr />
-<h2 id="normalization-vs-denormalization">Normalization vs Denormalization</h2>
+<h2 id="introduction-core-principles">Introduction &amp; Core Principles</h2>
+<h3 id="why-database-design-matters">Why Database Design Matters</h3>
+<p><strong>Bad design costs:</strong>
+- Hours debugging data inconsistencies
+- Millions of dollars in lost data
+- Months of refactoring
+- Career damage from production outages</p>
+<p><strong>Good design delivers:</strong>
+- Fast, reliable systems
+- Consistent data
+- Easy maintenance
+- Confident deployments</p>
+<h3 id="the-golden-rules">The Golden Rules</h3>
+<p><strong>Rule 1: Start normalized, denormalize only when measured</strong></p>
+<p>Many engineers optimize prematurely, adding complexity they don't need. Normalize first, profile to find bottlenecks, then selectively denormalize.</p>
+<p><strong>Rule 2: Understand your access patterns</strong></p>
+<p>Different data needs different designs:
+- User authentication → Normalized, ACID guaranteed
+- Analytics → Denormalized, high-write volume
+- Product catalog → Flexible schema, reads optimized</p>
+<p><strong>Rule 3: Let the database enforce constraints</strong></p>
+<ul>
+<li>Foreign keys prevent orphaned data</li>
+<li>Check constraints prevent invalid data</li>
+<li>Unique constraints prevent duplicates</li>
+<li>NOT NULL constraints prevent missing data</li>
+</ul>
+<hr />
+<h2 id="normalization-data-integrity">Normalization: Data Integrity</h2>
+<h3 id="what-is-normalization">What is Normalization?</h3>
+<p><strong>Normalization is the process of organizing data to eliminate redundancy and prevent inconsistencies.</strong></p>
+<h4 id="the-problem-without-normalization">The Problem Without Normalization</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">-- BAD: Highly redundant</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span><span class="w">      </span><span class="c1">-- Redundant: stored in users table</span>
+<span class="w">    </span><span class="n">user_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span><span class="w">       </span><span class="c1">-- Redundant: stored in users table</span>
+<span class="w">    </span><span class="n">user_phone</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span><span class="w">       </span><span class="c1">-- Redundant: stored in users table</span>
+<span class="w">    </span><span class="n">product_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">,</span>
+<span class="w">    </span><span class="n">product_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span><span class="w">    </span><span class="c1">-- Redundant</span>
+<span class="w">    </span><span class="n">product_price</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="w">  </span><span class="c1">-- Redundant</span>
+<span class="w">    </span><span class="n">total</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- Problems:</span>
+<span class="c1">-- 1. Update user email: Must update in users table AND all their orders</span>
+<span class="c1">-- 2. Risk: User has 2 different emails in different orders (data inconsistency)</span>
+<span class="c1">-- 3. Storage: Same data repeated millions of times</span>
+<span class="c1">-- 4. Queries: Harder to maintain, slower to update</span>
+</code></pre></div>
+<h4 id="the-solution-normalized-design">The Solution: Normalized Design</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">-- GOOD: Properly normalized</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">full_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">phone</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">price</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">sku</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">order_items</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">order_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">orders</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">product_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">products</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="n">quantity</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">price_at_purchase</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w">  </span><span class="c1">-- Snapshot of price</span>
+<span class="p">);</span>
+
+<span class="c1">-- Benefits:</span>
+<span class="c1">-- 1. Single source of truth: User email stored once</span>
+<span class="c1">-- 2. Atomic updates: Update email, affects all orders automatically (via join)</span>
+<span class="c1">-- 3. Space efficient: No duplication</span>
+<span class="c1">-- 4. Consistent: Impossible for user to have 2 different emails</span>
+</code></pre></div>
+<h3 id="normalization-forms-explained">Normalization Forms Explained</h3>
+<h4 id="1nf-first-normal-form-no-repeating-groups">1NF: First Normal Form - No Repeating Groups</h4>
+<p>Atomic values only. No arrays or comma-separated strings in columns.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- BAD: Violates 1NF</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="w">    </span><span class="n">phone_numbers</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w">  </span><span class="c1">-- &quot;555-1111, 555-2222, 555-3333&quot;</span>
+<span class="p">);</span>
+
+<span class="c1">-- Problems:</span>
+<span class="c1">-- - Can&#39;t query &quot;find users with phone 555-1111&quot;</span>
+<span class="c1">-- - Hard to add/remove phone numbers</span>
+<span class="c1">-- - Parsing strings in SQL is slow</span>
+<span class="c1">-- - Unlimited scalability issues</span>
+
+<span class="c1">-- GOOD: 1NF compliant</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">user_phones</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">phone_number</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">UNIQUE</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">phone_number</span><span class="p">)</span><span class="w">  </span><span class="c1">-- No duplicates per user</span>
+<span class="p">);</span>
+
+<span class="c1">-- Benefits:</span>
+<span class="c1">-- - Query: SELECT * FROM users WHERE id IN (SELECT user_id FROM user_phones WHERE phone_number = &#39;555-1111&#39;)</span>
+<span class="c1">-- - Easy to add/remove phones</span>
+<span class="c1">-- - Database enforces constraints</span>
+<span class="c1">-- - Handles unlimited phones</span>
+</code></pre></div>
+<h4 id="2nf-second-normal-form-no-partial-dependencies">2NF: Second Normal Form - No Partial Dependencies</h4>
+<p>Non-key columns must depend on the entire primary key, not just part of it.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- BAD: Violates 2NF</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">order_items</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">order_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">,</span>
+<span class="w">    </span><span class="n">product_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">,</span>
+<span class="w">    </span><span class="n">product_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span><span class="w">      </span><span class="c1">-- Depends on product_id ONLY</span>
+<span class="w">    </span><span class="n">product_sku</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w">        </span><span class="c1">-- Depends on product_id ONLY</span>
+<span class="w">    </span><span class="n">quantity</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">,</span>
+<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">order_id</span><span class="p">,</span><span class="w"> </span><span class="n">product_id</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- The problem:</span>
+<span class="c1">-- product_name depends on product_id (part of key)</span>
+<span class="c1">-- NOT on the whole key (order_id, product_id)</span>
+<span class="c1">-- Update product name: must update in ALL orders</span>
+
+<span class="c1">-- GOOD: 2NF compliant</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">sku</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">UNIQUE</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">order_items</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">order_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">product_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">products</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="n">quantity</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">order_id</span><span class="p">,</span><span class="w"> </span><span class="n">product_id</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- Benefits:</span>
+<span class="c1">-- - Product info in one place</span>
+<span class="c1">-- - Update product name once, everywhere correct</span>
+<span class="c1">-- - No data inconsistency</span>
+</code></pre></div>
+<h4 id="3nf-third-normal-form-no-transitive-dependencies">3NF: Third Normal Form - No Transitive Dependencies</h4>
+<p>Non-key columns must depend on the primary key, not on other non-key columns.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- BAD: Violates 3NF</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span><span class="w">       </span><span class="c1">-- Depends on user_id</span>
+<span class="w">    </span><span class="n">user_city</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span><span class="w">        </span><span class="c1">-- Depends on user_id</span>
+<span class="w">    </span><span class="n">user_country</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span><span class="w">     </span><span class="c1">-- Depends on user_id</span>
+<span class="w">    </span><span class="n">total</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- The problem:</span>
+<span class="c1">-- user_email, user_city, user_country don&#39;t depend on order id</span>
+<span class="c1">-- They depend on user_id (transitive dependency)</span>
+<span class="c1">-- Update user city: must update in ALL orders (inconsistency risk)</span>
+
+<span class="c1">-- GOOD: 3NF compliant</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="w">    </span><span class="n">city</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
+<span class="w">    </span><span class="n">country</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="n">total</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- Benefits:</span>
+<span class="c1">-- - User info in one place</span>
+<span class="c1">-- - Update user city once, affects all their orders (via join)</span>
+<span class="c1">-- - Single source of truth</span>
+<span class="c1">-- - Easier to query and maintain</span>
+</code></pre></div>
+<h3 id="when-to-stop-normalizing">When to Stop Normalizing</h3>
+<p><strong>3NF is usually the sweet spot.</strong> Beyond this (BCNF, 4NF) introduces complexity most applications don't need.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- GOOD: Stop at 3NF</span>
+<span class="c1">-- Most productions databases are 3NF normalized</span>
+<span class="c1">-- Simple to understand, maintain, and query</span>
+
+<span class="c1">-- 4NF+ introduces:</span>
+<span class="c1">-- - More tables (more joins)</span>
+<span class="c1">-- - More complex queries</span>
+<span class="c1">-- - Minimal real-world benefit for most applications</span>
+</code></pre></div>
+<hr />
+<h2 id="denormalization-performance">Denormalization: Performance</h2>
+<h3 id="what-is-denormalization">What is Denormalization?</h3>
+<p><strong>Denormalization is strategic redundancy.</strong> You duplicate data to improve read performance, accepting the trade-off of update complexity.</p>
+<h3 id="when-to-denormalize">When to Denormalize</h3>
+<p>Only denormalize when ALL of these are true:</p>
+<ol>
+<li><strong>Measured bottleneck</strong> - Profiling shows joins are slow</li>
+<li><strong>Read-heavy workload</strong> - Reads &gt;&gt; writes</li>
+<li><strong>Caching insufficient</strong> - Redis/Memcached doesn't solve it</li>
+<li><strong>Worth the complexity</strong> - Performance gain justifies update logic</li>
+</ol>
+<h3 id="denormalization-example-e-commerce-orders">Denormalization Example: E-commerce Orders</h3>
+<h4 id="normalized-approach-many-joins">Normalized Approach (Many joins)</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">-- 4 tables, 3 joins needed</span>
+<span class="k">SELECT</span><span class="w"> </span>
+<span class="w">    </span><span class="n">o</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+<span class="w">    </span><span class="n">o</span><span class="p">.</span><span class="n">created_at</span><span class="p">,</span>
+<span class="w">    </span><span class="n">u</span><span class="p">.</span><span class="n">email</span><span class="p">,</span>
+<span class="w">    </span><span class="n">u</span><span class="p">.</span><span class="n">full_name</span><span class="p">,</span>
+<span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">product_name</span><span class="p">,</span>
+<span class="w">    </span><span class="n">oi</span><span class="p">.</span><span class="n">quantity</span><span class="p">,</span>
+<span class="w">    </span><span class="n">oi</span><span class="p">.</span><span class="n">unit_price</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="n">o</span>
+<span class="k">JOIN</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">user_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">id</span>
+<span class="k">JOIN</span><span class="w"> </span><span class="n">order_items</span><span class="w"> </span><span class="n">oi</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">oi</span><span class="p">.</span><span class="n">order_id</span>
+<span class="k">JOIN</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">oi</span><span class="p">.</span><span class="n">product_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123</span><span class="p">;</span>
+
+<span class="c1">-- Performance: ~25ms per query (3 joins)</span>
+<span class="c1">-- With 1000 concurrent requests: ~25 seconds overhead</span>
+</code></pre></div>
+<h4 id="denormalized-approach-no-joins">Denormalized Approach (No joins)</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Store snapshot of user/product data at order time</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="n">user_email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span><span class="w">      </span><span class="c1">-- Snapshot at order time</span>
+<span class="w">    </span><span class="n">user_full_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span><span class="w">  </span><span class="c1">-- Snapshot</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="p">,</span>
+<span class="w">    </span><span class="n">total</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">order_items</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">order_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">orders</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="n">product_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">products</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="n">product_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span><span class="w">    </span><span class="c1">-- Snapshot at purchase</span>
+<span class="w">    </span><span class="n">quantity</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">,</span>
+<span class="w">    </span><span class="n">price_at_purchase</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w">  </span><span class="c1">-- Snapshot (important!)</span>
+<span class="p">);</span>
+
+<span class="c1">-- Single query, no joins</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">order_items</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">order_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123</span><span class="p">;</span>
+
+<span class="c1">-- Performance: ~10ms total (no joins)</span>
+<span class="c1">-- 60% faster, much simpler queries</span>
+</code></pre></div>
+<h3 id="managing-denormalized-updates">Managing Denormalized Updates</h3>
+<p><strong>Key insight</strong>: Denormalized fields are often <em>snapshots</em>, not live copies.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># When user updates email, should order show old OR new email?</span>
+<span class="c1"># Answer: OLD EMAIL (historical accuracy)</span>
+<span class="c1"># An order shows what the user&#39;s email WAS at purchase time</span>
+
+<span class="k">def</span> <span class="nf">update_user_email</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">new_email</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update user email. Orders keep historical email.&quot;&quot;&quot;</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">new_email</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+    <span class="c1"># Don&#39;t update orders—they&#39;re historical records</span>
+    <span class="c1"># Orders should show the email at purchase time</span>
+
+    <span class="c1"># If you need current email with orders:</span>
+    <span class="c1"># SELECT * FROM orders JOIN users USING(user_id) WHERE orders.id = 123</span>
+</code></pre></div>
+<p><strong>Alternative: Live denormalized data</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">update_user_email</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">new_email</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update user email everywhere.&quot;&quot;&quot;</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">new_email</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+    <span class="c1"># Update denormalized copies (if needed)</span>
+    <span class="n">Order</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+        <span class="p">{</span><span class="s1">&#39;user_email&#39;</span><span class="p">:</span> <span class="n">new_email</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+    <span class="c1"># Trade-off: Extra update, but queries see current email</span>
+    <span class="c1"># Usually NOT worth it—snapshots are better</span>
+</code></pre></div>
+<h3 id="denormalization-strategies">Denormalization Strategies</h3>
+<p><strong>Strategy 1: Summary fields</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Instead of: SELECT COUNT(*) FROM comments WHERE post_id = 1</span>
+<span class="c1">-- Store summary</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">title</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">500</span><span class="p">),</span>
+<span class="w">    </span><span class="n">comment_count</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span>
+<span class="p">);</span>
+
+<span class="c1">-- Update with triggers</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="n">update_post_comment_count</span><span class="p">()</span>
+<span class="k">RETURNS</span><span class="w"> </span><span class="k">TRIGGER</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="err">$$</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">comment_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">comment_count</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NEW</span><span class="p">.</span><span class="n">post_id</span><span class="p">;</span>
+<span class="w">    </span><span class="k">RETURN</span><span class="w"> </span><span class="k">NEW</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="err">$$</span><span class="w"> </span><span class="k">LANGUAGE</span><span class="w"> </span><span class="n">plpgsql</span><span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TRIGGER</span><span class="w"> </span><span class="n">after_comment_insert</span>
+<span class="k">AFTER</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">comments</span>
+<span class="k">FOR</span><span class="w"> </span><span class="k">EACH</span><span class="w"> </span><span class="k">ROW</span><span class="w"> </span><span class="k">EXECUTE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="n">update_post_comment_count</span><span class="p">();</span>
+</code></pre></div></p>
+<p><strong>Strategy 2: Computed columns</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">-- PostgreSQL 12+: Generated columns</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">line_items</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">quantity</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">,</span>
+<span class="w">    </span><span class="n">unit_price</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+<span class="w">    </span><span class="n">total</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">GENERATED</span><span class="w"> </span><span class="n">ALWAYS</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="n">quantity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">unit_price</span><span class="p">)</span><span class="w"> </span><span class="n">STORED</span>
+<span class="p">);</span>
+</code></pre></div></p>
+<p><strong>Strategy 3: Caching layer</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Cache instead of denormalizing</span>
+<span class="k">def</span> <span class="nf">get_user_post_count</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+    <span class="n">cache_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;user:</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s1">:post_count&#39;</span>
+
+    <span class="n">count</span> <span class="o">=</span> <span class="n">redis</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">count</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+
+    <span class="n">count</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+    <span class="n">redis</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">cache_key</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">ex</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>  <span class="c1"># Cache 5 minutes</span>
+
+    <span class="k">return</span> <span class="n">count</span>
+</code></pre></div></p>
+<hr />
+<h2 id="entity-relationships">Entity Relationships</h2>
+<h3 id="one-to-many-1n">One-to-Many (1:N)</h3>
+<p><strong>Definition</strong>: One parent has many children. Each child has exactly one parent.</p>
+<p><strong>Examples</strong>:
+- User has many Posts
+- Post has many Comments
+- Company has many Employees</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">title</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">500</span><span class="p">),</span>
+<span class="w">    </span><span class="n">content</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="c1">-- Queries</span>
+<span class="c1">-- Get all posts by user</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123</span><span class="p">;</span>
+
+<span class="c1">-- Get user with posts</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">post_count</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="n">u</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">user_id</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div>
+<p><strong>SQLAlchemy:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">posts</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s1">&#39;Post&#39;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="n">lazy</span><span class="o">=</span><span class="s1">&#39;dynamic&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Post</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;users.id&#39;</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">500</span><span class="p">))</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+
+<span class="c1"># Usage</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">user_posts</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">posts</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>  <span class="c1"># All posts by user</span>
+
+<span class="n">post</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">post_author</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">user</span>  <span class="c1"># Access via backref</span>
+</code></pre></div></p>
+<h3 id="many-to-many-mn">Many-to-Many (M:N)</h3>
+<p><strong>Definition</strong>: Both sides can have many. Implemented with a junction table.</p>
+<p><strong>Examples</strong>:
+- Posts have many Tags
+- Students enroll in many Courses
+- Users follow many Users</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">title</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tags</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+
+<span class="c1">-- Junction table</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">post_tags</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">post_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">posts</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">tag_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">tags</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">post_id</span><span class="p">,</span><span class="w"> </span><span class="n">tag_id</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- Queries</span>
+<span class="c1">-- Get posts with tag &quot;python&quot;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="n">p</span>
+<span class="k">JOIN</span><span class="w"> </span><span class="n">post_tags</span><span class="w"> </span><span class="n">pt</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pt</span><span class="p">.</span><span class="n">post_id</span>
+<span class="k">JOIN</span><span class="w"> </span><span class="n">tags</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">pt</span><span class="p">.</span><span class="n">tag_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">id</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;python&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Get tags for a post</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">tags</span><span class="w"> </span><span class="n">t</span>
+<span class="k">JOIN</span><span class="w"> </span><span class="n">post_tags</span><span class="w"> </span><span class="n">pt</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pt</span><span class="p">.</span><span class="n">tag_id</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">pt</span><span class="p">.</span><span class="n">post_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">456</span><span class="p">;</span>
+</code></pre></div>
+<p><strong>SQLAlchemy:</strong>
+<div class="highlight"><pre><span></span><code><span class="n">post_tags</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s1">&#39;post_tags&#39;</span><span class="p">,</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s1">&#39;post_id&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;posts.id&#39;</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s1">&#39;tag_id&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;tags.id&#39;</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Post</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">500</span><span class="p">))</span>
+    <span class="n">tags</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s1">&#39;Tag&#39;</span><span class="p">,</span> <span class="n">secondary</span><span class="o">=</span><span class="n">post_tags</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s1">&#39;posts&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Tag</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Usage</span>
+<span class="n">post</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">post</span><span class="o">.</span><span class="n">tags</span>  <span class="c1"># All tags for this post</span>
+
+<span class="n">post</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Tag</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">())</span>
+<span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</code></pre></div></p>
+<h3 id="one-to-one-11">One-to-One (1:1)</h3>
+<p><strong>Definition</strong>: Each side has exactly one of the other. Rare in practice.</p>
+<p><strong>Examples</strong>:
+- User has one Profile
+- Country has one Capital
+- Employee has one Passport</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span>
+<span class="p">);</span>
+
+<span class="c1">-- Profile has same PK as user (enforces 1:1)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">user_profiles</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">bio</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">avatar_url</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">500</span><span class="p">),</span>
+<span class="w">    </span><span class="n">website</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- Queries</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">up</span><span class="p">.</span><span class="n">bio</span><span class="p">,</span><span class="w"> </span><span class="n">up</span><span class="p">.</span><span class="n">avatar_url</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="n">u</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">user_profiles</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">up</span><span class="p">.</span><span class="n">user_id</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123</span><span class="p">;</span>
+</code></pre></div>
+<p><strong>SQLAlchemy:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">255</span><span class="p">))</span>
+    <span class="n">profile</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s1">&#39;UserProfile&#39;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="n">uselist</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">UserProfile</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;users.id&#39;</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">bio</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">avatar_url</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">500</span><span class="p">))</span>
+
+<span class="c1"># Usage</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">user</span><span class="o">.</span><span class="n">profile</span><span class="o">.</span><span class="n">bio</span>  <span class="c1"># Access profile</span>
+</code></pre></div></p>
+<hr />
+<h2 id="design-patterns">Design Patterns</h2>
+<h3 id="account-system-pattern">Account System Pattern</h3>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">password_hash</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">user_profiles</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="n">full_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="w">    </span><span class="n">avatar_url</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">user_settings</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="n">theme</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;light&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">notifications_enabled</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">TRUE</span><span class="p">,</span>
+<span class="w">    </span><span class="k">language</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;en&#39;</span>
+<span class="p">);</span>
+
+<span class="c1">-- Why separate tables:</span>
+<span class="c1">-- - Users: Authentication/core data</span>
+<span class="c1">-- - Profiles: Optional user info (some users never fill)</span>
+<span class="c1">-- - Settings: User preferences (can change frequently)</span>
+<span class="c1">-- - Faster queries: Load only what you need</span>
+</code></pre></div>
+<h3 id="hierarchical-data-pattern">Hierarchical Data Pattern</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Category hierarchy (parent-child)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">categories</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">parent_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">categories</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="w">    </span><span class="n">slug</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- Example:</span>
+<span class="c1">-- Electronics (id=1, parent=NULL)</span>
+<span class="o">#</span><span class="w">   </span><span class="n">Computers</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="o">#</span><span class="w">     </span><span class="n">Laptops</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">#</span><span class="w">     </span><span class="n">Desktops</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">#</span><span class="w">   </span><span class="n">Phones</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">-- Query: Get children of a category</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">categories</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">parent_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="c1">-- Query: Get path to root</span>
+<span class="k">WITH</span><span class="w"> </span><span class="k">RECURSIVE</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">parent_id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">level</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">categories</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">    </span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">parent_id</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="p">.</span><span class="k">level</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">categories</span><span class="w"> </span><span class="k">c</span>
+<span class="w">    </span><span class="k">JOIN</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">path</span><span class="p">.</span><span class="n">parent_id</span>
+<span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">path</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="audit-log-pattern">Audit Log Pattern</h3>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">title</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">500</span><span class="p">),</span>
+<span class="w">    </span><span class="n">content</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">updated_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">post_audit</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">post_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">posts</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">action</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span><span class="w">  </span><span class="c1">-- &#39;INSERT&#39;, &#39;UPDATE&#39;, &#39;DELETE&#39;</span>
+<span class="w">    </span><span class="n">old_values</span><span class="w"> </span><span class="n">JSONB</span><span class="p">,</span>
+<span class="w">    </span><span class="n">new_values</span><span class="w"> </span><span class="n">JSONB</span><span class="p">,</span>
+<span class="w">    </span><span class="n">changed_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="c1">-- Create audit trigger</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="n">audit_post_changes</span><span class="p">()</span>
+<span class="k">RETURNS</span><span class="w"> </span><span class="k">TRIGGER</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="err">$$</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">post_audit</span><span class="w"> </span><span class="p">(</span><span class="n">post_id</span><span class="p">,</span><span class="w"> </span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">action</span><span class="p">,</span><span class="w"> </span><span class="n">old_values</span><span class="p">,</span><span class="w"> </span><span class="n">new_values</span><span class="p">)</span>
+<span class="w">    </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="k">COALESCE</span><span class="p">(</span><span class="k">NEW</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">OLD</span><span class="p">.</span><span class="n">id</span><span class="p">),</span>
+<span class="w">        </span><span class="n">current_user_id</span><span class="p">,</span>
+<span class="w">        </span><span class="n">TG_OP</span><span class="p">,</span>
+<span class="w">        </span><span class="n">to_jsonb</span><span class="p">(</span><span class="k">OLD</span><span class="p">),</span>
+<span class="w">        </span><span class="n">to_jsonb</span><span class="p">(</span><span class="k">NEW</span><span class="p">)</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">    </span><span class="k">RETURN</span><span class="w"> </span><span class="k">COALESCE</span><span class="p">(</span><span class="k">NEW</span><span class="p">,</span><span class="w"> </span><span class="k">OLD</span><span class="p">);</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="err">$$</span><span class="w"> </span><span class="k">LANGUAGE</span><span class="w"> </span><span class="n">plpgsql</span><span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TRIGGER</span><span class="w"> </span><span class="n">post_audit_trigger</span>
+<span class="k">AFTER</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">posts</span>
+<span class="k">FOR</span><span class="w"> </span><span class="k">EACH</span><span class="w"> </span><span class="k">ROW</span><span class="w"> </span><span class="k">EXECUTE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="n">audit_post_changes</span><span class="p">();</span>
+</code></pre></div>
+<hr />
+<h2 id="anti-patterns-to-avoid">Anti-Patterns to Avoid</h2>
+<h3 id="anti-pattern-1-god-table">❌ Anti-Pattern 1: God Table</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- BAD: Everything crammed into one table</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">-- Authentication</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">password_hash</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="w">    </span><span class="c1">-- Profile</span>
+<span class="w">    </span><span class="n">first_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
+<span class="w">    </span><span class="n">last_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
+<span class="w">    </span><span class="n">bio</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">avatar_url</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">500</span><span class="p">),</span>
+<span class="w">    </span><span class="c1">-- Settings</span>
+<span class="w">    </span><span class="n">theme</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+<span class="w">    </span><span class="n">notifications_enabled</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="p">,</span>
+<span class="w">    </span><span class="k">language</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+<span class="w">    </span><span class="c1">-- Metadata</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="p">,</span>
+<span class="w">    </span><span class="n">updated_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="p">,</span>
+<span class="w">    </span><span class="n">last_login</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="p">,</span>
+<span class="w">    </span><span class="n">login_count</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">-- More fields...</span>
+<span class="w">    </span><span class="c1">-- ... 50 columns total</span>
+<span class="p">);</span>
+
+<span class="c1">-- Problems:</span>
+<span class="c1">-- - Query entire huge row even if needs just email</span>
+<span class="c1">-- - Hard to NULL fields users don&#39;t fill</span>
+<span class="c1">-- - Mixed concerns (auth, profile, settings in one table)</span>
+<span class="c1">-- - Slow indexes on huge row</span>
+
+<span class="c1">-- GOOD: Separate by concern</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="n">password_hash</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">user_profiles</span><span class="w"> </span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="n">last_name</span><span class="p">,</span><span class="w"> </span><span class="n">bio</span><span class="p">,</span><span class="w"> </span><span class="n">avatar_url</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">user_settings</span><span class="w"> </span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">theme</span><span class="p">,</span><span class="w"> </span><span class="n">notifications_enabled</span><span class="p">,</span><span class="w"> </span><span class="k">language</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">user_metadata</span><span class="w"> </span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">created_at</span><span class="p">,</span><span class="w"> </span><span class="n">updated_at</span><span class="p">,</span><span class="w"> </span><span class="n">last_login</span><span class="p">,</span><span class="w"> </span><span class="n">login_count</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="anti-pattern-2-eav-entity-attribute-value">❌ Anti-Pattern 2: EAV (Entity-Attribute-Value)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- BAD: Generic attribute storage</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">entity_attributes</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">entity_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">,</span>
+<span class="w">    </span><span class="n">attribute_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
+<span class="w">    </span><span class="n">attribute_value</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">entity_id</span><span class="p">,</span><span class="w"> </span><span class="n">attribute_name</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- Nightmare to query</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">entity_attributes</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">entity_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">attribute_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;email&#39;</span><span class="p">;</span>
+<span class="c1">-- vs normal: SELECT email FROM users WHERE id = 1;</span>
+
+<span class="c1">-- Problems:</span>
+<span class="c1">-- - No type safety (all values are TEXT)</span>
+<span class="c1">-- - Complex queries</span>
+<span class="c1">-- - Hard to validate</span>
+<span class="c1">-- - Slow indexes</span>
+<span class="c1">-- - Confusing to maintain</span>
+
+<span class="c1">-- GOOD: Proper columns or JSONB</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="w">    </span><span class="n">metadata</span><span class="w"> </span><span class="n">JSONB</span><span class="w">  </span><span class="c1">-- For truly flexible data</span>
+<span class="p">);</span>
+</code></pre></div>
+<h3 id="anti-pattern-3-surrogate-keys-without-natural-keys">❌ Anti-Pattern 3: Surrogate Keys Without Natural Keys</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- BAD: No constraints on real data</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span><span class="w">  </span><span class="c1">-- No unique constraint!</span>
+<span class="w">    </span><span class="n">username</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w">  </span><span class="c1">-- No unique constraint!</span>
+<span class="p">);</span>
+
+<span class="c1">-- Problems:</span>
+<span class="c1">-- - Duplicate emails possible</span>
+<span class="c1">-- - Impossible to prevent data corruption</span>
+<span class="c1">-- - queries: WHERE id = 1 (must know ID)</span>
+<span class="c1">-- - No business constraints</span>
+
+<span class="c1">-- GOOD: Appropriate constraints</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">username</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="c1">-- Or: Use Natural Key if better fit</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">countries</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">iso_code</span><span class="w"> </span><span class="nb">CHAR</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w">  </span><span class="c1">-- Natural key</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+</code></pre></div>
+<h3 id="anti-pattern-4-ignoring-cascade-behavior">❌ Anti-Pattern 4: Ignoring Cascade Behavior</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- BAD: Orphaned children</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w">  </span><span class="c1">-- No cascade</span>
+<span class="p">);</span>
+
+<span class="c1">-- User deletes account → Orders stay in DB orphaned</span>
+<span class="c1">-- Delete user manually? Forget → Data inconsistency</span>
+
+<span class="c1">-- GOOD: Specify cascade behavior</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span>
+<span class="p">);</span>
+<span class="c1">-- Delete user → All their orders deleted automatically, stays consistent</span>
+
+<span class="c1">-- Other options:</span>
+<span class="c1">-- ON DELETE SET NULL: orders.user_id becomes NULL</span>
+<span class="c1">-- ON DELETE RESTRICT: Prevent delete if orders exist</span>
+<span class="c1">-- ON DELETE SET DEFAULT: Set to default value</span>
+</code></pre></div>
+<hr />
+<h2 id="real-world-examples">Real-World Examples</h2>
+<h3 id="e-commerce-platform">E-commerce Platform</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Users (core account data)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">password_hash</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="c1">-- Products (inventory)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">sku</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">current_price</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">inventory_count</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="c1">-- Orders (denormalized for performance)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span><span class="w">  </span><span class="c1">-- Snapshot at order time</span>
+<span class="w">    </span><span class="n">total</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span><span class="w">  </span><span class="c1">-- pending, shipped, delivered</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="c1">-- Order items (snapshot of products)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">order_items</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">order_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">orders</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">product_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">products</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="n">product_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">500</span><span class="p">),</span><span class="w">  </span><span class="c1">-- Snapshot</span>
+<span class="w">    </span><span class="n">sku</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w">  </span><span class="c1">-- Snapshot</span>
+<span class="w">    </span><span class="n">price_at_purchase</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="w">  </span><span class="c1">-- Important: what user paid</span>
+<span class="w">    </span><span class="n">quantity</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+
+<span class="c1">-- Create indexes</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_orders_user_id</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">orders</span><span class="p">(</span><span class="n">user_id</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_orders_created_at</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">orders</span><span class="p">(</span><span class="n">created_at</span><span class="w"> </span><span class="k">DESC</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_order_items_order_id</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">order_items</span><span class="p">(</span><span class="n">order_id</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_products_sku</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">products</span><span class="p">(</span><span class="n">sku</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="blog-platform">Blog Platform</h3>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">full_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="w">    </span><span class="n">bio</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">avatar_url</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">500</span><span class="p">),</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">title</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">slug</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">content</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">published</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">FALSE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">published_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="p">,</span>
+<span class="w">    </span><span class="n">view_count</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">  </span><span class="c1">-- Denormalized</span>
+<span class="w">    </span><span class="n">comment_count</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">  </span><span class="c1">-- Denormalized</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">updated_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">comments</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">post_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">posts</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">content</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tags</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">slug</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">post_tags</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">post_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">posts</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">tag_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">tags</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">post_id</span><span class="p">,</span><span class="w"> </span><span class="n">tag_id</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- Indexes</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_posts_user_id</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">posts</span><span class="p">(</span><span class="n">user_id</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_posts_published_at</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">posts</span><span class="p">(</span><span class="n">published_at</span><span class="w"> </span><span class="k">DESC</span><span class="p">)</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">published</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">TRUE</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_posts_slug</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">posts</span><span class="p">(</span><span class="n">slug</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_comments_post_id</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">comments</span><span class="p">(</span><span class="n">post_id</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_comments_user_id</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">comments</span><span class="p">(</span><span class="n">user_id</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_post_tags_tag_id</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">post_tags</span><span class="p">(</span><span class="n">tag_id</span><span class="p">);</span>
+</code></pre></div>
+<hr />
+<h2 id="assessment-practice">Assessment &amp; Practice</h2>
+<h3 id="multiple-choice-quiz">Multiple Choice Quiz</h3>
+<p><strong>Q1</strong>: What is the main goal of 3NF normalization?
+- a) Improve query speed
+- b) Eliminate redundancy and transitive dependencies
+- c) Reduce disk space
+- d) Simplify queries</p>
+<p><strong>Answer</strong>: b) Eliminate redundancy and transitive dependencies</p>
+<p><strong>Q2</strong>: When should you denormalize a database?
+- a) Always—it's faster
+- b) Never—it violates best practices
+- c) When measured profiling shows it's needed for read-heavy queries
+- d) Only for NoSQL databases</p>
+<p><strong>Answer</strong>: c) When measured profiling shows it's needed</p>
+<p><strong>Q3</strong>: How do you implement a many-to-many relationship?
+- a) Add a foreign key on both sides
+- b) Use a junction table with two foreign keys
+- c) Use an array column
+- d) Use JSONB column</p>
+<p><strong>Answer</strong>: b) Use a junction table</p>
+<p><strong>Q4</strong>: What is the EAV anti-pattern?
+- a) Storing everything in one table
+- b) Using generic attribute-value pairs instead of proper columns
+- c) Not using foreign keys
+- d) Over-indexing</p>
+<p><strong>Answer</strong>: b) Using generic attribute-value pairs</p>
+<p><strong>Q5</strong>: What does ON DELETE CASCADE do?
+- a) Triggers a cascade warning
+- b) Automatically deletes child records when parent is deleted
+- c) Prevents deletion of parent records
+- d) Moves child records to another table</p>
+<p><strong>Answer</strong>: b) Automatically deletes child records</p>
+<h3 id="design-tasks">Design Tasks</h3>
+<p><strong>Task 1</strong>: Design a database for a social media platform with:
+- Users with profiles
+- Posts (text, images, videos)
+- Comments on posts
+- User follows user relationship
+- Hashtags on posts</p>
+<p>Include relationships, constraints, indexes, and explain your normalization choices.</p>
+<p><strong>Task 2</strong>: You have an e-commerce system. Customers report order history is slow. Your schema has:
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="n">o</span>
+<span class="k">JOIN</span><span class="w"> </span><span class="n">order_items</span><span class="w"> </span><span class="n">oi</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">oi</span><span class="p">.</span><span class="n">order_id</span>
+<span class="k">JOIN</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">oi</span><span class="p">.</span><span class="n">product_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">user_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123</span><span class="p">;</span>
+</code></pre></div></p>
+<p>Should you normalize or denormalize? What specific fields would you denormalize and why?</p>
+<h3 id="incident-scenario">Incident Scenario</h3>
+<p><strong>Scenario</strong>: Your user_addresses table has no NOT NULL constraints. Users report receiving packages at wrong addresses. Investigation reveals:
+- Same user has multiple addresses with NULL values
+- Impossible to tell which is primary
+- Updates affect multiple addresses
+- Data looks inconsistent</p>
+<p><strong>Questions</strong>:
+1. What caused this problem?
+2. How would you fix it in a migration?
+3. What constraints should be added?
+4. How do you prevent this in the future?</p>
 <p>Normalization eliminates redundancy and ensures consistency. Denormalization adds strategic redundancy for performance.</p>
 <h3 id="normalization-relational-databases">Normalization (Relational Databases)</h3>
 <p><strong>Goal</strong>: Eliminate data redundancy and prevent inconsistencies</p>
@@ -7324,7 +8862,7 @@ WHERE u.id = 1;
 </li>
 </ol>
 <h2 id="common-anti-patterns">Common Anti-Patterns</h2>
-<h3 id="anti-pattern-1-god-table">Anti-Pattern 1: God Table</h3>
+<h3 id="anti-pattern-1-god-table_1">Anti-Pattern 1: God Table</h3>
 <div class="highlight"><pre><span></span><code><span class="c1">-- BAD: Everything in one table</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
@@ -7361,7 +8899,7 @@ WHERE u.id = 1;
 <span class="w">    </span><span class="n">notifications_enabled</span><span class="w"> </span><span class="nb">BOOLEAN</span>
 <span class="p">);</span>
 </code></pre></div></p>
-<h3 id="anti-pattern-2-eav-entity-attribute-value">Anti-Pattern 2: EAV (Entity-Attribute-Value)</h3>
+<h3 id="anti-pattern-2-eav-entity-attribute-value_1">Anti-Pattern 2: EAV (Entity-Attribute-Value)</h3>
 <div class="highlight"><pre><span></span><code><span class="c1">-- BAD: Generic attribute table</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">entity_attributes</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">entity_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">,</span>
@@ -7554,7 +9092,7 @@ WHERE u.id = 1;
 <p>Optimize for:
 - Fast feed generation (get posts from followed users)
 - Fast follower/following counts</p>
-<h3 id="incident-scenario">Incident Scenario</h3>
+<h3 id="incident-scenario_1">Incident Scenario</h3>
 <p><strong>Scenario</strong>: Your e-commerce application is slow when loading order history. The schema is:</p>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>

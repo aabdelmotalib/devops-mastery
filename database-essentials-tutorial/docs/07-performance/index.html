@@ -79,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#module-7-database-performance" class="md-skip">
+        <a href="#module-7-database-performance-optimization" class="md-skip">
           Skip to content
         </a>
       
@@ -3012,18 +3012,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
+  <a href="#table-of-contents" class="md-nav__link">
+    Table of Contents
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#indexing-strategy" class="md-nav__link">
-    Indexing Strategy
+  <a href="#introduction" class="md-nav__link">
+    Introduction
   </a>
   
-    <nav class="md-nav" aria-label="Indexing Strategy">
+    <nav class="md-nav" aria-label="Introduction">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3248,6 +3248,61 @@
           <li class="md-nav__item">
   <a href="#production-monitoring" class="md-nav__link">
     Production Monitoring
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anti-patterns-mistakes" class="md-nav__link">
+    Anti-Patterns &amp; Mistakes
+  </a>
+  
+    <nav class="md-nav" aria-label="Anti-Patterns & Mistakes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-1-over-indexing" class="md-nav__link">
+    ❌ Anti-Pattern 1: Over-Indexing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-2-function-calls-in-where" class="md-nav__link">
+    ❌ Anti-Pattern 2: Function Calls in WHERE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-3-ignoring-sequence-of-join-columns" class="md-nav__link">
+    ❌ Anti-Pattern 3: Ignoring Sequence of Join Columns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-4-caching-without-invalidation" class="md-nav__link">
+    ❌ Anti-Pattern 4: Caching Without Invalidation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-5-sequential-scans-on-large-tables" class="md-nav__link">
+    ❌ Anti-Pattern 5: Sequential Scans on Large Tables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-6-connection-pool-exhaustion" class="md-nav__link">
+    ❌ Anti-Pattern 6: Connection Pool Exhaustion
   </a>
   
 </li>
@@ -6777,18 +6832,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
+  <a href="#table-of-contents" class="md-nav__link">
+    Table of Contents
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#indexing-strategy" class="md-nav__link">
-    Indexing Strategy
+  <a href="#introduction" class="md-nav__link">
+    Introduction
   </a>
   
-    <nav class="md-nav" aria-label="Indexing Strategy">
+    <nav class="md-nav" aria-label="Introduction">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -7023,6 +7078,61 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#anti-patterns-mistakes" class="md-nav__link">
+    Anti-Patterns &amp; Mistakes
+  </a>
+  
+    <nav class="md-nav" aria-label="Anti-Patterns & Mistakes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-1-over-indexing" class="md-nav__link">
+    ❌ Anti-Pattern 1: Over-Indexing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-2-function-calls-in-where" class="md-nav__link">
+    ❌ Anti-Pattern 2: Function Calls in WHERE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-3-ignoring-sequence-of-join-columns" class="md-nav__link">
+    ❌ Anti-Pattern 3: Ignoring Sequence of Join Columns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-4-caching-without-invalidation" class="md-nav__link">
+    ❌ Anti-Pattern 4: Caching Without Invalidation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-5-sequential-scans-on-large-tables" class="md-nav__link">
+    ❌ Anti-Pattern 5: Sequential Scans on Large Tables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-pattern-6-connection-pool-exhaustion" class="md-nav__link">
+    ❌ Anti-Pattern 6: Connection Pool Exhaustion
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#module-7-exam" class="md-nav__link">
     Module 7 Exam
   </a>
@@ -7071,20 +7181,22 @@
                   
 
 
-<h1 id="module-7-database-performance">Module 7: Database Performance</h1>
-<h2 id="introduction">Introduction</h2>
-<p><strong>Database performance is the difference between a smooth user experience and a system that times out.</strong></p>
-<p>In this module, you'll learn the techniques that separate fast systems from slow ones:</p>
-<p><strong>What you'll master</strong>:
-- <strong>Indexing strategy</strong>: When to add indexes and column order effects
-- <strong>Query analysis</strong>: Using EXPLAIN to find bottlenecks
-- <strong>Connection pooling</strong>: Reusing connections instead of creating new ones
-- <strong>N+1 problem</strong>: Detecting and eliminating the classic performance killer
-- <strong>Caching with Redis</strong>: Caching query results for 100-1000x speedup
-- <strong>Monitoring</strong>: Finding slow queries in production</p>
-<p><strong>The philosophy</strong>: Measure first, optimize second. Don't optimize for problems you don't have.</p>
+<h1 id="module-7-database-performance-optimization">Module 7: Database Performance Optimization</h1>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#indexing-fundamentals">Indexing Fundamentals</a></li>
+<li><a href="#index-design-strategies">Index Design Strategies</a></li>
+<li><a href="#query-analysis-with-explain">Query Analysis with EXPLAIN</a></li>
+<li><a href="#n1-problem-detection--fixes">N+1 Problem Detection &amp; Fixes</a></li>
+<li><a href="#connection-pooling">Connection Pooling</a></li>
+<li><a href="#caching-strategies">Caching Strategies</a></li>
+<li><a href="#anti-patterns--mistakes">Anti-Patterns &amp; Mistakes</a></li>
+<li><a href="#monitoring--profiling">Monitoring &amp; Profiling</a></li>
+<li><a href="#assessment--practice">Assessment &amp; Practice</a></li>
+</ol>
 <hr />
-<h2 id="indexing-strategy">Indexing Strategy</h2>
+<h2 id="introduction">Introduction</h2>
 <h3 id="understanding-indexes">Understanding Indexes</h3>
 <p>An <strong>index</strong> is a separate data structure (usually B-tree) that lets PostgreSQL find data without scanning every row.</p>
 <p><strong>Visual comparison</strong>:</p>
@@ -7533,6 +7645,128 @@ No index: Like reading word-by-word
     <span class="p">],</span>
     <span class="n">traces_sample_rate</span><span class="o">=</span><span class="mf">0.1</span>  <span class="c1"># Sample 10% of transactions</span>
 <span class="p">)</span>
+</code></pre></div>
+<h2 id="anti-patterns-mistakes">Anti-Patterns &amp; Mistakes</h2>
+<h3 id="anti-pattern-1-over-indexing">❌ Anti-Pattern 1: Over-Indexing</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- BAD: Index everything blindly</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_users_email</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">email</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_users_first_name</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">first_name</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_users_last_name</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">last_name</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_users_phone</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">phone</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_users_created_at</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">created_at</span><span class="p">);</span>
+<span class="c1">-- ... 20 more indexes</span>
+
+<span class="c1">-- Problems:</span>
+<span class="c1">-- - Every INSERT becomes slow (must update all indexes)</span>
+<span class="c1">-- - Memory bloat (20 extra indexes in RAM)</span>
+<span class="c1">-- - Maintenance nightmare</span>
+<span class="c1">-- - PostgreSQL might ignore unused indexes anyway</span>
+
+<span class="c1">-- GOOD: Index what you query</span>
+<span class="c1">-- Query: WHERE email = ?</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_users_email</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">email</span><span class="p">);</span>
+
+<span class="c1">-- Query: WHERE created_at &gt; ?</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_users_created_at</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">created_at</span><span class="p">);</span>
+
+<span class="c1">-- That&#39;s it. Stop here.</span>
+</code></pre></div>
+<h3 id="anti-pattern-2-function-calls-in-where">❌ Anti-Pattern 2: Function Calls in WHERE</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- BAD: Index is ignored</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">LOWER</span><span class="p">(</span><span class="n">email</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;user@example.com&#39;</span><span class="p">;</span>
+<span class="c1">-- Index on email is USELESS because of LOWER()</span>
+
+<span class="c1">-- GOOD: Functional index</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_users_email_lower</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="k">LOWER</span><span class="p">(</span><span class="n">email</span><span class="p">));</span>
+
+<span class="c1">-- Or: Normalize data at write time</span>
+<span class="c1">-- Store email in lowercase always:</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span><span class="n">email</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="k">LOWER</span><span class="p">(</span><span class="s1">&#39;User@Example.com&#39;</span><span class="p">));</span>
+
+<span class="c1">-- Then:</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;user@example.com&#39;</span><span class="p">;</span><span class="w">  </span><span class="c1">-- Uses index!</span>
+</code></pre></div>
+<h3 id="anti-pattern-3-ignoring-sequence-of-join-columns">❌ Anti-Pattern 3: Ignoring Sequence of Join Columns</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- BAD: Column order matters!</span>
+<span class="c1">-- Your query: WHERE user_id = ? AND created_at &gt; ?</span>
+<span class="c1">-- Your index: CREATE INDEX idx_posts_created_user ON posts(created_at, user_id);</span>
+<span class="c1">-- Problem: PostgreSQL can&#39;t use index efficiently (wrong column first)</span>
+
+<span class="c1">-- GOOD: Most selective column first</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_posts_user_created</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">posts</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="k">DESC</span><span class="p">);</span>
+<span class="c1">-- Now helps:</span>
+<span class="c1">-- WHERE user_id = ?</span>
+<span class="c1">-- WHERE user_id = ? AND created_at &gt; ?</span>
+<span class="c1">-- WHERE user_id = ? ORDER BY created_at DESC</span>
+</code></pre></div>
+<h3 id="anti-pattern-4-caching-without-invalidation">❌ Anti-Pattern 4: Caching Without Invalidation</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># BAD: Cache never updates</span>
+<span class="k">def</span> <span class="nf">get_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+    <span class="n">cached</span> <span class="o">=</span> <span class="n">redis</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;user:</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">cached</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">cached</span><span class="p">)</span>
+
+    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="n">redis</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;user:</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="n">user</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+
+<span class="c1"># User updates their name</span>
+<span class="k">def</span> <span class="nf">update_user_name</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">new_name</span><span class="p">):</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="n">user</span><span class="o">.</span><span class="n">full_name</span> <span class="o">=</span> <span class="n">new_name</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="c1"># Oops! Cache still has old name for 1 hour</span>
+    <span class="c1"># User sees stale data (confusing)</span>
+
+<span class="c1"># GOOD: Invalidate cache on update</span>
+<span class="k">def</span> <span class="nf">update_user_name</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">new_name</span><span class="p">):</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="n">user</span><span class="o">.</span><span class="n">full_name</span> <span class="o">=</span> <span class="n">new_name</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+    <span class="c1"># Invalidate cache</span>
+    <span class="n">redis</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;user:</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="c1"># Next read will fetch fresh data</span>
+</code></pre></div>
+<h3 id="anti-pattern-5-sequential-scans-on-large-tables">❌ Anti-Pattern 5: Sequential Scans on Large Tables</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- BAD: No index, full table scan on 1M rows</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">slug</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;my-post&#39;</span><span class="p">;</span>
+<span class="c1">-- Scans all 1M rows every time (slow!)</span>
+
+<span class="c1">-- GOOD: Add index</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_posts_slug</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">posts</span><span class="p">(</span><span class="n">slug</span><span class="p">);</span>
+<span class="c1">-- Now finds post in O(log n) = 20 lookups (fast!)</span>
+
+<span class="c1">-- Check if index is used</span>
+<span class="k">EXPLAIN</span><span class="w"> </span><span class="k">ANALYZE</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">slug</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;my-post&#39;</span><span class="p">;</span>
+<span class="c1">-- Should show: &quot;Index Scan using idx_posts_slug&quot;</span>
+<span class="c1">-- NOT: &quot;Seq Scan on posts&quot;</span>
+</code></pre></div>
+<h3 id="anti-pattern-6-connection-pool-exhaustion">❌ Anti-Pattern 6: Connection Pool Exhaustion</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># BAD: No connection pooling</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
+
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;postgresql://...&#39;</span><span class="p">)</span>
+<span class="c1"># Default pool_size = 5, max_overflow = 10</span>
+
+<span class="c1"># With 100 concurrent requests:</span>
+<span class="c1"># - First 5 use pool</span>
+<span class="c1"># - Next 10 create extra connections (overflow)</span>
+<span class="c1"># - Requests 16-100 WAIT (blocked!)</span>
+<span class="c1"># - If one request hangs, pool blocks everyone else</span>
+
+<span class="c1"># GOOD: Proper pool configuration</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;postgresql://...&#39;</span><span class="p">,</span>
+    <span class="n">pool_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>           <span class="c1"># Keep 20 connections open</span>
+    <span class="n">max_overflow</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>        <span class="c1"># Allow 40 extra under load</span>
+    <span class="n">pool_recycle</span><span class="o">=</span><span class="mi">3600</span><span class="p">,</span>      <span class="c1"># Recycle after 1 hour</span>
+    <span class="n">pool_pre_ping</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>    <span class="c1"># Verify connections alive</span>
+    <span class="n">pool_timeout</span><span class="o">=</span><span class="mi">30</span>        <span class="c1"># Wait max 30s for connection</span>
+<span class="p">)</span>
+
+<span class="c1"># Monitor</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pool: </span><span class="si">{</span><span class="n">engine</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="si">}</span><span class="s2">, Checked out: </span><span class="si">{</span><span class="n">engine</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">checkedout</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="module-7-exam">Module 7 Exam</h2>
