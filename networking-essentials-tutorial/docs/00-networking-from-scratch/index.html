@@ -1,0 +1,7743 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://aabdelmotalib.github.io/devops-mastery/networking-essentials-tutorial/docs/00-networking-from-scratch/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.0">
+    
+    
+      
+        <title>Networking From Scratch: An Engineer's Guide for Absolute Beginners - DevOps Engineering Mastery</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.9f615399.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.649f08f9.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#networking-from-scratch-an-engineers-guide-for-absolute-beginners" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="DevOps Engineering Mastery" class="md-header__button md-logo" aria-label="DevOps Engineering Mastery" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DevOps Engineering Mastery
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Networking From Scratch: An Engineer's Guide for Absolute Beginners
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="DevOps Engineering Mastery" class="md-nav__button md-logo" aria-label="DevOps Engineering Mastery" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    DevOps Engineering Mastery
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../portfolio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    My Portfolio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../programming-fundamentals-with-ai/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Programming Fundamentals
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_3">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Programming Fundamentals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../programming-fundamentals-with-ai/START_HERE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Start Here
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../programming-fundamentals-with-ai/docs/01-programming-thinking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Programming Thinking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../programming-fundamentals-with-ai/docs/02-core-programming-concepts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Core Concepts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../programming-fundamentals-with-ai/docs/03-software-architecture-basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Architecture Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../programming-fundamentals-with-ai/docs/04-thinking-like-an-engineer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Engineering Thinking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../programming-fundamentals-with-ai/docs/05-programming-with-ai/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Programming with AI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../programming-fundamentals-with-ai/docs/06-practical-examples/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Practical Examples
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../programming-fundamentals-with-ai/FINAL_PROJECT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../programming-fundamentals-with-ai/QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quick Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AWS Essentials
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            AWS Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/START_HERE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/docs/01-aws-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/docs/02-identity-access-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 IAM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/docs/03-compute-services/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Compute
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/docs/04-storage-databases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Storage & DBs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/docs/05-networking-content-delivery/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Networking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/docs/06-cicd-devops-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 CI/CD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/docs/07-monitoring-observability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Monitoring
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/docs/08-security-compliance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/docs/09-cost-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 Cost Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/docs/10-advanced-services/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 Advanced Services
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/final-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../aws-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_4_5">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/INDEX/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completion Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/DELIVERY_SUMMARY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Delivery Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/examples/REFERENCE_IMPLEMENTATIONS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference Implementation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../docker-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Docker Essentials
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_5">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Docker Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker-essentials-tutorial/00-bash-and-yaml-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    00 Bash & YAML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker-essentials-tutorial/01-container-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker-essentials-tutorial/02-docker-architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker-essentials-tutorial/03-docker-images/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Images
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker-essentials-tutorial/04-docker-containers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Containers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker-essentials-tutorial/05-docker-networking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Networking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker-essentials-tutorial/06-docker-volumes-storage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Storage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker-essentials-tutorial/07-docker-compose/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Compose
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker-essentials-tutorial/08-docker-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker-essentials-tutorial/09-docker-cicd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 CI/CD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker-essentials-tutorial/10-docker-kubernetes-readiness/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 Kubernetes Readiness
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker-essentials-tutorial/final-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../docker-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_5_4">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker-essentials-tutorial/TUTORIAL_SUMMARY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Kubernetes Essentials
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Kubernetes Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/START_HERE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
+        
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/docs/01-kubernetes-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/docs/02-kubectl-cluster-interaction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Kubectl
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/docs/03-pods-workloads/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Pods & Workloads
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/docs/04-services-networking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Services
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/docs/05-configmaps-secrets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Config & Secrets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/docs/06-storage-volumes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Storage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/docs/07-resource-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Resource Mgmt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/docs/08-health-probes-logging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Health & Logging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/docs/09-rbac-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/docs/10-helm-package-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 Helm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/docs/11-advanced-cluster-operations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11 Advanced Ops
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/docs/12-kubernetes-cicd-docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12 CI/CD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/docs/13-gateway-api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    13 Gateway API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/FINAL_PROJECT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/docs/GATEWAY_API_QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gateway API Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_6" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../kubernetes-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_6_6">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_6">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/INDEX/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completion Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/EXAM_AND_PRACTICE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exam & Practice
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/MODULE_13_UPDATE_SUMMARY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module 13 Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes-essentials-tutorial/COMPLETION_SUMMARY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completion Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../cicd-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    CI/CD Essentials
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_7">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            CI/CD Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cicd-essentials-tutorial/docs/01-cicd-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cicd-essentials-tutorial/docs/02-source-control-triggers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Triggers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cicd-essentials-tutorial/docs/03-ci-pipeline-design/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Pipeline Design
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cicd-essentials-tutorial/docs/04-artifact-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Artifacts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cicd-essentials-tutorial/docs/05-security-in-cicd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cicd-essentials-tutorial/docs/06-continuous-deployment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 CD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cicd-essentials-tutorial/docs/07-infrastructure-as-code/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 IaC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cicd-essentials-tutorial/docs/08-pipeline-observability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Observability
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cicd-essentials-tutorial/docs/09-cicd-tools-comparison/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 Tooling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cicd-essentials-tutorial/docs/10-failure-recovery/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 Recovery
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cicd-essentials-tutorial/docs/final-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cicd-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../cicd-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_7_5">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_5">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cicd-essentials-tutorial/INDEX/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cicd-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completion Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cicd-essentials-tutorial/DELIVERY_SUMMARY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Delivery Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cicd-essentials-tutorial/examples/REFERENCE_IMPLEMENTATIONS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference Implementation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../database-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Database Essentials
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_8">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Database Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_2" >
+        
+          <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database-essentials-tutorial/docs/01-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database-essentials-tutorial/docs/02-postgresql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 PostgreSQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database-essentials-tutorial/docs/03-nosql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 NoSQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database-essentials-tutorial/docs/04-database-design/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 DB Design
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database-essentials-tutorial/docs/05-sqlalchemy-orm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 SQLAlchemy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database-essentials-tutorial/docs/06-migrations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Migrations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database-essentials-tutorial/docs/07-performance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database-essentials-tutorial/docs/08-transactions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Transactions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database-essentials-tutorial/docs/09-final-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Networking Essentials
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Networking Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GETTING_STARTED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Start Here
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_2" >
+        
+          <label class="md-nav__link" for="__nav_9_2" id="__nav_9_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-networking-basics-a-to-z/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    00 Basics A-Z
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-linux-networking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    00.5 Linux Networking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-networking-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-http-https-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 HTTP/S
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-rest-api-design/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 API Design
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-websockets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 WebSockets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-load-balancing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Load Balancing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-reverse-proxy-nginx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Nginx
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-dns-domain-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 DNS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-ssl-tls-certificates/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 SSL/TLS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-final-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_4" >
+        
+          <label class="md-nav__link" for="__nav_9_4" id="__nav_9_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Practical Examples
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_4">
+            <span class="md-nav__icon md-icon"></span>
+            Practical Examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/EXAMPLES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/01-flask-app/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Flask Application
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/02-dockerfile/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dockerfile
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/03-docker-compose/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker Compose
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/04-nginx-docker-conf/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Nginx Docker Config
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/05-nginx-production-conf/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Nginx Production Config
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/06-requirements-txt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python Dependencies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quick Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_5">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Observability Essentials
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Observability Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../observability-essentials-tutorial/START_HERE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_2" >
+        
+          <label class="md-nav__link" for="__nav_10_2" id="__nav_10_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../observability-essentials-tutorial/docs/01-observability-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../observability-essentials-tutorial/docs/02-prometheus-metrics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Prometheus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../observability-essentials-tutorial/docs/03-logging-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Logging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../observability-essentials-tutorial/docs/04-loki-fluent-bit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Loki
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../observability-essentials-tutorial/docs/05-grafana-dashboards/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Grafana
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../observability-essentials-tutorial/docs/06-aws-cloudwatch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 CloudWatch
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../observability-essentials-tutorial/docs/07-alerting-incident-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Alerting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../observability-essentials-tutorial/docs/08-advanced-patterns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Advanced Patterns
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../observability-essentials-tutorial/FINAL_PROJECT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../observability-essentials-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../observability-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_10_5">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_5">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../observability-essentials-tutorial/INDEX/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../observability-essentials-tutorial/COMPLETION_REPORT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completion Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../observability-essentials-tutorial/DELIVERY_SUMMARY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Delivery Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../observability-essentials-tutorial/examples/REFERENCE_IMPLEMENTATIONS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference Implementation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Distributed Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Distributed Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../distributed-systems-tutorial/START_HERE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11_2" >
+        
+          <label class="md-nav__link" for="__nav_11_2" id="__nav_11_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../distributed-systems-tutorial/docs/01-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../distributed-systems-tutorial/docs/02-scalability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Scalability
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../distributed-systems-tutorial/docs/03-data-storage-replication/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Storage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../distributed-systems-tutorial/docs/04-messaging-event-driven/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Messaging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../distributed-systems-tutorial/docs/05-fault-tolerance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Fault Tolerance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../distributed-systems-tutorial/docs/06-performance-optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../distributed-systems-tutorial/docs/07-consistency-transactions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Transactions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../distributed-systems-tutorial/docs/08-microservices-patterns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Microservices
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../distributed-systems-tutorial/docs/09-observability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 Observability
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../distributed-systems-tutorial/docs/10-deployment-scaling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 Deployment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../distributed-systems-tutorial/FINAL_PROJECT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../distributed-systems-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_11_4">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11_4">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../distributed-systems-tutorial/INDEX/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../distributed-systems-tutorial/QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../distributed-systems-tutorial/EXAM_AND_PRACTICE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exam & Practice
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../flask-backend-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Flask Backend
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_12">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            Flask Backend
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12_2" >
+        
+          <label class="md-nav__link" for="__nav_12_2" id="__nav_12_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_12_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../flask-backend-tutorial/docs/00-prerequisites-and-basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    00 Prerequisites
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../flask-backend-tutorial/docs/01-flask-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../flask-backend-tutorial/docs/02-flask-architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../flask-backend-tutorial/docs/03-routing-and-views/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Routing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../flask-backend-tutorial/docs/04-request-handling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Requests
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../flask-backend-tutorial/docs/05-response-formats/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Response
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../flask-backend-tutorial/docs/06-templates-static/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Templates
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../flask-backend-tutorial/docs/07-flask-blueprints/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Blueprints
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../flask-backend-tutorial/docs/08-error-handling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Errors
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../flask-backend-tutorial/docs/09-authentication-authorization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 Auth
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../flask-backend-tutorial/docs/10-flask-extensions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 Extensions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../flask-backend-tutorial/docs/11-final-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Final Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../aws-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    AWS Advanced
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_13">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            AWS Advanced
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/11-advanced-ecs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11 Advanced ECS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/12-advanced-lambda/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12 Advanced Lambda
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/13-advanced-fargate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    13 Advanced Fargate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/14-terraform-deep-dive/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    14 Terraform Deep Dive
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws-essentials-tutorial/15-ansible-deep-dive/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    15 Ansible Deep Dive
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_14" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../modern-devops-patterns-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Modern DevOps Patterns
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_14">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            Modern DevOps Patterns
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../modern-devops-patterns-tutorial/01-gitops-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 GitOps Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../modern-devops-patterns-tutorial/02-service-mesh-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Service Mesh Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../modern-devops-patterns-tutorial/03-ebpf-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 eBPF Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_15" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../security-essentials-tutorial/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Security Essentials
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_15">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            Security Essentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_15_2" >
+        
+          <label class="md-nav__link" for="__nav_15_2" id="__nav_15_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../security-essentials-tutorial/01-application-security-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Application Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../security-essentials-tutorial/02-infrastructure-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Infrastructure Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../security-essentials-tutorial/03-supply-chain-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Supply Chain Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../security-essentials-tutorial/04-compliance-audit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Compliance & Audit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../security-essentials-tutorial/05-incident-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Incident Response
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16" >
+        
+          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mathematics for MLOps
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16">
+            <span class="md-nav__icon md-icon"></span>
+            Mathematics for MLOps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mathematics-for-mlops/START_HERE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Start Here
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16_2" >
+        
+          <label class="md-nav__link" for="__nav_16_2" id="__nav_16_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mathematics-for-mlops/MODULE_1_Absolute_Basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 Absolute Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mathematics-for-mlops/MODULE_2_Functions_and_Mappings/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 Functions & Mappings
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mathematics-for-mlops/MODULE_3_Derivatives_and_Gradients/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 Derivatives & Gradients
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mathematics-for-mlops/MODULE_4_Optimization_Intuition/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 Optimization Intuition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mathematics-for-mlops/MODULE_5_Probability_for_ML/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 Probability for ML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mathematics-for-mlops/MODULE_6_Statistics_for_Monitoring/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 Statistics for Monitoring
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mathematics-for-mlops/MODULE_7_Loss_Functions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 Loss Functions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mathematics-for-mlops/MODULE_8_Scaling_and_Normalization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 Scaling & Normalization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16_3" >
+        
+          <label class="md-nav__link" for="__nav_16_3" id="__nav_16_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16_3">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mathematics-for-mlops/LEARNING_PATHS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learning Paths
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mathematics-for-mlops/QUICK_REFERENCE_MODULES_1-3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quick Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mathematics-for-mlops/INDEX/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mathematics-for-mlops/COMPLETION_REPORT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completion Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_17" >
+        
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Capstone Projects
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
+            <span class="md-nav__icon md-icon"></span>
+            Capstone Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops-capstone-projects/README_START_HERE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Start Here
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_17_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Platform Engineering
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_17_2">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_17_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17_2">
+            <span class="md-nav__icon md-icon"></span>
+            Platform Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/aws/infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/decisions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Architecture Decisions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/scaling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scaling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/cost-awareness/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cost Awareness
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops-capstone-projects/PROJECT_1_PLATFORM_ENGINEERING/docs/interview-notes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interview Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_17_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Distributed Systems
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_17_3">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_17_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17_3">
+            <span class="md-nav__icon md-icon"></span>
+            Distributed Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/docs/decisions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Architecture Decisions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops-capstone-projects/PROJECT_2_DISTRIBUTED_SYSTEM/docs/scaling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scaling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops-capstone-projects/PORTFOLIO_OVERVIEW/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_17_5" >
+        
+          <label class="md-nav__link" for="__nav_17_5" id="__nav_17_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_17_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17_5">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops-capstone-projects/COMPLETION_SUMMARY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completion Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#01-why-you-need-to-understand-networking" class="md-nav__link">
+    0.1 Why You Need to Understand Networking
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#02-the-fundamental-question-how-do-two-computers-talk" class="md-nav__link">
+    0.2 The Fundamental Question: How Do Two Computers Talk?
+  </a>
+  
+    <nav class="md-nav" aria-label="0.2 The Fundamental Question: How Do Two Computers Talk?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-key-layers-simplified" class="md-nav__link">
+    The Key Layers (Simplified)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#03-concept-1-ip-addresses-how-computers-find-each-other" class="md-nav__link">
+    0.3 Concept 1: IP Addresses (How Computers Find Each Other)
+  </a>
+  
+    <nav class="md-nav" aria-label="0.3 Concept 1: IP Addresses (How Computers Find Each Other)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problem-computers-need-names-too" class="md-nav__link">
+    The Problem: Computers Need Names Too
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-an-ip-address" class="md-nav__link">
+    What Is an IP Address?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipv4-the-common-format" class="md-nav__link">
+    IPv4: The Common Format
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#public-vs-private-ip-addresses" class="md-nav__link">
+    Public vs. Private IP Addresses
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    Why This Matters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#04-concept-2-ports-which-service-do-you-want" class="md-nav__link">
+    0.4 Concept 2: Ports (Which Service Do You Want?)
+  </a>
+  
+    <nav class="md-nav" aria-label="0.4 Concept 2: Ports (Which Service Do You Want?)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problem-one-computer-might-run-many-services" class="md-nav__link">
+    The Problem: One Computer Might Run Many Services
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-solution-ports" class="md-nav__link">
+    The Solution: Ports
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-ports-just-for-reference" class="md-nav__link">
+    Common Ports (Just For Reference)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-it-all-works-together" class="md-nav__link">
+    How It All Works Together
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#05-concept-3-protocols-the-language-computers-speak" class="md-nav__link">
+    0.5 Concept 3: Protocols (The Language Computers Speak)
+  </a>
+  
+    <nav class="md-nav" aria-label="0.5 Concept 3: Protocols (The Language Computers Speak)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problem-how-do-computers-understand-each-other" class="md-nav__link">
+    The Problem: How Do Computers Understand Each Other?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-solution-protocols" class="md-nav__link">
+    The Solution: Protocols
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcp-the-reliable-messenger" class="md-nav__link">
+    TCP: The Reliable Messenger
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#udp-the-fast-messenger" class="md-nav__link">
+    UDP: The Fast Messenger
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httphttps-the-web-protocol" class="md-nav__link">
+    HTTP/HTTPS: The Web Protocol
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#06-concept-4-dns-how-do-humans-remember-addresses" class="md-nav__link">
+    0.6 Concept 4: DNS (How Do Humans Remember Addresses?)
+  </a>
+  
+    <nav class="md-nav" aria-label="0.6 Concept 4: DNS (How Do Humans Remember Addresses?)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problem-humans-cant-remember-203011342" class="md-nav__link">
+    The Problem: Humans Can't Remember "203.0.113.42"
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-solution-dns" class="md-nav__link">
+    The Solution: DNS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    How It Actually Works
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters_1" class="md-nav__link">
+    Why This Matters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#07-concept-5-routing-how-data-finds-its-way" class="md-nav__link">
+    0.7 Concept 5: Routing (How Data Finds Its Way)
+  </a>
+  
+    <nav class="md-nav" aria-label="0.7 Concept 5: Routing (How Data Finds Its Way)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problem-there-are-billions-of-computers" class="md-nav__link">
+    The Problem: There Are Billions of Computers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-solution-routing" class="md-nav__link">
+    The Solution: Routing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-routing-table" class="md-nav__link">
+    The Routing Table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters_2" class="md-nav__link">
+    Why This Matters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#08-concept-6-firewalls-the-bouncers" class="md-nav__link">
+    0.8 Concept 6: Firewalls (The Bouncers)
+  </a>
+  
+    <nav class="md-nav" aria-label="0.8 Concept 6: Firewalls (The Bouncers)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problem-not-all-traffic-should-be-allowed" class="md-nav__link">
+    The Problem: Not All Traffic Should Be Allowed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-solution-firewalls" class="md-nav__link">
+    The Solution: Firewalls
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-firewall-rules" class="md-nav__link">
+    Common Firewall Rules
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-firewalls-live" class="md-nav__link">
+    Where Firewalls Live
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#09-concept-7-connections-stateful-vs-stateless" class="md-nav__link">
+    0.9 Concept 7: Connections (Stateful vs. Stateless)
+  </a>
+  
+    <nav class="md-nav" aria-label="0.9 Concept 7: Connections (Stateful vs. Stateless)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problem-how-do-computers-know-if-a-conversation-is-happening" class="md-nav__link">
+    The Problem: How Do Computers Know If a Conversation Is Happening?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-solution-connections" class="md-nav__link">
+    The Solution: Connections
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcp-connections-the-handshake" class="md-nav__link">
+    TCP Connections: The Handshake
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#udp-no-handshake" class="md-nav__link">
+    UDP: No Handshake
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters_3" class="md-nav__link">
+    Why This Matters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#010-concept-8-bandwidth-vs-latency-what-fast-really-means" class="md-nav__link">
+    0.10 Concept 8: Bandwidth vs. Latency (What "Fast" Really Means)
+  </a>
+  
+    <nav class="md-nav" aria-label="0.10 Concept 8: Bandwidth vs. Latency (What "Fast" Really Means)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bandwidth-the-width-of-the-pipe" class="md-nav__link">
+    Bandwidth: The Width of the Pipe
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latency-the-speed-of-the-pipe" class="md-nav__link">
+    Latency: The Speed of the Pipe
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-difference-critical" class="md-nav__link">
+    The Difference (Critical!)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters_4" class="md-nav__link">
+    Why This Matters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#011-concept-9-packets-and-frames-the-envelopes" class="md-nav__link">
+    0.11 Concept 9: Packets and Frames (The "Envelopes")
+  </a>
+  
+    <nav class="md-nav" aria-label="0.11 Concept 9: Packets and Frames (The "Envelopes")">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-data-actually-travels" class="md-nav__link">
+    How Data Actually Travels
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#packet-structure-simplified" class="md-nav__link">
+    Packet Structure (Simplified)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-small-packets" class="md-nav__link">
+    Why Small Packets?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#012-concept-10-nat-network-address-translation-your-secret-translator" class="md-nav__link">
+    0.12 Concept 10: NAT (Network Address Translation – Your Secret Translator)
+  </a>
+  
+    <nav class="md-nav" aria-label="0.12 Concept 10: NAT (Network Address Translation – Your Secret Translator)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problem-you-have-a-private-ip-but-the-internet-wants-a-public-ip" class="md-nav__link">
+    The Problem: You Have a Private IP, But the Internet Wants a Public IP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-solution-nat" class="md-nav__link">
+    The Solution: NAT
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters_5" class="md-nav__link">
+    Why This Matters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#013-real-world-scenario-putting-it-all-together" class="md-nav__link">
+    0.13 Real-World Scenario: Putting It All Together
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#014-common-networking-problems-and-what-they-mean" class="md-nav__link">
+    0.14 Common Networking Problems (And What They Mean)
+  </a>
+  
+    <nav class="md-nav" aria-label="0.14 Common Networking Problems (And What They Mean)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connection-refused" class="md-nav__link">
+    "Connection Refused"
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connection-timed-out" class="md-nav__link">
+    "Connection Timed Out"
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dns-resolution-failed" class="md-nav__link">
+    "DNS Resolution Failed"
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#packet-loss" class="md-nav__link">
+    "Packet Loss"
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slow-connection" class="md-nav__link">
+    "Slow Connection"
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#015-key-takeaways-mental-models" class="md-nav__link">
+    0.15 Key Takeaways &amp; Mental Models
+  </a>
+  
+    <nav class="md-nav" aria-label="0.15 Key Takeaways & Mental Models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-5-mental-models-to-remember" class="md-nav__link">
+    The 5 Mental Models to Remember
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-questions-you-can-now-answer" class="md-nav__link">
+    The Questions You Can Now Answer
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#016-next-steps" class="md-nav__link">
+    0.16 Next Steps
+  </a>
+  
+    <nav class="md-nav" aria-label="0.16 Next Steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#practice-exercise-trace-your-own-connection" class="md-nav__link">
+    Practice Exercise: Trace Your Own Connection
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#017-glossary-quick-reference" class="md-nav__link">
+    0.17 Glossary (Quick Reference)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#018-the-engineers-mindset" class="md-nav__link">
+    0.18 The Engineer's Mindset
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="networking-from-scratch-an-engineers-guide-for-absolute-beginners">Networking From Scratch: An Engineer's Guide for Absolute Beginners</h1>
+<p><strong>Duration:</strong> 3–4 hours | <strong>Level:</strong> Complete Beginner | <strong>Prerequisites:</strong> None</p>
+<blockquote>
+<p><strong>What This Module Is:</strong> A conversational, conceptual guide to networking fundamentals. If someone asks you "What is networking?", this module will give you the answer from first principles. No hand-waving, no jargon left unexplained. Written as if an experienced engineer is explaining this to you over coffee.</p>
+</blockquote>
+<hr />
+<h2 id="01-why-you-need-to-understand-networking">0.1 Why You Need to Understand Networking</h2>
+<p>Let me start with a real scenario:</p>
+<p><strong>Your Flask API is deployed to the cloud. A user in Tokyo tries to access it. Their browser sends a request. Your API processes it. But the response never reaches them.</strong></p>
+<p>What happened? The user would say "the internet is broken." You, as a backend engineer, need to know:</p>
+<ul>
+<li>Did the request even arrive at your server?</li>
+<li>Is your server trying to send a response?</li>
+<li>Is something blocking the response halfway?</li>
+<li>Is it a firewall rule? A DNS problem? A routing issue?</li>
+</ul>
+<p><strong>This is why networking matters.</strong> Without understanding how data actually moves from one computer to another, you're debugging blind.</p>
+<h2 id="02-the-fundamental-question-how-do-two-computers-talk">0.2 The Fundamental Question: How Do Two Computers Talk?</h2>
+<p>Imagine you and I are in different buildings. I want to send you a message. Here's what has to happen:</p>
+<ol>
+<li><strong>I write the message</strong> ("Hello")</li>
+<li><strong>I put it in an envelope</strong> (address it to you)</li>
+<li><strong>I put the envelope in the mail system</strong> (physical delivery)</li>
+<li><strong>The mail system routes it</strong> through a network of postal workers and offices</li>
+<li><strong>It arrives at your building</strong></li>
+<li><strong>You check your mailbox and read it</strong></li>
+</ol>
+<p><strong>Computer networking is exactly this, but with data instead of envelopes.</strong></p>
+<h3 id="the-key-layers-simplified">The Key Layers (Simplified)</h3>
+<p>When two computers communicate, we can think of it in layers:</p>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────────────┐
+│ LAYER 4: Message Layer (What gets delivered?)                │
+│ ├─ &quot;Hello&quot; (the actual data)                                │
+│ └─ Port number (like apartment number in a building)        │
+├─────────────────────────────────────────────────────────────┤
+│ LAYER 3: Route Layer (How does it find the destination?)     │
+│ ├─ Source IP: 192.168.1.5 (my address)                      │
+│ └─ Destination IP: 203.0.113.42 (your address)              │
+├─────────────────────────────────────────────────────────────┤
+│ LAYER 2: Physical Layer (What cable/radio does it travel?)   │
+│ ├─ Source MAC: aa:bb:cc:dd:ee:ff (my network card)          │
+│ └─ Destination MAC: 11:22:33:44:55:66 (next hop)            │
+├─────────────────────────────────────────────────────────────┤
+│ LAYER 1: Hardware (Actual wires, cables, radio waves)        │
+└─────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<p>You'll hear these called the <strong>OSI Model</strong> or the <strong>TCP/IP Model</strong>. Don't memorize it. Just know: <strong>data travels in layers, each one adding a wrapper.</strong></p>
+<hr />
+<h2 id="03-concept-1-ip-addresses-how-computers-find-each-other">0.3 Concept 1: IP Addresses (How Computers Find Each Other)</h2>
+<h3 id="the-problem-computers-need-names-too">The Problem: Computers Need Names Too</h3>
+<p>If I want to send you a letter, I need your address. Computers need addresses too. That's what <strong>IP addresses</strong> are.</p>
+<h3 id="what-is-an-ip-address">What Is an IP Address?</h3>
+<p>An IP address is <strong>a unique label for a computer on a network</strong>. Like a street address.</p>
+<div class="highlight"><pre><span></span><code>Your home address:  123 Main Street, New York, NY 10001
+Your IP address:    192.168.1.5
+My IP address:      192.168.1.10
+</code></pre></div>
+<h3 id="ipv4-the-common-format">IPv4: The Common Format</h3>
+<p>Most IPs you'll see look like this:</p>
+<div class="highlight"><pre><span></span><code>192.168.1.5
+  ↑   ↑  ↑  ↑
+  |   |  |  └── These 4 numbers are each 0-255
+  |   |  |
+  └───┴──┘
+</code></pre></div>
+<p>Each part can be a number from 0 to 255. Why? Because computers think in <strong>bits (0 or 1)</strong>. Eight bits can represent 256 different numbers (0-255). Four groups of 8 bits = 32 bits total.</p>
+<h3 id="public-vs-private-ip-addresses">Public vs. Private IP Addresses</h3>
+<p><strong>Public IP:</strong> Your address on the actual internet. Anyone with routing can reach it.
+- Example: <code>8.8.8.8</code> (Google's DNS server)
+- Your home/office might have one for reaching the internet</p>
+<p><strong>Private IP:</strong> Only works within your local network. The internet ignores these.
+- Examples: <code>192.168.1.5</code>, <code>10.0.0.50</code>, <code>172.16.5.200</code>
+- Your laptop, phone, and server on the office network likely have these</p>
+<h3 id="why-this-matters">Why This Matters</h3>
+<p>When your Flask API is on a server:
+- The server has a <strong>public IP</strong> (so users from the internet can reach it)
+- Inside the server, there might be a database with a <strong>private IP</strong> (only the server can reach it)</p>
+<hr />
+<h2 id="04-concept-2-ports-which-service-do-you-want">0.4 Concept 2: Ports (Which Service Do You Want?)</h2>
+<h3 id="the-problem-one-computer-might-run-many-services">The Problem: One Computer Might Run Many Services</h3>
+<p>Your server might be running:
+- A web server on 1 address (serving HTTP)
+- A database on 1 address (storing data)
+- A cache server on 1 address (speeding things up)</p>
+<p>They all have the <em>same IP address</em>. So how does the computer know which service you want?</p>
+<h3 id="the-solution-ports">The Solution: Ports</h3>
+<p><strong>A port is a number that identifies which service/application you want to talk to.</strong></p>
+<p>Think of it like this:</p>
+<div class="highlight"><pre><span></span><code>IP Address = The Building
+Port       = The Office/Apartment Inside the Building
+
+IP: 192.168.1.5, Port: 80     = The web server
+IP: 192.168.1.5, Port: 5432   = The database
+IP: 192.168.1.5, Port: 6379   = The cache server
+</code></pre></div>
+<h3 id="common-ports-just-for-reference">Common Ports (Just For Reference)</h3>
+<p>When you see these, you'll know what service to expect:</p>
+<div class="highlight"><pre><span></span><code>Port 20, 21   = FTP (file transfer)
+Port 22       = SSH (remote login)
+Port 80       = HTTP (web, unencrypted)
+Port 443      = HTTPS (web, encrypted)
+Port 3306     = MySQL (database)
+Port 5432     = PostgreSQL (database)
+Port 6379     = Redis (cache)
+Port 8080     = Often a secondary web service
+</code></pre></div>
+<p><strong>You don't need to memorize these.</strong> Just know: ports are numbers, and different services listen on different ports.</p>
+<h3 id="how-it-all-works-together">How It All Works Together</h3>
+<div class="highlight"><pre><span></span><code>User&#39;s browser makes a request:
+   → 203.0.113.42:443
+
+This means: &quot;Hey computer at IP 203.0.113.42, 
+send my request to the service listening on port 443 (HTTPS)&quot;
+
+The computer receives it:
+   &quot;Oh, someone is asking for port 443. That&#39;s the web server. 
+    Let me pass this request to the web server application.&quot;
+</code></pre></div>
+<hr />
+<h2 id="05-concept-3-protocols-the-language-computers-speak">0.5 Concept 3: Protocols (The Language Computers Speak)</h2>
+<h3 id="the-problem-how-do-computers-understand-each-other">The Problem: How Do Computers Understand Each Other?</h3>
+<p>When you send data to another computer, just sending random bytes is useless. The receiving computer doesn't understand what it means.</p>
+<p>It's like mailing a letter in a language the recipient doesn't speak. Useless.</p>
+<h3 id="the-solution-protocols">The Solution: Protocols</h3>
+<p><strong>A protocol is a standard set of rules for how computers should format and exchange data.</strong></p>
+<p>Think of it as a language that both computers understand.</p>
+<h3 id="tcp-the-reliable-messenger">TCP: The Reliable Messenger</h3>
+<p><strong>TCP (Transmission Control Protocol)</strong> is like sending a registered letter.</p>
+<ul>
+<li>You send data, and the receiving computer confirms: "Yes, I got it."</li>
+<li>If something gets lost, it's retransmitted.</li>
+<li>Data arrives in the correct order.</li>
+<li>Slow but reliable.</li>
+</ul>
+<p><strong>When you use TCP:</strong>
+- Browsing websites (HTTP/HTTPS)
+- Sending emails (SMTP)
+- Talking to databases
+- Anything where losing data would be bad</p>
+<div class="highlight"><pre><span></span><code>Your computer → [Package with label &quot;PART 1&quot;] → Remote computer
+                &quot;Got it!&quot; ← [Acknowledgment]
+Your computer → [Package with label &quot;PART 2&quot;] → Remote computer
+                &quot;Got it!&quot; ← [Acknowledgment]
+</code></pre></div>
+<h3 id="udp-the-fast-messenger">UDP: The Fast Messenger</h3>
+<p><strong>UDP (User Datagram Protocol)</strong> is like shouting across a crowded room.</p>
+<ul>
+<li>You send data and don't wait for confirmation.</li>
+<li>If something gets lost, oh well.</li>
+<li>Data might arrive out of order.</li>
+<li>Fast but unreliable.</li>
+</ul>
+<p><strong>When you use UDP:</strong>
+- Video streaming (losing one frame is okay)
+- Online gaming (speed matters more than perfection)
+- DNS lookups (if it fails, try again)
+- Real-time voice (a dropped packet won't be noticed)</p>
+<div class="highlight"><pre><span></span><code>Your computer → [Shout 1] → Remote computer
+Your computer → [Shout 2] → Remote computer
+(No confirmation needed. Maybe it heard both, maybe one got lost.)
+</code></pre></div>
+<h3 id="httphttps-the-web-protocol">HTTP/HTTPS: The Web Protocol</h3>
+<p><strong>HTTP (HyperText Transfer Protocol)</strong> sits on top of TCP.</p>
+<p>It's the protocol that web browsers and web servers use. It defines:
+- How to ask for a web page ("GET /index.html")
+- How to send form data ("POST this data")
+- How to respond ("Here's your page" or "Page not found")</p>
+<p><strong>HTTPS</strong> is HTTP encrypted. Everything you send is scrambled.</p>
+<hr />
+<h2 id="06-concept-4-dns-how-do-humans-remember-addresses">0.6 Concept 4: DNS (How Do Humans Remember Addresses?)</h2>
+<h3 id="the-problem-humans-cant-remember-203011342">The Problem: Humans Can't Remember "203.0.113.42"</h3>
+<p>You probably visit Google daily. The IP address for google.com changes. And you certainly don't remember <code>8.8.8.8</code>; you remember <code>google.com</code>.</p>
+<h3 id="the-solution-dns">The Solution: DNS</h3>
+<p><strong>DNS (Domain Name System)</strong> is like a phone book for the internet.</p>
+<div class="highlight"><pre><span></span><code>When you type &quot;google.com&quot; in your browser:
+
+1. Browser: &quot;What&#39;s the IP for google.com?&quot;
+2. DNS Server (phone book): &quot;That&#39;s 172.217.16.206&quot;
+3. Browser: &quot;Thanks! Let me connect to 172.217.16.206&quot;
+</code></pre></div>
+<h3 id="how-it-actually-works">How It Actually Works</h3>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────┐
+│ Your Computer (Client)                  │
+│ Question: &quot;What&#39;s the IP for google.com?&quot;
+└──────────────┬──────────────────────────┘
+               │
+               ↓
+┌─────────────────────────────────────────┐
+│ Recursive Resolver (Your ISP)           │
+│ &quot;Let me find this for you...&quot;           │
+└──────────────┬──────────────────────────┘
+               │
+               ↓
+┌─────────────────────────────────────────┐
+│ Root Nameserver                         │
+│ &quot;Go ask the .com nameserver&quot;            │
+└──────────────┬──────────────────────────┘
+               │
+               ↓
+┌─────────────────────────────────────────┐
+│ TLD Nameserver (.com)                   │
+│ &quot;Go ask Google&#39;s nameserver&quot;            │
+└──────────────┬──────────────────────────┘
+               │
+               ↓
+┌─────────────────────────────────────────┐
+│ Google&#39;s Nameserver                     │
+│ &quot;The IP is 172.217.16.206&quot;              │
+└──────────────┬──────────────────────────┘
+               │ (answer travels back)
+               ↓
+┌─────────────────────────────────────────┐
+│ Your Browser Gets Answer                │
+│ &quot;Now I&#39;ll connect to 172.217.16.206&quot;    │
+└─────────────────────────────────────────┘
+</code></pre></div>
+<h3 id="why-this-matters_1">Why This Matters</h3>
+<ul>
+<li><strong>Domains are memorable.</strong> <code>example.com</code> beats <code>203.0.113.42</code></li>
+<li><strong>IPs can change.</strong> If your server moves to a new IP, you just update DNS. Users still type the same domain.</li>
+<li><strong>You might cache DNS.</strong> Repeated requests for the same domain are answered instantly from cache.</li>
+</ul>
+<hr />
+<h2 id="07-concept-5-routing-how-data-finds-its-way">0.7 Concept 5: Routing (How Data Finds Its Way)</h2>
+<h3 id="the-problem-there-are-billions-of-computers">The Problem: There Are Billions of Computers</h3>
+<p>Your computer doesn't have a direct cable to every other computer on the internet. So how does your data reach its destination?</p>
+<h3 id="the-solution-routing">The Solution: Routing</h3>
+<p><strong>Routing is hop-by-hop delivery, like mail being passed between post offices.</strong></p>
+<div class="highlight"><pre><span></span><code>Your Computer (192.168.1.5)
+        ↓
+   Your Router (192.168.1.1)
+   &quot;I need to send this to 203.0.113.42&quot;
+        ↓
+   ISP&#39;s Gateway
+   &quot;I need to send this west to the next network&quot;
+        ↓
+   Regional Network
+   &quot;I need to send this to another region&quot;
+        ↓
+   ...multiple hops...
+        ↓
+   Destination Network
+   &quot;Use this local router to find 203.0.113.42&quot;
+        ↓
+   Target Computer (203.0.113.42)
+</code></pre></div>
+<h3 id="the-routing-table">The Routing Table</h3>
+<p>Every computer has a <strong>routing table</strong> that says:</p>
+<div class="highlight"><pre><span></span><code>&quot;If you want to reach this range of IPs, send it through that gateway.&quot;
+
+For example:
+- 192.168.1.0/24         → Use local network (no gateway needed)
+- 10.0.0.0/8             → Send through gateway 192.168.1.1
+- 8.8.8.8 (and everything else) → Send through gateway 192.168.1.1 (default)
+</code></pre></div>
+<p>Your computer checks the routing table to decide: "Who should I pass this packet to next?"</p>
+<h3 id="why-this-matters_2">Why This Matters</h3>
+<ul>
+<li><strong>Networks are hierarchical.</strong> Not flat. Data hops from router to router.</li>
+<li><strong>Routing can break.</strong> If a router is misconfigured, packets get lost.</li>
+<li><strong>You might route traffic differently.</strong> Internal traffic (to your database) might use one route. Internet traffic uses another.</li>
+</ul>
+<hr />
+<h2 id="08-concept-6-firewalls-the-bouncers">0.8 Concept 6: Firewalls (The Bouncers)</h2>
+<h3 id="the-problem-not-all-traffic-should-be-allowed">The Problem: Not All Traffic Should Be Allowed</h3>
+<p>Imagine your server. Someone tries to connect to a port that shouldn't be open. They're trying to exploit your system.</p>
+<h3 id="the-solution-firewalls">The Solution: Firewalls</h3>
+<p><strong>A firewall is a set of rules that says "allow this traffic, block that traffic."</strong></p>
+<p>Think of it like a bouncer at a club:</p>
+<div class="highlight"><pre><span></span><code>Incoming Request: &quot;I want to connect to 203.0.113.42:5432&quot;
+Firewall: &quot;Are you on the whitelist? No? BLOCKED.&quot;
+
+Incoming Request: &quot;I want to connect to 203.0.113.42:443&quot;
+Firewall: &quot;Yes, that&#39;s HTTPS. That&#39;s allowed. Go in.&quot;
+</code></pre></div>
+<h3 id="common-firewall-rules">Common Firewall Rules</h3>
+<div class="highlight"><pre><span></span><code>✅ Allow incoming on port 443 (HTTPS)
+✅ Allow incoming on port 80 (HTTP)
+❌ Block incoming on port 5432 (PostgreSQL)
+✅ Allow outgoing to 8.8.8.8 (DNS)
+❌ Block outgoing to suspicious IPs
+</code></pre></div>
+<h3 id="where-firewalls-live">Where Firewalls Live</h3>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────┐
+│ Network Firewall (AWS Security Groups)  │
+│ ← checks traffic coming TO your servers │
+└─────────────────────────────────────────┘
+            ↓
+┌─────────────────────────────────────────┐
+│ Host Firewall (`iptables` on the server)│
+│ ← checks traffic at the OS level        │
+└─────────────────────────────────────────┘
+            ↓
+┌─────────────────────────────────────────┐
+│ Application Firewall                    │
+│ ← checks at the application level       │
+└─────────────────────────────────────────┘
+</code></pre></div>
+<hr />
+<h2 id="09-concept-7-connections-stateful-vs-stateless">0.9 Concept 7: Connections (Stateful vs. Stateless)</h2>
+<h3 id="the-problem-how-do-computers-know-if-a-conversation-is-happening">The Problem: How Do Computers Know If a Conversation Is Happening?</h3>
+<p>If your computer sends data to another computer, how does the receiving computer know:
+- Is this the start of a conversation or a random packet?
+- Should I respond to this?
+- Is this legitimate?</p>
+<h3 id="the-solution-connections">The Solution: Connections</h3>
+<p><strong>A connection is an established communication session between two computers.</strong></p>
+<h3 id="tcp-connections-the-handshake">TCP Connections: The Handshake</h3>
+<p>TCP connections follow a famous ritual called the <strong>Three-Way Handshake</strong>:</p>
+<div class="highlight"><pre><span></span><code>Client (You)               Server (Remote)
+
+     │                            │
+     │───── SYN (let&#39;s talk) ────→│
+     │                            │
+     │←── SYN-ACK (ok, let&#39;s) ───│
+     │                            │
+     │─── ACK (confirmed) ────────→│
+     │                            │
+     └──── Connection Open ───────┘
+</code></pre></div>
+<p>Now data can flow back and forth.</p>
+<h3 id="udp-no-handshake">UDP: No Handshake</h3>
+<p>UDP doesn't have a connection. It's like yelling into the void:</p>
+<div class="highlight"><pre><span></span><code>Client (You)               Server (Remote)
+
+     │                            │
+     │─── Here&#39;s some data ──────→│
+     │                            │
+     │─── Here&#39;s more data ──────→│
+     │                            │
+(No confirmation. The server might receive it or not.)
+</code></pre></div>
+<h3 id="why-this-matters_3">Why This Matters</h3>
+<ul>
+<li><strong>TCP is reliable but slower</strong> (needs confirmation for each packet)</li>
+<li><strong>UDP is fast but unreliable</strong> (no confirmation)</li>
+<li><strong>Your web browser uses TCP</strong> (you want the data to arrive correctly)</li>
+<li><strong>Video streaming often uses UDP</strong> (speed matters more than perfection)</li>
+</ul>
+<hr />
+<h2 id="010-concept-8-bandwidth-vs-latency-what-fast-really-means">0.10 Concept 8: Bandwidth vs. Latency (What "Fast" Really Means)</h2>
+<h3 id="bandwidth-the-width-of-the-pipe">Bandwidth: The Width of the Pipe</h3>
+<p><strong>Bandwidth is the maximum amount of data that can flow per second.</strong></p>
+<div class="highlight"><pre><span></span><code>Low bandwidth:    1 Mbps   (enough for email)
+Medium bandwidth: 100 Mbps (good for a home network)
+High bandwidth:   10 Gbps  (for data centers)
+</code></pre></div>
+<h3 id="latency-the-speed-of-the-pipe">Latency: The Speed of the Pipe</h3>
+<p><strong>Latency is the time it takes for one packet to travel from A to B.</strong></p>
+<div class="highlight"><pre><span></span><code>Low latency:   1 ms  (very fast, like talking to a local server)
+Medium latency: 50 ms (acceptable for most web apps)
+High latency:  200 ms (feels slow, like a video call with lag)
+</code></pre></div>
+<h3 id="the-difference-critical">The Difference (Critical!)</h3>
+<div class="highlight"><pre><span></span><code>Bandwidth = How much water flows per second
+Latency   = How fast the water travels
+
+A fire hose (high bandwidth) shooting water slow-motion (high latency) 
+is less useful than a thin pipe with fast water pressure (low latency).
+</code></pre></div>
+<h3 id="why-this-matters_4">Why This Matters</h3>
+<ul>
+<li>Your API might be able to process 1000 requests/second (bandwidth)</li>
+<li>But if each request takes 200ms to reach you (latency), users feel it's slow</li>
+<li>A server in Tokyo accessing a database in New York has high latency (~150ms round-trip) even on a fast connection</li>
+</ul>
+<hr />
+<h2 id="011-concept-9-packets-and-frames-the-envelopes">0.11 Concept 9: Packets and Frames (The "Envelopes")</h2>
+<h3 id="how-data-actually-travels">How Data Actually Travels</h3>
+<p>Your message "Hello" doesn't travel as one big blob. It's broken into small pieces called <strong>packets</strong>.</p>
+<div class="highlight"><pre><span></span><code>Application: &quot;Hello, world! This is a long message.&quot;
+             ↓
+             (break it into pieces)
+             ↓
+Packet 1: [Packet 1 of 3, containing &quot;Hello,&quot;]
+Packet 2: [Packet 2 of 3, containing &quot;world!&quot;]
+Packet 3: [Packet 3 of 3, containing &quot;This is...&quot;]
+
+Each packet travels independently and is reassembled at the destination.
+</code></pre></div>
+<h3 id="packet-structure-simplified">Packet Structure (Simplified)</h3>
+<p>Each packet has layers:</p>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────┐
+│ Your actual data (e.g., &quot;Hello&quot;)│
+├─────────────────────────────────┤
+│ TCP header:                      │
+│ ├─ Source port: 54321           │
+│ ├─ Destination port: 443        │
+│ └─ Other info                   │
+├─────────────────────────────────┤
+│ IP header:                       │
+│ ├─ Source IP: 192.168.1.5       │
+│ ├─ Destination IP: 203.0.113.42 │
+│ └─ Other info                   │
+├─────────────────────────────────┤
+│ Ethernet header:                 │
+│ ├─ Source MAC: aa:bb:cc:...     │
+│ ├─ Destination MAC: 11:22:33... │
+│ └─ Other info                   │
+└─────────────────────────────────┘
+</code></pre></div>
+<p>Each layer adds its own header. It's like a letter inside an envelope inside a bigger envelope.</p>
+<h3 id="why-small-packets">Why Small Packets?</h3>
+<p>Networks aren't perfect. If you send 1 GB in one chunk and 1 bit gets corrupted, you lose the whole thing. Split into 1000 packets, and you only resend the 1 packet that got corrupted.</p>
+<hr />
+<h2 id="012-concept-10-nat-network-address-translation-your-secret-translator">0.12 Concept 10: NAT (Network Address Translation – Your Secret Translator)</h2>
+<h3 id="the-problem-you-have-a-private-ip-but-the-internet-wants-a-public-ip">The Problem: You Have a Private IP, But the Internet Wants a Public IP</h3>
+<p>Your laptop has IP <code>192.168.1.5</code> (private). You ask Google for something. Google responds to <code>192.168.1.5</code>. But that's private! The internet doesn't know how to reach it.</p>
+<h3 id="the-solution-nat">The Solution: NAT</h3>
+<p><strong>NAT (Network Address Translation) translates between private and public IPs.</strong></p>
+<p>Your router does this automatically:</p>
+<div class="highlight"><pre><span></span><code>Your Laptop (192.168.1.5): &quot;Google, what&#39;s the weather?&quot;
+         ↓
+Your Router: &quot;Wait, I&#39;ll translate this.&quot;
+         ↓
+Translation: Change source IP from 192.168.1.5 to YOUR_PUBLIC_IP
+         ↓
+Google receives request from YOUR_PUBLIC_IP
+         ↓
+Google responds to YOUR_PUBLIC_IP
+         ↓
+Your Router: &quot;This is for my laptop. Let me translate back.&quot;
+         ↓
+Translation: Change destination from YOUR_PUBLIC_IP to 192.168.1.5
+         ↓
+Your Laptop receives the response
+</code></pre></div>
+<h3 id="why-this-matters_5">Why This Matters</h3>
+<ul>
+<li>Your private IP Never leaves your network</li>
+<li>The internet only sees your router's public IP</li>
+<li>Millions of computers can hide behind one public IP using NAT</li>
+<li>This is why the world hasn't run out of IP addresses yet</li>
+</ul>
+<hr />
+<h2 id="013-real-world-scenario-putting-it-all-together">0.13 Real-World Scenario: Putting It All Together</h2>
+<p>Let's trace what happens when you visit <code>example.com</code>:</p>
+<div class="highlight"><pre><span></span><code>step 1: Your Browser
+        &quot;I need to visit example.com&quot;
+
+step 2: DNS (Concept 4)
+        Browser: &quot;What&#39;s the IP for example.com?&quot;
+        DNS: &quot;That&#39;s 93.184.216.34&quot;
+
+Step 3: TCP Handshake (Concept 7)
+        Your computer: &quot;Can I connect to 93.184.216.34:443?&quot;
+        Web server: &quot;Yes, here&#39;s my response&quot;
+        Your computer: &quot;Great, connection confirmed&quot;
+
+Step 4: HTTP Request (Concept 3)
+        Your browser: &quot;GET /index.html HTTP/1.1&quot;
+
+Step 5: Routing (Concept 5)
+        Your packet travels: local router → ISP → backbone network → server&#39;s router → server
+
+Step 6: Firewall (Concept 6)
+        Server&#39;s firewall: &quot;Port 443? Yep, that&#39;s allowed.&quot;
+
+Step 7: Web Server
+        Server: &quot;Here&#39;s your page&quot;
+
+Step 8: Response Routing (Concept 5 again)
+        Response travels back: server → router → backbone → ISP → your router → your computer
+
+step 9: Your Browser
+        Renders the HTML
+</code></pre></div>
+<p><strong>Each step involves multiple concepts working together.</strong></p>
+<hr />
+<h2 id="014-common-networking-problems-and-what-they-mean">0.14 Common Networking Problems (And What They Mean)</h2>
+<h3 id="connection-refused">"Connection Refused"</h3>
+<div class="highlight"><pre><span></span><code>Your computer tried to connect, but nothing was listening on that port.
+Why: Service isn&#39;t running, or firewall is blocking it.
+</code></pre></div>
+<h3 id="connection-timed-out">"Connection Timed Out"</h3>
+<div class="highlight"><pre><span></span><code>Your computer tried to connect, but got no response within the timeout.
+Why: Firewall is silently dropping packets, or the route is broken.
+</code></pre></div>
+<h3 id="dns-resolution-failed">"DNS Resolution Failed"</h3>
+<div class="highlight"><pre><span></span><code>The domain name couldn&#39;t be translated to an IP.
+Why: The DNS server is down, or the domain doesn&#39;t exist.
+</code></pre></div>
+<h3 id="packet-loss">"Packet Loss"</h3>
+<div class="highlight"><pre><span></span><code>Some packets are being dropped along the way.
+Why: Network congestion, bad hardware, or interference.
+</code></pre></div>
+<h3 id="slow-connection">"Slow Connection"</h3>
+<div class="highlight"><pre><span></span><code>Could be low bandwidth (slow pipe) or high latency (far away).
+Why: Internet congestion, geographic distance, or bottleneck in infrastructure.
+</code></pre></div>
+<hr />
+<h2 id="015-key-takeaways-mental-models">0.15 Key Takeaways &amp; Mental Models</h2>
+<h3 id="the-5-mental-models-to-remember">The 5 Mental Models to Remember</h3>
+<p><strong>Model 1: IP Addresses are mailing addresses.</strong>
+<div class="highlight"><pre><span></span><code>IP address = Where the data should go
+Port = Which service in that location
+</code></pre></div></p>
+<p><strong>Model 2: Protocols are languages.</strong>
+<div class="highlight"><pre><span></span><code>TCP = Formal handwritten letter (slow, reliable)
+UDP = Shouting across a room (fast, unreliable)
+HTTP = What we write in the letter
+</code></pre></div></p>
+<p><strong>Model 3: Routing is hop-by-hop delivery.</strong>
+<div class="highlight"><pre><span></span><code>Data doesn&#39;t teleport. It travels router → router → router.
+Each router looks at the destination and decides the next hop.
+</code></pre></div></p>
+<p><strong>Model 4: Firewalls are bouncers.</strong>
+<div class="highlight"><pre><span></span><code>&quot;Who is allowed in?&quot; Bouncers at every level check.
+Some let certain ports through, others block them.
+</code></pre></div></p>
+<p><strong>Model 5: Everything is layered.</strong>
+<div class="highlight"><pre><span></span><code>Data + TCP = Package for transport
+Package + IP = Addressed envelope
+Envelope + Ethernet = Physical delivery info
+All together = your actual network packet
+</code></pre></div></p>
+<h3 id="the-questions-you-can-now-answer">The Questions You Can Now Answer</h3>
+<p>After this module, when something breaks, you can ask:</p>
+<ol>
+<li><strong>Can the computers find each other?</strong> (DNS, IP addressing)</li>
+<li><strong>Is the path open?</strong> (Routing, firewalls)</li>
+<li><strong>Are they speaking the same language?</strong> (Protocols)</li>
+<li><strong>Is the connection established?</strong> (TCP handshake)</li>
+<li><strong>Is the data actually being delivered?</strong> (Bandwidth, latency, packet loss)</li>
+</ol>
+<hr />
+<h2 id="016-next-steps">0.16 Next Steps</h2>
+<p>This module gives you the <strong>conceptual foundation</strong>. Now you're ready for:</p>
+<ol>
+<li><strong>Module 1: Networking Fundamentals</strong> – Hands-on tools (<code>ping</code>, <code>traceroute</code>, <code>netstat</code>)</li>
+<li><strong>Module 2: HTTP/HTTPS Protocols</strong> – Deep dive into web protocols</li>
+<li><strong>Module 3: DNS &amp; Domain Management</strong> – Setting up and troubleshooting domains</li>
+<li><strong>Module 4: Advanced Topics</strong> – Load balancing, VPNs, etc.</li>
+</ol>
+<h3 id="practice-exercise-trace-your-own-connection">Practice Exercise: Trace Your Own Connection</h3>
+<p>Try this on your computer (any OS):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># What&#39;s your IP?</span>
+ifconfig<span class="w"> </span><span class="o">(</span>Mac/Linux<span class="o">)</span><span class="w"> </span>or<span class="w"> </span>ipconfig<span class="w"> </span><span class="o">(</span>Windows<span class="o">)</span>
+
+<span class="c1"># How do you reach example.com?</span>
+traceroute<span class="w"> </span>example.com<span class="w"> </span><span class="o">(</span>Mac/Linux<span class="o">)</span><span class="w"> </span>or<span class="w"> </span>tracert<span class="w"> </span>example.com<span class="w"> </span><span class="o">(</span>Windows<span class="o">)</span>
+<span class="c1"># You&#39;ll see all the hops your data takes</span>
+
+<span class="c1"># What&#39;s the IP for example.com?</span>
+nslookup<span class="w"> </span>example.com
+<span class="c1"># Or dig example.com (Linux)</span>
+</code></pre></div>
+<p><strong>Run these commands and see the concepts in action!</strong></p>
+<hr />
+<h2 id="017-glossary-quick-reference">0.17 Glossary (Quick Reference)</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Simple Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IP Address</strong></td>
+<td>Unique label for a computer on a network (192.168.1.5)</td>
+</tr>
+<tr>
+<td><strong>Port</strong></td>
+<td>A number identifying which service you want (like an apartment number)</td>
+</tr>
+<tr>
+<td><strong>Protocol</strong></td>
+<td>A standard set of rules for how computers exchange data</td>
+</tr>
+<tr>
+<td><strong>TCP</strong></td>
+<td>Reliable protocol with confirmation (slower, safer)</td>
+</tr>
+<tr>
+<td><strong>UDP</strong></td>
+<td>Fast protocol without confirmation (faster, riskier)</td>
+</tr>
+<tr>
+<td><strong>DNS</strong></td>
+<td>Translation from domain names to IP addresses</td>
+</tr>
+<tr>
+<td><strong>Routing</strong></td>
+<td>The process of getting data from source to destination</td>
+</tr>
+<tr>
+<td><strong>Firewall</strong></td>
+<td>Rules that allow or block certain traffic</td>
+</tr>
+<tr>
+<td><strong>Bandwidth</strong></td>
+<td>Maximum amount of data that can flow per second</td>
+</tr>
+<tr>
+<td><strong>Latency</strong></td>
+<td>Time it takes for one packet to travel</td>
+</tr>
+<tr>
+<td><strong>Packet</strong></td>
+<td>Small piece of data with headers attached</td>
+</tr>
+<tr>
+<td><strong>NAT</strong></td>
+<td>Translation between private and public IPs</td>
+</tr>
+<tr>
+<td><strong>Connection</strong></td>
+<td>Established two-way communication (mostly TCP)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="018-the-engineers-mindset">0.18 The Engineer's Mindset</h2>
+<p>As you learn networking:</p>
+<ol>
+<li><strong>Assume nothing.</strong> Just because it <em>should</em> work doesn't mean it does.</li>
+<li><strong>Verify at each layer.</strong> If something is broken, check: Is DNS working? Is routing working? Is the firewall allowing it?</li>
+<li><strong>Use tools fearlessly.</strong> <code>ping</code>, <code>traceroute</code>, <code>telnet</code>, <code>nc</code> – these are your friends.</li>
+<li><strong>Think in layers.</strong> A Layer 7 (application) problem looks different from a Layer 3 (routing) problem.</li>
+<li><strong>Packets don't lie.</strong> If you can see a packet, you can understand what's happening.</li>
+</ol>
+<p><strong>Welcome to networking. You're going to be great at this.</strong></p>
+<hr />
+<p><strong>Ready for deeper dives?</strong> Move on to Module 1 (Fundamentals) or the A-to-Z guide for specific topics.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="mailto:contact@example.com" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480v-83.6c0-4 1.5-7.8 4.2-10.7l167.6-182.9c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8l-88.3-44.2C7.1 311.3.3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "navigation.footer", "navigation.tracking", "navigation.indexes", "navigation.pruned", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tooltips", "content.tabs.link", "toc.follow"], "search": "../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.4e0fa4ba.min.js"></script>
+      
+    
+  </body>
+</html>
