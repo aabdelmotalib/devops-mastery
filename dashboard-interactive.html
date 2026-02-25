@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Dashboard - DevOps Mastery</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #1e40af;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --border: #e5e7eb;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --header-bg: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f3f4f6;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--header-bg);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+
+        .metric-label {
+            color: var(--text-light);
+            font-size: 0.95em;
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: var(--bg-light);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            border-radius: 5px;
+            transition: width 0.4s ease;
+        }
+
+        .progress-percent {
+            font-size: 0.85em;
+            color: var(--text-light);
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+        }
+
+        .streak-widget {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .flame {
+            font-size: 4em;
+            animation: flicker 0.5s infinite alternate;
+            margin-bottom: 15px;
+        }
+
+        @keyframes flicker {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .streak-count {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--warning);
+        }
+
+        .path-card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .path-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .path-name {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .path-progress {
+            font-size: 0.9em;
+            color: var(--text-light);
+        }
+
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .step {
+            flex: 1;
+            height: 8px;
+            background: var(--bg-light);
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .step.completed {
+            background: var(--success);
+        }
+
+        .step.current {
+            background: var(--primary);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scaleX(1); }
+            50% { transform: scaleX(1.1); }
+        }
+
+        .step:hover {
+            height: 12px;
+            margin-top: -2px;
+        }
+
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .badge {
+            text-align: center;
+            padding: 15px;
+            border-radius: 12px;
+            background: var(--bg-light);
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .badge.earned {
+            background: linear-gradient(135deg, #fef3c7, #fcd34d);
+            border-color: var(--warning);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
+        .badge-icon {
+            font-size: 2.5em;
+            margin-bottom: 8px;
+        }
+
+        .badge-name {
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .badge-desc {
+            font-size: 0.75em;
+            color: var(--text-light);
+        }
+
+        .recommendation-card {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .recommendation-label {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .recommendation-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .recommendation-reason {
+            font-size: 0.95em;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 0.85em;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .stat-icon {
+            font-size: 2.5em;
+        }
+
+        .stat-content h3 {
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+
+        .stat-content p {
+            color: var(--text-light);
+            font-size: 0.9em;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .skill-gaps {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .gap-item {
+            padding: 15px;
+            background: var(--bg-light);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .gap-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .gap-info p {
+            font-size: 0.9em;
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .metric-value {
+                font-size: 2em;
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 10px 16px;
+            background: var(--bg-light);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .modal-close {
+            float: right;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .modal-close:hover {
+            color: var(--text-dark);
+        }
+
+        .badge-detail {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .badge-detail-icon {
+            font-size: 5em;
+            margin-bottom: 15px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+        }
+
+        .empty-state-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Learning Dashboard</h1>
+            <p>Track your DevOps journey in real-time</p>
+        </header>
+
+        <!-- Overview Cards -->
+        <div class="grid">
+            <div class="card metric">
+                <div class="metric-label">📚 Tutorials Completed</div>
+                <div class="metric-value" id="completed-count">0</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="completed-progress" style="width: 0%"></div>
+                </div>
+                <div class="progress-percent" id="completed-percent">0/14</div>
+            </div>
+
+            <div class="card metric">
+                <div class="metric-label">🏆 Paths Completed</div>
+                <div class="metric-value" id="paths-count">0</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="paths-progress" style="width: 0%"></div>
+                </div>
+                <div class="progress-percent" id="paths-percent">0/6</div>
+            </div>
+
+            <div class="card metric">
+                <div class="metric-label">⏱️ Total Time Invested</div>
+                <div class="metric-value" id="hours-count">0</div>
+                <div style="color: var(--text-light); margin-top: 10px;">hours</div>
+            </div>
+
+            <div class="card metric">
+                <div class="metric-label">🏅 Badges Earned</div>
+                <div class="metric-value" id="badges-count">0</div>
+                <div style="color: var(--text-light); margin-top: 10px;">achievements</div>
+            </div>
+        </div>
+
+        <!-- Streak Widget -->
+        <div class="card" style="text-align: center; margin-bottom: 30px;">
+            <div class="streak-widget">
+                <div class="flame">🔥</div>
+                <div class="streak-count" id="streak-count">0 days</div>
+                <p style="color: var(--text-light); margin-top: 10px;">Current learning streak</p>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="switchTab('paths')">📌 Learning Paths</button>
+            <button class="tab-btn" onclick="switchTab('badges')">🏅 Achievements</button>
+            <button class="tab-btn" onclick="switchTab('recommendations')">🤖 Recommendations</button>
+            <button class="tab-btn" onclick="switchTab('gaps')">📍 Skill Gaps</button>
+        </div>
+
+        <!-- Learning Paths Tab -->
+        <div id="paths" class="tab-content active">
+            <div class="section-title">📌 Your Learning Paths</div>
+            <div id="paths-container"></div>
+        </div>
+
+        <!-- Badges Tab -->
+        <div id="badges" class="tab-content">
+            <div class="section-title">🏅 Achievements</div>
+            <div id="badges-container" class="badges-grid"></div>
+        </div>
+
+        <!-- Recommendations Tab -->
+        <div id="recommendations" class="tab-content">
+            <div class="section-title">🤖 AI Recommendations</div>
+            <div id="recommendation-container"></div>
+        </div>
+
+        <!-- Skill Gaps Tab -->
+        <div id="gaps" class="tab-content">
+            <div class="section-title">📍 Skill Gaps</div>
+            <div class="skill-gaps" id="skill-gaps-container"></div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons" style="margin-top: 40px;">
+            <button class="btn" onclick="exportData()">📥 Export Progress</button>
+            <button class="btn btn-secondary" onclick="clearConfirm()">🔄 Reset Data</button>
+            <button class="btn btn-secondary" onclick="generateSampleData()">📊 Load Sample Data</button>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('confirmModal')">&times;</span>
+            <h2>Are you sure?</h2>
+            <p>This will clear all your learning progress data. This action cannot be undone.</p>
+            <div style="margin-top: 20px;">
+                <button class="btn btn-secondary" style="margin-right: 10px;" onclick="closeModal('confirmModal')">Cancel</button>
+                <button class="btn" style="background: var(--danger);" onclick="clearData()">Clear Data</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Badge Detail Modal -->
+    <div id="badgeModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('badgeModal')">&times;</span>
+            <div class="badge-detail">
+                <div class="badge-detail-icon" id="badgeModalIcon">🏅</div>
+                <h2 id="badgeModalTitle">Badge Title</h2>
+                <p id="badgeModalDesc" style="color: var(--text-light); margin: 10px 0;">Badge description here</p>
+                <p id="badgeModalStatus" style="color: var(--warning); font-weight: 600;">Locked</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize dashboard
+        window.dashboardInitialized = true;
+
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function renderDashboard() {
+            if (typeof window.progressTracker === 'undefined') {
+                renderSampleDashboard();
+                return;
+            }
+
+            const progress = window.progressTracker.getProgress();
+            const analytics = progress.analytics;
+            const badges = progress.badges || [];
+
+            // Update metrics
+            const completedTutorials = Object.values(progress.tutorials).filter(t => t.completed).length;
+            const totalTutorials = Object.keys(progress.tutorials).length;
+            const completedPaths = Object.values(progress.paths).filter(p => p.completedDate).length;
+            const totalPaths = Object.keys(progress.paths).length;
+            const totalHours = Math.round(Object.values(progress.tutorials).reduce((sum, t) => sum + (t.timeSpent / 3600), 0));
+            const earnedBadges = badges.length;
+            const longestStreak = window.progressTracker.calculateLongestStreak(analytics);
+
+            // Update UI
+            document.getElementById('completed-count').textContent = completedTutorials;
+            document.getElementById('completed-progress').style.width = (completedTutorials / totalTutorials * 100) + '%';
+            document.getElementById('completed-percent').textContent = `${completedTutorials}/${totalTutorials}`;
+
+            document.getElementById('paths-count').textContent = completedPaths;
+            document.getElementById('paths-progress').style.width = (completedPaths / totalPaths * 100) + '%';
+            document.getElementById('paths-percent').textContent = `${completedPaths}/${totalPaths}`;
+
+            document.getElementById('hours-count').textContent = totalHours;
+            document.getElementById('badges-count').textContent = earnedBadges;
+            document.getElementById('streak-count').textContent = longestStreak + ' days';
+
+            // Render paths
+            renderPaths(progress.paths);
+
+            // Render badges
+            renderBadges(progress.badges);
+
+            // Render recommendations
+            if (typeof window.recommendationEngine !== 'undefined') {
+                renderRecommendations();
+            }
+
+            // Render skill gaps
+            renderSkillGaps(progress);
+        }
+
+        function renderPaths(paths) {
+            const container = document.getElementById('paths-container');
+            if (!paths || Object.keys(paths).length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📚</div><p>Start a learning path to see progress here</p></div>';
+                return;
+            }
+
+            const pathNames = {
+                'new-to-devops': '🚀 New to DevOps',
+                'career-transition': '🔄 Career Transition',
+                'cka-preparation': '☸️ CKA Preparation',
+                'building-infrastructure': '🏗️ Building Infrastructure',
+                'distributed-systems': '🌐 Distributed Systems',
+                'interview-prep': '💼 Interview Preparation'
+            };
+
+            let html = '';
+            for (const [pathId, path] of Object.entries(paths)) {
+                const name = pathNames[pathId] || pathId;
+                const progress = path.completedSteps ? (path.completedSteps.length / this.pathSteps[pathId].length) * 100 : 0;
+                const stepsHtml = (this.pathSteps[pathId] || []).map((step, idx) => {
+                    let stepClass = 'step';
+                    if (path.completedSteps && path.completedSteps.includes(idx)) {
+                        stepClass += ' completed';
+                    } else if (idx === path.currentStep) {
+                        stepClass += ' current';
+                    }
+                    return `<div class="${stepClass}" title="Step ${idx + 1}"></div>`;
+                }).join('');
+
+                html += `
+                    <div class="path-card">
+                        <div class="path-header">
+                            <div class="path-name">${name}</div>
+                            <div class="path-progress">${Math.round(progress)}%</div>
+                        </div>
+                        <div class="steps-container">
+                            ${stepsHtml}
+                        </div>
+                    </div>
+                `;
+            }
+            container.innerHTML = html;
+        }
+
+        function renderBadges(badges) {
+            const container = document.getElementById('badges-container');
+            const allBadges = {
+                'first-tutorial': { icon: '🚀', name: 'Getting Started', desc: 'Complete your first tutorial' },
+                'path-starter': { icon: '🎯', name: 'Path Starter', desc: 'Start a learning path' },
+                'path-completer': { icon: '🏆', name: 'Path Master', desc: 'Complete a learning path' },
+                'five-tutorials': { icon: '⭐', name: 'Momentum', desc: 'Complete 5 tutorials' },
+                'all-paths-started': { icon: '🌟', name: 'Explorer', desc: 'Start all paths' },
+                'cka-ready': { icon: '📜', name: 'CKA Ready', desc: 'Complete CKA prep' },
+                'week-warrior': { icon: '⚡', name: 'Week Warrior', desc: '7-day streak' },
+                'knowledge-architect': { icon: '🏗️', name: 'Knowledge Architect', desc: 'Complete 3 paths' }
+            };
+
+            let html = '';
+            for (const [badgeId, badgeInfo] of Object.entries(allBadges)) {
+                const earned = badges.includes(badgeId);
+                const badgeClass = earned ? 'badge earned' : 'badge';
+                html += `
+                    <div class="${badgeClass}" onclick="showBadgeDetail('${badgeId}', '${badgeInfo.icon}', '${badgeInfo.name}', '${badgeInfo.desc}', ${earned})">
+                        <div class="badge-icon">${badgeInfo.icon}</div>
+                        <div class="badge-name">${badgeInfo.name}</div>
+                        <div class="badge-desc">${earned ? '✓ Earned' : 'Locked'}</div>
+                    </div>
+                `;
+            }
+            container.innerHTML = html;
+        }
+
+        function renderRecommendations() {
+            const container = document.getElementById('recommendation-container');
+            if (typeof window.recommendationEngine === 'undefined') {
+                container.innerHTML = '<p>Recommendations engine not available</p>';
+                return;
+            }
+
+            try {
+                const recommendation = window.recommendationEngine.recommendPath();
+                const nextTutorial = window.recommendationEngine.recommendNextTutorial();
+
+                let html = '';
+                if (recommendation) {
+                    html += `
+                        <div class="recommendation-card">
+                            <div class="recommendation-label">🎯 RECOMMENDED PATH</div>
+                            <div class="recommendation-title">${recommendation}</div>
+                            <div class="recommendation-reason">Based on your learning progress and goals</div>
+                            <button class="btn btn-small" onclick="alert('Start path: ${recommendation}')">Start Learning →</button>
+                        </div>
+                    `;
+                }
+
+                if (nextTutorial) {
+                    html += `
+                        <div class="recommendation-card">
+                            <div class="recommendation-label">📚 NEXT TUTORIAL</div>
+                            <div class="recommendation-title">${nextTutorial}</div>
+                            <div class="recommendation-reason">Continue your current learning path</div>
+                            <button class="btn btn-small" onclick="alert('Start tutorial: ${nextTutorial}')">Learn Now →</button>
+                        </div>
+                    `;
+                }
+
+                if (!html) {
+                    html = '<div class="empty-state"><div class="empty-state-icon">🤔</div><p>Complete some tutorials to get personalized recommendations</p></div>';
+                }
+
+                container.innerHTML = html;
+            } catch (e) {
+                container.innerHTML = '<p style="color: red;">Error loading recommendations</p>';
+            }
+        }
+
+        function renderSkillGaps(progress) {
+            const container = document.getElementById('skill-gaps-container');
+            const categories = ['Foundations', 'Cloud & Infrastructure', 'Operations', 'Data & Backend', 'Advanced', 'Capstone'];
+            
+            let html = '<div>';
+            categories.forEach(cat => {
+                html += `
+                    <div class="gap-item">
+                        <div class="gap-info">
+                            <h4>${cat}</h4>
+                            <p>Continue learning to master this area</p>
+                        </div>
+                        <button class="btn btn-small" onclick="alert('Browse ${cat} tutorials')">Explore →</button>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            
+            container.innerHTML = html;
+        }
+
+        function showBadgeDetail(badgeId, icon, name, desc, earned) {
+            document.getElementById('badgeModalIcon').textContent = icon;
+            document.getElementById('badgeModalTitle').textContent = name;
+            document.getElementById('badgeModalDesc').textContent = desc;
+            document.getElementById('badgeModalStatus').textContent = earned ? '✓ Achieved!' : 'Keep learning to unlock';
+            document.getElementById('badgeModalStatus').style.color = earned ? 'var(--success)' : 'var(--warning)';
+            document.getElementById('badgeModal').classList.add('active');
+        }
+
+        function exportData() {
+            if (typeof window.progressTracker === 'undefined') {
+                alert('No data to export');
+                return;
+            }
+
+            const data = window.progressTracker.exportProgress();
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'devops-progress.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function clearConfirm() {
+            document.getElementById('confirmModal').classList.add('active');
+        }
+
+        function clearData() {
+            if (typeof window.progressTracker !== 'undefined') {
+                window.progressTracker.clearAllProgress();
+            } else {
+                localStorage.clear();
+            }
+            closeModal('confirmModal');
+            renderDashboard();
+            alert('Data cleared successfully');
+        }
+
+        function generateSampleData() {
+            if (typeof window.progressTracker === 'undefined') {
+                alert('Progress tracker not available');
+                return;
+            }
+
+            // Generate sample data
+            window.progressTracker.visitTutorial('docker-essentials', 7200);
+            window.progressTracker.visitTutorial('kubernetes-essentials', 5400);
+            window.progressTracker.completeTutorial('docker-essentials');
+            window.progressTracker.enrollPath('new-to-devops');
+            window.progressTracker.completePathStep('new-to-devops', 0);
+            window.progressTracker.completePathStep('new-to-devops', 1);
+
+            renderDashboard();
+            alert('Sample data loaded! Refresh to see updates.');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Path steps reference
+        renderDashboard.prototype.pathSteps = {
+            'new-to-devops': ['Start', 'Docker', 'Kubernetes', 'Deploy'],
+            'career-transition': ['Assess', 'Foundations', 'Hands-on', 'Projects', 'Interview'],
+            'cka-preparation': ['Core Concepts', 'Practice', 'Full Exam', 'Review'],
+            'building-infrastructure': ['Plan', 'AWS', 'IaC', 'Deploy', 'Monitor', 'Optimize'],
+            'distributed-systems': ['Theory', 'Practice', 'Build', 'Test', 'Deploy'],
+            'interview-prep': ['Review', 'Practice', 'Mock', 'Interview']
+        };
+
+        function renderSampleDashboard() {
+            document.getElementById('completed-count').textContent = '3';
+            document.getElementById('completed-progress').style.width = '21%';
+            document.getElementById('completed-percent').textContent = '3/14';
+
+            document.getElementById('paths-count').textContent = '1';
+            document.getElementById('paths-progress').style.width = '17%';
+            document.getElementById('paths-percent').textContent = '1/6';
+
+            document.getElementById('hours-count').textContent = '24';
+            document.getElementById('badges-count').textContent = '2';
+            document.getElementById('streak-count').textContent = '5 days';
+
+            // Render sample paths
+            const pathsContainer = document.getElementById('paths-container');
+            pathsContainer.innerHTML = `
+                <div class="path-card">
+                    <div class="path-header">
+                        <div class="path-name">🚀 New to DevOps</div>
+                        <div class="path-progress">50%</div>
+                    </div>
+                    <div class="steps-container">
+                        <div class="step completed"></div>
+                        <div class="step completed"></div>
+                        <div class="step current" style="animation: pulse 1s infinite;"></div>
+                        <div class="step"></div>
+                    </div>
+                </div>
+            `;
+
+            // Render sample badges
+            const badgesContainer = document.getElementById('badges-container');
+            badgesContainer.innerHTML = `
+                <div class="badge earned" onclick="showBadgeDetail('first-tutorial', '🚀', 'Getting Started', 'Complete your first tutorial', true)">
+                    <div class="badge-icon">🚀</div>
+                    <div class="badge-name">Getting Started</div>
+                    <div class="badge-desc">✓ Earned</div>
+                </div>
+                <div class="badge earned" onclick="showBadgeDetail('path-starter', '🎯', 'Path Starter', 'Start a learning path', true)">
+                    <div class="badge-icon">🎯</div>
+                    <div class="badge-name">Path Starter</div>
+                    <div class="badge-desc">✓ Earned</div>
+                </div>
+                <div class="badge" onclick="showBadgeDetail('momentum', '⭐', 'Momentum', 'Complete 5 tutorials', false)">
+                    <div class="badge-icon">⭐</div>
+                    <div class="badge-name">Momentum</div>
+                    <div class="badge-desc">Locked</div>
+                </div>
+            `;
+
+            // Render recommendations
+            document.getElementById('recommendation-container').innerHTML = `
+                <div class="recommendation-card">
+                    <div class="recommendation-label">🎯 RECOMMENDED PATH</div>
+                    <div class="recommendation-title">Career Transition Path</div>
+                    <div class="recommendation-reason">Based on your learning progress, we recommend starting the Career Transition path next</div>
+                    <button class="btn btn-small" onclick="alert('Start path: Career Transition')">Start Learning →</button>
+                </div>
+                <div class="recommendation-card">
+                    <div class="recommendation-label">📚 NEXT TUTORIAL</div>
+                    <div class="recommendation-title">AWS Essentials</div>
+                    <div class="recommendation-reason">Continue your current learning path</div>
+                    <button class="btn btn-small" onclick="alert('Start tutorial: AWS Essentials')">Learn Now →</button>
+                </div>
+            `;
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', renderDashboard);
+
+        // Watch for localStorage changes
+        window.addEventListener('storage', renderDashboard);
+    </script>
+</body>
+</html>
