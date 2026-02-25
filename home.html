@@ -422,24 +422,384 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            body {
+                overflow-x: hidden;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                padding: 50px 20px;
+            }
+
+            .hero::before,
+            .hero::after {
+                display: none;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
             .hero h1 {
-                font-size: 2.5em;
+                font-size: 2em;
+                margin-bottom: 15px;
+            }
+
+            .hero p {
+                font-size: 1.1em;
+                margin-bottom: 20px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 20px;
+                font-size: 0.95em;
+            }
+
+            .section {
+                padding: 40px 20px;
             }
 
             .section-title {
-                font-size: 2em;
+                font-size: 1.8em;
+                margin-bottom: 12px;
+            }
+
+            .section-subtitle {
+                font-size: 1em;
+                margin-bottom: 30px;
             }
 
             .paths-grid {
                 grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .path-card {
+                padding: 20px;
+                margin-bottom: 0;
+            }
+
+            .path-icon {
+                font-size: 2em;
+            }
+
+            .path-card h3 {
+                font-size: 1.3em;
+            }
+
+            .path-stats {
+                gap: 10px;
+                font-size: 0.85em;
+                flex-wrap: wrap;
+            }
+
+            .stat {
+                padding: 5px 10px;
             }
 
             .cta {
                 padding: 40px 20px;
+                border-radius: 12px;
             }
 
             .cta h2 {
+                font-size: 1.6em;
+                margin-bottom: 12px;
+            }
+
+            .cta p {
+                font-size: 1em;
+                margin-bottom: 20px;
+            }
+
+            .tutorials-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .tutorial-card {
+                padding: 20px;
+            }
+
+            .tutorial-icon {
+                font-size: 2.5em;
+                margin-bottom: 12px;
+            }
+
+            .tutorial-card h4 {
+                font-size: 1.2em;
+                margin-bottom: 8px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .feature-icon {
+                font-size: 2.5em;
+            }
+
+            .feature h3 {
+                font-size: 1.2em;
+            }
+
+            .feature p {
+                font-size: 0.9em;
+            }
+
+            .stats {
+                padding: 30px 20px;
+                grid-template-columns: 1fr 1fr;
+                gap: 25px;
+            }
+
+            .stat-item h3 {
                 font-size: 2em;
+            }
+
+            .stat-item p {
+                font-size: 0.9em;
+            }
+
+            .tabs {
+                gap: 10px;
+            }
+
+            .tab-btn {
+                padding: 10px 16px;
+                font-size: 0.9em;
+            }
+
+            /* Ensure no horizontal scroll */
+            .paths-grid,
+            .tutorials-grid,
+            .features,
+            .stats {
+                width: 100%;
+                overflow: hidden;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 40px 15px;
+            }
+
+            .hero h1 {
+                font-size: 1.6em;
+                margin-bottom: 12px;
+            }
+
+            .hero p {
+                font-size: 0.95em;
+                margin-bottom: 15px;
+            }
+
+            .btn {
+                padding: 10px 16px;
+                font-size: 0.9em;
+            }
+
+            .btn-primary {
+                padding: 10px 16px;
+            }
+
+            .section {
+                padding: 30px 15px;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+                margin-bottom: 10px;
+            }
+
+            .section-subtitle {
+                font-size: 0.95em;
+                margin-bottom: 25px;
+            }
+
+            .path-card {
+                padding: 15px;
+            }
+
+            .path-icon {
+                font-size: 1.8em;
+                margin-bottom: 12px;
+            }
+
+            .path-card h3 {
+                font-size: 1.1em;
+                margin-bottom: 10px;
+            }
+
+            .path-card p {
+                font-size: 0.9em;
+                margin-bottom: 12px;
+            }
+
+            .path-stats {
+                gap: 8px;
+                font-size: 0.8em;
+                margin-bottom: 12px;
+            }
+
+            .stat {
+                padding: 4px 8px;
+                font-size: 0.85em;
+            }
+
+            .cta {
+                padding: 30px 15px;
+                margin-top: 40px;
+            }
+
+            .cta h2 {
+                font-size: 1.4em;
+                margin-bottom: 10px;
+            }
+
+            .cta p {
+                font-size: 0.95em;
+                margin-bottom: 15px;
+            }
+
+            .tutorials-grid {
+                gap: 12px;
+            }
+
+            .tutorial-card {
+                padding: 15px;
+            }
+
+            .tutorial-icon {
+                font-size: 2.2em;
+                margin-bottom: 10px;
+            }
+
+            .tutorial-card h4 {
+                font-size: 1.1em;
+                margin-bottom: 6px;
+            }
+
+            .tutorial-level {
+                padding: 3px 10px;
+                font-size: 0.75em;
+            }
+
+            .tutorial-time {
+                font-size: 0.85em;
+                margin-bottom: 10px;
+            }
+
+            .tutorial-card > p {
+                font-size: 0.9em;
+                margin-bottom: 12px;
+            }
+
+            .features {
+                gap: 20px;
+            }
+
+            .feature {
+                text-align: center;
+            }
+
+            .feature-icon {
+                font-size: 2.2em;
+                margin-bottom: 12px;
+            }
+
+            .feature h3 {
+                font-size: 1.1em;
+                margin-bottom: 8px;
+            }
+
+            .feature p {
+                font-size: 0.85em;
+                line-height: 1.5;
+            }
+
+            .stats {
+                padding: 25px 15px;
+                grid-template-columns: 1fr;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .stat-item h3 {
+                font-size: 1.8em;
+                margin-bottom: 5px;
+            }
+
+            .stat-item p {
+                font-size: 0.85em;
+            }
+
+            .tabs {
+                gap: 8px;
+                margin-bottom: 20px;
+            }
+
+            .tab-btn {
+                padding: 8px 12px;
+                font-size: 0.8em;
+                border-bottom: 2px solid transparent;
+            }
+
+            footer {
+                padding: 30px 15px;
+                text-align: center;
+            }
+
+            footer p {
+                font-size: 0.9em;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .hero h1 {
+                font-size: 1.4em;
+            }
+
+            .hero p {
+                font-size: 0.9em;
+            }
+
+            .section-title {
+                font-size: 1.3em;
+            }
+
+            .btn {
+                font-size: 0.85em;
+                padding: 9px 14px;
+            }
+
+            .stats {
+                gap: 15px;
+            }
+
+            .stat-item h3 {
+                font-size: 1.6em;
+            }
+
+            .tutorial-card h4 {
+                font-size: 1em;
+            }
+
+            .cta h2 {
+                font-size: 1.2em;
             }
         }
 
