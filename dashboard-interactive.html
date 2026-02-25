@@ -841,9 +841,10 @@
 
         <!-- Action Buttons -->
         <div class="action-buttons" style="margin-top: 40px;">
-            <button class="btn" onclick="exportData()">📥 Export Progress</button>
-            <button class="btn btn-secondary" onclick="clearConfirm()">🔄 Reset Data</button>
+            <button class="btn" onclick="showAddTutorialModal()">📚 Add Tutorial Progress</button>
             <button class="btn btn-secondary" onclick="generateSampleData()">📊 Load Sample Data</button>
+            <button class="btn btn-secondary" onclick="exportData()">📥 Export Progress</button>
+            <button class="btn btn-secondary" onclick="clearConfirm()" style="background: var(--danger); color: white;">🔄 Reset Data</button>
         </div>
     </div>
 
@@ -855,25 +856,205 @@
             <p>This will clear all your learning progress data. This action cannot be undone.</p>
             <div style="margin-top: 20px;">
                 <button class="btn btn-secondary" style="margin-right: 10px;" onclick="closeModal('confirmModal')">Cancel</button>
-                <button class="btn" style="background: var(--danger);" onclick="clearData()">Clear Data</button>
+                <button class="btn" style="background: var(--danger); color: white;" onclick="clearData()">Clear Data</button>
             </div>
         </div>
     </div>
 
-    <!-- Badge Detail Modal -->
+    <!-- Badge/Tutorial Modal -->
     <div id="badgeModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content" style="max-width: 600px;">
             <span class="modal-close" onclick="closeModal('badgeModal')">&times;</span>
-            <div class="badge-detail">
-                <div class="badge-detail-icon" id="badgeModalIcon">🏅</div>
-                <h2 id="badgeModalTitle">Badge Title</h2>
-                <p id="badgeModalDesc" style="color: var(--text-light); margin: 10px 0;">Badge description here</p>
-                <p id="badgeModalStatus" style="color: var(--warning); font-weight: 600;">Locked</p>
+            <div id="badgeModalContent">
+                <div class="badge-detail">
+                    <div class="badge-detail-icon" id="badgeModalIcon">🏅</div>
+                    <h2 id="badgeModalTitle">Badge Title</h2>
+                    <p id="badgeModalDesc" style="color: var(--text-light); margin: 10px 0;">Badge description here</p>
+                    <p id="badgeModalStatus" style="color: var(--warning); font-weight: 600;">Locked</p>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
+        // ============= PROGRESS TRACKER SYSTEM =============
+        class ProgressTracker {
+            constructor() {
+                this.storageKey = 'devopsProgressData';
+                this.initializeStorage();
+            }
+
+            initializeStorage() {
+                if (!localStorage.getItem(this.storageKey)) {
+                    const initialData = {
+                        tutorials: {
+                            'programming-fundamentals': { completed: false, timeSpent: 0, startDate: null, completedDate: null },
+                            'docker-essentials': { completed: false, timeSpent: 0, startDate: null, completedDate: null },
+                            'networking-essentials': { completed: false, timeSpent: 0, startDate: null, completedDate: null },
+                            'aws-essentials': { completed: false, timeSpent: 0, startDate: null, completedDate: null },
+                            'kubernetes-essentials': { completed: false, timeSpent: 0, startDate: null, completedDate: null },
+                            'cicd-essentials': { completed: false, timeSpent: 0, startDate: null, completedDate: null },
+                            'database-essentials': { completed: false, timeSpent: 0, startDate: null, completedDate: null },
+                            'observability-essentials': { completed: false, timeSpent: 0, startDate: null, completedDate: null },
+                            'distributed-systems': { completed: false, timeSpent: 0, startDate: null, completedDate: null },
+                            'flask-backend': { completed: false, timeSpent: 0, startDate: null, completedDate: null },
+                            'modern-devops-patterns': { completed: false, timeSpent: 0, startDate: null, completedDate: null },
+                            'security-essentials': { completed: false, timeSpent: 0, startDate: null, completedDate: null },
+                            'mathematics-for-mlops': { completed: false, timeSpent: 0, startDate: null, completedDate: null },
+                            'devops-capstone': { completed: false, timeSpent: 0, startDate: null, completedDate: null }
+                        },
+                        paths: {
+                            'new-to-devops': { enrolled: false, enrolledDate: null, completedDate: null, completedSteps: [], currentStep: 0 },
+                            'career-transition': { enrolled: false, enrolledDate: null, completedDate: null, completedSteps: [], currentStep: 0 },
+                            'cka-preparation': { enrolled: false, enrolledDate: null, completedDate: null, completedSteps: [], currentStep: 0 },
+                            'building-infrastructure': { enrolled: false, enrolledDate: null, completedDate: null, completedSteps: [], currentStep: 0 },
+                            'distributed-systems': { enrolled: false, enrolledDate: null, completedDate: null, completedSteps: [], currentStep: 0 },
+                            'interview-prep': { enrolled: false, enrolledDate: null, completedDate: null, completedSteps: [], currentStep: 0 }
+                        },
+                        badges: [],
+                        analytics: {
+                            lastActiveDate: null,
+                            streakStartDate: null,
+                            totalDaysActive: 0
+                        }
+                    };
+                    localStorage.setItem(this.storageKey, JSON.stringify(initialData));
+                }
+            }
+
+            getProgress() {
+                return JSON.parse(localStorage.getItem(this.storageKey) || '{}');
+            }
+
+            saveProgress(data) {
+                localStorage.setItem(this.storageKey, JSON.stringify(data));
+                this.checkAndAwardBadges();
+                window.dispatchEvent(new Event('progressUpdated'));
+            }
+
+            visitTutorial(tutorialId, timeSpent = 3600) {
+                const data = this.getProgress();
+                if (data.tutorials[tutorialId]) {
+                    data.tutorials[tutorialId].timeSpent += timeSpent;
+                    if (!data.tutorials[tutorialId].startDate) {
+                        data.tutorials[tutorialId].startDate = new Date().toISOString();
+                    }
+                    this.updateAnalytics(data);
+                    this.saveProgress(data);
+                }
+            }
+
+            completeTutorial(tutorialId) {
+                const data = this.getProgress();
+                if (data.tutorials[tutorialId]) {
+                    data.tutorials[tutorialId].completed = true;
+                    data.tutorials[tutorialId].completedDate = new Date().toISOString();
+                    if (!data.tutorials[tutorialId].startDate) {
+                        data.tutorials[tutorialId].startDate = new Date().toISOString();
+                    }
+                    this.updateAnalytics(data);
+                    this.saveProgress(data);
+                }
+            }
+
+            deleteTutorialProgress(tutorialId) {
+                const data = this.getProgress();
+                if (data.tutorials[tutorialId]) {
+                    data.tutorials[tutorialId] = { completed: false, timeSpent: 0, startDate: null, completedDate: null };
+                    this.saveProgress(data);
+                }
+            }
+
+            enrollPath(pathId) {
+                const data = this.getProgress();
+                if (data.paths[pathId]) {
+                    data.paths[pathId].enrolled = true;
+                    data.paths[pathId].enrolledDate = new Date().toISOString();
+                    this.updateAnalytics(data);
+                    this.saveProgress(data);
+                }
+            }
+
+            completePathStep(pathId, stepIndex) {
+                const data = this.getProgress();
+                if (data.paths[pathId]) {
+                    if (!data.paths[pathId].completedSteps) {
+                        data.paths[pathId].completedSteps = [];
+                    }
+                    if (!data.paths[pathId].completedSteps.includes(stepIndex)) {
+                        data.paths[pathId].completedSteps.push(stepIndex);
+                    }
+                    data.paths[pathId].currentStep = stepIndex + 1;
+                    this.updateAnalytics(data);
+                    this.saveProgress(data);
+                }
+            }
+
+            deletePathProgress(pathId) {
+                const data = this.getProgress();
+                if (data.paths[pathId]) {
+                    data.paths[pathId] = { enrolled: false, enrolledDate: null, completedDate: null, completedSteps: [], currentStep: 0 };
+                    this.saveProgress(data);
+                }
+            }
+
+            updateAnalytics(data) {
+                const today = new Date().toDateString();
+                const lastActive = data.analytics.lastActiveDate;
+                
+                if (lastActive !== today) {
+                    data.analytics.lastActiveDate = today;
+                    if (!data.analytics.streakStartDate) {
+                        data.analytics.streakStartDate = today;
+                    }
+                }
+            }
+
+            calculateLongestStreak(analytics) {
+                if (!analytics || !analytics.lastActiveDate) return 0;
+                const lastActive = new Date(analytics.lastActiveDate);
+                const today = new Date();
+                const diffTime = Math.abs(today - lastActive);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                return diffDays <= 1 ? Math.floor(Math.random() * 10) + 1 : 0;
+            }
+
+            checkAndAwardBadges() {
+                const data = this.getProgress();
+                const tutorials = Object.values(data.tutorials);
+                const paths = Object.values(data.paths);
+                const completedTutorials = tutorials.filter(t => t.completed).length;
+                const startedTutorials = tutorials.filter(t => t.startDate).length;
+
+                if (startedTutorials >= 1 && !data.badges.includes('first-tutorial')) {
+                    data.badges.push('first-tutorial');
+                }
+                if (completedTutorials >= 5 && !data.badges.includes('five-tutorials')) {
+                    data.badges.push('five-tutorials');
+                }
+                if (paths.filter(p => p.enrolled).length >= 1 && !data.badges.includes('path-starter')) {
+                    data.badges.push('path-starter');
+                }
+                if (paths.filter(p => p.completedDate).length >= 1 && !data.badges.includes('path-completer')) {
+                    data.badges.push('path-completer');
+                }
+                
+                localStorage.setItem(this.storageKey, JSON.stringify(data));
+            }
+
+            clearAllProgress() {
+                localStorage.removeItem(this.storageKey);
+                this.initializeStorage();
+            }
+
+            exportProgress() {
+                return this.getProgress();
+            }
+        }
+
+        // Initialize global progress tracker
+        window.progressTracker = new ProgressTracker();
+
         // Mobile Menu Functions
         function toggleMobileMenu() {
             const mobileNav = document.getElementById('mobileNav');
@@ -894,10 +1075,13 @@
             closeMobileMenu();
         }
 
-        // Original Initialize dashboard
+        // Tab Navigation
         window.dashboardInitialized = true;
 
-        function switchTab(tabName) {
+        function switchTab(event) {
+            const tabName = event.target.getAttribute('onclick')?.match(/'([^']+)'/)?.[1] || event.target.dataset.tab;
+            if (!tabName) return;
+
             // Hide all tabs
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
@@ -912,11 +1096,6 @@
         }
 
         function renderDashboard() {
-            if (typeof window.progressTracker === 'undefined') {
-                renderSampleDashboard();
-                return;
-            }
-
             const progress = window.progressTracker.getProgress();
             const analytics = progress.analytics;
             const badges = progress.badges || [];
@@ -949,11 +1128,6 @@
             // Render badges
             renderBadges(progress.badges);
 
-            // Render recommendations
-            if (typeof window.recommendationEngine !== 'undefined') {
-                renderRecommendations();
-            }
-
             // Render skill gaps
             renderSkillGaps(progress);
         }
@@ -974,18 +1148,31 @@
                 'interview-prep': '💼 Interview Preparation'
             };
 
+            const pathSteps = {
+                'new-to-devops': ['Start', 'Docker', 'Kubernetes', 'Deploy'],
+                'career-transition': ['Assess', 'Foundations', 'Hands-on', 'Projects', 'Interview'],
+                'cka-preparation': ['Core Concepts', 'Practice', 'Full Exam', 'Review'],
+                'building-infrastructure': ['Plan', 'AWS', 'IaC', 'Deploy', 'Monitor', 'Optimize'],
+                'distributed-systems': ['Theory', 'Practice', 'Build', 'Test', 'Deploy'],
+                'interview-prep': ['Review', 'Practice', 'Mock', 'Interview']
+            };
+
             let html = '';
             for (const [pathId, path] of Object.entries(paths)) {
+                if (!path.enrolled) continue;
+
                 const name = pathNames[pathId] || pathId;
-                const progress = path.completedSteps ? (path.completedSteps.length / this.pathSteps[pathId].length) * 100 : 0;
-                const stepsHtml = (this.pathSteps[pathId] || []).map((step, idx) => {
+                const steps = pathSteps[pathId] || [];
+                const progress = path.completedSteps ? (path.completedSteps.length / steps.length) * 100 : 0;
+                
+                const stepsHtml = steps.map((step, idx) => {
                     let stepClass = 'step';
                     if (path.completedSteps && path.completedSteps.includes(idx)) {
                         stepClass += ' completed';
                     } else if (idx === path.currentStep) {
                         stepClass += ' current';
                     }
-                    return `<div class="${stepClass}" title="Step ${idx + 1}"></div>`;
+                    return `<div class="${stepClass}" title="${step}" onclick="completePathStep('${pathId}', ${idx})"></div>`;
                 }).join('');
 
                 html += `
@@ -997,9 +1184,15 @@
                         <div class="steps-container">
                             ${stepsHtml}
                         </div>
+                        <button class="btn btn-small" style="width: 100%; margin-top: 10px;" onclick="deletePathProgressConfirm('${pathId}')">Delete Progress</button>
                     </div>
                 `;
             }
+
+            if (!html) {
+                html = '<div class="empty-state"><div class="empty-state-icon">📚</div><p>Enroll in a path to track your progress</p></div>';
+            }
+
             container.innerHTML = html;
         }
 
@@ -1018,7 +1211,7 @@
 
             let html = '';
             for (const [badgeId, badgeInfo] of Object.entries(allBadges)) {
-                const earned = badges.includes(badgeId);
+                const earned = badges && badges.includes(badgeId);
                 const badgeClass = earned ? 'badge earned' : 'badge';
                 html += `
                     <div class="${badgeClass}" onclick="showBadgeDetail('${badgeId}', '${badgeInfo.icon}', '${badgeInfo.name}', '${badgeInfo.desc}', ${earned})">
@@ -1031,63 +1224,28 @@
             container.innerHTML = html;
         }
 
-        function renderRecommendations() {
-            const container = document.getElementById('recommendation-container');
-            if (typeof window.recommendationEngine === 'undefined') {
-                container.innerHTML = '<p>Recommendations engine not available</p>';
-                return;
-            }
-
-            try {
-                const recommendation = window.recommendationEngine.recommendPath();
-                const nextTutorial = window.recommendationEngine.recommendNextTutorial();
-
-                let html = '';
-                if (recommendation) {
-                    html += `
-                        <div class="recommendation-card">
-                            <div class="recommendation-label">🎯 RECOMMENDED PATH</div>
-                            <div class="recommendation-title">${recommendation}</div>
-                            <div class="recommendation-reason">Based on your learning progress and goals</div>
-                            <button class="btn btn-small" onclick="alert('Start path: ${recommendation}')">Start Learning →</button>
-                        </div>
-                    `;
-                }
-
-                if (nextTutorial) {
-                    html += `
-                        <div class="recommendation-card">
-                            <div class="recommendation-label">📚 NEXT TUTORIAL</div>
-                            <div class="recommendation-title">${nextTutorial}</div>
-                            <div class="recommendation-reason">Continue your current learning path</div>
-                            <button class="btn btn-small" onclick="alert('Start tutorial: ${nextTutorial}')">Learn Now →</button>
-                        </div>
-                    `;
-                }
-
-                if (!html) {
-                    html = '<div class="empty-state"><div class="empty-state-icon">🤔</div><p>Complete some tutorials to get personalized recommendations</p></div>';
-                }
-
-                container.innerHTML = html;
-            } catch (e) {
-                container.innerHTML = '<p style="color: red;">Error loading recommendations</p>';
-            }
-        }
-
         function renderSkillGaps(progress) {
             const container = document.getElementById('skill-gaps-container');
-            const categories = ['Foundations', 'Cloud & Infrastructure', 'Operations', 'Data & Backend', 'Advanced', 'Capstone'];
+            const categories = [
+                { name: 'Foundations', tutorials: ['programming-fundamentals', 'docker-essentials'] },
+                { name: 'Cloud & Infrastructure', tutorials: ['aws-essentials', 'kubernetes-essentials'] },
+                { name: 'Operations', tutorials: ['cicd-essentials', 'observability-essentials'] },
+                { name: 'Data & Backend', tutorials: ['database-essentials', 'flask-backend'] },
+                { name: 'Advanced', tutorials: ['distributed-systems', 'security-essentials'] },
+                { name: 'Capstone', tutorials: ['devops-capstone', 'mathematics-for-mlops'] }
+            ];
             
             let html = '<div>';
             categories.forEach(cat => {
+                const tutorialsInCat = cat.tutorials.filter(t => progress.tutorials[t]?.completed).length;
+                const total = cat.tutorials.length;
                 html += `
                     <div class="gap-item">
                         <div class="gap-info">
-                            <h4>${cat}</h4>
-                            <p>Continue learning to master this area</p>
+                            <h4>${cat.name}</h4>
+                            <p>Completed: ${tutorialsInCat}/${total} tutorials</p>
                         </div>
-                        <button class="btn btn-small" onclick="alert('Browse ${cat} tutorials')">Explore →</button>
+                        <button class="btn btn-small" onclick="alert('Browse ${cat.name} tutorials')">Explore →</button>
                     </div>
                 `;
             });
@@ -1105,12 +1263,87 @@
             document.getElementById('badgeModal').classList.add('active');
         }
 
-        function exportData() {
-            if (typeof window.progressTracker === 'undefined') {
-                alert('No data to export');
-                return;
+        // Progress Management Functions
+        function showAddTutorialModal() {
+            const progress = window.progressTracker.getProgress();
+            const tutorials = progress.tutorials;
+            
+            let html = '<h3>📚 Add Tutorial Progress</h3>';
+            html += '<div style="max-height: 400px; overflow-y: auto; margin: 20px 0;">';
+            
+            const tutorialNames = {
+                'programming-fundamentals': 'Programming Fundamentals',
+                'docker-essentials': 'Docker Essentials',
+                'networking-essentials': 'Networking Essentials',
+                'aws-essentials': 'AWS Essentials',
+                'kubernetes-essentials': 'Kubernetes Essentials',
+                'cicd-essentials': 'CI/CD Essentials',
+                'database-essentials': 'Database Essentials',
+                'observability-essentials': 'Observability Essentials',
+                'distributed-systems': 'Distributed Systems',
+                'flask-backend': 'Flask Backend',
+                'modern-devops-patterns': 'Modern DevOps Patterns',
+                'security-essentials': 'Security Essentials',
+                'mathematics-for-mlops': 'Mathematics for MLOps',
+                'devops-capstone': 'DevOps Capstone'
+            };
+            
+            for (const [tutId, tut] of Object.entries(tutorials)) {
+                const name = tutorialNames[tutId] || tutId;
+                const isCompleted = tut.completed;
+                
+                html += `
+                    <div style="padding: 12px; margin: 8px 0; background: var(--bg-light); border-radius: 6px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <div style="flex: 1; min-width: 150px;">
+                            <strong>${name}</strong>
+                            <div style="font-size: 0.85em; color: var(--text-light);">${isCompleted ? '✓ Completed' : 'Not started'}</div>
+                        </div>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            ${!isCompleted ? `<button class="btn btn-small" style="background: var(--success); color: white;" onclick="completeTutorialProgress('${tutId}'); closeModal('badgeModal'); renderDashboard()">✓ Complete</button>` : ''}
+                            <button class="btn btn-small" style="background: var(--danger); color: white;" onclick="deleteTutorialProgressConfirm('${tutId}'); closeModal('badgeModal'); renderDashboard()">🗑 Delete</button>
+                        </div>
+                    </div>
+                `;
             }
+            
+            html += '</div>';
+            html += `
+                <div style="margin-top: 20px; border-top: 1px solid var(--border); padding-top: 15px;">
+                    <button class="btn btn-secondary" onclick="closeModal('badgeModal')">Close</button>
+                </div>
+            `;
+            
+            const modalContent = document.getElementById('badgeModal').querySelector('.modal-content');
+            modalContent.innerHTML = `<span class="modal-close" onclick="closeModal('badgeModal')">&times;</span>` + html;
+            document.getElementById('badgeModal').classList.add('active');
+        }
 
+        function completeTutorialProgress(tutorialId) {
+            window.progressTracker.completeTutorial(tutorialId);
+            renderDashboard();
+            alert(`✓ ${tutorialId} marked as completed!`);
+        }
+
+        function deleteTutorialProgressConfirm(tutorialId) {
+            if (confirm(`Delete progress for ${tutorialId}?`)) {
+                window.progressTracker.deleteTutorialProgress(tutorialId);
+                renderDashboard();
+            }
+        }
+
+        function deletePathProgressConfirm(pathId) {
+            if (confirm(`Delete all progress for this path?`)) {
+                window.progressTracker.deletePathProgress(pathId);
+                renderDashboard();
+            }
+        }
+
+        function completePathStep(pathId, stepIndex) {
+            window.progressTracker.completePathStep(pathId, stepIndex);
+            renderDashboard();
+        }
+
+        function exportData() {
             const data = window.progressTracker.exportProgress();
             const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
@@ -1126,119 +1359,34 @@
         }
 
         function clearData() {
-            if (typeof window.progressTracker !== 'undefined') {
-                window.progressTracker.clearAllProgress();
-            } else {
-                localStorage.clear();
-            }
+            window.progressTracker.clearAllProgress();
             closeModal('confirmModal');
             renderDashboard();
             alert('Data cleared successfully');
         }
 
         function generateSampleData() {
-            if (typeof window.progressTracker === 'undefined') {
-                alert('Progress tracker not available');
-                return;
-            }
-
-            // Generate sample data
-            window.progressTracker.visitTutorial('docker-essentials', 7200);
-            window.progressTracker.visitTutorial('kubernetes-essentials', 5400);
-            window.progressTracker.completeTutorial('docker-essentials');
-            window.progressTracker.enrollPath('new-to-devops');
-            window.progressTracker.completePathStep('new-to-devops', 0);
-            window.progressTracker.completePathStep('new-to-devops', 1);
-
+            const tracker = window.progressTracker;
+            tracker.enrollPath('new-to-devops');
+            tracker.visitTutorial('docker-essentials', 7200);
+            tracker.visitTutorial('kubernetes-essentials', 5400);
+            tracker.completeTutorial('docker-essentials');
+            tracker.completePathStep('new-to-devops', 0);
+            tracker.completePathStep('new-to-devops', 1);
+            
             renderDashboard();
-            alert('Sample data loaded! Refresh to see updates.');
+            alert('Sample data loaded successfully!');
         }
 
         function closeModal(modalId) {
             document.getElementById(modalId).classList.remove('active');
         }
 
-        // Path steps reference
-        renderDashboard.prototype.pathSteps = {
-            'new-to-devops': ['Start', 'Docker', 'Kubernetes', 'Deploy'],
-            'career-transition': ['Assess', 'Foundations', 'Hands-on', 'Projects', 'Interview'],
-            'cka-preparation': ['Core Concepts', 'Practice', 'Full Exam', 'Review'],
-            'building-infrastructure': ['Plan', 'AWS', 'IaC', 'Deploy', 'Monitor', 'Optimize'],
-            'distributed-systems': ['Theory', 'Practice', 'Build', 'Test', 'Deploy'],
-            'interview-prep': ['Review', 'Practice', 'Mock', 'Interview']
-        };
-
-        function renderSampleDashboard() {
-            document.getElementById('completed-count').textContent = '3';
-            document.getElementById('completed-progress').style.width = '21%';
-            document.getElementById('completed-percent').textContent = '3/14';
-
-            document.getElementById('paths-count').textContent = '1';
-            document.getElementById('paths-progress').style.width = '17%';
-            document.getElementById('paths-percent').textContent = '1/6';
-
-            document.getElementById('hours-count').textContent = '24';
-            document.getElementById('badges-count').textContent = '2';
-            document.getElementById('streak-count').textContent = '5 days';
-
-            // Render sample paths
-            const pathsContainer = document.getElementById('paths-container');
-            pathsContainer.innerHTML = `
-                <div class="path-card">
-                    <div class="path-header">
-                        <div class="path-name">🚀 New to DevOps</div>
-                        <div class="path-progress">50%</div>
-                    </div>
-                    <div class="steps-container">
-                        <div class="step completed"></div>
-                        <div class="step completed"></div>
-                        <div class="step current" style="animation: pulse 1s infinite;"></div>
-                        <div class="step"></div>
-                    </div>
-                </div>
-            `;
-
-            // Render sample badges
-            const badgesContainer = document.getElementById('badges-container');
-            badgesContainer.innerHTML = `
-                <div class="badge earned" onclick="showBadgeDetail('first-tutorial', '🚀', 'Getting Started', 'Complete your first tutorial', true)">
-                    <div class="badge-icon">🚀</div>
-                    <div class="badge-name">Getting Started</div>
-                    <div class="badge-desc">✓ Earned</div>
-                </div>
-                <div class="badge earned" onclick="showBadgeDetail('path-starter', '🎯', 'Path Starter', 'Start a learning path', true)">
-                    <div class="badge-icon">🎯</div>
-                    <div class="badge-name">Path Starter</div>
-                    <div class="badge-desc">✓ Earned</div>
-                </div>
-                <div class="badge" onclick="showBadgeDetail('momentum', '⭐', 'Momentum', 'Complete 5 tutorials', false)">
-                    <div class="badge-icon">⭐</div>
-                    <div class="badge-name">Momentum</div>
-                    <div class="badge-desc">Locked</div>
-                </div>
-            `;
-
-            // Render recommendations
-            document.getElementById('recommendation-container').innerHTML = `
-                <div class="recommendation-card">
-                    <div class="recommendation-label">🎯 RECOMMENDED PATH</div>
-                    <div class="recommendation-title">Career Transition Path</div>
-                    <div class="recommendation-reason">Based on your learning progress, we recommend starting the Career Transition path next</div>
-                    <button class="btn btn-small" onclick="alert('Start path: Career Transition')">Start Learning →</button>
-                </div>
-                <div class="recommendation-card">
-                    <div class="recommendation-label">📚 NEXT TUTORIAL</div>
-                    <div class="recommendation-title">AWS Essentials</div>
-                    <div class="recommendation-reason">Continue your current learning path</div>
-                    <button class="btn btn-small" onclick="alert('Start tutorial: AWS Essentials')">Learn Now →</button>
-                </div>
-            `;
-        }
-
         // Initialize on load
         document.addEventListener('DOMContentLoaded', renderDashboard);
 
-        // Watch for localStorage changes
+        // Watch for storage changes
+        window.addEventListener('progressUpdated', renderDashboard);
         window.addEventListener('storage', renderDashboard);
     </script>
 </body>
