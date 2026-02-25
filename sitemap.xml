@@ -6,6 +6,31 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/ACCESSIBILITY_IMPROVEMENTS/</loc>
+         <lastmod>2026-02-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/PHASE_4_IMPLEMENTATION_GUIDE/</loc>
+         <lastmod>2026-02-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/dashboard/</loc>
+         <lastmod>2026-02-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/learning-paths/</loc>
+         <lastmod>2026-02-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/path-navigation-templates/</loc>
+         <lastmod>2026-02-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://aabdelmotalib.github.io/devops-mastery/portfolio/</loc>
          <lastmod>2026-02-25</lastmod>
          <changefreq>daily</changefreq>
@@ -221,6 +246,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/database-essentials-tutorial/START_HERE/</loc>
+         <lastmod>2026-02-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://aabdelmotalib.github.io/devops-mastery/database-essentials-tutorial/docs/01-fundamentals/</loc>
          <lastmod>2026-02-25</lastmod>
          <changefreq>daily</changefreq>
@@ -412,6 +442,11 @@
     </url>
     <url>
          <loc>https://aabdelmotalib.github.io/devops-mastery/docker-essentials-tutorial/</loc>
+         <lastmod>2026-02-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/docker-essentials-tutorial/START_HERE/</loc>
          <lastmod>2026-02-25</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -756,6 +791,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/modern-devops-patterns-tutorial/START_HERE/</loc>
+         <lastmod>2026-02-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://aabdelmotalib.github.io/devops-mastery/modern-devops-patterns-tutorial/docs/01-gitops-fundamentals/</loc>
          <lastmod>2026-02-25</lastmod>
          <changefreq>daily</changefreq>
@@ -782,6 +822,11 @@
     </url>
     <url>
          <loc>https://aabdelmotalib.github.io/devops-mastery/networking-essentials-tutorial/PREMODULE_SUMMARY/</loc>
+         <lastmod>2026-02-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://aabdelmotalib.github.io/devops-mastery/networking-essentials-tutorial/START_HERE/</loc>
          <lastmod>2026-02-25</lastmod>
          <changefreq>daily</changefreq>
     </url>
