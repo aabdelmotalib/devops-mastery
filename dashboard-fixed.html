@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Dashboard - DevOps Mastery</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #1e40af;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --border: #e5e7eb;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --header-bg: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f3f4f6;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--header-bg);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+
+        .metric-label {
+            color: var(--text-light);
+            font-size: 0.95em;
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: var(--bg-light);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            border-radius: 5px;
+            transition: width 0.4s ease;
+        }
+
+        .progress-percent {
+            font-size: 0.85em;
+            color: var(--text-light);
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .modal-close {
+            float: right;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .modal-close:hover {
+            color: var(--text-dark);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+        }
+
+        .info-banner {
+            background: #dbeafe;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #1e40af;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 10px 16px;
+            background: var(--bg-light);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .path-card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .path-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .path-name {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .path-progress {
+            font-size: 0.9em;
+            color: var(--text-light);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Learning Dashboard</h1>
+            <p>Track your DevOps journey in real-time</p>
+        </header>
+
+        <div class="info-banner">
+            💡 <strong>Fresh Start:</strong> Your dashboard data has been cleared. All previous progress will be removed. Click "Generate Sample Data" to see how the dashboard works!
+        </div>
+
+        <!-- Overview Cards -->
+        <div class="grid">
+            <div class="card metric">
+                <div class="metric-label">📚 Tutorials Completed</div>
+                <div class="metric-value" id="completed-count">0</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="completed-progress" style="width: 0%"></div>
+                </div>
+                <div class="progress-percent" id="completed-percent">0/14</div>
+            </div>
+
+            <div class="card metric">
+                <div class="metric-label">🏆 Paths Completed</div>
+                <div class="metric-value" id="paths-count">0</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="paths-progress" style="width: 0%"></div>
+                </div>
+                <div class="progress-percent" id="paths-percent">0/6</div>
+            </div>
+
+            <div class="card metric">
+                <div class="metric-label">⏱️ Total Time Invested</div>
+                <div class="metric-value" id="hours-count">0</div>
+                <div style="color: var(--text-light); margin-top: 10px;">hours</div>
+            </div>
+
+            <div class="card metric">
+                <div class="metric-label">🏅 Badges Earned</div>
+                <div class="metric-value" id="badges-count">0</div>
+                <div style="color: var(--text-light); margin-top: 10px;">achievements</div>
+            </div>
+        </div>
+
+        <!-- Learning Paths -->
+        <div class="section-title">📌 Your Learning Paths</div>
+        <div id="paths-container"></div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="btn" onclick="generateSampleData()">📊 Generate Sample Data</button>
+            <button class="btn btn-secondary" onclick="exportData()">📥 Export Progress</button>
+            <button class="btn btn-secondary" onclick="clearConfirm()">🔄 Clear All Data</button>
+            <button class="btn btn-secondary" onclick="location.reload()">🔃 Refresh Page</button>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('confirmModal')">&times;</span>
+            <h2>Clear All Data?</h2>
+            <p>This will permanently delete all your learning progress. This action cannot be undone.</p>
+            <div style="margin-top: 20px;">
+                <button class="btn btn-secondary" style="margin-right: 10px;" onclick="closeModal('confirmModal')">Cancel</button>
+                <button class="btn btn-danger" onclick="clearAllData()">Clear Data</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple Progress Tracker (built-in)
+        class SimpleProgressTracker {
+            constructor() {
+                this.storageKey = 'devops-progress-data';
+            }
+
+            initialize() {
+                // Check if there's any old data and clear it
+                const existingData = localStorage.getItem(this.storageKey);
+                if (!existingData) {
+                    this.saveData({
+                        tutorials: {},
+                        paths: {},
+                        badges: [],
+                        createdAt: new Date().toISOString()
+                    });
+                }
+            }
+
+            getData() {
+                const data = localStorage.getItem(this.storageKey);
+                if (!data) {
+                    this.initialize();
+                    return this.getData();
+                }
+                return JSON.parse(data);
+            }
+
+            saveData(data) {
+                localStorage.setItem(this.storageKey, JSON.stringify(data));
+            }
+
+            completeTutorial(tutorialId) {
+                const data = this.getData();
+                if (!data.tutorials[tutorialId]) {
+                    data.tutorials[tutorialId] = {};
+                }
+                data.tutorials[tutorialId].completed = true;
+                data.tutorials[tutorialId].completedAt = new Date().toISOString();
+                this.saveData(data);
+            }
+
+            enrollPath(pathId) {
+                const data = this.getData();
+                if (!data.paths[pathId]) {
+                    data.paths[pathId] = {};
+                }
+                data.paths[pathId].enrolled = true;
+                data.paths[pathId].enrolledAt = new Date().toISOString();
+                this.saveData(data);
+            }
+
+            completePath(pathId) {
+                const data = this.getData();
+                if (!data.paths[pathId]) {
+                    data.paths[pathId] = {};
+                }
+                data.paths[pathId].completed = true;
+                data.paths[pathId].completedAt = new Date().toISOString();
+                this.saveData(data);
+            }
+
+            earnBadge(badgeId) {
+                const data = this.getData();
+                if (!data.badges.includes(badgeId)) {
+                    data.badges.push(badgeId);
+                }
+                this.saveData(data);
+            }
+
+            clearAllData() {
+                localStorage.removeItem(this.storageKey);
+                // Remove old keys too
+                localStorage.removeItem('devops-learning-progress-v1');
+                localStorage.removeItem('devops-learning-badges-v1');
+                localStorage.removeItem('devops-learning-analytics-v1');
+                this.initialize();
+            }
+
+            exportData() {
+                return this.getData();
+            }
+        }
+
+        // Initialize tracker
+        const tracker = new SimpleProgressTracker();
+        tracker.initialize();
+
+        // Path definitions
+        const paths = {
+            'new-to-devops': { name: '🚀 New to DevOps', steps: 4 },
+            'career-transition': { name: '🔄 Career Transition', steps: 5 },
+            'cka-preparation': { name: '☸️ CKA Preparation', steps: 4 },
+            'building-infrastructure': { name: '🏗️ Building Infrastructure', steps: 6 },
+            'distributed-systems': { name: '🌐 Distributed Systems', steps: 5 },
+            'interview-prep': { name: '💼 Interview Prep', steps: 4 }
+        };
+
+        const badges = {
+            'first-tutorial': '🚀 Getting Started',
+            'path-starter': '🎯 Path Starter',
+            'path-completer': '🏆 Path Master',
+            'five-tutorials': '⭐ Momentum',
+            'all-paths-started': '🌟 Explorer',
+            'cka-ready': '📜 CKA Ready',
+            'week-warrior': '⚡ Week Warrior',
+            'knowledge-architect': '🏗️ Knowledge Architect'
+        };
+
+        function renderDashboard() {
+            const data = tracker.getData();
+            
+            // Calculate metrics
+            const completedTutorials = Object.values(data.tutorials || {}).filter(t => t.completed).length;
+            const completedPaths = Object.values(data.paths || {}).filter(p => p.completed).length;
+            const earnedBadges = (data.badges || []).length;
+
+            // Update UI
+            document.getElementById('completed-count').textContent = completedTutorials;
+            document.getElementById('completed-progress').style.width = (completedTutorials * 100 / 14) + '%';
+            document.getElementById('completed-percent').textContent = completedTutorials + '/14';
+
+            document.getElementById('paths-count').textContent = completedPaths;
+            document.getElementById('paths-progress').style.width = (completedPaths * 100 / 6) + '%';
+            document.getElementById('paths-percent').textContent = completedPaths + '/6';
+
+            document.getElementById('badges-count').textContent = earnedBadges;
+
+            // Render paths
+            let pathsHtml = '';
+            for (const [pathId, pathInfo] of Object.entries(paths)) {
+                const pathData = data.paths[pathId] || {};
+                const isEnrolled = pathData.enrolled;
+                const isCompleted = pathData.completed;
+                
+                pathsHtml += `
+                    <div class="path-card" style="opacity: ${isEnrolled ? 1 : 0.6}">
+                        <div class="path-header">
+                            <div class="path-name">${pathInfo.name}</div>
+                            <div class="path-progress">${isCompleted ? '✓ Completed' : isEnrolled ? 'In Progress' : 'Not Started'}</div>
+                        </div>
+                    </div>
+                `;
+            }
+            document.getElementById('paths-container').innerHTML = pathsHtml || '<div class="empty-state">No learning paths started yet. Generate sample data to see how it works!</div>';
+        }
+
+        function generateSampleData() {
+            if (!confirm('This will add sample progress data. Continue?')) return;
+
+            tracker.clearAllData();
+
+            // Add sample data
+            tracker.completeTutorial('docker-essentials');
+            tracker.completeTutorial('programming-fundamentals');
+            tracker.enrollPath('new-to-devops');
+            tracker.completePath('cka-preparation');
+            tracker.earnBadge('first-tutorial');
+            tracker.earnBadge('path-starter');
+            tracker.earnBadge('path-completer');
+
+            renderDashboard();
+            alert('✅ Sample data generated! Refresh to see it on dashboard.');
+        }
+
+        function clearAllData() {
+            tracker.clearAllData();
+            closeModal('confirmModal');
+            renderDashboard();
+            alert('✅ All data cleared successfully!');
+        }
+
+        function clearConfirm() {
+            document.getElementById('confirmModal').classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        function exportData() {
+            const data = tracker.exportData();
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'devops-progress-' + new Date().toISOString().split('T')[0] + '.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            renderDashboard();
+            // Watch for storage changes
+            window.addEventListener('storage', renderDashboard);
+        });
+    </script>
+</body>
+</html>
